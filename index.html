@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insha Bangles & Purses | Festive & Bridal Collection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+    .gold-gradient {
+      background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+    }
+    .festive-bg {
+      background: radial-gradient(circle at top, #2D1115 0%, #120A0B 100%);
+    }
+    .gold-border {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#1E1E1E] pb-24 selection:bg-amber-100">
+
+  <!-- Festive Top Marquee Announcement -->
+  <div class="bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 text-white text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 shadow-inner">
+    <span>✨ GRAND WEDDING & FESTIVE SEASON SALE — SPECIAL WHOLESALE DISCOUNTS AVAILABLE ✨</span>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md border-b border-amber-100 sticky top-0 z-40 px-4 py-3 shadow-sm">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[#1E1B18] flex items-center justify-center text-amber-400 font-cinzel font-bold text-lg border border-amber-500/40 shadow-sm">
+          I
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-extrabold font-cinzel tracking-wider text-[#1A1817]" id="t-store-title">Insha Bangles & Purses</h1>
+          <p class="text-[10px] text-amber-700 font-bold uppercase tracking-widest">Handcrafted Bridal & Wholesale Hub</p>
+        </div>
+      </div>
+      
+      <!-- Language Selector -->
+      <div class="flex items-center gap-2">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-amber-50/70 border border-amber-200 text-xs font-semibold text-gray-800 rounded-xl px-3 py-1.5 focus:outline-none cursor-pointer">
+          <option value="en">🇬🇧 English</option>
+          <option value="hi">🇮🇳 हिंदी</option>
+          <option value="ur">🇵🇰 اردو</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 py-6">
+
+    <!-- Tab Switcher (Customer Store vs Owner Dashboard) -->
+    <div class="flex bg-stone-200/80 p-1 rounded-2xl mb-6 max-w-xs mx-auto border border-stone-300/40">
+      <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-stone-900 transition">🛍️ Shop Store</button>
+      <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 transition">⚙️ Owner Dashboard</button>
+    </div>
+
+    <!-- 1. Customer Store View -->
+    <section id="storeSection" class="space-y-6">
+
+      <!-- Hero Festive Showcase Banner -->
+      <div class="relative overflow-hidden rounded-3xl festive-bg text-white p-6 sm:p-8 gold-border shadow-xl">
+        <div class="relative z-10 max-w-lg space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
+            <span>✨ Festive Special 2026</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-cinzel font-black leading-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-yellow-200 to-amber-400">
+            Royal Bridal Velvet Sets & Designer Purses
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-300 leading-relaxed">
+            Exclusive bridal choodas, handcrafted velvet bangles, stone clutches, and party collections available for individual buyers and bulk wholesale resellers.
+          </p>
+          <div class="flex items-center gap-3 pt-1">
+            <button onclick="toggleChat()" class="gold-gradient text-stone-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg hover:opacity-95 transition flex items-center gap-1.5">
+              <span>💬 Ask AI for Rates</span>
+            </button>
+          </div>
+        </div>
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-amber-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs">
+        <button onclick="filterCategory('All')" class="cat-pill active-pill px-4 py-2 rounded-full font-bold bg-[#1E1B18] text-amber-400 shadow-sm border border-stone-800">All Collections</button>
+        <button onclick="filterCategory('Bangles')" class="cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200">✨ Bangles & Sets</button>
+        <button onclick="filterCategory('Purses & Clutches')" class="cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200">👜 Purses & Clutches</button>
+        <button onclick="filterCategory('Undergarments')" class="cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200">👗 Apparel & Innerwear</button>
+      </div>
+
+      <!-- Catalog Header -->
+      <div class="flex items-center justify-between pt-2">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold text-stone-900" id="t-latest-products">Catalog Collections</h2>
+          <p class="text-[11px] text-stone-500">Showing retail and bulk wholesale discounts</p>
+        </div>
+        <button onclick="fetchProducts()" class="text-xs font-bold text-amber-800 hover:underline flex items-center gap-1">
+          <span>🔄</span> Refresh Catalog
+        </button>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div class="col-span-full py-16 text-center text-stone-400 text-xs">Loading festive collections...</div>
+      </div>
+    </section>
+
+    <!-- 2. Owner Dashboard View -->
+    <section id="ownerSection" class="hidden">
+      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-lg mx-auto">
+        <div class="flex items-center gap-2.5 mb-2">
+          <div class="w-8 h-8 rounded-lg bg-stone-900 text-amber-400 flex items-center justify-center font-bold text-sm">⚙️</div>
+          <h2 class="text-lg font-bold text-stone-900">Add New Item to Shop</h2>
+        </div>
+        <p class="text-xs text-stone-500 mb-6">Added items sync to the customer catalog and the AI assistant instantly.</p>
+        
+        <form onsubmit="addProduct(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Product Title</label>
+            <input type="text" id="pTitle" required placeholder="e.g. Royal Bridal Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-700">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Category</label>
+              <select id="pCategory" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none">
+                <option value="Bangles">Bangles</option>
+                <option value="Purses & Clutches">Purses & Clutches</option>
+                <option value="Undergarments">Undergarments</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Retail Price (₹)</label>
+              <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale Rate (₹)</label>
+              <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale MOQ</label>
+              <input type="number" id="pMoq" value="10" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Image URL</label>
+            <input type="url" id="pImg" placeholder="https://images.unsplash.com/photo-1611591475152-4735eac870c2" class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Description</label>
+            <textarea id="pDesc" rows="2" placeholder="Handcrafted velvet finish, stone embroidery, festive collection..." class="w-full text-sm px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none"></textarea>
+          </div>
+
+          <button type="submit" id="addBtn" class="w-full bg-[#1A1817] text-amber-400 text-sm font-bold py-3.5 rounded-xl hover:bg-stone-900 transition flex items-center justify-center gap-2">
+            <span>✨ Publish Festive Product</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Multilingual AI Assistant Button -->
+  <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1817] border border-amber-500/40 text-amber-300 font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-50 hover:scale-105 transition">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span>✨ AI Shopping Buddy</span>
+  </button>
+
+  <!-- AI Chat Drawer -->
+  <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-stone-800 flex items-center justify-between bg-[#1A1817] text-white">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-sm">✨</div>
+        <div>
+          <h3 class="text-sm font-bold text-amber-400">Insha AI Assistant</h3>
+          <p class="text-[11px] text-stone-300">Multilingual Retail & Wholesale Guide</p>
+        </div>
+      </div>
+      <button onclick="toggleChat()" class="text-stone-400 hover:text-white text-lg font-bold px-2">✕</button>
+    </div>
+
+    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF8F5]">
+      <div class="bg-white border border-stone-200 text-stone-800 text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. How can I help you today with bridal collections, single retail items, or bulk wholesale prices?
+      </div>
+    </div>
+
+    <div class="p-3 border-t border-stone-200 bg-white flex gap-2">
+      <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Ask in Hindi, English, Urdu..." class="flex-1 text-xs bg-stone-100 px-3.5 py-2.5 rounded-xl focus:outline-none">
+      <button onclick="sendChatMessage()" class="bg-[#1A1817] text-amber-400 text-xs font-bold px-4 rounded-xl hover:bg-stone-900 transition">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = "http://127.0.0.1:8000";
+    const SHOP_WHATSAPP = "919903610501"; 
+
+    let allProducts = [];
+    let currentCategory = 'All';
+
+    const translations = {
+      en: { title: "Insha Bangles & Purses", catalog: "Catalog Collections" },
+      hi: { title: "इंशा चूड़ियां और पर्स", catalog: "दुकान का सामान (फेस्टिवल कलेक्शन)" },
+      ur: { title: "انشاء چوڑی اور پرس", catalog: "اسٹور کی فہرست" }
+    };
+
+    function changeLanguage(lang) {
+      document.getElementById("t-store-title").innerText = translations[lang].title;
+      document.getElementById("t-latest-products").innerText = translations[lang].catalog;
+    }
+
+    function switchTab(tab) {
+      if (tab === 'store') {
+        document.getElementById('storeSection').classList.remove('hidden');
+        document.getElementById('ownerSection').classList.add('hidden');
+        document.getElementById('tabStoreBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-stone-900 transition";
+        document.getElementById('tabOwnerBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 transition";
+      } else {
+        document.getElementById('storeSection').classList.add('hidden');
+        document.getElementById('ownerSection').classList.remove('hidden');
+        document.getElementById('tabOwnerBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-stone-900 transition";
+        document.getElementById('tabStoreBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 transition";
+      }
+    }
+
+    function toggleChat() {
+      const drawer = document.getElementById("chatDrawer");
+      drawer.classList.toggle("translate-x-full");
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      const pills = document.querySelectorAll('.cat-pill');
+      pills.forEach(p => {
+        if (p.innerText.includes(cat) || (cat === 'All' && p.innerText.includes('All'))) {
+          p.className = "cat-pill active-pill px-4 py-2 rounded-full font-bold bg-[#1E1B18] text-amber-400 shadow-sm border border-stone-800";
+        } else {
+          p.className = "cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200";
+        }
+      });
+      renderProducts();
+    }
+
+    // Clean WhatsApp redirect function
+    function orderWhatsApp(productId, type) {
+      const p = allProducts.find(item => item.id === productId || item.title === productId);
+      if (!p) return;
+
+      const price = type === 'Wholesale' ? p.wholesale_price : p.retail_price;
+      const cleanMessage = `Hello! I would like to order:
+Product: ${p.title}
+Price: Rs ${price} (${type})
+Please confirm availability and delivery.`;
+
+      const encoded = encodeURIComponent(cleanMessage);
+      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encoded}`, '_blank');
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById("productsGrid");
+      grid.innerHTML = "";
+
+      const filtered = currentCategory === 'All' 
+        ? allProducts 
+        : allProducts.filter(p => p.categories?.name === currentCategory || p.category_name === currentCategory);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-center text-stone-400 text-xs">No products found in this category.</div>`;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
+        const identifier = p.id || p.title;
+
+        grid.innerHTML += `
+          <div class="bg-white rounded-2xl overflow-hidden border border-amber-100/60 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="relative">
+                <img src="${img}" class="w-full h-40 object-cover bg-stone-100" onerror="this.src='https://placehold.co/400x300'">
+                <span class="absolute top-2 left-2 bg-[#1A1817]/90 backdrop-blur-sm text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                  ✨ Festive Pick
+                </span>
+              </div>
+              <div class="p-3.5 space-y-1.5">
+                <h3 class="font-bold text-xs text-stone-900 line-clamp-1">${p.title}</h3>
+                <p class="text-[11px] text-stone-500 line-clamp-2">${p.description || 'Festive handcrafted accessory'}</p>
+                <div class="pt-2">
+                  <div class="text-sm font-black text-stone-900">
+                    ₹${p.retail_price} 
+                    <span class="text-[10px] text-stone-500 font-semibold">(Retail)</span>
+                  </div>
+                  ${p.wholesale_price ? `
+                    <div class="text-[11px] font-bold text-amber-700">
+                      ₹${p.wholesale_price}/pc <span class="text-[10px] text-stone-400 font-normal">(Min: ${p.min_wholesale_qty} pcs)</span>
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+            <div class="p-3 pt-0">
+              <button onclick="orderWhatsApp('${identifier}', 'Retail')" class="w-full bg-[#25D366] text-white text-[11px] font-bold py-2 rounded-xl hover:bg-emerald-600 transition flex items-center justify-center gap-1.5 shadow-sm">
+                <span>💬 Order on WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    async function fetchProducts() {
+      try {
+        const res = await fetch(`${API_BASE}/products`);
+        const data = await res.json();
+        allProducts = data.products || [];
+        renderProducts();
+      } catch (err) {
+        document.getElementById("productsGrid").innerHTML = `<div class="col-span-full text-red-500 text-xs text-center py-8">Please make sure the backend server is running on port 8000.</div>`;
+      }
+    }
+
+    async function addProduct(e) {
+      e.preventDefault();
+      const btn = document.getElementById("addBtn");
+      btn.disabled = true;
+      btn.innerText = "Publishing...";
+
+      const payload = {
+        title: document.getElementById("pTitle").value,
+        description: document.getElementById("pDesc").value,
+        category_name: document.getElementById("pCategory").value,
+        image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
+        retail_price: parseFloat(document.getElementById("pRetail").value),
+        wholesale_price: document.getElementById("pWholesale").value ? parseFloat(document.getElementById("pWholesale").value) : null,
+        min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 1,
+        stock_count: 100
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/products`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          alert("Festive product published successfully!");
+          document.querySelector("form").reset();
+          switchTab('store');
+          fetchProducts();
+        } else {
+          alert("Failed: " + await res.text());
+        }
+      } catch (err) {
+        alert("Error connecting to server.");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "✨ Publish Festive Product";
+      }
+    }
+
+    async function sendChatMessage() {
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById("chatMessages");
+      container.innerHTML += `<div class="bg-[#1A1817] text-white text-xs p-3 rounded-2xl rounded-tr-none max-w-[85%] ml-auto shadow-sm">${text}</div>`;
+      input.value = "";
+      container.scrollTop = container.scrollHeight;
+
+      const loadingId = "loader-" + Date.now();
+      container.innerHTML += `<div id="${loadingId}" class="text-[11px] text-stone-400 italic">Thinking...</div>`;
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const res = await fetch(`${API_BASE}/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        document.getElementById(loadingId).remove();
+        container.innerHTML += `<div class="bg-white border border-stone-200 text-stone-800 text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[85%] leading-relaxed shadow-sm">${data.reply}</div>`;
+      } catch (err) {
+        document.getElementById(loadingId).remove();
+        container.innerHTML += `<div class="bg-red-50 text-red-600 text-xs p-2 rounded-lg">Failed to reach AI. Ensure backend server is running.</div>`;
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>
