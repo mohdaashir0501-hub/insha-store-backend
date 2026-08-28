@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1A1817" />
   <title>Insha Bangles & Purses | Festive & Bridal Collection</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -109,12 +110,27 @@
       </div>
     </section>
 
-    <!-- 2. Owner Dashboard View -->
+    <!-- 2. Owner Dashboard View with PIN Protection -->
     <section id="ownerSection" class="hidden">
-      <div class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-lg mx-auto">
-        <div class="flex items-center gap-2.5 mb-2">
-          <div class="w-8 h-8 rounded-lg bg-stone-900 text-amber-400 flex items-center justify-center font-bold text-sm">⚙️</div>
-          <h2 class="text-lg font-bold text-stone-900">Add New Item to Shop</h2>
+      <!-- PIN Login Card -->
+      <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-sm mx-auto text-center space-y-4">
+        <div class="w-12 h-12 rounded-2xl bg-stone-900 text-amber-400 flex items-center justify-center font-bold text-lg mx-auto">🔒</div>
+        <div>
+          <h2 class="text-base font-bold text-stone-900">Owner Access Required</h2>
+          <p class="text-xs text-stone-500 mt-1">Enter your 4-digit PIN to manage store items.</p>
+        </div>
+        <input type="password" id="ownerPinInput" maxlength="4" placeholder="••••" class="w-32 text-center text-2xl tracking-widest font-bold py-2 bg-stone-50 border border-stone-300 rounded-xl focus:outline-none focus:border-amber-600">
+        <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1817] text-amber-400 text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
+      </div>
+
+      <!-- Add Product Form (Hidden until PIN verified) -->
+      <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-lg mx-auto">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-stone-900 text-amber-400 flex items-center justify-center font-bold text-sm">⚙️</div>
+            <h2 class="text-lg font-bold text-stone-900">Add New Item to Shop</h2>
+          </div>
+          <button onclick="lockOwnerDashboard()" class="text-xs text-stone-400 hover:text-red-500 font-bold">Lock 🔒</button>
         </div>
         <p class="text-xs text-stone-500 mb-6">Added items sync to the customer catalog and the AI assistant instantly.</p>
         
@@ -175,7 +191,7 @@
     <span>✨ AI Shopping Buddy</span>
   </button>
 
-  <!-- AI Chat Drawer -->
+  <!-- AI Chat Drawer with Voice Recognition -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-stone-800 flex items-center justify-between bg-[#1A1817] text-white">
       <div class="flex items-center gap-2.5">
@@ -190,19 +206,25 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF8F5]">
       <div class="bg-white border border-stone-200 text-stone-800 text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. How can I help you today with bridal collections, single retail items, or bulk wholesale prices?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Type or tap the 🎙️ mic to speak your inquiry in Hindi, English, or Urdu!
       </div>
     </div>
 
-    <div class="p-3 border-t border-stone-200 bg-white flex gap-2">
+    <!-- Chat Input with Speech to Text -->
+    <div class="p-3 border-t border-stone-200 bg-white flex items-center gap-2">
+      <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-stone-100 text-stone-700 hover:text-amber-700 p-2.5 rounded-xl text-sm transition">
+        🎙️
+      </button>
       <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Ask in Hindi, English, Urdu..." class="flex-1 text-xs bg-stone-100 px-3.5 py-2.5 rounded-xl focus:outline-none">
-      <button onclick="sendChatMessage()" class="bg-[#1A1817] text-amber-400 text-xs font-bold px-4 rounded-xl hover:bg-stone-900 transition">Send</button>
+      <button onclick="sendChatMessage()" class="bg-[#1A1817] text-amber-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-stone-900 transition">Send</button>
     </div>
   </div>
 
   <script>
-    const API_BASE = "http://127.0.0.1:8000";
+    // In production on Render, using relative path automatically targets the cloud server
+    const API_BASE = window.location.origin;
     const SHOP_WHATSAPP = "919903610501"; 
+    const OWNER_PIN = "1234"; // Default Owner PIN
 
     let allProducts = [];
     let currentCategory = 'All';
@@ -232,9 +254,55 @@
       }
     }
 
+    function verifyOwnerPin() {
+      const pin = document.getElementById("ownerPinInput").value;
+      if (pin === OWNER_PIN) {
+        document.getElementById("pinBox").classList.add("hidden");
+        document.getElementById("productFormBox").classList.remove("hidden");
+        document.getElementById("ownerPinInput").value = "";
+      } else {
+        alert("Incorrect PIN code.");
+      }
+    }
+
+    function lockOwnerDashboard() {
+      document.getElementById("productFormBox").classList.add("hidden");
+      document.getElementById("pinBox").classList.remove("hidden");
+    }
+
     function toggleChat() {
       const drawer = document.getElementById("chatDrawer");
       drawer.classList.toggle("translate-x-full");
+    }
+
+    // Voice recognition (Speech to Text)
+    function startVoiceInput() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Voice recognition is not supported on this browser. Please use Chrome or Edge.");
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = document.getElementById("langSelect").value === 'hi' ? 'hi-IN' : 'en-IN';
+      const micBtn = document.getElementById("micBtn");
+      micBtn.innerText = "🔴";
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("chatInput").value = transcript;
+        micBtn.innerText = "🎙️";
+        sendChatMessage();
+      };
+
+      recognition.onerror = () => {
+        micBtn.innerText = "🎙️";
+      };
+
+      recognition.onend = () => {
+        micBtn.innerText = "🎙️";
+      };
+
+      recognition.start();
     }
 
     function filterCategory(cat) {
@@ -250,7 +318,6 @@
       renderProducts();
     }
 
-    // Clean WhatsApp redirect function
     function orderWhatsApp(productId, type) {
       const p = allProducts.find(item => item.id === productId || item.title === productId);
       if (!p) return;
@@ -324,7 +391,7 @@ Please confirm availability and delivery.`;
         allProducts = data.products || [];
         renderProducts();
       } catch (err) {
-        document.getElementById("productsGrid").innerHTML = `<div class="col-span-full text-red-500 text-xs text-center py-8">Please make sure the backend server is running on port 8000.</div>`;
+        document.getElementById("productsGrid").innerHTML = `<div class="col-span-full text-red-500 text-xs text-center py-8">Please make sure the backend server is online.</div>`;
       }
     }
 
