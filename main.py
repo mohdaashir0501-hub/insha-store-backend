@@ -59,6 +59,9 @@ class ChatRequest(BaseModel):
 @app.get("/manifest.json")
 def get_manifest():
     return FileResponse("manifest.json", media_type="application/json")
+@app.get("/sw.js")
+def get_sw():
+    return FileResponse("sw.js", media_type="application/javascript")
 @app.get("/products")
 def get_products():
     response = supabase.table("products").select("*, categories(name)").eq("is_active", True).execute()
