@@ -23,13 +23,16 @@
 </head>
 <body class="bg-[#FAF8F5] text-[#1E1E1E] pb-24 selection:bg-amber-100">
 
+  <!-- Festive Top Marquee Announcement -->
   <div class="bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-800 text-white text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 shadow-inner">
     <span>✨ GRAND WEDDING & FESTIVE SEASON SALE — SPECIAL WHOLESALE DISCOUNTS AVAILABLE ✨</span>
   </div>
 
+  <!-- Header -->
   <header class="bg-white/95 backdrop-blur-md border-b border-amber-100 sticky top-0 z-40 px-4 py-3 shadow-sm">
     <div class="max-w-5xl mx-auto flex items-center justify-between gap-2">
       
+      <!-- Brand Logo & Title -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1E1B18] flex items-center justify-center text-amber-400 font-cinzel font-bold text-base sm:text-lg border border-amber-500/40 shadow-sm flex-shrink-0">
           I
@@ -40,30 +43,36 @@
         </div>
       </div>
       
+      <!-- Top Action Bar (Dedicated WhatsApp Tab + Language Selector: EN & HI) -->
       <div class="flex items-center gap-2">
+        <!-- Top WhatsApp Order Tab -->
         <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-extrabold px-3 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
           <span>Order on WhatsApp</span>
         </button>
 
+        <!-- Language Selector: English & Hindi only -->
         <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-amber-50/70 border border-amber-200 text-xs font-semibold text-gray-800 rounded-xl px-2.5 py-2 focus:outline-none cursor-pointer">
-          <option value="en">🇬🇧 EN</option>
-          <option value="hi">🇮🇳 HI</option>
-          <option value="ur">🇵🇰 UR</option>
+          <option value="en">🇬🇧 English</option>
+          <option value="hi">🇮🇳 हिंदी</option>
         </select>
       </div>
     </div>
   </header>
 
+  <!-- Main Container -->
   <main class="max-w-5xl mx-auto px-4 py-6">
 
+    <!-- Tab Switcher (Customer Store vs Owner Dashboard) -->
     <div class="flex bg-stone-200/80 p-1 rounded-2xl mb-6 max-w-xs mx-auto border border-stone-300/40">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-stone-900 transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 transition">⚙️ Owner Dashboard</button>
     </div>
 
+    <!-- 1. Customer Store View -->
     <section id="storeSection" class="space-y-6">
 
+      <!-- Hero Festive Showcase Banner -->
       <div class="relative overflow-hidden rounded-3xl festive-bg text-white p-6 sm:p-8 gold-border shadow-xl">
         <div class="relative z-10 max-w-lg space-y-3">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
@@ -87,6 +96,7 @@
         <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-amber-600/20 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
+      <!-- Category Filter Pills -->
       <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs">
         <button onclick="filterCategory('All')" class="cat-pill active-pill px-4 py-2 rounded-full font-bold bg-[#1E1B18] text-amber-400 shadow-sm border border-stone-800">All Collections</button>
         <button onclick="filterCategory('Bangles')" class="cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200">✨ Bangles & Sets</button>
@@ -94,6 +104,7 @@
         <button onclick="filterCategory('Undergarments')" class="cat-pill px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-amber-50 border border-stone-200">👗 Apparel & Innerwear</button>
       </div>
 
+      <!-- Catalog Header -->
       <div class="flex items-center justify-between pt-2">
         <div>
           <h2 class="text-base sm:text-lg font-bold text-stone-900" id="t-latest-products">Catalog Collections</h2>
@@ -104,12 +115,15 @@
         </button>
       </div>
 
+      <!-- Product Grid (Cards Cleaned Without Bottom Button) -->
       <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div class="col-span-full py-16 text-center text-stone-400 text-xs">Loading festive collections...</div>
       </div>
     </section>
 
+    <!-- 2. Owner Dashboard View with PIN Protection -->
     <section id="ownerSection" class="hidden">
+      <!-- PIN Login Card -->
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-stone-900 text-amber-400 flex items-center justify-center font-bold text-lg mx-auto">🔒</div>
         <div>
@@ -120,6 +134,7 @@
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1817] text-amber-400 text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
       </div>
 
+      <!-- Add Product Form (Hidden until PIN verified) -->
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm max-w-lg mx-auto">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
@@ -184,18 +199,20 @@
 
   </main>
 
+  <!-- Floating Multilingual AI Assistant Button -->
   <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1817] border border-amber-500/40 text-amber-300 font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-50 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
   </button>
 
+  <!-- AI Chat Drawer with Voice Recognition -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-stone-800 flex items-center justify-between bg-[#1A1817] text-white">
       <div class="flex items-center gap-2.5">
         <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-sm">✨</div>
         <div>
           <h3 class="text-sm font-bold text-amber-400">Insha AI Assistant</h3>
-          <p class="text-[11px] text-stone-300">Multilingual Retail & Wholesale Guide</p>
+          <p class="text-[11px] text-stone-300">English & Hindi Shopping Guide</p>
         </div>
       </div>
       <button onclick="toggleChat()" class="text-stone-400 hover:text-white text-lg font-bold px-2">✕</button>
@@ -203,15 +220,16 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF8F5]">
       <div class="bg-white border border-stone-200 text-stone-800 text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. Type or tap the 🎙️ mic to speak your inquiry in Hindi, English, or Urdu!
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Type or tap the 🎙️ mic to speak your inquiry in English or Hindi!
       </div>
     </div>
 
+    <!-- Chat Input with Speech to Text -->
     <div class="p-3 border-t border-stone-200 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-stone-100 text-stone-700 hover:text-amber-700 p-2.5 rounded-xl text-sm transition">
         🎙️
       </button>
-      <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Ask in Hindi, English, Urdu..." class="flex-1 text-xs bg-stone-100 px-3.5 py-2.5 rounded-xl focus:outline-none">
+      <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Ask in Hindi or English..." class="flex-1 text-xs bg-stone-100 px-3.5 py-2.5 rounded-xl focus:outline-none">
       <button onclick="sendChatMessage()" class="bg-[#1A1817] text-amber-400 text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-stone-900 transition">Send</button>
     </div>
   </div>
@@ -226,8 +244,7 @@
 
     const translations = {
       en: { title: "Insha Bangles & Purses", catalog: "Catalog Collections" },
-      hi: { title: "इंशा चूड़ियां और पर्स", catalog: "दुकान का सामान (फेस्टिवल कलेक्शन)" },
-      ur: { title: "انشاء چوڑی اور پرس", catalog: "اسٹور کی فہرست" }
+      hi: { title: "इंशा चूड़ियां और पर्स", catalog: "दुकान का सामान (फेस्टिवल कलेक्शन)" }
     };
 
     function changeLanguage(lang) {
@@ -270,13 +287,13 @@
       drawer.classList.toggle("translate-x-full");
     }
 
-    // Top Header Automatic Catalog WhatsApp Dispatch
+    // Top Header WhatsApp Catalog Request
     function sendFullCatalogWhatsApp() {
       const catalogMsg = `Hello Insha Bangles & Purses! 🌸
 
-I am browsing your store and would like to receive your complete Festive & Bridal Catalog along with latest Retail & Wholesale prices.
+I am browsing your website store and would like to receive your complete Festive & Bridal Catalog along with Retail & Wholesale rates.
 
-Please share available designs and order details!`;
+Please share available stock and order details!`;
       const encoded = encodeURIComponent(catalogMsg);
       window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encoded}`, '_blank');
     }
@@ -330,24 +347,6 @@ Please share available designs and order details!`;
       renderProducts();
     }
 
-    // Direct product card ordering
-    function orderWhatsApp(productId, type) {
-      const p = allProducts.find(item => item.id === productId || item.title === productId);
-      if (!p) return;
-
-      const price = type === 'Wholesale' ? p.wholesale_price : p.retail_price;
-      const cleanMessage = `Hello Insha Bangles & Purses! 🌸
-
-I would like to place an order:
-📦 Product: ${p.title}
-💰 Price: Rs ${price} (${type})
-
-Please confirm availability and delivery!`;
-
-      const encoded = encodeURIComponent(cleanMessage);
-      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encoded}`, '_blank');
-    }
-
     function renderProducts() {
       const grid = document.getElementById("productsGrid");
       grid.innerHTML = "";
@@ -363,7 +362,6 @@ Please confirm availability and delivery!`;
 
       filtered.forEach(p => {
         const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
-        const identifier = p.id || p.title;
 
         grid.innerHTML += `
           <div class="bg-white rounded-2xl overflow-hidden border border-amber-100/60 shadow-sm hover:shadow-md transition flex flex-col justify-between">
@@ -389,11 +387,6 @@ Please confirm availability and delivery!`;
                   ` : ''}
                 </div>
               </div>
-            </div>
-            <div class="p-3 pt-0">
-              <button onclick="orderWhatsApp('${identifier}', 'Retail')" class="w-full bg-[#25D366] text-white text-[11px] font-bold py-2 rounded-xl hover:bg-emerald-600 transition flex items-center justify-center gap-1.5 shadow-sm">
-                <span>💬 Order on WhatsApp</span>
-              </button>
             </div>
           </div>
         `;
