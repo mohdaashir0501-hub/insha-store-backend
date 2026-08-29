@@ -8,6 +8,7 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Premium Boutique Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,9 +51,9 @@
 </head>
 <body class="bg-[#FAF4F6] text-[#241C20] pb-28 selection:bg-pink-100">
 
+  <!-- FULL SCREEN HORIZONTAL SECTION POP-UP BANNER -->
   <div id="fullScreenPopRibbon" class="fixed top-0 left-0 right-0 w-full z-50 pointer-events-none opacity-0 shadow-2xl">
     <div class="w-full bg-gradient-to-r from-[#170B11] via-[#2F1221] to-[#170B11] border-b-2 border-[#D4AF37] px-6 py-4 sm:py-5 flex items-center justify-between shadow-2xl backdrop-blur-md">
-      
       <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
         <div class="hidden sm:flex items-center gap-2 text-[#D4AF37]/60 text-xs font-serif tracking-widest">
           <span>✦ ── ✦</span>
@@ -74,17 +75,19 @@
           <span>✦ ── ✦</span>
         </div>
       </div>
-
     </div>
   </div>
 
+  <!-- Top Announcement Bar -->
   <div class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span>✨ GRAND WEDDING & FESTIVE SEASON SALE — WHOLESALE RATES ACTIVE ✨</span>
   </div>
 
+  <!-- Header -->
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
+      <!-- Brand Logo & Royal Typography -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
           <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
@@ -101,6 +104,7 @@
         </div>
       </div>
       
+      <!-- Top Actions -->
       <div class="flex items-center gap-2">
         <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
@@ -115,35 +119,66 @@
     </div>
   </header>
 
+  <!-- Sticky Section Navigation & Live Search Bar -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
-    <div class="max-w-6xl mx-auto flex items-center gap-2.5 overflow-x-auto scrollbar-none text-xs">
-      <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
-        👑 Royal Bridal Suite
-      </a>
-      <a href="#festive-section" onclick="triggerFullRibbon('✨', 'Festive Season Specials')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
-        ✨ Festive Specials
-      </a>
-      <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'Store Best Sellers')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
-        🔥 Best Sellers
-      </a>
-      <a href="#purses-section" onclick="triggerFullRibbon('👜', 'Purses & Clutches')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
-        👜 Purses & Clutches
-      </a>
-      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'Underclothes & Innerwear')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
-        👗 Underclothes
-      </a>
+    <div class="max-w-6xl mx-auto space-y-2.5">
+      
+      <!-- Category Pills -->
+      <div class="flex items-center gap-2.5 overflow-x-auto scrollbar-none text-xs">
+        <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
+          👑 Royal Bridal Suite
+        </a>
+        <a href="#festive-section" onclick="triggerFullRibbon('✨', 'Festive Season Specials')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+          ✨ Festive Specials
+        </a>
+        <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'Store Best Sellers')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+          🔥 Best Sellers
+        </a>
+        <a href="#purses-section" onclick="triggerFullRibbon('👜', 'Handbags & Clutches')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+          👜 Purses & Clutches
+        </a>
+        <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'Underclothes & Innerwear')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+          👗 Underclothes
+        </a>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="relative">
+        <input 
+          type="text" 
+          id="searchInput" 
+          oninput="handleSearch(this.value)" 
+          placeholder="🔍 Search bridal chooda, velvet sets, clutches, innerwear..." 
+          class="w-full text-xs bg-white/90 border border-pink-200/80 rounded-2xl px-4 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm text-[#1A1316]"
+        />
+        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-xs text-stone-400 hover:text-stone-700">✕</button>
+      </div>
+
     </div>
   </div>
 
+  <!-- Main Container -->
   <main class="max-w-6xl mx-auto px-4 py-6">
 
+    <!-- Store vs Owner Switcher -->
     <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-8 max-w-xs mx-auto border border-pink-200/50">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
 
+    <!-- Live Search Results Grid (Visible when searching) -->
+    <section id="searchResultsSection" class="hidden space-y-4 mb-12">
+      <div class="flex items-center justify-between border-b border-pink-200 pb-2">
+        <h2 class="text-lg font-bold text-[#1A1316] font-cormorant" id="searchHeader">Search Results</h2>
+        <button onclick="clearSearch()" class="text-xs text-[#A64B74] font-bold hover:underline">Show All Sections</button>
+      </div>
+      <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+    </section>
+
+    <!-- 1. Customer Store View -->
     <div id="storeSection" class="space-y-16">
 
+      <!-- Hero Luxury Showcase -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-xl space-y-4">
           <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[11px] font-bold uppercase tracking-[0.2em]">
@@ -167,7 +202,8 @@
         <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <section id="bridal-section" class="scroll-mt-32 space-y-5">
+      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
+      <section id="bridal-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
             <div class="flex items-center gap-2.5">
@@ -183,7 +219,8 @@
         <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <section id="festive-section" class="scroll-mt-32 space-y-5">
+      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
+      <section id="festive-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
             <div class="flex items-center gap-2.5">
@@ -199,7 +236,8 @@
         <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <section id="bestseller-section" class="scroll-mt-32 space-y-5">
+      <!-- SECTION 3: STORE BEST SELLERS -->
+      <section id="bestseller-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
             <div class="flex items-center gap-2.5">
@@ -215,7 +253,8 @@
         <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <section id="purses-section" class="scroll-mt-32 space-y-5">
+      <!-- SECTION 4: PURSES & CLUTCHES -->
+      <section id="purses-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
             <div class="flex items-center gap-2.5">
@@ -228,7 +267,8 @@
         <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <section id="apparel-section" class="scroll-mt-32 space-y-5">
+      <!-- SECTION 5: UNDERCLOTHES -->
+      <section id="apparel-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
             <div class="flex items-center gap-2.5">
@@ -241,8 +281,40 @@
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- Boutique Location & Trust Footer -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-pink-200/80 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-100 pb-5">
+          <div>
+            <h3 class="text-lg font-bold font-cormorant text-[#1A1316]">Visit Our Offline Shop in Lucknow</h3>
+            <p class="text-xs text-[#8C6274]">Explore full bridal collections, touch the fabrics, and buy at direct wholesale rates.</p>
+          </div>
+          <a href="https://maps.google.com/?q=Dubagga+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition">
+            <span>🗺️ Open in Google Maps</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-stone-600">
+          <div class="space-y-1">
+            <p class="font-bold text-[#1A1316]">📍 Store Address</p>
+            <p>Insha Bangles & Purses</p>
+            <p class="text-stone-500">Dubagga, Lucknow, Uttar Pradesh</p>
+          </div>
+          <div class="space-y-1">
+            <p class="font-bold text-[#1A1316]">⏰ Business Hours</p>
+            <p>Open All 7 Days</p>
+            <p class="text-stone-500">10:00 AM – 10:00 PM</p>
+          </div>
+          <div class="space-y-1">
+            <p class="font-bold text-[#1A1316]">💬 Wholesale & Enquiries</p>
+            <p>Direct WhatsApp Support</p>
+            <p class="text-[#25D366] font-bold">+91 99036 10501</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+    <!-- 2. Owner Dashboard View with PIN Protection -->
     <section id="ownerSection" class="hidden">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🔒</div>
@@ -254,6 +326,7 @@
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
       </div>
 
+      <!-- Add Product Form -->
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
@@ -319,11 +392,13 @@
 
   </main>
 
+  <!-- Floating AI Assistant Button -->
   <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-40 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
   </button>
 
+  <!-- AI Chat Drawer -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
@@ -342,6 +417,7 @@
       </div>
     </div>
 
+    <!-- Chat Input -->
     <div class="p-3 border-t border-pink-100 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-pink-50 text-stone-700 hover:text-[#A64B74] p-2.5 rounded-xl text-sm transition">
         🎙️
@@ -444,6 +520,21 @@
       drawer.classList.toggle("translate-x-full");
     }
 
+    // Direct WhatsApp Item Order Handshake
+    function orderProductWhatsApp(title, retailPrice, wholesalePrice, moq) {
+      const message = `Hello Insha Bangles & Purses! 🌸
+
+I would like to order / inquire about this item:
+🛍️ *Product:* ${title}
+💰 *Retail Price:* ₹${retailPrice}
+${wholesalePrice ? `📦 *Wholesale Rate:* ₹${wholesalePrice}/pc (Min MOQ: ${moq} pcs)` : ''}
+
+Please share available colors, sizes, and delivery details!`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encoded}`, '_blank');
+    }
+
     function sendFullCatalogWhatsApp() {
       const catalogMsg = `Hello Insha Bangles & Purses! 🌸
 
@@ -452,6 +543,46 @@ I am browsing your official website store and would like to receive your complet
 Please share available stock and designs!`;
       const encoded = encodeURIComponent(catalogMsg);
       window.open(`https://wa.me/${SHOP_WHATSAPP}?text=${encoded}`, '_blank');
+    }
+
+    // Live Search Handler
+    function handleSearch(query) {
+      const q = query.trim().toLowerCase();
+      const resultsSection = document.getElementById("searchResultsSection");
+      const resultsGrid = document.getElementById("searchResultsGrid");
+      const clearBtn = document.getElementById("clearSearchBtn");
+      const storeSection = document.getElementById("storeSection");
+
+      if (q === "") {
+        clearSearch();
+        return;
+      }
+
+      clearBtn.classList.remove("hidden");
+      resultsSection.classList.remove("hidden");
+      storeSection.classList.add("hidden");
+
+      const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
+      const filtered = catalog.filter(p => 
+        (p.title || '').toLowerCase().includes(q) ||
+        (p.description || '').toLowerCase().includes(q) ||
+        (p.category_name || '').toLowerCase().includes(q)
+      );
+
+      document.getElementById("searchHeader").innerText = `Search Results for "${query}" (${filtered.length} items)`;
+
+      if (filtered.length === 0) {
+        resultsGrid.innerHTML = `<div class="col-span-full py-12 text-center text-[#8C6274] text-xs">No matching products found. Try searching for "Velvet", "Bridal", or "Clutch".</div>`;
+      } else {
+        resultsGrid.innerHTML = filtered.map(p => createProductCard(p, '✨ Search Match')).join('');
+      }
+    }
+
+    function clearSearch() {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("clearSearchBtn").classList.add("hidden");
+      document.getElementById("searchResultsSection").classList.add("hidden");
+      document.getElementById("storeSection").classList.remove("hidden");
     }
 
     function handleImageFile(event) {
@@ -491,7 +622,7 @@ Please share available stock and designs!`;
     function createProductCard(p, badgeText) {
       const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
       return `
-        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80">
+        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
           <div>
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
@@ -515,9 +646,28 @@ Please share available stock and designs!`;
               </div>
             </div>
           </div>
+
+          <!-- 1-Tap WhatsApp Order Button -->
+          <div class="p-3 pt-0">
+            <button 
+              onclick="orderProductWhatsApp('${p.title.replace(/'/g, "\\'")}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10})" 
+              class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition">
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
+              <span>Order on WhatsApp</span>
+            </button>
+          </div>
         </div>
       `;
     }
+
+    const defaultCatalog = [
+      { title: "Royal Velvet Bridal Chooda Set", description: "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.", category_name: "Bridal", retail_price: 1250, wholesale_price: 650, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"] },
+      { title: "Maharani Kundan Dulhan Bangles", description: "Heavy Kundan and pearl studded bangle set for grand weddings.", category_name: "Bridal", retail_price: 1450, wholesale_price: 780, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"] },
+      { title: "Velvet Festive Bangle Set (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
+      { title: "Zari Embroidered Party Clutch", description: "Premium golden zari stone clutch with detachable metal chain strap.", category_name: "Purses & Clutches", retail_price: 890, wholesale_price: 480, min_wholesale_qty: 10, image_urls: ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"] },
+      { title: "Trending Matte Silk Everyday Bangles", description: "Smooth textured durable daily wear bangles in 12 festive shades.", category_name: "Best Seller", retail_price: 350, wholesale_price: 180, min_wholesale_qty: 20, image_urls: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"] },
+      { title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton innerwear essentials for all-day comfort.", category_name: "Underclothes", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
+    ];
 
     function renderAllSections() {
       const bridalGrid = document.getElementById("bridalGrid");
@@ -525,15 +675,6 @@ Please share available stock and designs!`;
       const bestsellerGrid = document.getElementById("bestsellerGrid");
       const pursesGrid = document.getElementById("pursesGrid");
       const apparelGrid = document.getElementById("apparelGrid");
-
-      const defaultCatalog = [
-        { title: "Royal Velvet Bridal Chooda Set", description: "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.", category_name: "Bridal", retail_price: 1250, wholesale_price: 650, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"] },
-        { title: "Maharani Kundan Dulhan Bangles", description: "Heavy Kundan and pearl studded bangle set for grand weddings.", category_name: "Bridal", retail_price: 1450, wholesale_price: 780, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"] },
-        { title: "Velvet Festive Bangle Set (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
-        { title: "Zari Embroidered Party Clutch", description: "Premium golden zari stone clutch with detachable metal chain strap.", category_name: "Purses & Clutches", retail_price: 890, wholesale_price: 480, min_wholesale_qty: 10, image_urls: ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"] },
-        { title: "Trending Matte Silk Everyday Bangles", description: "Smooth textured durable daily wear bangles in 12 festive shades.", category_name: "Best Seller", retail_price: 350, wholesale_price: 180, min_wholesale_qty: 20, image_urls: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"] },
-        { title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton innerwear essentials for all-day comfort.", category_name: "Underclothes", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
-      ];
 
       const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
 
@@ -549,7 +690,6 @@ Please share available stock and designs!`;
       pursesGrid.innerHTML = (pursesItems.length ? pursesItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👜 Luxury Clutch')).join('');
       apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Daily Essential')).join('');
 
-      // Observe the heading container of each section specifically
       document.querySelectorAll('main section[id] > div:first-child').forEach(headingDiv => {
         sectionObserver.observe(headingDiv);
       });
@@ -563,7 +703,7 @@ Please share available stock and designs!`;
           allProducts = data.products;
         }
       } catch (err) {
-        console.log("Loading default curated collections...");
+        console.log("Loading curated collections...");
       } finally {
         renderAllSections();
       }
