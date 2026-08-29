@@ -1,5 +1,4 @@
 fastapi
 uvicorn
-supabase
-python-dotenv
-google-genai
+pydantic
+google-generativeai
