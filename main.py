@@ -1,28 +1,14 @@
-import os
-import json
-from typing import List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from dotenv import load_dotenv
-from supabase import create_client, Client
-from google import genai
-from google.genai import types
+from typing import Optional, List
+import os
+import google.generativeai as genai
 
-load_dotenv()
+app = FastAPI(title="Insha Bangles & Purses API")
 
-# Supabase Client
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
-# Gemini Client
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
-app = FastAPI(title="Store Multilingual E-Commerce & AI Assistant")
-
-# Enable CORS for frontend connection
+# Enable CORS for web and Android access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -31,98 +17,132 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Serve Frontend App ---
-@app.get("/")
-def serve_store_app():
-    if os.path.exists("index.html"):
-        return FileResponse("index.html")
-    return {"status": "online", "message": "Store Backend Ready"}
+# Configure Gemini AI
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
-# --- Data Models ---
+# Conversational Assistant System Prompt
+SYSTEM_PROMPT = """
+You are the official smart shopping assistant for 'Insha Bangles & Purses', a bridal and festive boutique located in Dubagga, Lucknow.
+Your goals:
+1. Greet customers warmly in English or Hindi (Hinglish).
+2. Answer questions about traditional bridal choodas, handcrafted velvet bangles, stone clutches, party potlis, and comfortable underclothes.
+3. Help with sizing inquiries (bangle standard sizes: 2.4, 2.6, 2.8, etc.), color combinations (Maroon, Royal Red, Emerald Green, Golden Zari, Pastel Pink), and wholesale lot terms (minimum order quantities).
+4. When customers want to check exact real-time stock or order, kindly invite them to tap the green "Check Availability & Colors" button on the item card to chat directly with the store team on WhatsApp (+91 99036 10501).
+Keep answers concise, polite, helpful, and welcoming.
+"""
+
+# In-memory product catalog store
+catalog_db = [
+    {
+        "id": "1",
+        "title": "Royal Velvet Bridal Chooda Set",
+        "description": "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.",
+        "category_name": "Bridal",
+        "retail_price": 1250,
+        "wholesale_price": 650,
+        "min_wholesale_qty": 6,
+        "image_urls": ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"],
+        "stock_count": 50
+    },
+    {
+        "id": "2",
+        "title": "Maharani Kundan Dulhan Bangles",
+        "description": "Heavy Kundan and pearl studded bangle set for grand weddings.",
+        "category_name": "Bridal",
+        "retail_price": 1450,
+        "wholesale_price": 780,
+        "min_wholesale_qty": 6,
+        "image_urls": ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"],
+        "stock_count": 40
+    },
+    {
+        "id": "3",
+        "title": "Velvet Festive Bangle Set (Pack of 24)",
+        "description": "Rich multicolor festive velvet bangles with gold zari edging.",
+        "category_name": "Festive",
+        "retail_price": 450,
+        "wholesale_price": 220,
+        "min_wholesale_qty": 12,
+        "image_urls": ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"],
+        "stock_count": 100
+    },
+    {
+        "id": "4",
+        "title": "Zari Embroidered Party Clutch",
+        "description": "Premium golden zari stone clutch with detachable metal chain strap.",
+        "category_name": "Purses & Clutches",
+        "retail_price": 890,
+        "wholesale_price": 480,
+        "min_wholesale_qty": 10,
+        "image_urls": ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"],
+        "stock_count": 30
+    },
+    {
+        "id": "5",
+        "title": "Trending Matte Silk Everyday Bangles",
+        "description": "Smooth textured durable daily wear bangles in 12 festive shades.",
+        "category_name": "Best Seller",
+        "retail_price": 350,
+        "wholesale_price": 180,
+        "min_wholesale_qty": 20,
+        "image_urls": ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"],
+        "stock_count": 150
+    },
+    {
+        "id": "6",
+        "title": "Premium Cotton Everyday Innerwear Set",
+        "description": "Soft stretch breathable cotton innerwear essentials for all-day comfort.",
+        "category_name": "Underclothes",
+        "retail_price": 399,
+        "wholesale_price": 190,
+        "min_wholesale_qty": 15,
+        "image_urls": ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"],
+        "stock_count": 80
+    }
+]
+
 class ProductCreate(BaseModel):
     title: str
-    description: Optional[str] = None
+    description: Optional[str] = ""
     category_name: str
     image_urls: List[str] = []
     retail_price: float
     wholesale_price: Optional[float] = None
-    min_wholesale_qty: int = 1
-    stock_count: int = 0
+    min_wholesale_qty: Optional[int] = 10
+    stock_count: Optional[int] = 100
 
 class ChatRequest(BaseModel):
     message: str
-    conversation_history: List[dict] = []
-    preferred_language: Optional[str] = "English"
 
-# --- Endpoints ---
+# Endpoints
+@app.get("/")
+def serve_home():
+    if os.path.exists("index.html"):
+        return FileResponse("index.html")
+    return {"message": "Insha Bangles & Purses API is Live"}
 
-@app.get("/manifest.json")
-def get_manifest():
-    return FileResponse("manifest.json", media_type="application/json")
-@app.get("/sw.js")
-def get_sw():
-    return FileResponse("sw.js", media_type="application/javascript")
 @app.get("/products")
 def get_products():
-    response = supabase.table("products").select("*, categories(name)").eq("is_active", True).execute()
-    return {"products": response.data}
+    return {"products": catalog_db}
 
 @app.post("/products")
-def create_product(product: ProductCreate):
-    cat_res = supabase.table("categories").select("id").eq("name", product.category_name).execute()
-    if not cat_res.data:
-        raise HTTPException(status_code=400, detail="Category not found")
-    
-    category_id = cat_res.data[0]["id"]
-    
-    data = {
-        "title": product.title,
-        "description": product.description,
-        "category_id": category_id,
-        "image_urls": product.image_urls,
-        "retail_price": product.retail_price,
-        "wholesale_price": product.wholesale_price,
-        "min_wholesale_qty": product.min_wholesale_qty,
-        "stock_count": product.stock_count
-    }
-    
-    insert_res = supabase.table("products").insert(data).execute()
-    return {"status": "success", "data": insert_res.data}
-
-def fetch_catalog_items():
-    response = supabase.table("products").select("title, description, retail_price, wholesale_price, min_wholesale_qty, stock_count").eq("is_active", True).execute()
-    return json.dumps(response.data)
+def add_product(item: ProductCreate):
+    new_product = item.dict()
+    new_product["id"] = str(len(catalog_db) + 1)
+    catalog_db.insert(0, new_product)
+    return {"success": True, "product": new_product}
 
 @app.post("/chat")
 def chat_with_assistant(req: ChatRequest):
+    if not GEMINI_API_KEY:
+        return {"reply": "Namaste! 🙏 Welcome to Insha Bangles & Purses. Please feel free to check our collections or reach out via WhatsApp at +91 99036 10501 for stock and color availability!"}
+    
     try:
-        catalog_data = fetch_catalog_items()
-
-        system_instruction = f"""
-        You are a polite, helpful, and expert multilingual shopping assistant for Insha Bangles and Purses (Retail & Wholesale).
-        
-        CRITICAL RULES:
-        1. NATIVE POLYGLOT: Detect the user's language and respond naturally in that exact same language (English, Hindi, Hinglish, Arabic, Spanish, Bengali, Urdu, etc.).
-        2. RETAIL VS. WHOLESALE:
-           - For single-item buyers: quote retail prices clearly.
-           - For bulk/wholesale buyers: quote wholesale rates and explain the minimum order quantity (MOQ).
-        3. ACCURACY: Base recommendations exclusively on available catalog items:
-        {catalog_data}
-        4. Keep your replies crisp, helpful, and visually scannable.
-        """
-
-        response = client.models.generate_content(
-            model='gemini-3.5-flash',
-            contents=req.message,
-            config=types.GenerateContentConfig(
-                system_instruction=system_instruction,
-                temperature=0.3,
-            ),
-        )
-
-        return {
-            "reply": response.text,
-            "status": "success"
-        }
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        full_prompt = f"{SYSTEM_PROMPT}\n\nCustomer: {req.message}\nAssistant:"
+        response = model.generate_content(full_prompt)
+        return {"reply": response.text.strip()}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        return {"reply": "Namaste! 🙏 For immediate color and size confirmation, please tap 'Check Availability & Colors' on any item to chat directly on WhatsApp."}
