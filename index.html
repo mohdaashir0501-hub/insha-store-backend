@@ -117,19 +117,19 @@
 
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center gap-2.5 overflow-x-auto scrollbar-none text-xs">
-      <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'ROYAL BRIDAL SUITE')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
+      <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
         👑 Royal Bridal Suite
       </a>
-      <a href="#festive-section" onclick="triggerFullRibbon('✨', 'FESTIVE SPECIALS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+      <a href="#festive-section" onclick="triggerFullRibbon('✨', 'Festive Season Specials')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         ✨ Festive Specials
       </a>
-      <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'HOT BEST SELLERS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+      <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'Store Best Sellers')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         🔥 Best Sellers
       </a>
-      <a href="#purses-section" onclick="triggerFullRibbon('👜', 'HANDBAGS & CLUTCHES')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+      <a href="#purses-section" onclick="triggerFullRibbon('👜', 'Purses & Clutches')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         👜 Purses & Clutches
       </a>
-      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'UNDERCLOTHES & INNERWEAR')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'Underclothes & Innerwear')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         👗 Underclothes
       </a>
     </div>
@@ -360,6 +360,8 @@
 
     // FULL SCREEN HORIZONTAL RIBBON TRIGGER
     let ribbonTimeout;
+    let lastActiveSection = null;
+
     function triggerFullRibbon(icon, title) {
       const ribbon = document.getElementById("fullScreenPopRibbon");
       document.getElementById("popIcon").innerText = icon;
@@ -373,12 +375,23 @@
       }, 1600);
     }
 
-    // Scroll Observer to trigger Full Screen Banner on Scroll
-    const observerOptions = { root: null, threshold: 0.25 };
+    // Precise Middle-of-Screen Observer
+    const observerOptions = {
+      root: null,
+      rootMargin: "-45% 0px -45% 0px",
+      threshold: 0
+    };
+
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const id = entry.target.id;
+          const parentSection = entry.target.closest('section');
+          if (!parentSection) return;
+          
+          const id = parentSection.id;
+          if (id === lastActiveSection) return;
+          lastActiveSection = id;
+
           if (id === 'bridal-section') triggerFullRibbon('👑', 'Royal Bridal Suite');
           else if (id === 'festive-section') triggerFullRibbon('✨', 'Festive Season Specials');
           else if (id === 'bestseller-section') triggerFullRibbon('🔥', 'Store Best Sellers');
@@ -536,7 +549,10 @@ Please share available stock and designs!`;
       pursesGrid.innerHTML = (pursesItems.length ? pursesItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👜 Luxury Clutch')).join('');
       apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Daily Essential')).join('');
 
-      document.querySelectorAll('main section[id]').forEach(sec => sectionObserver.observe(sec));
+      // Observe the heading container of each section specifically
+      document.querySelectorAll('main section[id] > div:first-child').forEach(headingDiv => {
+        sectionObserver.observe(headingDiv);
+      });
     }
 
     async function fetchProducts() {
