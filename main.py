@@ -20,15 +20,21 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 WHATSAPP_TOKEN = os.environ.get("WHATSAPP_TOKEN", "")
 WHATSAPP_PHONE_NUMBER_ID = os.environ.get("WHATSAPP_PHONE_NUMBER_ID", "")
 VERIFY_TOKEN = os.environ.get("WHATSAPP_VERIFY_TOKEN", "insha_secure_token_123")
+STORE_URL = os.environ.get("STORE_URL", "https://insha-store.onrender.com")
 
-SYSTEM_PROMPT = """
-You are the smart AI sales assistant for 'Insha Bangles & Purses', located in Dubagga, Lucknow.
-Shop highlights:
-- Handcrafted bridal velvet choodas, Kundan bangles, designer clutches, party potlis, and comfortable underclothes.
-- Standard bangle sizes: 2.4, 2.6, 2.8.
-- Retail and wholesale rates available (with MOQ).
-- Offline shop in Dubagga, Lucknow (open daily 10 AM - 10 PM).
-Help customers with stock, size selection, pricing, and bulk wholesale inquiries politely in English or Hindi.
+SYSTEM_PROMPT = f"""
+You are the automated WhatsApp shopping assistant for 'Insha Bangles & Purses', a luxury bridal & festive boutique located in Dubagga, Hardoi Road, Lucknow.
+Shop & Product Details:
+1. Products: Handcrafted bridal velvet choodas, Kundan bangles, stone-embellished party clutches, bridal potlis, and everyday underclothes/innerwear.
+2. Standard Bangle Sizes: 2.4 (Small), 2.6 (Medium), 2.8 (Large), 2.10 (Extra Large).
+3. Pricing & Wholesale: Retail prices and wholesale rates with Minimum Order Quantity (MOQ: 6-12 pcs) are available.
+4. Offline Shop Timings: Open daily 10:00 AM – 10:00 PM in Dubagga, Lucknow.
+5. Online Store & Full Catalog Link: {STORE_URL}
+
+Guidelines:
+- Greet warmly in polite Hinglish or English matching the customer's language.
+- When customers ask for product availability, colors, or catalogs, provide concise, helpful details and invite them to explore the full live catalog at {STORE_URL}.
+- Keep replies clean, professional, and friendly.
 """
 
 catalog_db = [
@@ -114,16 +120,36 @@ class ChatRequest(BaseModel):
     message: str
 
 def generate_ai_reply(prompt_text: str) -> str:
+    text_lower = prompt_text.lower()
+    
+    # Fast intelligent catalog check
+    if any(k in text_lower for k in ["catalog", "catalogue", "all items", "rate list", "price list", "website"]):
+        return (
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses, Lucknow.\n\n"
+            f"✨ You can view our complete 2026 Bridal & Festive Collection with live retail & wholesale rates here:\n"
+            f"👉 {STORE_URL}\n\n"
+            "Feel free to reply with the items or sizes (2.4, 2.6, 2.8) you'd like to check for live stock!"
+        )
+
     if not GEMINI_API_KEY:
-        return "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you with sizes, collections, or wholesale orders today?"
+        return (
+            "Namaste! 🙏 Thank you for contacting Insha Bangles & Purses, Dubagga, Lucknow.\n\n"
+            f"Explore our latest collection and prices online:\n👉 {STORE_URL}\n\n"
+            "Our team will confirm item availability with you shortly!"
+        )
+
     try:
         import google.generativeai as genai
         genai.configure(api_key=GEMINI_API_KEY)
         model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(f"{SYSTEM_PROMPT}\n\nCustomer Inquiry: {prompt_text}\nAssistant Response:")
+        response = model.generate_content(f"{SYSTEM_PROMPT}\n\nCustomer Message: {prompt_text}\nAssistant Response:")
         return response.text.strip()
     except Exception:
-        return "Namaste! Welcome to Insha Bangles & Purses Lucknow. Please let us know your requirements, and our team will get back to you shortly."
+        return (
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses.\n\n"
+            f"You can view all bridal sets, purses, and innerwear directly at:\n👉 {STORE_URL}\n\n"
+            "Let us know which design or size you would like to book!"
+        )
 
 @app.get("/")
 def serve_home():
@@ -152,7 +178,8 @@ def delete_product(product_id: str):
 def chat_with_assistant(req: ChatRequest):
     return {"reply": generate_ai_reply(req.message)}
 
-# Automated WhatsApp Cloud API Webhook Handler
+# ----------------- WhatsApp Meta Cloud Webhook ----------------- #
+
 @app.get("/webhook")
 def verify_webhook(request: Request):
     params = dict(request.query_params)
