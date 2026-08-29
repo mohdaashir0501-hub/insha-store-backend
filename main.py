@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional, List
 import os
+import requests
 
 app = FastAPI(title="Insha Bangles & Purses API")
 
@@ -16,13 +17,18 @@ app.add_middleware(
 )
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+WHATSAPP_TOKEN = os.environ.get("WHATSAPP_TOKEN", "")
+WHATSAPP_PHONE_NUMBER_ID = os.environ.get("WHATSAPP_PHONE_NUMBER_ID", "")
+VERIFY_TOKEN = os.environ.get("WHATSAPP_VERIFY_TOKEN", "insha_secure_token_123")
 
 SYSTEM_PROMPT = """
-You are the official smart shopping assistant for 'Insha Bangles & Purses', a bridal and festive boutique located in Dubagga, Lucknow.
-1. Greet customers warmly in English or Hindi (Hinglish).
-2. Answer questions about traditional bridal choodas, handcrafted velvet bangles, stone clutches, party potlis, and comfortable underclothes.
-3. Help with sizing inquiries (bangle standard sizes: 2.4, 2.6, 2.8, etc.), colors (Maroon, Royal Red, Emerald Green, Golden Zari, Pastel Pink), and wholesale lot terms (MOQ).
-4. Direct users to tap the green "Check Availability & Colors" button on any item to connect directly with the shop team on WhatsApp (+91 99036 10501).
+You are the smart AI sales assistant for 'Insha Bangles & Purses', located in Dubagga, Lucknow.
+Shop highlights:
+- Handcrafted bridal velvet choodas, Kundan bangles, designer clutches, party potlis, and comfortable underclothes.
+- Standard bangle sizes: 2.4, 2.6, 2.8.
+- Retail and wholesale rates available (with MOQ).
+- Offline shop in Dubagga, Lucknow (open daily 10 AM - 10 PM).
+Help customers with stock, size selection, pricing, and bulk wholesale inquiries politely in English or Hindi.
 """
 
 catalog_db = [
@@ -107,11 +113,23 @@ class ProductCreate(BaseModel):
 class ChatRequest(BaseModel):
     message: str
 
+def generate_ai_reply(prompt_text: str) -> str:
+    if not GEMINI_API_KEY:
+        return "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you with sizes, collections, or wholesale orders today?"
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        response = model.generate_content(f"{SYSTEM_PROMPT}\n\nCustomer Inquiry: {prompt_text}\nAssistant Response:")
+        return response.text.strip()
+    except Exception:
+        return "Namaste! Welcome to Insha Bangles & Purses Lucknow. Please let us know your requirements, and our team will get back to you shortly."
+
 @app.get("/")
 def serve_home():
     if os.path.exists("index.html"):
         return FileResponse("index.html")
-    return {"message": "Insha Bangles & Purses API is Live"}
+    return {"status": "Insha Bangles & Purses API Online"}
 
 @app.get("/products")
 def get_products():
@@ -126,15 +144,49 @@ def add_product(item: ProductCreate):
 
 @app.post("/chat")
 def chat_with_assistant(req: ChatRequest):
-    if not GEMINI_API_KEY:
-        return {"reply": "Namaste! 🙏 Welcome to Insha Bangles & Purses. Please feel free to check our collections or reach out via WhatsApp at +91 99036 10501 for stock and color availability!"}
-    
+    return {"reply": generate_ai_reply(req.message)}
+
+# Automated WhatsApp Cloud API Webhook Handler
+@app.get("/webhook")
+def verify_webhook(request: Request):
+    params = dict(request.query_params)
+    mode = params.get("hub.mode")
+    token = params.get("hub.verify_token")
+    challenge = params.get("hub.challenge")
+
+    if mode == "subscribe" and token == VERIFY_TOKEN:
+        return Response(content=challenge, media_type="text/plain")
+    raise HTTPException(status_code=403, detail="Verification token mismatch")
+
+@app.post("/webhook")
+async def handle_whatsapp_incoming(request: Request):
+    data = await request.json()
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        full_prompt = f"{SYSTEM_PROMPT}\n\nCustomer: {req.message}\nAssistant:"
-        response = model.generate_content(full_prompt)
-        return {"reply": response.text.strip()}
-    except Exception:
-        return {"reply": "Namaste! 🙏 For immediate color and size confirmation, please tap 'Check Availability & Colors' on any item to chat directly on WhatsApp."}
+        entry = data.get("entry", [])[0]
+        changes = entry.get("changes", [])[0]
+        value = changes.get("value", {})
+        messages = value.get("messages", [])
+
+        if messages:
+            msg = messages[0]
+            from_number = msg.get("from")
+            text_body = msg.get("text", {}).get("body", "")
+
+            if text_body and WHATSAPP_TOKEN and WHATSAPP_PHONE_NUMBER_ID:
+                ai_answer = generate_ai_reply(text_body)
+                url = f"https://graph.facebook.com/v19.0/{WHATSAPP_PHONE_NUMBER_ID}/messages"
+                headers = {
+                    "Authorization": f"Bearer {WHATSAPP_TOKEN}",
+                    "Content-Type": "application/json"
+                }
+                payload = {
+                    "messaging_product": "whatsapp",
+                    "to": from_number,
+                    "type": "text",
+                    "text": {"body": ai_answer}
+                }
+                requests.post(url, json=payload, headers=headers, timeout=10)
+    except Exception as e:
+        print(f"Webhook processing error: {e}")
+
+    return {"status": "success"}
