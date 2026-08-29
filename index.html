@@ -7,79 +7,102 @@
   <title>Insha Bangles & Purses | Royal Bridal & Festive Hub</title>
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-cinzel { font-family: 'Cinzel', serif; }
+    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    .font-playfair { font-family: 'Playfair Display', serif; }
     
     .gold-gradient-btn {
-      background: linear-gradient(135deg, #F4D068 0%, #D4AF37 50%, #AA8220 100%);
+      background: linear-gradient(135deg, #F9DF88 0%, #D4AF37 50%, #9E7412 100%);
       color: #1A1316;
     }
     .hero-gradient {
-      background: radial-gradient(circle at 80% 20%, #4A1E34 0%, #20121A 60%, #120A0E 100%);
+      background: radial-gradient(circle at 85% 15%, #441A30 0%, #1E0F17 55%, #10070C 100%);
     }
     .logo-ring {
       background: radial-gradient(circle, #FCE8F0 0%, #F5C2D5 100%);
       border: 2px solid #D4AF37;
     }
     .section-card {
-      background: linear-gradient(180deg, #FFFFFF 0%, #FFFDFE 100%);
-      border: 1px solid rgba(226, 178, 199, 0.4);
+      background: #FFFFFF;
+      border: 1px solid rgba(226, 178, 199, 0.45);
     }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
     }
 
-    /* Fullscreen/Over-the-screen Category Pop Animation */
-    #sectionPopToast {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* FULL-SCREEN HORIZONTAL POP OVERLAY */
+    #fullScreenPopRibbon {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      transform: translateY(-120%);
+    }
+    #fullScreenPopRibbon.active {
+      transform: translateY(0%);
+      opacity: 1;
     }
   </style>
 </head>
 <body class="bg-[#FAF4F6] text-[#241C20] pb-28 selection:bg-pink-100">
 
-  <!-- Bold Screen Pop Announcement on Section Entry -->
-  <div id="sectionPopToast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 scale-75 transform">
-    <div class="px-6 py-3 rounded-2xl bg-[#1A1316]/95 border-2 border-[#D4AF37] shadow-2xl flex items-center gap-3 backdrop-blur-md">
-      <span id="popIcon" class="text-2xl">👑</span>
-      <div>
-        <p class="text-[9px] uppercase tracking-widest text-pink-300 font-bold">Exploring Collection</p>
-        <h4 id="popTitle" class="text-sm sm:text-base font-cinzel font-black text-[#F4D068] tracking-wider">ROYAL BRIDAL SUITE</h4>
+  <div id="fullScreenPopRibbon" class="fixed top-0 left-0 right-0 w-full z-50 pointer-events-none opacity-0 shadow-2xl">
+    <div class="w-full bg-gradient-to-r from-[#170B11] via-[#2F1221] to-[#170B11] border-b-2 border-[#D4AF37] px-6 py-4 sm:py-5 flex items-center justify-between shadow-2xl backdrop-blur-md">
+      
+      <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
+        <div class="hidden sm:flex items-center gap-2 text-[#D4AF37]/60 text-xs font-serif tracking-widest">
+          <span>✦ ── ✦</span>
+          <span class="text-[10px] tracking-widest uppercase text-pink-200/70 font-sans">INSHA ROYAL ARCHIVE</span>
+        </div>
+
+        <div class="flex items-center gap-3.5 mx-auto sm:mx-0">
+          <span id="popIcon" class="text-2xl sm:text-3xl filter drop-shadow">👑</span>
+          <div class="text-left">
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-[#F3C57A] font-bold block">ENTERING SHOWCASE</span>
+            <h2 id="popTitle" class="text-xl sm:text-3xl font-cormorant font-bold italic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#FFEBF2] via-[#F6D787] to-[#E5A823]">
+              ROYAL BRIDAL SUITE
+            </h2>
+          </div>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2 text-[#D4AF37]/60 text-xs font-serif tracking-widest">
+          <span class="text-[10px] tracking-widest uppercase text-pink-200/70 font-sans">EXCLUSIVE 2026</span>
+          <span>✦ ── ✦</span>
+        </div>
       </div>
+
     </div>
   </div>
 
-  <!-- Top Announcement Bar -->
   <div class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span>✨ GRAND WEDDING & FESTIVE SEASON SALE — WHOLESALE RATES ACTIVE ✨</span>
   </div>
 
-  <!-- Header -->
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
-      <!-- Brand Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
           <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
             <path d="M35 32 L40 22 L50 28 L60 22 L65 32 Z" fill="#D4AF37" stroke="#1A1316" stroke-width="1.5" />
             <circle cx="50" cy="52" r="22" fill="#1A1316" stroke="#D4AF37" stroke-width="2.5" />
-            <text x="50" y="58" font-family="'Cinzel', serif" font-weight="900" font-size="16" fill="#F4D068" text-anchor="middle">IB</text>
+            <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-weight="900" font-size="17" fill="#F4D068" text-anchor="middle">IB</text>
             <path d="M22 62 Q35 70 50 68 Q65 70 78 62" fill="none" stroke="#D4AF37" stroke-width="2" />
           </svg>
         </div>
         
         <div>
-          <h1 class="text-sm sm:text-lg font-black font-cinzel tracking-wider text-[#1A1316] leading-tight" id="t-store-title">INSHA BANGLES & PURSES</h1>
-          <p class="text-[9px] sm:text-[10px] text-[#A64B74] font-bold uppercase tracking-widest">Festive Bridal & Wholesale Hub</p>
+          <h1 class="text-base sm:text-xl font-cormorant font-bold tracking-wider text-[#1A1316] leading-none" id="t-store-title">INSHA BANGLES & PURSES</h1>
+          <p class="text-[9px] sm:text-[10px] text-[#A64B74] font-bold uppercase tracking-[0.18em] mt-0.5">Festive Bridal & Wholesale Hub</p>
         </div>
       </div>
       
-      <!-- Top Action Bar -->
       <div class="flex items-center gap-2">
-        <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-extrabold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
+        <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
           <span>Order on WhatsApp</span>
         </button>
@@ -92,168 +115,145 @@
     </div>
   </header>
 
-  <!-- Sticky Quick Jump Bar -->
-  <div class="sticky top-[61px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/60 py-2.5 px-4 shadow-sm">
-    <div class="max-w-6xl mx-auto flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
-      <a href="#bridal-section" onclick="triggerPop('👑', 'ROYAL BRIDAL SUITE')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90">
-        👑 Bridal Collection
+  <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
+    <div class="max-w-6xl mx-auto flex items-center gap-2.5 overflow-x-auto scrollbar-none text-xs">
+      <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'ROYAL BRIDAL SUITE')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
+        👑 Royal Bridal Suite
       </a>
-      <a href="#festive-section" onclick="triggerPop('✨', 'FESTIVE SPECIALS')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200">
+      <a href="#festive-section" onclick="triggerFullRibbon('✨', 'FESTIVE SPECIALS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         ✨ Festive Specials
       </a>
-      <a href="#bestseller-section" onclick="triggerPop('🔥', 'HOT BEST SELLERS')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200">
+      <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'HOT BEST SELLERS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         🔥 Best Sellers
       </a>
-      <a href="#purses-section" onclick="triggerPop('👜', 'HANDBAGS & CLUTCHES')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200">
+      <a href="#purses-section" onclick="triggerFullRibbon('👜', 'HANDBAGS & CLUTCHES')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         👜 Purses & Clutches
       </a>
-      <a href="#apparel-section" onclick="triggerPop('👗', 'APPAREL & ESSENTIALS')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200">
+      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'APPAREL & ESSENTIALS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         👗 Apparel & Innerwear
       </a>
     </div>
   </div>
 
-  <!-- Main Container -->
   <main class="max-w-6xl mx-auto px-4 py-6">
 
-    <!-- Store vs Owner Tab Switcher -->
-    <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-6 max-w-xs mx-auto border border-pink-200/50">
+    <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-8 max-w-xs mx-auto border border-pink-200/50">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
 
-    <!-- 1. Customer Store View -->
-    <div id="storeSection" class="space-y-12">
+    <div id="storeSection" class="space-y-16">
 
-      <!-- Hero Luxury Showcase Banner -->
-      <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-6 sm:p-10 border border-[#D4AF37]/40 shadow-2xl">
+      <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-xl space-y-4">
-          <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[11px] font-bold uppercase tracking-wider">
-            <span>👑 Exclusive Bridal & Wholesale Hub</span>
+          <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[11px] font-bold uppercase tracking-[0.2em]">
+            <span>👑 Exclusive Bridal & Wholesale Heritage</span>
           </div>
-          <h2 class="text-2xl sm:text-4xl font-cinzel font-black leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFE7F1] via-[#F4D068] to-[#E5A823]">
-            Royal Bridal Velvet Sets & Designer Purses
+          <h2 class="text-3xl sm:text-5xl font-cormorant font-bold italic leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFEBF2] via-[#F6D787] to-[#E5A823]">
+            Royal Bridal Velvet Sets & Designer Clutches
           </h2>
-          <p class="text-xs sm:text-sm text-pink-100/80 leading-relaxed">
-            Handcrafted traditional bridal choodas, premium velvet bangles, party clutches, and innerwear available in single sets and bulk wholesale lots.
+          <p class="text-xs sm:text-sm text-pink-100/80 leading-relaxed font-normal">
+            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily innerwear available in single sets and bulk wholesale lots.
           </p>
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg hover:bg-emerald-600 transition flex items-center gap-1.5">
-              <span>💬 Get WhatsApp Catalog & Rates</span>
+          <div class="flex flex-wrap items-center gap-3 pt-3">
+            <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] text-white font-bold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:bg-emerald-600 transition flex items-center gap-2">
+              <span>💬 Request WhatsApp Catalog</span>
             </button>
-            <button onclick="toggleChat()" class="gold-gradient-btn font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg hover:opacity-95 transition flex items-center gap-1.5">
+            <button onclick="toggleChat()" class="gold-gradient-btn font-extrabold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:opacity-95 transition flex items-center gap-2">
               <span>✨ Ask AI Assistant</span>
             </button>
           </div>
         </div>
-        <div class="absolute -right-8 -bottom-8 w-72 h-72 bg-pink-600/25 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
-      <section id="bridal-section" class="scroll-mt-28 space-y-4">
-        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3">
+      <section id="bridal-section" class="scroll-mt-32 space-y-5">
+        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">👑</span>
-              <h2 class="text-lg sm:text-2xl font-black font-cinzel text-[#1A1316] tracking-wide">ROYAL BRIDAL SUITE</h2>
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">👑</span>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Royal Bridal Suite</h2>
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Heavy bridal choodas, dulhan velvet sets & ceremonial gold-tone bangles</p>
           </div>
-          <span class="text-[11px] font-bold bg-[#1A1316] text-[#F4D068] px-3 py-1 rounded-full border border-[#D4AF37]/40 shadow-sm hidden sm:inline-block">
+          <span class="text-[11px] font-bold bg-[#1A1316] text-[#F4D068] px-3.5 py-1.5 rounded-full border border-[#D4AF37]/40 shadow-sm hidden sm:inline-block">
             Bridal Special
           </span>
         </div>
-        <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <!-- Products loaded via JS -->
-        </div>
+        <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
-      <section id="festive-section" class="scroll-mt-28 space-y-4">
-        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3">
+      <section id="festive-section" class="scroll-mt-32 space-y-5">
+        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">✨</span>
-              <h2 class="text-lg sm:text-2xl font-black font-cinzel text-[#1A1316] tracking-wide">FESTIVE SEASON SPECIALS</h2>
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">✨</span>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Festive Season Specials</h2>
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Vibrant velvet sets, party latkan accessories, and glitter highlights</p>
           </div>
-          <span class="text-[11px] font-bold bg-pink-100 text-[#8C2E58] px-3 py-1 rounded-full border border-pink-300 shadow-sm hidden sm:inline-block">
+          <span class="text-[11px] font-bold bg-pink-100 text-[#8C2E58] px-3.5 py-1.5 rounded-full border border-pink-300 shadow-sm hidden sm:inline-block">
             Festive 2026
           </span>
         </div>
-        <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <!-- Products loaded via JS -->
-        </div>
+        <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 3: STORE BEST SELLERS -->
-      <section id="bestseller-section" class="scroll-mt-28 space-y-4">
-        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3">
+      <section id="bestseller-section" class="scroll-mt-32 space-y-5">
+        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">🔥</span>
-              <h2 class="text-lg sm:text-2xl font-black font-cinzel text-[#1A1316] tracking-wide">STORE BEST SELLERS</h2>
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">🔥</span>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Store Best Sellers</h2>
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Most in-demand wholesale lots & daily fast-movers</p>
           </div>
-          <span class="text-[11px] font-bold bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300 shadow-sm hidden sm:inline-block">
+          <span class="text-[11px] font-bold bg-amber-100 text-amber-900 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-sm hidden sm:inline-block">
             Top Trending
           </span>
         </div>
-        <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <!-- Products loaded via JS -->
-        </div>
+        <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 4: PURSES & CLUTCHES -->
-      <section id="purses-section" class="scroll-mt-28 space-y-4">
-        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3">
+      <section id="purses-section" class="scroll-mt-32 space-y-5">
+        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">👜</span>
-              <h2 class="text-lg sm:text-2xl font-black font-cinzel text-[#1A1316] tracking-wide">PURSES & CLUTCHES</h2>
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">👜</span>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Purses & Clutches</h2>
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Designer stone clutches, bridal potlis & premium everyday handbags</p>
           </div>
         </div>
-        <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <!-- Products loaded via JS -->
-        </div>
+        <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 5: APPAREL & ESSENTIALS -->
-      <section id="apparel-section" class="scroll-mt-28 space-y-4">
-        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3">
+      <section id="apparel-section" class="scroll-mt-32 space-y-5">
+        <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xl">👗</span>
-              <h2 class="text-lg sm:text-2xl font-black font-cinzel text-[#1A1316] tracking-wide">APPAREL & ESSENTIALS</h2>
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">👗</span>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Apparel & Essentials</h2>
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Quality innerwear, comfort basics & boutique clothing items</p>
           </div>
         </div>
-        <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          <!-- Products loaded via JS -->
-        </div>
+        <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
     </div>
 
-    <!-- 2. Owner Dashboard View with PIN Protection -->
     <section id="ownerSection" class="hidden">
-      <!-- PIN Login Card -->
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🔒</div>
         <div>
           <h2 class="text-base font-bold text-[#1A1316]">Owner Access Required</h2>
-          <p class="text-xs text-stone-500 mt-1">Enter your 4-digit PIN to manage store catalog.</p>
+          <p class="text-xs text-stone-500 mt-1">Enter your 4-digit PIN to manage inventory.</p>
         </div>
         <input type="password" id="ownerPinInput" maxlength="4" placeholder="••••" class="w-32 text-center text-2xl tracking-widest font-bold py-2 bg-pink-50/50 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
       </div>
 
-      <!-- Add Product Form -->
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
@@ -319,20 +319,18 @@
 
   </main>
 
-  <!-- Floating Multilingual AI Assistant Button -->
-  <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-50 hover:scale-105 transition">
+  <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-40 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
   </button>
 
-  <!-- AI Chat Drawer -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-full logo-ring flex items-center justify-center text-[#1A1316] text-xs font-cinzel font-black">IB</div>
+        <div class="w-8 h-8 rounded-full logo-ring flex items-center justify-center text-[#1A1316] text-xs font-cormorant font-black">IB</div>
         <div>
-          <h3 class="text-sm font-bold text-[#F4D068]">Insha AI Assistant</h3>
-          <p class="text-[11px] text-pink-200/80">English & Hindi Shopping Guide</p>
+          <h3 class="text-base font-cormorant font-bold text-[#F4D068]">Insha AI Shopping Buddy</h3>
+          <p class="text-[10px] text-pink-200/80">English & Hindi Shopping Guide</p>
         </div>
       </div>
       <button onclick="toggleChat()" class="text-stone-400 hover:text-white text-lg font-bold px-2">✕</button>
@@ -340,11 +338,10 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
       <div class="bg-white border border-pink-100 text-[#1A1316] text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. How may I help you explore bridal sets, wholesale rates, or clutches today?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. How may I assist you with bridal choodas, sizes, or wholesale discounts today?
       </div>
     </div>
 
-    <!-- Chat Input -->
     <div class="p-3 border-t border-pink-100 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-pink-50 text-stone-700 hover:text-[#A64B74] p-2.5 rounded-xl text-sm transition">
         🎙️
@@ -361,34 +358,32 @@
 
     let allProducts = [];
 
-    // Screen Banner Pop Trigger
-    let popTimeout;
-    function triggerPop(icon, title) {
-      const toast = document.getElementById("sectionPopToast");
+    // FULL SCREEN HORIZONTAL RIBBON TRIGGER
+    let ribbonTimeout;
+    function triggerFullRibbon(icon, title) {
+      const ribbon = document.getElementById("fullScreenPopRibbon");
       document.getElementById("popIcon").innerText = icon;
       document.getElementById("popTitle").innerText = title;
 
-      toast.classList.remove("opacity-0", "scale-75");
-      toast.classList.add("opacity-100", "scale-100");
+      ribbon.classList.add("active");
 
-      clearTimeout(popTimeout);
-      popTimeout = setTimeout(() => {
-        toast.classList.remove("opacity-100", "scale-100");
-        toast.classList.add("opacity-0", "scale-75");
-      }, 1400);
+      clearTimeout(ribbonTimeout);
+      ribbonTimeout = setTimeout(() => {
+        ribbon.classList.remove("active");
+      }, 1600);
     }
 
-    // Scroll Intersection Observer to automatically trigger Pop when scrolling into a section
-    const observerOptions = { root: null, threshold: 0.35 };
+    // Scroll Observer to trigger Full Screen Banner on Scroll
+    const observerOptions = { root: null, threshold: 0.25 };
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
-          if (id === 'bridal-section') triggerPop('👑', 'ROYAL BRIDAL SUITE');
-          else if (id === 'festive-section') triggerPop('✨', 'FESTIVE SPECIALS');
-          else if (id === 'bestseller-section') triggerPop('🔥', 'HOT BEST SELLERS');
-          else if (id === 'purses-section') triggerPop('👜', 'HANDBAGS & CLUTCHES');
-          else if (id === 'apparel-section') triggerPop('👗', 'APPAREL & ESSENTIALS');
+          if (id === 'bridal-section') triggerFullRibbon('👑', 'Royal Bridal Suite');
+          else if (id === 'festive-section') triggerFullRibbon('✨', 'Festive Season Specials');
+          else if (id === 'bestseller-section') triggerFullRibbon('🔥', 'Store Best Sellers');
+          else if (id === 'purses-section') triggerFullRibbon('👜', 'Purses & Clutches');
+          else if (id === 'apparel-section') triggerFullRibbon('👗', 'Apparel & Essentials');
         }
       });
     }, observerOptions);
@@ -439,7 +434,7 @@
     function sendFullCatalogWhatsApp() {
       const catalogMsg = `Hello Insha Bangles & Purses! 🌸
 
-I am browsing your website store and would like to receive your complete Bridal & Festive Catalog along with Retail & Wholesale rates.
+I am browsing your official website store and would like to receive your complete Bridal & Festive Catalog along with Retail & Wholesale rates.
 
 Please share available stock and designs!`;
       const encoded = encodeURIComponent(catalogMsg);
@@ -480,23 +475,22 @@ Please share available stock and designs!`;
       recognition.start();
     }
 
-    // Helper to generate elegant card HTML
     function createProductCard(p, badgeText) {
       const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
       return `
-        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col justify-between group">
+        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80">
           <div>
             <div class="relative overflow-hidden">
-              <img src="${img}" class="w-full h-44 object-cover bg-pink-50 transition duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
-              <span class="absolute top-2 left-2 bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
+              <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
+              <span class="absolute top-2.5 left-2.5 bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
                 ${badgeText}
               </span>
             </div>
             <div class="p-3.5 space-y-1.5">
-              <h3 class="font-bold text-xs text-[#1A1316] line-clamp-1">${p.title}</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-2">${p.description || 'Festive handcrafted bridal collection piece'}</p>
+              <h3 class="font-cormorant font-bold text-sm sm:text-base text-[#1A1316] line-clamp-1">${p.title}</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-2 leading-relaxed">${p.description || 'Festive handcrafted boutique collection piece'}</p>
               <div class="pt-2">
-                <div class="text-sm font-black text-[#1A1316]">
+                <div class="text-sm sm:text-base font-black text-[#1A1316]">
                   ₹${p.retail_price} 
                   <span class="text-[10px] text-stone-500 font-semibold">(Retail)</span>
                 </div>
@@ -519,11 +513,10 @@ Please share available stock and designs!`;
       const pursesGrid = document.getElementById("pursesGrid");
       const apparelGrid = document.getElementById("apparelGrid");
 
-      // Default curated sample products if inventory is fresh
       const defaultCatalog = [
         { title: "Royal Velvet Bridal Chooda Set", description: "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.", category_name: "Bridal", retail_price: 1250, wholesale_price: 650, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"] },
-        { title: "Maharani Kundan Dulhan Bangles", description: "Heavy Kundan and pearl studded bangle set for weddings.", category_name: "Bridal", retail_price: 1450, wholesale_price: 780, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"] },
-        { title: "Velvet Festive Bangle Bangles (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
+        { title: "Maharani Kundan Dulhan Bangles", description: "Heavy Kundan and pearl studded bangle set for grand weddings.", category_name: "Bridal", retail_price: 1450, wholesale_price: 780, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"] },
+        { title: "Velvet Festive Bangle Set (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
         { title: "Zari Embroidered Party Clutch", description: "Premium golden zari stone clutch with detachable metal chain strap.", category_name: "Purses & Clutches", retail_price: 890, wholesale_price: 480, min_wholesale_qty: 10, image_urls: ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"] },
         { title: "Trending Matte Silk Everyday Bangles", description: "Smooth textured durable daily wear bangles in 12 festive shades.", category_name: "Best Seller", retail_price: 350, wholesale_price: 180, min_wholesale_qty: 20, image_urls: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"] },
         { title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton essentials for all-day comfort.", category_name: "Undergarments", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
@@ -531,7 +524,6 @@ Please share available stock and designs!`;
 
       const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
 
-      // Group products into specific sections
       const bridalItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('dulhan') || (p.title || '').toLowerCase().includes('chooda'));
       const festiveItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('festive') || (p.title || '').toLowerCase().includes('velvet') || (p.category_name || '').toLowerCase().includes('bangles'));
       const bestsellerItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('best') || (p.wholesale_price && p.wholesale_price < 300) || catalog.indexOf(p) % 2 === 0);
@@ -544,7 +536,6 @@ Please share available stock and designs!`;
       pursesGrid.innerHTML = (pursesItems.length ? pursesItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👜 Luxury Clutch')).join('');
       apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Boutique Essential')).join('');
 
-      // Connect Observer to sections
       document.querySelectorAll('main section[id]').forEach(sec => sectionObserver.observe(sec));
     }
 
