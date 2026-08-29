@@ -142,6 +142,12 @@ def add_product(item: ProductCreate):
     catalog_db.insert(0, new_product)
     return {"success": True, "product": new_product}
 
+@app.delete("/products/{product_id}")
+def delete_product(product_id: str):
+    global catalog_db
+    catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
+    return {"success": True, "message": f"Product {product_id} deleted"}
+
 @app.post("/chat")
 def chat_with_assistant(req: ChatRequest):
     return {"reply": generate_ai_reply(req.message)}
