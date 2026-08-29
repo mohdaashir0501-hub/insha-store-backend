@@ -8,6 +8,7 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Premium Boutique Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
       border: 1px solid rgba(226, 178, 199, 0.45);
     }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(14px);
     }
 
@@ -50,6 +51,7 @@
 </head>
 <body class="bg-[#FAF4F6] text-[#241C20] pb-28 selection:bg-pink-100">
 
+  <!-- FULL SCREEN HORIZONTAL SECTION POP-UP BANNER -->
   <div id="fullScreenPopRibbon" class="fixed top-0 left-0 right-0 w-full z-50 pointer-events-none opacity-0 shadow-2xl">
     <div class="w-full bg-gradient-to-r from-[#170B11] via-[#2F1221] to-[#170B11] border-b-2 border-[#D4AF37] px-6 py-4 sm:py-5 flex items-center justify-between shadow-2xl backdrop-blur-md">
       <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
@@ -76,13 +78,16 @@
     </div>
   </div>
 
+  <!-- Top Announcement Bar -->
   <div class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span>✨ GRAND WEDDING & FESTIVE SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨</span>
   </div>
 
+  <!-- Header -->
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
+      <!-- Brand Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
           <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
@@ -99,6 +104,7 @@
         </div>
       </div>
       
+      <!-- Top Actions -->
       <div class="flex items-center gap-2">
         <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
@@ -113,58 +119,87 @@
     </div>
   </header>
 
+  <!-- Sticky Section Navigation & Advanced Filter/Search Bar -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
-      <div class="flex items-center gap-2.5 overflow-x-auto scrollbar-none text-xs">
-        <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
+      <!-- Category Quick Jump Pills -->
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
+        <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
           👑 Royal Bridal Suite
         </a>
-        <a href="#festive-section" onclick="triggerFullRibbon('✨', 'Festive Season Specials')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+        <a href="#festive-section" onclick="triggerFullRibbon('✨', 'Festive Season Specials')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
           ✨ Festive Specials
         </a>
-        <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'Store Best Sellers')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+        <a href="#bestseller-section" onclick="triggerFullRibbon('🔥', 'Store Best Sellers')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
           🔥 Best Sellers
         </a>
-        <a href="#purses-section" onclick="triggerFullRibbon('👜', 'Handbags & Clutches')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+        <a href="#purses-section" onclick="triggerFullRibbon('👜', 'Handbags & Clutches')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
           👜 Purses & Clutches
         </a>
-        <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'Underclothes & Innerwear')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+        <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'Underclothes & Innerwear')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
           👗 Underclothes
         </a>
       </div>
 
-      <div class="relative">
-        <input 
-          type="text" 
-          id="searchInput" 
-          oninput="handleSearch(this.value)" 
-          placeholder="🔍 Search bridal chooda, velvet sets, clutches, underclothes..." 
-          class="w-full text-xs bg-white/90 border border-pink-200/80 rounded-2xl px-4 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm text-[#1A1316]"
-        />
-        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-xs text-stone-400 hover:text-stone-700">✕</button>
+      <!-- Live Search & Integrated Filter Bar -->
+      <div class="flex flex-col sm:flex-row gap-2">
+        <div class="relative flex-1">
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="applyAllFilters()" 
+            placeholder="🔍 Search choodas, velvet sets, clutches, underclothes..." 
+            class="w-full text-xs bg-white border border-pink-200/80 rounded-2xl pl-4 pr-9 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm text-[#1A1316]"
+          />
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-xs text-stone-400 hover:text-stone-700">✕</button>
+        </div>
+
+        <!-- Filter & Sorting Dropdowns -->
+        <div class="flex items-center gap-2 text-xs">
+          <select id="filterCategory" onchange="applyAllFilters()" class="bg-white border border-pink-200/80 font-semibold text-stone-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm cursor-pointer">
+            <option value="All">All Categories</option>
+            <option value="Bridal">👑 Bridal</option>
+            <option value="Festive">✨ Festive</option>
+            <option value="Best Seller">🔥 Best Sellers</option>
+            <option value="Purses & Clutches">👜 Clutches & Bags</option>
+            <option value="Underclothes">👗 Underclothes</option>
+          </select>
+
+          <select id="filterSort" onchange="applyAllFilters()" class="bg-white border border-pink-200/80 font-semibold text-stone-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm cursor-pointer">
+            <option value="featured">✨ Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="wholesale">Wholesale MOQ</option>
+          </select>
+        </div>
       </div>
 
     </div>
   </div>
 
+  <!-- Main Container -->
   <main class="max-w-6xl mx-auto px-4 py-6">
 
+    <!-- Store vs Owner Switcher -->
     <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-8 max-w-xs mx-auto border border-pink-200/50">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
 
+    <!-- Live Search & Filter Results Grid -->
     <section id="searchResultsSection" class="hidden space-y-4 mb-12">
       <div class="flex items-center justify-between border-b border-pink-200 pb-2">
-        <h2 class="text-lg font-bold text-[#1A1316] font-cormorant" id="searchHeader">Search Results</h2>
-        <button onclick="clearSearch()" class="text-xs text-[#A64B74] font-bold hover:underline">Show All Collections</button>
+        <h2 class="text-lg font-bold text-[#1A1316] font-cormorant" id="searchHeader">Filtered Products</h2>
+        <button onclick="clearSearch()" class="text-xs text-[#A64B74] font-bold hover:underline">Reset Filters & Show All</button>
       </div>
       <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
     </section>
 
+    <!-- 1. Customer Store View -->
     <div id="storeSection" class="space-y-16">
 
+      <!-- Hero Showcase Banner -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-xl space-y-4">
           <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[11px] font-bold uppercase tracking-[0.2em]">
@@ -188,6 +223,7 @@
         <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
+      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
       <section id="bridal-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -204,6 +240,7 @@
         <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
       <section id="festive-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -220,6 +257,7 @@
         <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 3: STORE BEST SELLERS -->
       <section id="bestseller-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -236,6 +274,7 @@
         <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 4: PURSES & CLUTCHES -->
       <section id="purses-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -249,6 +288,7 @@
         <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 5: UNDERCLOTHES -->
       <section id="apparel-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -262,12 +302,14 @@
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- Boutique Location & Trust Footer with Google Maps Links -->
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-pink-200/80 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-100 pb-5">
           <div>
             <h3 class="text-lg font-bold font-cormorant text-[#1A1316]">Visit Our Offline Shop in Lucknow</h3>
             <p class="text-xs text-[#8C6274]">Explore full bridal collections, touch the fabrics, and buy at direct wholesale rates.</p>
           </div>
+          <!-- Direct Google Maps Route Link -->
           <a href="https://www.google.com/maps/search/?api=1&query=Insha+Bangles+and+Purses+Dubagga+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
             <span>🗺️ Get Directions on Google Maps</span>
           </a>
@@ -294,6 +336,7 @@
 
     </div>
 
+    <!-- 2. Owner Dashboard View with PIN Protection -->
     <section id="ownerSection" class="hidden">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🔒</div>
@@ -305,6 +348,7 @@
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
       </div>
 
+      <!-- Add Product Form -->
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
@@ -370,11 +414,45 @@
 
   </main>
 
+  <!-- Product Quickview Modal -->
+  <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200">
+      <div class="relative">
+        <img id="modalImg" src="" class="w-full h-64 object-cover">
+        <button onclick="closeProductModal()" class="absolute top-3 right-3 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">✕</button>
+      </div>
+      <div class="p-6 space-y-4">
+        <div>
+          <span id="modalBadge" class="text-[10px] uppercase font-bold text-[#A64B74] tracking-wider">Category</span>
+          <h3 id="modalTitle" class="text-xl font-cormorant font-bold text-[#1A1316]">Product Title</h3>
+          <p id="modalDesc" class="text-xs text-stone-600 mt-1 leading-relaxed">Product description</p>
+        </div>
+        
+        <div class="bg-pink-50/60 p-3.5 rounded-2xl flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-stone-500 font-bold uppercase block">Retail Price</span>
+            <span id="modalRetail" class="text-lg font-black text-[#1A1316]">₹0</span>
+          </div>
+          <div id="modalWholesaleBox" class="text-right">
+            <span class="text-[10px] text-stone-500 font-bold uppercase block">Wholesale Rate</span>
+            <span id="modalWholesale" class="text-sm font-bold text-[#A64B74]">₹0</span>
+          </div>
+        </div>
+
+        <button id="modalWhatsAppBtn" class="w-full bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2 shadow-md hover:bg-emerald-600 transition">
+          <span>💬 Check Live Stock & Colors on WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI Assistant Button -->
   <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-40 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
   </button>
 
+  <!-- AI Chat Drawer -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
@@ -393,6 +471,7 @@
       </div>
     </div>
 
+    <!-- Chat Input -->
     <div class="p-3 border-t border-pink-100 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-pink-50 text-stone-700 hover:text-[#A64B74] p-2.5 rounded-xl text-sm transition">
         🎙️
@@ -404,7 +483,7 @@
 
   <script>
     const API_BASE = window.location.origin;
-    const SHOP_WHATSAPP = "919903610501"; 
+    const SHOP_WHATSAPP = "919903610501";
     const OWNER_PIN = "1234";
 
     let allProducts = [];
@@ -495,7 +574,7 @@
       drawer.classList.toggle("translate-x-full");
     }
 
-    // Clean WhatsApp Inquiry Handshake
+    // WhatsApp Inquiry Handshake
     function orderProductWhatsApp(title, retailPrice, wholesalePrice, moq) {
       let msg = "Hello Insha Bangles & Purses!\n\n";
       msg += "I am interested in this item from your website:\n";
@@ -520,15 +599,18 @@
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encoded, "_blank");
     }
 
-    // Live Instant Search
-    function handleSearch(query) {
-      const q = query.trim().toLowerCase();
+    // Advanced Combined Search & Filtering
+    function applyAllFilters() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const selectedCategory = document.getElementById("filterCategory").value;
+      const sortOption = document.getElementById("filterSort").value;
+
       const resultsSection = document.getElementById("searchResultsSection");
       const resultsGrid = document.getElementById("searchResultsGrid");
       const clearBtn = document.getElementById("clearSearchBtn");
       const storeSection = document.getElementById("storeSection");
 
-      if (q === "") {
+      if (query === "" && selectedCategory === "All" && sortOption === "featured") {
         clearSearch();
         return;
       }
@@ -538,26 +620,67 @@
       storeSection.classList.add("hidden");
 
       const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
-      const filtered = catalog.filter(p => 
-        (p.title || '').toLowerCase().includes(q) ||
-        (p.description || '').toLowerCase().includes(q) ||
-        (p.category_name || '').toLowerCase().includes(q)
-      );
+      
+      let filtered = catalog.filter(p => {
+        const matchesQuery = query === "" || 
+          (p.title || '').toLowerCase().includes(query) ||
+          (p.description || '').toLowerCase().includes(query) ||
+          (p.category_name || '').toLowerCase().includes(query);
 
-      document.getElementById("searchHeader").innerText = `Search Results for "${query}" (${filtered.length} items)`;
+        const matchesCategory = selectedCategory === "All" || 
+          (p.category_name || '').toLowerCase().includes(selectedCategory.toLowerCase());
+
+        return matchesQuery && matchesCategory;
+      });
+
+      // Sorting Logic
+      if (sortOption === "price-low") {
+        filtered.sort((a, b) => a.retail_price - b.retail_price);
+      } else if (sortOption === "price-high") {
+        filtered.sort((a, b) => b.retail_price - a.retail_price);
+      } else if (sortOption === "wholesale") {
+        filtered.sort((a, b) => (a.wholesale_price || 9999) - (b.wholesale_price || 9999));
+      }
+
+      document.getElementById("searchHeader").innerText = `Filtered Results (${filtered.length} items)`;
 
       if (filtered.length === 0) {
-        resultsGrid.innerHTML = `<div class="col-span-full py-12 text-center text-[#8C6274] text-xs">No matching products found. Try searching for "Velvet", "Bridal", "Clutch", or "Chooda".</div>`;
+        resultsGrid.innerHTML = `<div class="col-span-full py-12 text-center text-[#8C6274] text-xs">No matching products found with selected filters.</div>`;
       } else {
-        resultsGrid.innerHTML = filtered.map(p => createProductCard(p, '✨ Search Match')).join('');
+        resultsGrid.innerHTML = filtered.map(p => createProductCard(p, '✨ Filtered')).join('');
       }
     }
 
     function clearSearch() {
       document.getElementById("searchInput").value = "";
+      document.getElementById("filterCategory").value = "All";
+      document.getElementById("filterSort").value = "featured";
       document.getElementById("clearSearchBtn").classList.add("hidden");
       document.getElementById("searchResultsSection").classList.add("hidden");
       document.getElementById("storeSection").classList.remove("hidden");
+    }
+
+    // Modal Quickview
+    function openProductModal(title, retail, wholesale, moq, img, desc, category) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalRetail").innerText = "₹" + retail;
+      document.getElementById("modalDesc").innerText = desc || "Festive handcrafted boutique collection piece";
+      document.getElementById("modalBadge").innerText = category || "Showcase";
+      document.getElementById("modalImg").src = img;
+
+      if (wholesale) {
+        document.getElementById("modalWholesaleBox").classList.remove("hidden");
+        document.getElementById("modalWholesale").innerText = `₹${wholesale}/pc (Min: ${moq || 10})`;
+      } else {
+        document.getElementById("modalWholesaleBox").classList.add("hidden");
+      }
+
+      document.getElementById("modalWhatsAppBtn").onclick = () => orderProductWhatsApp(title, retail, wholesale, moq);
+      document.getElementById("productModal").classList.remove("hidden");
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.add("hidden");
     }
 
     function handleImageFile(event) {
@@ -596,9 +719,13 @@
 
     function createProductCard(p, badgeText) {
       const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
+      const escapedTitle = (p.title || '').replace(/'/g, "\\'");
+      const escapedDesc = (p.description || '').replace(/'/g, "\\'");
+      const escapedCat = (p.category_name || '').replace(/'/g, "\\'");
+
       return `
-        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
-          <div>
+        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white cursor-pointer">
+          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10}, '${img}', '${escapedDesc}', '${escapedCat}')">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
               <span class="absolute top-2.5 left-2.5 bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
@@ -622,9 +749,10 @@
             </div>
           </div>
 
+          <!-- Conversational Inquiry Button -->
           <div class="p-3 pt-0">
             <button 
-              onclick="orderProductWhatsApp('${p.title.replace(/'/g, "\\'")}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10})" 
+              onclick="orderProductWhatsApp('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10})" 
               class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition">
               <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
               <span>Check Availability & Colors</span>
