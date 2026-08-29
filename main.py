@@ -4,11 +4,9 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional, List
 import os
-import google.generativeai as genai
 
 app = FastAPI(title="Insha Bangles & Purses API")
 
-# Enable CORS for web and Android access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -17,23 +15,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Configure Gemini AI
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
 
-# Conversational Assistant System Prompt
 SYSTEM_PROMPT = """
 You are the official smart shopping assistant for 'Insha Bangles & Purses', a bridal and festive boutique located in Dubagga, Lucknow.
-Your goals:
 1. Greet customers warmly in English or Hindi (Hinglish).
 2. Answer questions about traditional bridal choodas, handcrafted velvet bangles, stone clutches, party potlis, and comfortable underclothes.
-3. Help with sizing inquiries (bangle standard sizes: 2.4, 2.6, 2.8, etc.), color combinations (Maroon, Royal Red, Emerald Green, Golden Zari, Pastel Pink), and wholesale lot terms (minimum order quantities).
-4. When customers want to check exact real-time stock or order, kindly invite them to tap the green "Check Availability & Colors" button on the item card to chat directly with the store team on WhatsApp (+91 99036 10501).
-Keep answers concise, polite, helpful, and welcoming.
+3. Help with sizing inquiries (bangle standard sizes: 2.4, 2.6, 2.8, etc.), colors (Maroon, Royal Red, Emerald Green, Golden Zari, Pastel Pink), and wholesale lot terms (MOQ).
+4. Direct users to tap the green "Check Availability & Colors" button on any item to connect directly with the shop team on WhatsApp (+91 99036 10501).
 """
 
-# In-memory product catalog store
 catalog_db = [
     {
         "id": "1",
@@ -116,7 +107,6 @@ class ProductCreate(BaseModel):
 class ChatRequest(BaseModel):
     message: str
 
-# Endpoints
 @app.get("/")
 def serve_home():
     if os.path.exists("index.html"):
@@ -129,7 +119,7 @@ def get_products():
 
 @app.post("/products")
 def add_product(item: ProductCreate):
-    new_product = item.dict()
+    new_product = item.model_dump() if hasattr(item, "model_dump") else item.dict()
     new_product["id"] = str(len(catalog_db) + 1)
     catalog_db.insert(0, new_product)
     return {"success": True, "product": new_product}
@@ -140,9 +130,11 @@ def chat_with_assistant(req: ChatRequest):
         return {"reply": "Namaste! 🙏 Welcome to Insha Bangles & Purses. Please feel free to check our collections or reach out via WhatsApp at +91 99036 10501 for stock and color availability!"}
     
     try:
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEY)
         model = genai.GenerativeModel("gemini-1.5-flash")
         full_prompt = f"{SYSTEM_PROMPT}\n\nCustomer: {req.message}\nAssistant:"
         response = model.generate_content(full_prompt)
         return {"reply": response.text.strip()}
-    except Exception as e:
+    except Exception:
         return {"reply": "Namaste! 🙏 For immediate color and size confirmation, please tap 'Check Availability & Colors' on any item to chat directly on WhatsApp."}
