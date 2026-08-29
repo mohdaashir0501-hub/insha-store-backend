@@ -129,8 +129,8 @@
       <a href="#purses-section" onclick="triggerFullRibbon('👜', 'HANDBAGS & CLUTCHES')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
         👜 Purses & Clutches
       </a>
-      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'APPAREL & ESSENTIALS')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
-        👗 Apparel & Innerwear
+      <a href="#apparel-section" onclick="triggerFullRibbon('👗', 'UNDERCLOTHES & INNERWEAR')" class="flex-shrink-0 px-4 py-2 rounded-full font-bold bg-white text-stone-700 hover:bg-pink-50 border border-pink-200 transition">
+        👗 Underclothes
       </a>
     </div>
   </div>
@@ -153,7 +153,7 @@
             Royal Bridal Velvet Sets & Designer Clutches
           </h2>
           <p class="text-xs sm:text-sm text-pink-100/80 leading-relaxed font-normal">
-            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily innerwear available in single sets and bulk wholesale lots.
+            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily underclothes available in single sets and bulk wholesale lots.
           </p>
           <div class="flex flex-wrap items-center gap-3 pt-3">
             <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] text-white font-bold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:bg-emerald-600 transition flex items-center gap-2">
@@ -233,9 +233,9 @@
           <div>
             <div class="flex items-center gap-2.5">
               <span class="text-2xl">👗</span>
-              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Apparel & Essentials</h2>
+              <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Underclothes & Innerwear</h2>
             </div>
-            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Quality innerwear, comfort basics & boutique clothing items</p>
+            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Premium comfortable undergarments, soft daily essentials & innerwear sets</p>
           </div>
         </div>
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
@@ -277,7 +277,7 @@
                 <option value="Festive">✨ Festive Specials</option>
                 <option value="Best Seller">🔥 Store Best Sellers</option>
                 <option value="Purses & Clutches">👜 Purses & Clutches</option>
-                <option value="Undergarments">👗 Apparel & Innerwear</option>
+                <option value="Underclothes">👗 Underclothes & Innerwear</option>
               </select>
             </div>
             <div>
@@ -383,7 +383,7 @@
           else if (id === 'festive-section') triggerFullRibbon('✨', 'Festive Season Specials');
           else if (id === 'bestseller-section') triggerFullRibbon('🔥', 'Store Best Sellers');
           else if (id === 'purses-section') triggerFullRibbon('👜', 'Purses & Clutches');
-          else if (id === 'apparel-section') triggerFullRibbon('👗', 'Apparel & Essentials');
+          else if (id === 'apparel-section') triggerFullRibbon('👗', 'Underclothes & Innerwear');
         }
       });
     }, observerOptions);
@@ -519,7 +519,7 @@ Please share available stock and designs!`;
         { title: "Velvet Festive Bangle Set (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
         { title: "Zari Embroidered Party Clutch", description: "Premium golden zari stone clutch with detachable metal chain strap.", category_name: "Purses & Clutches", retail_price: 890, wholesale_price: 480, min_wholesale_qty: 10, image_urls: ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"] },
         { title: "Trending Matte Silk Everyday Bangles", description: "Smooth textured durable daily wear bangles in 12 festive shades.", category_name: "Best Seller", retail_price: 350, wholesale_price: 180, min_wholesale_qty: 20, image_urls: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"] },
-        { title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton essentials for all-day comfort.", category_name: "Undergarments", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
+        { title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton innerwear essentials for all-day comfort.", category_name: "Underclothes", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
       ];
 
       const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
@@ -528,13 +528,13 @@ Please share available stock and designs!`;
       const festiveItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('festive') || (p.title || '').toLowerCase().includes('velvet') || (p.category_name || '').toLowerCase().includes('bangles'));
       const bestsellerItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('best') || (p.wholesale_price && p.wholesale_price < 300) || catalog.indexOf(p) % 2 === 0);
       const pursesItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('purse') || (p.category_name || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('bag'));
-      const apparelItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('under') || (p.category_name || '').toLowerCase().includes('apparel') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
+      const apparelItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('under') || (p.category_name || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
 
       bridalGrid.innerHTML = (bridalItems.length ? bridalItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👑 Royal Bridal')).join('');
       festiveGrid.innerHTML = (festiveItems.length ? festiveItems : catalog.slice(0, 2)).map(p => createProductCard(p, '✨ Festive Pick')).join('');
       bestsellerGrid.innerHTML = (bestsellerItems.length ? bestsellerItems : catalog.slice(0, 2)).map(p => createProductCard(p, '🔥 Fast Moving')).join('');
       pursesGrid.innerHTML = (pursesItems.length ? pursesItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👜 Luxury Clutch')).join('');
-      apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Boutique Essential')).join('');
+      apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Daily Essential')).join('');
 
       document.querySelectorAll('main section[id]').forEach(sec => sectionObserver.observe(sec));
     }
@@ -598,7 +598,7 @@ Please share available stock and designs!`;
       if (!text) return;
 
       const container = document.getElementById("chatMessages");
-      container.innerHTML += `<div class="bg-[#1A1316] text-[#F4D068] text-xs p-3 rounded-2xl rounded-tr-none max-w-[85%] ml-auto shadow-sm">${text}</div>`;
+      container.innerHTML += `<div class="bg-[#1A1817] text-[#F4D068] text-xs p-3 rounded-2xl rounded-tr-none max-w-[85%] ml-auto shadow-sm">${text}</div>`;
       input.value = "";
       container.scrollTop = container.scrollHeight;
 
