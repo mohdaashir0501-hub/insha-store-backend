@@ -25,6 +25,9 @@
     .hero-gradient {
       background: radial-gradient(circle at 85% 15%, #441A30 0%, #1E0F17 55%, #10070C 100%);
     }
+    .festive-spotlight-gradient {
+      background: linear-gradient(135deg, #2D0F1E 0%, #4A1A33 50%, #1A0A12 100%);
+    }
     .logo-ring {
       background: radial-gradient(circle, #FCE8F0 0%, #F5C2D5 100%);
       border: 2px solid #D4AF37;
@@ -99,7 +102,7 @@
         
         <div>
           <h1 class="text-base sm:text-xl font-cormorant font-bold tracking-wider text-[#1A1316] leading-none" id="t-store-title">INSHA BANGLES & PURSES</h1>
-          <p id="storeSubTag" class="text-[9px] sm:text-[10px] text-[#A64B74] font-bold uppercase tracking-[0.18em] mt-0.5">Festive Bridal & Wholesale Hub</p>
+          <p id="storeSubTag" class="text-[9px] sm:text-[10px] text-[#A64B74] font-bold uppercase tracking-[0.18em] mt-0.5">Festive Bangles, Purses & Innerwear Hub</p>
         </div>
       </div>
       
@@ -185,7 +188,7 @@
   <main class="max-w-6xl mx-auto px-4 py-6">
 
     <!-- Store vs Owner Switcher -->
-    <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-8 max-w-xs mx-auto border border-pink-200/50">
+    <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-6 max-w-xs mx-auto border border-pink-200/50">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
@@ -200,7 +203,33 @@
     </section>
 
     <!-- 1. Customer Store View -->
-    <div id="storeSection" class="space-y-16">
+    <div id="storeSection" class="space-y-12">
+
+      <!-- DYNAMIC FESTIVAL & OCCASION SPOTLIGHT CARD -->
+      <div id="liveOccasionSpotlight" class="rounded-3xl festive-spotlight-gradient text-white p-5 sm:p-7 border border-[#D4AF37]/50 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left z-10">
+          <div class="inline-flex items-center gap-2 bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-3 py-1 rounded-full text-[#F4D068] text-[10px] font-black uppercase tracking-widest">
+            <span id="occasionBadgeIcon">✨</span>
+            <span id="occasionBadgeText">FESTIVAL CELEBRATION ACTIVE</span>
+          </div>
+          <h3 id="occasionHeading" class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#FFEBF2]">
+            Raksha Bandhan & Festive Season Special
+          </h3>
+          <p id="occasionDescription" class="text-xs text-pink-100/80 max-w-xl leading-relaxed">
+            Special festive velvet bangles, elegant party clutches, and gift set packages with direct wholesale pricing for sisters & families.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 z-10 w-full md:w-auto">
+          <button onclick="sendFullCatalogWhatsApp()" class="w-full sm:w-auto bg-[#25D366] hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-md flex items-center justify-center gap-2 transition">
+            <span>💬 Get Festival Catalog</span>
+          </button>
+          <a href="#festive-section" class="w-full sm:w-auto gold-gradient-btn font-extrabold text-xs px-5 py-3 rounded-xl shadow-md text-center hover:opacity-90 transition">
+            <span>Explore Sets ✦</span>
+          </a>
+        </div>
+        <div class="absolute -right-12 -top-12 w-48 h-48 bg-[#D4AF37]/15 rounded-full blur-2xl pointer-events-none"></div>
+      </div>
 
       <!-- Dynamic Hero Showcase Banner -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
@@ -305,14 +334,14 @@
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- Boutique Location & Trust Footer with Google Maps Links -->
+      <!-- Boutique Location & Trust Footer with Exact Nakkhas Address -->
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-pink-200/80 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-100 pb-5">
           <div>
             <h3 class="text-lg font-bold font-cormorant text-[#1A1316]">Visit Our Offline Shop in Lucknow</h3>
             <p class="text-xs text-[#8C6274]">Explore full bridal collections, touch the fabrics, and buy at direct wholesale rates.</p>
           </div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Insha+Bangles+and+Purses+Dubagga+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
+          <a href="https://www.google.com/maps/search/?api=1&query=Chidiya+Bazar+Nakkhas+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
             <span>🗺️ Get Directions on Google Maps</span>
           </a>
         </div>
@@ -321,7 +350,7 @@
           <div class="space-y-1">
             <p class="font-bold text-[#1A1316]">📍 Exact Store Address</p>
             <p class="font-medium text-stone-800">Insha Bangles & Purses</p>
-            <p class="text-stone-500">In front of Chidiya Bazaar, Nakkhas , Lucknow, Uttar Pradesh 226003</p>
+            <p class="text-stone-500">In front of Chidiya Bazar, Nakkhas, Lucknow 226003</p>
           </div>
           <div class="space-y-1">
             <p class="font-bold text-[#1A1316]">⏰ Business Hours</p>
@@ -575,14 +604,15 @@
     const API_BASE = window.location.origin;
     const SHOP_WHATSAPP = "919903610501";
     
-    // UPDATED OWNER PIN
+    // OWNER PIN
     const OWNER_PIN = "1208";
     const SHOP_UPI_ID = "9903610501@paytm"; 
 
-    // Dynamic Calendar & Seasonal Festival Engine (Strictly Bangles, Purses & Undergarments)
+    // Dynamic Calendar & Live Occasion Theme Engine
     function applyCalendarFestivalTheme() {
       const now = new Date();
       const month = now.getMonth() + 1; // 1-12
+      const date = now.getDate();
       const year = now.getFullYear();
 
       const bannerText = document.getElementById("festivalBannerText");
@@ -593,16 +623,26 @@
       const popSubBadge = document.getElementById("popSubBadge");
       const popYearBadge = document.getElementById("popYearBadge");
 
+      const occasionBadgeIcon = document.getElementById("occasionBadgeIcon");
+      const occasionBadgeText = document.getElementById("occasionBadgeText");
+      const occasionHeading = document.getElementById("occasionHeading");
+      const occasionDescription = document.getElementById("occasionDescription");
+
       if (popYearBadge) popYearBadge.innerText = `EXCLUSIVE ${year}`;
 
       if (month === 8 || month === 9) {
-        // Aug - Sep (Grand Festive & Early Wedding Hub)
-        bannerText.innerText = `✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨`;
+        // Late August / September (Raksha Bandhan / Janmashtami / Festive Wave)
+        bannerText.innerText = `✨ FESTIVE SEASON CELEBRATION SALE — SPECIAL WHOLESALE DISCOUNTS ACTIVE ✨`;
         heroBadge.innerText = `👑 Festive & Wedding Hub ${year}`;
         heroTitle.innerText = `Festive Velvet Bangles & Royal Bridal Choodas`;
         heroDesc.innerText = `Handcrafted festive velvet bangle sets, Kundan dulhan choodas, stone party clutches, and ladies undergarment lots.`;
         storeSubTag.innerText = `Festive Bangles, Purses & Innerwear Hub`;
-        if (popSubBadge) popSubBadge.innerText = `FESTIVE & BRIDAL ARCHIVE ${year}`;
+        if (popSubBadge) popSubBadge.innerText = `FESTIVE ARCHIVE ${year}`;
+
+        occasionBadgeIcon.innerText = `🎁`;
+        occasionBadgeText.innerText = `FESTIVE GIFTING & CELEBRATION ACTIVE`;
+        occasionHeading.innerText = `Raksha Bandhan & Festive Season Special`;
+        occasionDescription.innerText = `Special velvet bangle gifting sets, matching party clutches, and wholesale lots for festive celebrations.`;
       } else if (month === 10 || month === 11) {
         // Oct - Nov (Diwali & Karwa Chauth Season)
         bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — EXCLUSIVE BRIDAL CHOODA & CLUTCH LOTS 🪔`;
@@ -611,6 +651,11 @@
         heroDesc.innerText = `Special red & gold dulhan chooda sets, glitter festive bangles, designer clutches, and daily ladies innerwear.`;
         storeSubTag.innerText = `Festive Bangles & Designer Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `DIWALI ROYAL SHOWCASE`;
+
+        occasionBadgeIcon.innerText = `🪔`;
+        occasionBadgeText.innerText = `DIWALI & KARWA CHAUTH SPECIAL`;
+        occasionHeading.innerText = `Karwa Chauth Dulhan Sets & Diwali Sparkle`;
+        occasionDescription.innerText = `Rich red bridal choodas, gold zari clutches, and velvet matching bangle packs at direct boutique rates.`;
       } else if (month === 12 || month === 1 || month === 2) {
         // Dec - Feb (Peak Winter Wedding Season)
         bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — WHOLESALE DULHAN CHOODAS & HEAVY KUNDAN BANGLES 💍`;
@@ -619,6 +664,11 @@
         heroDesc.innerText = `Heavy traditional wedding choodas, premium velvet sets, stone-studded clutches, and ladies cotton innerwear.`;
         storeSubTag.innerText = `Royal Wedding Bangles & Purses Hub`;
         if (popSubBadge) popSubBadge.innerText = `WINTER BRIDAL SUITE`;
+
+        occasionBadgeIcon.innerText = `💍`;
+        occasionBadgeText.innerText = `PEAK WEDDING SEASON`;
+        occasionHeading.innerText = `Grand Winter Bridal & Chooda Collection`;
+        occasionDescription.innerText = `Full bridal sets with latkans, traditional choodas, and party potlis ready for wedding orders.`;
       } else if (month === 3 || month === 4) {
         // Mar - Apr (Eid & Spring Festive)
         bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — MULTICOLOR VELVET & DESIGNER CLUTCHES 🌙`;
@@ -627,6 +677,11 @@
         heroDesc.innerText = `Multicolor silk bangles, stone-embellished clutches, and comfortable ladies underclothes available in retail & wholesale.`;
         storeSubTag.innerText = `Eid Festive Bangles & Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `EID FESTIVE SUITE`;
+
+        occasionBadgeIcon.innerText = `🌙`;
+        occasionBadgeText.innerText = `EID FESTIVE SPECIAL`;
+        occasionHeading.innerText = `Eid Festive Velvet Sets & Shimmer Bags`;
+        occasionDescription.innerText = `Multicolor festive bangle sets and designer party clutches curated for Eid celebrations.`;
       } else {
         // Summer Showcase
         bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — DIRECT WHOLESALE RATES ACTIVE ✨`;
@@ -634,13 +689,17 @@
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
         heroDesc.innerText = `Handcrafted traditional bridal choodas, rich velvet bangles, stone clutches, and ladies underclothes.`;
         storeSubTag.innerText = `Festive Bridal & Wholesale Hub`;
+
+        occasionBadgeIcon.innerText = `✨`;
+        occasionBadgeText.innerText = `BOUTIQUE SPECIALS`;
+        occasionHeading.innerText = `Curated Bridal Choodas & Everyday Essentials`;
+        occasionDescription.innerText = `Direct factory prices for bulk and single orders in Lucknow.`;
       }
     }
 
     let allProducts = JSON.parse(localStorage.getItem('insha_catalog_cache') || '[]');
     let shoppingCart = [];
 
-    // Full Screen Pop Banner Trigger
     let ribbonTimeout;
     let lastActiveSection = null;
 
@@ -716,7 +775,6 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    // CART MANAGEMENT
     function addToCart(title, price, img) {
       const existing = shoppingCart.find(i => i.title === title);
       if (existing) {
@@ -834,7 +892,6 @@
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(catalogMsg), "_blank");
     }
 
-    // Filter Logic
     function applyAllFilters() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       const selectedCategory = document.getElementById("filterCategory").value;
@@ -1155,7 +1212,6 @@
       container.scrollTop = container.scrollHeight;
     }
 
-    // Initialize Festival Theme and Catalog Data
     applyCalendarFestivalTheme();
     fetchProducts();
   </script>
