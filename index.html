@@ -8,7 +8,7 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Premium Boutique Fonts -->
+  <!-- Premium Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,7 +38,6 @@
       backdrop-filter: blur(14px);
     }
 
-    /* FULL-SCREEN HORIZONTAL POP OVERLAY */
     #fullScreenPopRibbon {
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
       transform: translateY(-120%);
@@ -106,9 +105,14 @@
       
       <!-- Top Actions -->
       <div class="flex items-center gap-2">
+        <button onclick="toggleCartModal()" class="relative bg-pink-50 border border-pink-200 text-[#1A1316] font-bold p-2.5 rounded-xl text-xs flex items-center gap-1.5 hover:bg-pink-100 transition">
+          <span>🛍️ Cart</span>
+          <span id="cartCountBadge" class="bg-[#1A1316] text-[#F4D068] text-[10px] font-black px-1.5 py-0.2 rounded-full">0</span>
+        </button>
+
         <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-          <span>Ask on WhatsApp</span>
+          <span>Ask WhatsApp</span>
         </button>
 
         <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-pink-50/80 border border-pink-200 text-xs font-semibold text-[#1A1316] rounded-xl px-2.5 py-2 focus:outline-none cursor-pointer">
@@ -123,7 +127,7 @@
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
-      <!-- Category Quick Jump Pills -->
+      <!-- Category Pills -->
       <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
         <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
           👑 Royal Bridal Suite
@@ -142,7 +146,7 @@
         </a>
       </div>
 
-      <!-- Live Search & Integrated Filter Bar -->
+      <!-- Live Search & Filtering Bar -->
       <div class="flex flex-col sm:flex-row gap-2">
         <div class="relative flex-1">
           <input 
@@ -155,7 +159,6 @@
           <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-xs text-stone-400 hover:text-stone-700">✕</button>
         </div>
 
-        <!-- Filter & Sorting Dropdowns -->
         <div class="flex items-center gap-2 text-xs">
           <select id="filterCategory" onchange="applyAllFilters()" class="bg-white border border-pink-200/80 font-semibold text-stone-700 rounded-2xl px-3 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm cursor-pointer">
             <option value="All">All Categories</option>
@@ -309,7 +312,6 @@
             <h3 class="text-lg font-bold font-cormorant text-[#1A1316]">Visit Our Offline Shop in Lucknow</h3>
             <p class="text-xs text-[#8C6274]">Explore full bridal collections, touch the fabrics, and buy at direct wholesale rates.</p>
           </div>
-          <!-- Direct Google Maps Route Link -->
           <a href="https://www.google.com/maps/search/?api=1&query=Insha+Bangles+and+Purses+Dubagga+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
             <span>🗺️ Get Directions on Google Maps</span>
           </a>
@@ -336,7 +338,7 @@
 
     </div>
 
-    <!-- 2. Owner Dashboard View with PIN Protection -->
+    <!-- 2. Owner Dashboard View with Live Camera & PIN Protection -->
     <section id="ownerSection" class="hidden">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🔒</div>
@@ -348,7 +350,7 @@
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
       </div>
 
-      <!-- Add Product Form -->
+      <!-- Add Product Form with Live Camera Support -->
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
@@ -392,10 +394,27 @@
             </div>
           </div>
 
+          <!-- Live Camera & Gallery Photo Uploader -->
           <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Product Photo</label>
+            <label class="block text-xs font-bold text-stone-700 mb-1">Take Photo or Upload</label>
             <div class="space-y-2">
-              <input type="file" id="pFile" accept="image/*" onchange="handleImageFile(event)" class="w-full text-xs text-stone-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-pink-100 file:text-[#1A1316] hover:file:bg-pink-200">
+              <div class="flex gap-2">
+                <label class="flex-1 bg-pink-100 text-[#1A1316] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-200 transition">
+                  <span>📸 Open Camera</span>
+                  <input type="file" accept="image/*" capture="environment" onchange="handleImageFile(event)" class="hidden">
+                </label>
+                <label class="flex-1 bg-pink-50 text-stone-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-100 border border-pink-200 transition">
+                  <span>🖼️ Choose File</span>
+                  <input type="file" accept="image/*" onchange="handleImageFile(event)" class="hidden">
+                </label>
+              </div>
+
+              <!-- Live Photo Preview -->
+              <div id="imgPreviewBox" class="hidden relative rounded-xl overflow-hidden border border-pink-200 h-32 bg-stone-100">
+                <img id="imgPreviewTag" src="" class="w-full h-full object-cover">
+                <button type="button" onclick="clearPreviewImage()" class="absolute top-2 right-2 bg-black/60 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center">✕</button>
+              </div>
+              
               <input type="url" id="pImg" placeholder="Or paste image URL directly..." class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
             </div>
           </div>
@@ -406,13 +425,70 @@
           </div>
 
           <button type="submit" id="addBtn" class="w-full bg-[#1A1316] text-[#F4D068] text-sm font-bold py-3.5 rounded-xl hover:bg-stone-900 transition flex items-center justify-center gap-2 border border-[#D4AF37]/50">
-            <span>✨ Publish to Selected Section</span>
+            <span>✨ Publish to Store Catalog</span>
           </button>
         </form>
       </div>
     </section>
 
   </main>
+
+  <!-- Shopping Cart & Checkout Modal with UPI Payment -->
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200 flex flex-col max-h-[90vh]">
+      <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🛍️</span>
+          <h3 class="font-cormorant font-bold text-lg text-[#F4D068]">Your Shopping Bag</h3>
+        </div>
+        <button onclick="toggleCartModal()" class="text-stone-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
+        <!-- Cart Items via JS -->
+      </div>
+
+      <div class="p-4 bg-white border-t border-pink-100 space-y-3">
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-stone-500 font-bold">Total Order Value:</span>
+          <span id="cartTotalVal" class="text-lg font-black text-[#1A1316]">₹0</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <button onclick="checkoutWhatsAppOrder()" class="bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-emerald-600 transition">
+            <span>💬 Send WhatsApp Order</span>
+          </button>
+          <button onclick="generateUpiPayment()" class="bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#D4AF37]/50 shadow-md hover:bg-stone-900 transition">
+            <span>💳 Pay via UPI / QR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPI Payment Intent & QR Modal -->
+  <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
+      <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Instant UPI Payment</h3>
+      <p class="text-xs text-stone-500">Scan using Google Pay, PhonePe, Paytm or BHIM UPI</p>
+      
+      <div class="p-3 bg-pink-50 rounded-2xl inline-block border border-pink-200">
+        <img id="upiQrCodeImg" src="" class="w-48 h-48 mx-auto rounded-lg">
+      </div>
+
+      <div class="space-y-1 text-xs">
+        <p class="font-bold text-stone-800">Insha Bangles & Purses</p>
+        <p id="upiAmountLabel" class="text-base font-black text-emerald-600">₹0</p>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <a id="upiIntentLink" href="#" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl block shadow-md hover:bg-stone-900 transition">
+          🚀 Open in UPI App (Mobile)
+        </a>
+        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold">Close Payment</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Product Quickview Modal -->
   <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
@@ -439,9 +515,14 @@
           </div>
         </div>
 
-        <button id="modalWhatsAppBtn" class="w-full bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2 shadow-md hover:bg-emerald-600 transition">
-          <span>💬 Check Live Stock & Colors on WhatsApp</span>
-        </button>
+        <div class="flex gap-2">
+          <button id="modalAddToCartBtn" class="flex-1 bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-stone-900 transition">
+            <span>🛍️ Add to Cart</span>
+          </button>
+          <button id="modalWhatsAppBtn" class="flex-1 bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-emerald-600 transition">
+            <span>💬 Ask on WhatsApp</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -483,12 +564,14 @@
 
   <script>
     const API_BASE = window.location.origin;
-    const SHOP_WHATSAPP = "919903610501";
+    const SHOP_WHATSAPP = "919903610501"; //
     const OWNER_PIN = "1234";
+    const SHOP_UPI_ID = "9903610501@paytm"; 
 
     let allProducts = [];
+    let shoppingCart = [];
 
-    // FULL SCREEN HORIZONTAL RIBBON TRIGGER
+    // Full Screen Pop Banner
     let ribbonTimeout;
     let lastActiveSection = null;
 
@@ -505,19 +588,12 @@
       }, 1600);
     }
 
-    // Middle-of-Screen Observer (Triggers when header is between 45% and 55% screen height)
-    const observerOptions = {
-      root: null,
-      rootMargin: "-45% 0px -45% 0px",
-      threshold: 0
-    };
-
+    const observerOptions = { root: null, rootMargin: "-45% 0px -45% 0px", threshold: 0 };
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const parentSection = entry.target.closest('section');
           if (!parentSection) return;
-          
           const id = parentSection.id;
           if (id === lastActiveSection) return;
           lastActiveSection = id;
@@ -532,10 +608,7 @@
     }, observerOptions);
 
     function changeLanguage(lang) {
-      const titles = {
-        en: "INSHA BANGLES & PURSES",
-        hi: "इंशा चूड़ियां और पर्स"
-      };
+      const titles = { en: "INSHA BANGLES & PURSES", hi: "इंशा चूड़ियां और पर्स" };
       document.getElementById("t-store-title").innerText = titles[lang] || titles.en;
     }
 
@@ -570,11 +643,106 @@
     }
 
     function toggleChat() {
-      const drawer = document.getElementById("chatDrawer");
-      drawer.classList.toggle("translate-x-full");
+      document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    // WhatsApp Inquiry Handshake
+    // CART MANAGEMENT
+    function addToCart(title, price, img) {
+      const existing = shoppingCart.find(i => i.title === title);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        shoppingCart.push({ title, price, img, qty: 1 });
+      }
+      updateCartBadge();
+      alert(`Added "${title}" to your shopping bag!`);
+    }
+
+    function updateCartBadge() {
+      const totalQty = shoppingCart.reduce((sum, i) => sum + i.qty, 0);
+      document.getElementById("cartCountBadge").innerText = totalQty;
+    }
+
+    function toggleCartModal() {
+      const modal = document.getElementById("cartModal");
+      const list = document.getElementById("cartItemsList");
+      
+      if (modal.classList.contains("hidden")) {
+        list.innerHTML = "";
+        let total = 0;
+
+        if (shoppingCart.length === 0) {
+          list.innerHTML = `<div class="py-12 text-center text-stone-400 text-xs">Your shopping bag is empty.</div>`;
+        } else {
+          shoppingCart.forEach((item, index) => {
+            const itemTotal = item.price * item.qty;
+            total += itemTotal;
+            list.innerHTML += `
+              <div class="bg-white p-3 rounded-2xl border border-pink-100 flex items-center justify-between shadow-sm">
+                <div class="flex items-center gap-2.5">
+                  <img src="${item.img}" class="w-12 h-12 rounded-xl object-cover">
+                  <div>
+                    <h4 class="font-bold text-xs text-[#1A1316] line-clamp-1">${item.title}</h4>
+                    <p class="text-[11px] text-[#A64B74] font-semibold">₹${item.price} × ${item.qty}</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="changeCartQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold">-</button>
+                  <span class="text-xs font-bold">${item.qty}</span>
+                  <button onclick="changeCartQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold">+</button>
+                </div>
+              </div>
+            `;
+          });
+        }
+        document.getElementById("cartTotalVal").innerText = `₹${total}`;
+        modal.classList.remove("hidden");
+      } else {
+        modal.classList.add("hidden");
+      }
+    }
+
+    function changeCartQty(index, delta) {
+      shoppingCart[index].qty += delta;
+      if (shoppingCart[index].qty <= 0) {
+        shoppingCart.splice(index, 1);
+      }
+      updateCartBadge();
+      toggleCartModal();
+      toggleCartModal();
+    }
+
+    function checkoutWhatsAppOrder() {
+      if (shoppingCart.length === 0) return alert("Your cart is empty!");
+      let total = 0;
+      let msg = "Hello Insha Bangles & Purses! 🌸\n\nI would like to place an order for the following items:\n\n";
+      shoppingCart.forEach(i => {
+        msg += `• *${i.title}* (Qty: ${i.qty}) - ₹${i.price * i.qty}\n`;
+        total += i.price * i.qty;
+      });
+      msg += `\n💰 *Total Order Amount:* ₹${total}\n`;
+      msg += "Please confirm stock and provide delivery details!";
+      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+    }
+
+    function generateUpiPayment() {
+      if (shoppingCart.length === 0) return alert("Your cart is empty!");
+      const total = shoppingCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${total}&cu=INR&tn=OrderPayment`;
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+
+      document.getElementById("upiQrCodeImg").src = qrCodeUrl;
+      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${total}`;
+      document.getElementById("upiIntentLink").href = upiUrl;
+
+      document.getElementById("cartModal").classList.add("hidden");
+      document.getElementById("upiModal").classList.remove("hidden");
+    }
+
+    function closeUpiModal() {
+      document.getElementById("upiModal").classList.add("hidden");
+    }
+
     function orderProductWhatsApp(title, retailPrice, wholesalePrice, moq) {
       let msg = "Hello Insha Bangles & Purses!\n\n";
       msg += "I am interested in this item from your website:\n";
@@ -586,20 +754,17 @@
       msg += "\nCould you please confirm if this is currently available?\n";
       msg += "Also, please share available sizes, color variants, and details.";
 
-      const encoded = encodeURIComponent(msg);
-      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encoded, "_blank");
+      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
     function sendFullCatalogWhatsApp() {
       let catalogMsg = "Hello Insha Bangles & Purses!\n\n";
       catalogMsg += "I am browsing your website store and would like to receive your complete Bridal & Festive Catalog along with Retail & Wholesale rates.\n\n";
       catalogMsg += "Please share available stock, sizes, and designs!";
-
-      const encoded = encodeURIComponent(catalogMsg);
-      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encoded, "_blank");
+      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(catalogMsg), "_blank");
     }
 
-    // Advanced Combined Search & Filtering
+    // Filter Logic
     function applyAllFilters() {
       const query = document.getElementById("searchInput").value.trim().toLowerCase();
       const selectedCategory = document.getElementById("filterCategory").value;
@@ -633,19 +798,14 @@
         return matchesQuery && matchesCategory;
       });
 
-      // Sorting Logic
-      if (sortOption === "price-low") {
-        filtered.sort((a, b) => a.retail_price - b.retail_price);
-      } else if (sortOption === "price-high") {
-        filtered.sort((a, b) => b.retail_price - a.retail_price);
-      } else if (sortOption === "wholesale") {
-        filtered.sort((a, b) => (a.wholesale_price || 9999) - (b.wholesale_price || 9999));
-      }
+      if (sortOption === "price-low") filtered.sort((a, b) => a.retail_price - b.retail_price);
+      else if (sortOption === "price-high") filtered.sort((a, b) => b.retail_price - a.retail_price);
+      else if (sortOption === "wholesale") filtered.sort((a, b) => (a.wholesale_price || 9999) - (b.wholesale_price || 9999));
 
       document.getElementById("searchHeader").innerText = `Filtered Results (${filtered.length} items)`;
 
       if (filtered.length === 0) {
-        resultsGrid.innerHTML = `<div class="col-span-full py-12 text-center text-[#8C6274] text-xs">No matching products found with selected filters.</div>`;
+        resultsGrid.innerHTML = `<div class="col-span-full py-12 text-center text-[#8C6274] text-xs">No matching products found.</div>`;
       } else {
         resultsGrid.innerHTML = filtered.map(p => createProductCard(p, '✨ Filtered')).join('');
       }
@@ -660,7 +820,6 @@
       document.getElementById("storeSection").classList.remove("hidden");
     }
 
-    // Modal Quickview
     function openProductModal(title, retail, wholesale, moq, img, desc, category) {
       document.getElementById("modalTitle").innerText = title;
       document.getElementById("modalRetail").innerText = "₹" + retail;
@@ -675,6 +834,7 @@
         document.getElementById("modalWholesaleBox").classList.add("hidden");
       }
 
+      document.getElementById("modalAddToCartBtn").onclick = () => { addToCart(title, retail, img); closeProductModal(); };
       document.getElementById("modalWhatsAppBtn").onclick = () => orderProductWhatsApp(title, retail, wholesale, moq);
       document.getElementById("productModal").classList.remove("hidden");
     }
@@ -689,31 +849,33 @@
         const reader = new FileReader();
         reader.onload = function(e) {
           document.getElementById("pImg").value = e.target.result;
+          document.getElementById("imgPreviewTag").src = e.target.result;
+          document.getElementById("imgPreviewBox").classList.remove("hidden");
         };
         reader.readAsDataURL(file);
       }
     }
 
+    function clearPreviewImage() {
+      document.getElementById("pImg").value = "";
+      document.getElementById("imgPreviewTag").src = "";
+      document.getElementById("imgPreviewBox").classList.add("hidden");
+    }
+
     function startVoiceInput() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Voice recognition is not supported on this browser.");
-        return;
-      }
+      if (!SpeechRecognition) return alert("Voice recognition not supported.");
       const recognition = new SpeechRecognition();
       recognition.lang = document.getElementById("langSelect").value === 'hi' ? 'hi-IN' : 'en-IN';
       const micBtn = document.getElementById("micBtn");
       micBtn.innerText = "🔴";
 
       recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("chatInput").value = transcript;
+        document.getElementById("chatInput").value = event.results[0][0].transcript;
         micBtn.innerText = "🎙️";
         sendChatMessage();
       };
-
-      recognition.onerror = () => { micBtn.innerText = "🎙️"; };
-      recognition.onend = () => { micBtn.innerText = "🎙️"; };
+      recognition.onerror = recognition.onend = () => { micBtn.innerText = "🎙️"; };
       recognition.start();
     }
 
@@ -724,8 +886,8 @@
       const escapedCat = (p.category_name || '').replace(/'/g, "\\'");
 
       return `
-        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white cursor-pointer">
-          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10}, '${img}', '${escapedDesc}', '${escapedCat}')">
+        <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
+          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10}, '${img}', '${escapedDesc}', '${escapedCat}')" class="cursor-pointer">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
               <span class="absolute top-2.5 left-2.5 bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
@@ -749,13 +911,16 @@
             </div>
           </div>
 
-          <!-- Conversational Inquiry Button -->
-          <div class="p-3 pt-0">
+          <div class="p-3 pt-0 flex gap-2">
+            <button 
+              onclick="addToCart('${escapedTitle}', ${p.retail_price}, '${img}')" 
+              class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1 transition">
+              <span>+ Cart</span>
+            </button>
             <button 
               onclick="orderProductWhatsApp('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10})" 
-              class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 shadow-sm transition">
-              <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-              <span>Check Availability & Colors</span>
+              class="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1 shadow-sm transition">
+              <span>Ask</span>
             </button>
           </div>
         </div>
@@ -801,11 +966,9 @@
       try {
         const res = await fetch(`${API_BASE}/products`);
         const data = await res.json();
-        if (data && data.products && data.products.length > 0) {
-          allProducts = data.products;
-        }
+        if (data && data.products && data.products.length > 0) allProducts = data.products;
       } catch (err) {
-        console.log("Loading curated collections...");
+        console.log("Loaded default curated collection.");
       } finally {
         renderAllSections();
       }
@@ -837,6 +1000,7 @@
         if (res.ok) {
           alert("Product published successfully!");
           document.querySelector("form").reset();
+          clearPreviewImage();
           switchTab('store');
           fetchProducts();
         } else {
@@ -846,7 +1010,7 @@
         alert("Error connecting to server.");
       } finally {
         btn.disabled = false;
-        btn.innerText = "✨ Publish to Selected Section";
+        btn.innerText = "✨ Publish to Store Catalog";
       }
     }
 
