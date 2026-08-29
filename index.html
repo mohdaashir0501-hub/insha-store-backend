@@ -77,7 +77,7 @@
     </div>
   </div>
 
-  <!-- Dynamic Top Announcement Bar (Auto Calendar/Festival Engine) -->
+  <!-- Dynamic Top Announcement Bar -->
   <div id="dynamicFestivalBanner" class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨</span>
   </div>
@@ -575,11 +575,11 @@
     const API_BASE = window.location.origin;
     const SHOP_WHATSAPP = "919903610501";
     
-    // UPDATED OWNER PIN (1208)
+    // UPDATED OWNER PIN
     const OWNER_PIN = "1208";
     const SHOP_UPI_ID = "9903610501@paytm"; 
 
-    // Dynamic Calendar & Seasonal Festival Engine
+    // Dynamic Calendar & Seasonal Festival Engine (Strictly Bangles, Purses & Undergarments)
     function applyCalendarFestivalTheme() {
       const now = new Date();
       const month = now.getMonth() + 1; // 1-12
@@ -596,43 +596,43 @@
       if (popYearBadge) popYearBadge.innerText = `EXCLUSIVE ${year}`;
 
       if (month === 8 || month === 9) {
-        // Aug - Sep (Rakhi / Janmashtami / Early Festive)
-        bannerText.innerText = `✨ GRAND FESTIVE & WEDDING SEASON SALE — RAKHI & BRIDAL SPECIAL WHOLESALE RATES ACTIVE ✨`;
+        // Aug - Sep (Grand Festive & Early Wedding Hub)
+        bannerText.innerText = `✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨`;
         heroBadge.innerText = `👑 Festive & Wedding Hub ${year}`;
         heroTitle.innerText = `Festive Velvet Bangles & Royal Bridal Choodas`;
-        heroDesc.innerText = `Handcrafted Rakhi & festive velvet sets, Kundan wedding bangles, stone party clutches, and daily undergarment lots.`;
-        storeSubTag.innerText = `Festive Season & Bridal Wholesale Hub`;
+        heroDesc.innerText = `Handcrafted festive velvet bangle sets, Kundan dulhan choodas, stone party clutches, and ladies undergarment lots.`;
+        storeSubTag.innerText = `Festive Bangles, Purses & Innerwear Hub`;
         if (popSubBadge) popSubBadge.innerText = `FESTIVE & BRIDAL ARCHIVE ${year}`;
       } else if (month === 10 || month === 11) {
-        // Oct - Nov (Diwali, Karwa Chauth & Peak Wedding Season)
+        // Oct - Nov (Diwali & Karwa Chauth Season)
         bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — EXCLUSIVE BRIDAL CHOODA & CLUTCH LOTS 🪔`;
         heroBadge.innerText = `🪔 Royal Diwali & Karwa Chauth Edition`;
-        heroTitle.innerText = `Diwali Sparkle Bangles & Karwa Chauth Sets`;
-        heroDesc.innerText = `Special red & gold dulhan choodas, glitter festive sets, and embroidered clutches for the grand festive season.`;
-        storeSubTag.innerText = `Diwali & Wedding Wholesale Boutique`;
+        heroTitle.innerText = `Diwali Sparkle Bangles & Bridal Choodas`;
+        heroDesc.innerText = `Special red & gold dulhan chooda sets, glitter festive bangles, designer clutches, and daily ladies innerwear.`;
+        storeSubTag.innerText = `Festive Bangles & Designer Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `DIWALI ROYAL SHOWCASE`;
       } else if (month === 12 || month === 1 || month === 2) {
-        // Dec - Feb (Peak Winter Wedding Dulhan Season)
+        // Dec - Feb (Peak Winter Wedding Season)
         bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — WHOLESALE DULHAN CHOODAS & HEAVY KUNDAN BANGLES 💍`;
         heroBadge.innerText = `👑 Royal Winter Dulhan Showcase`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
-        heroDesc.innerText = `Heavy traditional wedding choodas, premium velvet sets, bridal potlis, and everyday underclothes.`;
-        storeSubTag.innerText = `Royal Wedding & Dulhan Hub`;
+        heroDesc.innerText = `Heavy traditional wedding choodas, premium velvet sets, stone-studded clutches, and ladies cotton innerwear.`;
+        storeSubTag.innerText = `Royal Wedding Bangles & Purses Hub`;
         if (popSubBadge) popSubBadge.innerText = `WINTER BRIDAL SUITE`;
       } else if (month === 3 || month === 4) {
         // Mar - Apr (Eid & Spring Festive)
         bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — MULTICOLOR VELVET & DESIGNER CLUTCHES 🌙`;
         heroBadge.innerText = `🌙 Eid Mubarak Festive Collection`;
         heroTitle.innerText = `Eid Special Velvet Sets & Party Clutches`;
-        heroDesc.innerText = `Multicolor silk bangles, stone embellished clutches, and comfortable innerwear sets available in retail and wholesale.`;
-        storeSubTag.innerText = `Eid & Spring Festive Boutique`;
+        heroDesc.innerText = `Multicolor silk bangles, stone-embellished clutches, and comfortable ladies underclothes available in retail & wholesale.`;
+        storeSubTag.innerText = `Eid Festive Bangles & Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `EID FESTIVE SUITE`;
       } else {
-        // Summer & Regular
+        // Summer Showcase
         bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — DIRECT WHOLESALE RATES ACTIVE ✨`;
         heroBadge.innerText = `👑 Exclusive Bridal & Wholesale Hub`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
-        heroDesc.innerText = `Handcrafted traditional bridal choodas, rich velvet bangles, stone clutches, and daily underclothes.`;
+        heroDesc.innerText = `Handcrafted traditional bridal choodas, rich velvet bangles, stone clutches, and ladies underclothes.`;
         storeSubTag.innerText = `Festive Bridal & Wholesale Hub`;
       }
     }
