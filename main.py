@@ -8,6 +8,7 @@ import requests
 
 app = FastAPI(title="Insha Bangles & Purses API")
 
+# Enable CORS for frontend and external app requests
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -116,13 +117,10 @@ class ProductCreate(BaseModel):
     min_wholesale_qty: Optional[int] = 10
     stock_count: Optional[int] = 100
 
-class ChatRequest(BaseModel):
-    message: str
-
 def generate_ai_reply(prompt_text: str) -> str:
     text_lower = prompt_text.lower()
     
-    # Fast intelligent catalog check
+    # Fast auto-recognition for catalog inquiries
     if any(k in text_lower for k in ["catalog", "catalogue", "all items", "rate list", "price list", "website"]):
         return (
             "Namaste! 🙏 Welcome to Insha Bangles & Purses, Lucknow.\n\n"
@@ -151,6 +149,7 @@ def generate_ai_reply(prompt_text: str) -> str:
             "Let us know which design or size you would like to book!"
         )
 
+# Routes
 @app.get("/")
 def serve_home():
     if os.path.exists("index.html"):
@@ -174,12 +173,42 @@ def delete_product(product_id: str):
     catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
     return {"success": True, "message": f"Product {product_id} deleted"}
 
-@app.post("/chat")
-def chat_with_assistant(req: ChatRequest):
-    return {"reply": generate_ai_reply(req.message)}
+# Multi-format endpoint supporting both website frontend and AutoResponder for WA
+@app.api_route("/chat", methods=["GET", "POST"])
+async def chat_with_assistant(request: Request):
+    msg_text = ""
+    
+    # 1. Parse JSON body (Website or AutoResponder POST)
+    try:
+        data = await request.json()
+        if isinstance(data, dict):
+            if "message" in data:
+                msg_text = str(data["message"])
+            elif "query" in data and isinstance(data["query"], dict):
+                msg_text = str(data["query"].get("message", ""))
+            elif "text" in data:
+                msg_text = str(data["text"])
+    except Exception:
+        pass
 
-# ----------------- WhatsApp Meta Cloud Webhook ----------------- #
+    # 2. Parse Query Params (GET requests / URL fallback)
+    if not msg_text:
+        msg_text = request.query_params.get("message") or request.query_params.get("query") or ""
 
+    if not msg_text:
+        default_msg = "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you?"
+        return {"reply": default_msg, "replies": [{"message": default_msg}]}
+
+    ai_reply = generate_ai_reply(msg_text)
+    
+    return {
+        "reply": ai_reply,
+        "replies": [
+            {"message": ai_reply}
+        ]
+    }
+
+# Webhook for Meta Cloud API (Optional fallback)
 @app.get("/webhook")
 def verify_webhook(request: Request):
     params = dict(request.query_params)
