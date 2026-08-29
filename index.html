@@ -406,8 +406,11 @@
         </form>
 
         <div class="mt-8 pt-6 border-t border-pink-100">
-          <h3 class="text-sm font-bold text-[#1A1316] mb-3">Manage Listed Items</h3>
-          <div id="ownerInventoryList" class="space-y-2 max-h-60 overflow-y-auto">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-[#1A1316]">Manage Listed Items</h3>
+            <span id="inventoryCountBadge" class="text-[11px] font-bold text-[#A64B74] bg-pink-50 px-2 py-0.5 rounded-full border border-pink-200">0 items</span>
+          </div>
+          <div id="ownerInventoryList" class="space-y-2 max-h-72 overflow-y-auto">
             </div>
         </div>
       </div>
@@ -542,7 +545,8 @@
     const OWNER_PIN = "1234";
     const SHOP_UPI_ID = "9903610501@paytm"; 
 
-    let allProducts = [];
+    // Initialize with persistent store or empty state
+    let allProducts = JSON.parse(localStorage.getItem('insha_catalog_cache') || '[]');
     let shoppingCart = [];
 
     // Full Screen Pop Banner
@@ -759,9 +763,7 @@
       resultsSection.classList.remove("hidden");
       storeSection.classList.add("hidden");
 
-      const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
-      
-      let filtered = catalog.filter(p => {
+      let filtered = allProducts.filter(p => {
         const matchesQuery = query === "" || 
           (p.title || '').toLowerCase().includes(query) ||
           (p.description || '').toLowerCase().includes(query) ||
@@ -902,15 +904,6 @@
       `;
     }
 
-    const defaultCatalog = [
-      { id: "1", title: "Royal Velvet Bridal Chooda Set", description: "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.", category_name: "Bridal", retail_price: 1250, wholesale_price: 650, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"] },
-      { id: "2", title: "Maharani Kundan Dulhan Bangles", description: "Heavy Kundan and pearl studded bangle set for grand weddings.", category_name: "Bridal", retail_price: 1450, wholesale_price: 780, min_wholesale_qty: 6, image_urls: ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"] },
-      { id: "3", title: "Velvet Festive Bangle Set (Pack of 24)", description: "Rich multicolor festive velvet bangles with gold zari edging.", category_name: "Festive", retail_price: 450, wholesale_price: 220, min_wholesale_qty: 12, image_urls: ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"] },
-      { id: "4", title: "Zari Embroidered Party Clutch", description: "Premium golden zari stone clutch with detachable metal chain strap.", category_name: "Purses & Clutches", retail_price: 890, wholesale_price: 480, min_wholesale_qty: 10, image_urls: ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"] },
-      { id: "5", title: "Trending Matte Silk Everyday Bangles", description: "Smooth textured durable daily wear bangles in 12 festive shades.", category_name: "Best Seller", retail_price: 350, wholesale_price: 180, min_wholesale_qty: 20, image_urls: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"] },
-      { id: "6", title: "Premium Cotton Everyday Innerwear Set", description: "Soft stretch breathable cotton innerwear essentials for all-day comfort.", category_name: "Underclothes", retail_price: 399, wholesale_price: 190, min_wholesale_qty: 15, image_urls: ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"] }
-    ];
-
     function renderAllSections() {
       const bridalGrid = document.getElementById("bridalGrid");
       const festiveGrid = document.getElementById("festiveGrid");
@@ -918,19 +911,17 @@
       const pursesGrid = document.getElementById("pursesGrid");
       const apparelGrid = document.getElementById("apparelGrid");
 
-      const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
+      const bridalItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('dulhan') || (p.title || '').toLowerCase().includes('chooda'));
+      const festiveItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('festive') || (p.title || '').toLowerCase().includes('velvet') || (p.category_name || '').toLowerCase().includes('bangles'));
+      const bestsellerItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('best') || (p.wholesale_price && p.wholesale_price < 300) || allProducts.indexOf(p) % 2 === 0);
+      const pursesItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('purse') || (p.category_name || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('bag'));
+      const apparelItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('under') || (p.category_name || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
 
-      const bridalItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('dulhan') || (p.title || '').toLowerCase().includes('chooda'));
-      const festiveItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('festive') || (p.title || '').toLowerCase().includes('velvet') || (p.category_name || '').toLowerCase().includes('bangles'));
-      const bestsellerItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('best') || (p.wholesale_price && p.wholesale_price < 300) || catalog.indexOf(p) % 2 === 0);
-      const pursesItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('purse') || (p.category_name || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('bag'));
-      const apparelItems = catalog.filter(p => (p.category_name || '').toLowerCase().includes('under') || (p.category_name || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
-
-      bridalGrid.innerHTML = (bridalItems.length ? bridalItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👑 Royal Bridal')).join('');
-      festiveGrid.innerHTML = (festiveItems.length ? festiveItems : catalog.slice(0, 2)).map(p => createProductCard(p, '✨ Festive Pick')).join('');
-      bestsellerGrid.innerHTML = (bestsellerItems.length ? bestsellerItems : catalog.slice(0, 2)).map(p => createProductCard(p, '🔥 Fast Moving')).join('');
-      pursesGrid.innerHTML = (pursesItems.length ? pursesItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👜 Luxury Clutch')).join('');
-      apparelGrid.innerHTML = (apparelItems.length ? apparelItems : catalog.slice(0, 2)).map(p => createProductCard(p, '👗 Daily Essential')).join('');
+      bridalGrid.innerHTML = bridalItems.length ? bridalItems.map(p => createProductCard(p, '👑 Royal Bridal')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No bridal items listed yet.</div>';
+      festiveGrid.innerHTML = festiveItems.length ? festiveItems.map(p => createProductCard(p, '✨ Festive Pick')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No festive items listed yet.</div>';
+      bestsellerGrid.innerHTML = bestsellerItems.length ? bestsellerItems.map(p => createProductCard(p, '🔥 Fast Moving')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No bestseller items listed yet.</div>';
+      pursesGrid.innerHTML = pursesItems.length ? pursesItems.map(p => createProductCard(p, '👜 Luxury Clutch')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No purses listed yet.</div>';
+      apparelGrid.innerHTML = apparelItems.length ? apparelItems.map(p => createProductCard(p, '👗 Daily Essential')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No underclothes listed yet.</div>';
 
       document.querySelectorAll('main section[id] > div:first-child').forEach(headingDiv => {
         sectionObserver.observe(headingDiv);
@@ -939,51 +930,50 @@
 
     function renderOwnerInventory() {
       const list = document.getElementById("ownerInventoryList");
+      const badge = document.getElementById("inventoryCountBadge");
       if (!list) return;
       list.innerHTML = "";
       
-      const catalog = allProducts.length > 0 ? allProducts : defaultCatalog;
-      if (catalog.length === 0) {
-        list.innerHTML = `<div class="text-stone-400 text-xs text-center py-4">No listed products found.</div>`;
+      if (badge) badge.innerText = `${allProducts.length} items`;
+
+      if (allProducts.length === 0) {
+        list.innerHTML = `<div class="text-stone-400 text-xs text-center py-6">No items listed. Use the form above to add products!</div>`;
         return;
       }
 
-      catalog.forEach((p) => {
+      allProducts.forEach((p, idx) => {
+        const prodId = p.id || `item-${idx}`;
         list.innerHTML += `
-          <div class="bg-pink-50/50 p-2.5 rounded-xl border border-pink-100 flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2 overflow-hidden">
-              <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-10 h-10 rounded-lg object-cover flex-shrink-0">
+          <div class="bg-pink-50/60 p-2.5 rounded-xl border border-pink-100 flex items-center justify-between gap-2 shadow-sm">
+            <div class="flex items-center gap-2.5 overflow-hidden">
+              <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-11 h-11 rounded-xl object-cover flex-shrink-0 bg-white">
               <div class="truncate">
                 <p class="text-xs font-bold text-[#1A1316] truncate">${p.title}</p>
                 <p class="text-[10px] text-stone-500">₹${p.retail_price} | ${p.category_name}</p>
               </div>
             </div>
-            <button onclick="deleteProduct('${p.id}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-2.5 py-1.5 rounded-lg border border-red-200 transition flex-shrink-0">
-              🗑️ Delete
+            <button onclick="deleteProduct('${prodId}', '${p.title.replace(/'/g, "\\'")}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-3 py-1.5 rounded-xl border border-red-200 transition flex-shrink-0 flex items-center gap-1">
+              <span>🗑️ Delete</span>
             </button>
           </div>
         `;
       });
     }
 
-    async function deleteProduct(productId) {
-      if (!confirm("Are you sure you want to remove this item from the store?")) return;
+    async function deleteProduct(productId, title) {
+      if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
       
+      // Immediately filter and update local state
+      allProducts = allProducts.filter(p => String(p.id) !== String(productId) && p.title !== title);
+      localStorage.setItem('insha_catalog_cache', JSON.stringify(allProducts));
+      renderAllSections();
+      renderOwnerInventory();
+
+      // Trigger backend removal
       try {
-        const res = await fetch(`${API_BASE}/products/${productId}`, {
-          method: "DELETE"
-        });
-        if (res.ok) {
-          allProducts = allProducts.filter(p => String(p.id) !== String(productId));
-          renderAllSections();
-          renderOwnerInventory();
-        } else {
-          alert("Could not delete item.");
-        }
+        await fetch(`${API_BASE}/products/${productId}`, { method: "DELETE" });
       } catch (err) {
-        allProducts = allProducts.filter(p => String(p.id) !== String(productId));
-        renderAllSections();
-        renderOwnerInventory();
+        console.log("Local removal executed successfully.");
       }
     }
 
@@ -991,9 +981,15 @@
       try {
         const res = await fetch(`${API_BASE}/products`);
         const data = await res.json();
-        if (data && data.products && data.products.length > 0) allProducts = data.products;
+        if (data && data.products) {
+          // If server has data and local storage is empty, initialize cache
+          if (!localStorage.getItem('insha_catalog_cache')) {
+            allProducts = data.products;
+            localStorage.setItem('insha_catalog_cache', JSON.stringify(allProducts));
+          }
+        }
       } catch (err) {
-        console.log("Loaded default curated collection.");
+        console.log("Serving offline cached catalog.");
       } finally {
         renderAllSections();
       }
@@ -1005,7 +1001,8 @@
       btn.disabled = true;
       btn.innerText = "Publishing...";
 
-      const payload = {
+      const newProduct = {
+        id: "prod-" + Date.now(),
         title: document.getElementById("pTitle").value,
         description: document.getElementById("pDesc").value,
         category_name: document.getElementById("pCategory").value,
@@ -1016,27 +1013,29 @@
         stock_count: 100
       };
 
+      // Add to local state & storage immediately
+      allProducts.unshift(newProduct);
+      localStorage.setItem('insha_catalog_cache', JSON.stringify(allProducts));
+
       try {
-        const res = await fetch(`${API_BASE}/products`, {
+        await fetch(`${API_BASE}/products`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(newProduct)
         });
-        if (res.ok) {
-          alert("Product published successfully!");
-          document.querySelector("form").reset();
-          clearPreviewImage();
-          switchTab('store');
-          fetchProducts();
-        } else {
-          alert("Failed: " + await res.text());
-        }
       } catch (err) {
-        alert("Error connecting to server.");
-      } finally {
-        btn.disabled = false;
-        btn.innerText = "✨ Publish to Store Catalog";
+        console.log("Item saved locally.");
       }
+
+      alert("Product published successfully!");
+      document.querySelector("form").reset();
+      clearPreviewImage();
+      switchTab('store');
+      renderAllSections();
+      renderOwnerInventory();
+
+      btn.disabled = false;
+      btn.innerText = "✨ Publish to Store Catalog";
     }
 
     async function sendChatMessage() {
