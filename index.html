@@ -370,7 +370,7 @@
       <!-- Owner Management Panel -->
       <div id="productFormBox" class="hidden space-y-6 max-w-3xl mx-auto">
         
-        <!-- SECTION 1: LIVE ORDERS FEED -->
+        <!-- SECTION 1: LIVE ORDERS FEED WITH ORDER DELETION -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100 pb-3">
             <div class="flex items-center gap-2">
@@ -380,7 +380,12 @@
                 <p class="text-[11px] text-stone-500">Live feed of orders placed with customer address & quantities.</p>
               </div>
             </div>
-            <button onclick="fetchOrders()" class="text-xs text-[#A64B74] font-bold hover:underline">🔄 Refresh Orders</button>
+            <div class="flex items-center gap-2">
+              <button onclick="fetchOrders()" class="text-xs text-[#A64B74] font-bold hover:underline">🔄 Refresh</button>
+              <button onclick="clearAllOrdersHistory()" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-[11px] px-2.5 py-1 rounded-xl border border-red-200 transition">
+                🗑️ Clear All Orders
+              </button>
+            </div>
           </div>
 
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
@@ -640,7 +645,6 @@
           </div>
         </div>
 
-        <!-- UNIFIED PAYMENT / ORDER BUTTON -->
         <button onclick="openPaymentQRModal()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
           <span>💳 Proceed to Pay & Place Order</span>
         </button>
@@ -707,12 +711,12 @@
             ❌ Cancel Order (Request Refund)
           </button>
           <button onclick="finishOrderAndNotify()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-2.5 rounded-xl hover:bg-stone-900 transition">
-            ✓ Continue & Notify Boutique
+            ✓ Continue & Get WhatsApp Receipt
           </button>
         </div>
       </div>
 
-      <!-- Cancelled State (shown if clicked cancel within 10s) -->
+      <!-- Cancelled State -->
       <div id="cancelledStateBox" class="hidden space-y-4">
         <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
           ✕
@@ -1240,7 +1244,7 @@
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       };
 
-      // 1. Post to backend & local cache once
+      // Record once in local cache & server
       liveOrders.unshift(activeOrderPayload);
       localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
 
@@ -1254,12 +1258,12 @@
         console.log("Offline local storage record.");
       }
 
-      // 2. Clear Cart & Close QR Modal
+      // Clear cart
       shoppingCart = [];
       updateCartBadge();
       closeUpiModal();
 
-      // 3. Show 10-second confirmation timer modal
+      // Launch 10s confirmation modal
       document.getElementById("successOrderNumber").innerText = `Order ID: ${currentOrderId}`;
       document.getElementById("confirmedStateBox").classList.remove("hidden");
       document.getElementById("cancelledStateBox").classList.add("hidden");
@@ -1307,32 +1311,36 @@
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
+    // AUTOMATIC SWEET WHATSAPP RECEIPT TO CUSTOMER'S NUMBER
     function finishOrderAndNotify() {
       clearInterval(cancelTimer);
       closeSuccessModal();
 
       if (!activeOrderPayload || activeOrderPayload.status === "CANCELLED") return;
 
-      // Send formatted WhatsApp notification
-      let msg = "Hello Insha Bangles & Purses!\n\nI have completed payment and placed a new order from your website:\n\n";
-      msg += `* ORDER ID: ${activeOrderPayload.order_id}\n`;
-      msg += `* CUSTOMER: ${activeOrderPayload.customer_name} (${activeOrderPayload.customer_phone})\n`;
-      msg += `* DELIVERY ADDRESS: ${activeOrderPayload.delivery_address}, ${activeOrderPayload.city_pincode}\n\n`;
+      const phoneClean = (activeOrderPayload.customer_phone || "").replace(/[^0-9]/g, '');
+      const custWaNumber = phoneClean.length === 10 ? `91${phoneClean}` : phoneClean;
 
-      msg += "* ORDER ITEMS:\n";
+      // Personalized sweet message
+      let msg = `Dear ${activeOrderPayload.customer_name},\n\n`;
+      msg += `Thank you so much for shopping with *Insha Bangles & Purses*! ✨🌸\n\n`;
+      msg += `We are delighted to confirm that your order has been received and is being prepared with utmost care and love.\n\n`;
+      
+      msg += `* YOUR ORDER SUMMARY:\n`;
+      msg += `  Order ID: *${activeOrderPayload.order_id}*\n`;
+      msg += `  Delivery Address: ${activeOrderPayload.delivery_address}, ${activeOrderPayload.city_pincode}\n\n`;
+
+      msg += `* ITEMS:\n`;
       activeOrderPayload.items.forEach(i => {
-        const lineTotal = i.price * i.qty;
-        msg += `* ${i.title} (${i.orderType.toUpperCase()}) - ${i.qty} pcs @ Rs. ${i.price} = Rs. ${lineTotal}\n`;
+        msg += `* ${i.title} (${i.orderType.toUpperCase()}) - ${i.qty} pcs\n`;
       });
 
-      msg += `\n* Subtotal: Rs. ${activeOrderPayload.subtotal}\n`;
-      if (activeOrderPayload.discount > 0) {
-        msg += `* Coupon Discount: -Rs. ${activeOrderPayload.discount}\n`;
-      }
-      msg += `* Total Paid (UPI): Rs. ${activeOrderPayload.final_total}\n\n`;
-      msg += "Please confirm order receipt and delivery dispatch!";
+      msg += `\n* Total Amount Paid: Rs. ${activeOrderPayload.final_total}\n\n`;
+      msg += `May your celebrations and special days shine with timeless beauty and elegance! If you ever need styling advice, size assistance, or delivery tracking, feel free to reach out to us right here anytime.\n\n`;
+      msg += `With warm regards,\n*Insha Bangles & Purses*\nNakkhas, Lucknow 💐`;
 
-      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+      // Opens WhatsApp directly with customer receipt
+      window.open(`https://wa.me/${custWaNumber}?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
     function closeSuccessModal() {
@@ -1340,7 +1348,7 @@
       document.getElementById("orderSuccessModal").classList.add("hidden");
     }
 
-    // ORDERS FEED IN OWNER PORTAL
+    // OWNER PORTAL ORDER MANAGEMENT WITH DELETION
     async function fetchOrders() {
       const list = document.getElementById("ownerOrdersList");
       if (!list) return;
@@ -1348,22 +1356,23 @@
       try {
         const res = await fetch(`${API_BASE}/orders`);
         const data = await res.json();
-        if (data && data.orders && data.orders.length > 0) {
+        if (data && data.orders) {
           liveOrders = data.orders;
           localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
         }
       } catch (e) {
-        console.log("Serving offline order feed.");
+        console.log("Serving cached orders.");
       }
 
       if (liveOrders.length === 0) {
-        list.innerHTML = `<div class="text-stone-400 text-xs text-center py-6">No customer orders placed yet.</div>`;
+        list.innerHTML = `<div class="text-stone-400 text-xs text-center py-6">No customer orders in history.</div>`;
         return;
       }
 
       list.innerHTML = liveOrders.map((ord, idx) => {
         const itemsSummary = (ord.items || []).map(i => `• ${i.title} (${i.qty} pcs @ ₹${i.price})`).join('<br>');
         const isCancelled = ord.status === "CANCELLED";
+        const orderIdentifier = ord.order_id || `ORD-${idx}`;
 
         return `
           <div class="bg-pink-50/70 p-3.5 rounded-2xl border ${isCancelled ? 'border-red-300 opacity-75' : 'border-pink-100'} space-y-2 shadow-sm text-xs">
@@ -1375,7 +1384,12 @@
                   ${ord.status || 'CONFIRMED'}
                 </span>
               </div>
-              <span class="text-[10px] text-stone-400 font-semibold">${ord.timestamp || 'Recent'}</span>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] text-stone-400 font-semibold">${ord.timestamp || 'Recent'}</span>
+                <button onclick="deleteSingleOrderHistory('${orderIdentifier}', ${idx})" class="text-xs text-red-500 hover:text-red-700 font-bold px-2 py-0.5 rounded-lg hover:bg-red-50 transition">
+                  🗑️ Delete
+                </button>
+              </div>
             </div>
 
             <div class="text-stone-700 bg-white p-2 rounded-xl border border-pink-100/80">
@@ -1395,6 +1409,30 @@
           </div>
         `;
       }).join('');
+    }
+
+    async function deleteSingleOrderHistory(orderId, index) {
+      if (!confirm(`Delete order ${orderId} from history?`)) return;
+
+      liveOrders.splice(index, 1);
+      localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+      fetchOrders();
+
+      try {
+        await fetch(`${API_BASE}/orders/${orderId}`, { method: "DELETE" });
+      } catch (e) {}
+    }
+
+    async function clearAllOrdersHistory() {
+      if (!confirm("Are you sure you want to permanently clear ALL order history?")) return;
+
+      liveOrders = [];
+      localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+      fetchOrders();
+
+      try {
+        await fetch(`${API_BASE}/orders`, { method: "DELETE" });
+      } catch (e) {}
     }
 
     function renderActiveCoupons() {
