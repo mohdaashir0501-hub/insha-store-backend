@@ -155,7 +155,7 @@
             type="text" 
             id="searchInput" 
             oninput="applyAllFilters()" 
-            placeholder="🔍 Search choodas, metal chudis, daily bangles, clutches..." 
+            placeholder="🔍 Search shades (Maroon, Bottle Green, Nude), choodas, metal chudis..." 
             class="w-full text-xs bg-white border border-pink-200/80 rounded-2xl pl-4 pr-9 py-2.5 focus:outline-none focus:border-[#D4AF37] shadow-sm text-[#1A1316]"
           />
           <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2.5 text-xs text-stone-400 hover:text-stone-700">✕</button>
@@ -222,7 +222,7 @@
           </h2>
           
           <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/90 leading-relaxed font-normal">
-            Handcrafted festive velvet sets, daily metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Complete range of colors and sizes.
+            Explore 30+ vibrant shades in velvet sets, daily metal chudis, Kundan bridal choodas, stone party clutches, and soft ladies innerwear. Available in single retail packs and wholesale cartons.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-3">
@@ -307,7 +307,7 @@
               <span class="text-2xl">👗</span>
               <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Underclothes & Innerwear</h2>
             </div>
-            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Premium comfortable undergarments, soft daily essentials (S to 2XL sizes)</p>
+            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Soft stretch cotton daily innerwear (S to 2XL sizes in classic & pastel tones)</p>
           </div>
         </div>
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
@@ -346,7 +346,7 @@
 
     </div>
 
-    <!-- 2. Secure Owner Dashboard View (with Color & Size Selectors) -->
+    <!-- 2. Secure Owner Dashboard View (with Full Color & Size Suites) -->
     <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
@@ -383,7 +383,7 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add / Edit Product Form with Full Colors & Sizes -->
+        <!-- SECTION 2: Add / Edit Product Form -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -401,7 +401,7 @@
 
             <div>
               <label class="block text-xs font-bold text-stone-700 mb-1">Product Title</label>
-              <input type="text" id="pTitle" required placeholder="e.g. Red Metal chudi / Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+              <input type="text" id="pTitle" required placeholder="e.g. Royal Velvet Bridal Chooda / Pure Cotton Innerwear" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
             </div>
 
             <!-- Categories -->
@@ -435,53 +435,120 @@
               </div>
             </div>
 
-            <!-- MULTI-COLOR PALETTE SELECTOR -->
-            <div class="space-y-1.5">
-              <label class="block text-xs font-bold text-stone-700">Available Color Variants (Select all shades in stock)</label>
-              <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100 text-xs">
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Red / Laal" class="colorCheckbox accent-red-600"> 🔴 Red (Laal)
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Maroon" class="colorCheckbox accent-rose-900"> 🍷 Maroon
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Gold / Golden" class="colorCheckbox accent-amber-500"> 🟡 Golden
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Green / Mehndi" class="colorCheckbox accent-emerald-600"> 🟢 Green
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Pink / Rani" class="colorCheckbox accent-pink-500"> 🌸 Rani Pink
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Navy Blue" class="colorCheckbox accent-blue-900"> 🔵 Navy Blue
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Sky Blue" class="colorCheckbox accent-sky-400"> 🩵 Sky Blue
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Yellow / Haldi" class="colorCheckbox accent-yellow-400"> 🌻 Yellow
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Orange" class="colorCheckbox accent-orange-500"> 🟠 Orange
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Purple / Velvet Plum" class="colorCheckbox accent-purple-600"> 🟣 Purple
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Black" class="colorCheckbox accent-stone-900"> ⚫ Black
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
-                  <input type="checkbox" value="Silver / White" class="colorCheckbox accent-stone-400"> ⚪ Silver
-                </label>
-                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700 col-span-3 sm:col-span-4">
-                  <input type="checkbox" value="Multicolor / Navratan" class="colorCheckbox accent-[#1A1316]"> 🌈 Multicolor / Navratan
-                </label>
+            <!-- 1. EXHAUSTIVE BANGLE COLOR PALETTE (28+ SHADES) -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-stone-700">🎨 Comprehensive Bangle & Accessory Colors</label>
+              <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-3">
+                
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Reds, Maroons & Bridal Tones</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Bridal Deep Red (Laal)" class="colorCheckbox accent-red-600"> 🔴 Bridal Deep Red</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Crimson Scarlet" class="colorCheckbox accent-red-500"> 🌹 Crimson Scarlet</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Rich Maroon" class="colorCheckbox accent-rose-950"> 🍷 Rich Maroon</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Wine Burgundy" class="colorCheckbox accent-purple-900"> 🍇 Wine Burgundy</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Cherry Red" class="colorCheckbox accent-rose-600"> 🍒 Cherry Red</label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Pinks, Peaches & Magentas</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Rani Hot Pink" class="colorCheckbox accent-pink-600"> 🌸 Rani Hot Pink</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Baby Pastel Pink" class="colorCheckbox accent-pink-300"> 🎀 Baby Pastel Pink</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Rose Pink" class="colorCheckbox accent-pink-400"> 🌷 Rose Pink</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Coral Peach" class="colorCheckbox accent-orange-300"> 🍑 Coral Peach</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Magenta Velvet" class="colorCheckbox accent-fuchsia-700"> 🌺 Magenta Velvet</label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Greens & Mehendi Tones</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Dark Bottle Green" class="colorCheckbox accent-emerald-900"> 🌲 Bottle Green</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Emerald Green" class="colorCheckbox accent-emerald-600"> 💚 Emerald Green</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Mehndi / Olive Green" class="colorCheckbox accent-lime-800"> 🌿 Mehndi / Olive</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Mint Green" class="colorCheckbox accent-teal-300"> 🍃 Mint Green</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Peacock Teal" class="colorCheckbox accent-teal-700"> 🦚 Peacock Teal</label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Yellows, Oranges & Metallic Golds</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Mustard Haldi Yellow" class="colorCheckbox accent-amber-500"> 🌻 Haldi Yellow</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Lemon Yellow" class="colorCheckbox accent-yellow-400"> 🍋 Lemon Yellow</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Bright Orange / Kesariya" class="colorCheckbox accent-orange-500"> 🟠 Orange (Kesariya)</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Royal Shiny Gold" class="colorCheckbox accent-yellow-600"> ✨ Royal Shiny Gold</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Antique Matte Gold" class="colorCheckbox accent-amber-700"> 🪙 Antique Matte Gold</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Copper / Bronze" class="colorCheckbox accent-amber-900"> 🥉 Copper Bronze</label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Blues, Purples, Silvers & Multicolors</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Royal Blue" class="colorCheckbox accent-blue-700"> 💙 Royal Blue</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Navy Blue" class="colorCheckbox accent-blue-950"> 🔵 Navy Blue</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Sky Cyan" class="colorCheckbox accent-sky-400"> 🩵 Sky Cyan</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Deep Violet Plum" class="colorCheckbox accent-purple-800"> 🟣 Deep Violet Plum</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Lavender Lilac" class="colorCheckbox accent-purple-300"> 🪻 Lavender Lilac</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Glossy Jet Black" class="colorCheckbox accent-stone-900"> ⚫ Glossy Black</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Pure Silver / White" class="colorCheckbox accent-stone-400"> ⚪ Silver White</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Navratan Multicolor" class="colorCheckbox accent-[#1A1316]"> 🌈 Navratan Multicolor</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Glitter Sparkle Mix" class="colorCheckbox accent-[#1A1316]"> 💎 Glitter Mix</label>
+                  </div>
+                </div>
+
               </div>
             </div>
 
-            <!-- Bangle Sizes (Baccha & Chart Aligned) -->
+            <!-- 2. DEDICATED LADIES UNDERGARMENTS COLOR SUITE (14+ SHADES) -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-stone-700">👙 Dedicated Ladies Undergarments & Innerwear Colors</label>
+              <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-2">
+                
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Everyday Nudes & Basic Essentials</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Skin Nude" class="colorCheckbox accent-amber-200"> 🏷️ Skin Nude</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Pure Crisp White" class="colorCheckbox accent-stone-200"> 🤍 Pure Crisp White</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Jet Black" class="colorCheckbox accent-stone-900"> 🖤 Jet Black</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Soft Cream / Beige" class="colorCheckbox accent-amber-100"> 🍦 Cream / Beige</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Mocha Brown" class="colorCheckbox accent-amber-900"> ☕ Mocha Brown</label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">Pastel Comforts & Glamour Tones</span>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Blush Soft Pink" class="colorCheckbox accent-pink-300"> 🌸 Blush Pink</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Powder Sky Blue" class="colorCheckbox accent-sky-300"> 🩵 Powder Blue</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Minty Sage" class="colorCheckbox accent-teal-200"> 🍃 Minty Sage</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Lilac Mist" class="colorCheckbox accent-purple-300"> 🪻 Lilac Mist</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Heather Grey" class="colorCheckbox accent-stone-400"> 🩶 Heather Grey</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Midnight Navy (Innerwear)" class="colorCheckbox accent-blue-900"> 🌌 Midnight Navy</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Deep Maroon (Innerwear)" class="colorCheckbox accent-rose-900"> 🍷 Deep Maroon</label>
+                    <label class="flex items-center gap-1.5 cursor-pointer font-medium text-stone-700"><input type="checkbox" value="Ruby Crimson (Innerwear)" class="colorCheckbox accent-red-600"> 🌹 Ruby Crimson</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- CUSTOM COLOR CREATOR -->
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">+ Add Any Custom Color Shade</label>
+              <div class="flex gap-2">
+                <input type="text" id="customColorInput" placeholder="e.g. Firozi, Peacock Green, Champagne..." class="flex-1 text-xs px-3.5 py-2 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+                <button type="button" onclick="addCustomColorChip()" class="bg-[#1A1316] text-[#F4D068] text-xs font-bold px-3.5 py-2 rounded-xl hover:bg-stone-900 transition">
+                  + Add Shade
+                </button>
+              </div>
+              <div id="customColorsContainer" class="flex flex-wrap gap-1.5 mt-2"></div>
+            </div>
+
+            <!-- Bangle Sizes -->
             <div class="space-y-1.5">
               <label class="block text-xs font-bold text-stone-700">Available Bangle Sizes (Optional)</label>
               <div class="bg-pink-50/30 p-3 rounded-2xl border border-pink-100 space-y-2">
@@ -503,30 +570,14 @@
                 <div>
                   <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👑 Standard & Plus Sizes</span>
                   <div class="flex flex-wrap gap-2">
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-2 (2.125 in)" class="sizeCheckbox accent-[#1A1316]"> 2-2
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-4 (2.250 in)" class="sizeCheckbox accent-[#1A1316]"> 2-4
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-6 (2.375 in)" class="sizeCheckbox accent-[#1A1316]"> 2-6
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-8 (2.500 in)" class="sizeCheckbox accent-[#1A1316]"> 2-8
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-10 (2.625 in)" class="sizeCheckbox accent-[#1A1316]"> 2-10
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-12 (2.750 in)" class="sizeCheckbox accent-[#1A1316]"> 2-12
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="2-14 (2.875 in)" class="sizeCheckbox accent-[#1A1316]"> 2-14
-                    </label>
-                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                      <input type="checkbox" value="3-0 (3.000 in)" class="sizeCheckbox accent-[#1A1316]"> 3-0
-                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-2 (2.125 in)" class="sizeCheckbox accent-[#1A1316]"> 2-2</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-4 (2.250 in)" class="sizeCheckbox accent-[#1A1316]"> 2-4</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-6 (2.375 in)" class="sizeCheckbox accent-[#1A1316]"> 2-6</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-8 (2.500 in)" class="sizeCheckbox accent-[#1A1316]"> 2-8</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-10 (2.625 in)" class="sizeCheckbox accent-[#1A1316]"> 2-10</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-12 (2.750 in)" class="sizeCheckbox accent-[#1A1316]"> 2-12</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2-14 (2.875 in)" class="sizeCheckbox accent-[#1A1316]"> 2-14</label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="3-0 (3.000 in)" class="sizeCheckbox accent-[#1A1316]"> 3-0</label>
                   </div>
                 </div>
               </div>
@@ -536,24 +587,12 @@
             <div class="space-y-1.5">
               <label class="block text-xs font-bold text-stone-700">Available Ladies Underwear Sizes (Optional)</label>
               <div class="flex flex-wrap gap-2 bg-pink-50/30 p-2.5 rounded-2xl border border-pink-100">
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="S (28-30)" class="sizeCheckbox accent-[#1A1316]"> S (28-30)
-                </label>
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="M (32-34)" class="sizeCheckbox accent-[#1A1316]"> M (32-34)
-                </label>
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="L (36-38)" class="sizeCheckbox accent-[#1A1316]"> L (36-38)
-                </label>
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="XL (40-42)" class="sizeCheckbox accent-[#1A1316]"> XL (40-42)
-                </label>
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="2XL (44-46)" class="sizeCheckbox accent-[#1A1316]"> 2XL (44-46)
-                </label>
-                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
-                  <input type="checkbox" value="Free Size" class="sizeCheckbox accent-[#1A1316]"> Free Size
-                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="S (28-30)" class="sizeCheckbox accent-[#1A1316]"> S (28-30)</label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="M (32-34)" class="sizeCheckbox accent-[#1A1316]"> M (32-34)</label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="L (36-38)" class="sizeCheckbox accent-[#1A1316]"> L (36-38)</label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="XL (40-42)" class="sizeCheckbox accent-[#1A1316]"> XL (40-42)</label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="2XL (44-46)" class="sizeCheckbox accent-[#1A1316]"> 2XL (44-46)</label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer"><input type="checkbox" value="Free Size" class="sizeCheckbox accent-[#1A1316]"> Free Size</label>
               </div>
             </div>
 
@@ -841,7 +880,7 @@
         <!-- Dynamic Color Selector inside Modal -->
         <div id="modalColorSection" class="space-y-1.5">
           <label class="block text-xs font-bold text-stone-700">Choose Color Variant *</label>
-          <div id="modalColorPills" class="flex flex-wrap gap-1.5"></div>
+          <div id="modalColorPills" class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto p-1 bg-pink-50/30 rounded-xl border border-pink-100"></div>
         </div>
 
         <!-- Dynamic Size Selector inside Modal -->
@@ -897,7 +936,7 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
       <div class="bg-white border border-pink-100 text-[#1A1316] text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available anywhere across Lucknow with FREE shipping on orders above ₹999! How may I assist you with colors, sizes, or orders today?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available anywhere across Lucknow with FREE shipping on orders above ₹999! How may I assist you with shades, sizes, or orders today?
       </div>
     </div>
 
@@ -930,6 +969,8 @@
     let preparedOrderPayload = null;
     let selectedModalSize = null;
     let selectedModalColor = null;
+
+    let customColorsList = [];
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
       const R = 6371;
@@ -1207,6 +1248,37 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
+    function addCustomColorChip() {
+      const input = document.getElementById("customColorInput");
+      const colorVal = input.value.trim();
+      if (!colorVal) return;
+
+      if (!customColorsList.includes(colorVal)) {
+        customColorsList.push(colorVal);
+        renderCustomColorChips();
+      }
+      input.value = "";
+    }
+
+    function removeCustomColorChip(idx) {
+      customColorsList.splice(idx, 1);
+      renderCustomColorChips();
+    }
+
+    function renderCustomColorChips() {
+      const container = document.getElementById("customColorsContainer");
+      container.innerHTML = "";
+      customColorsList.forEach((c, idx) => {
+        container.innerHTML += `
+          <label class="inline-flex items-center gap-1.5 bg-pink-100 text-[#1A1316] font-bold text-xs px-2.5 py-1 rounded-xl border border-pink-200 cursor-pointer">
+            <input type="checkbox" value="${c}" checked class="colorCheckbox customColorCheck accent-[#1A1316]">
+            <span>${c}</span>
+            <button type="button" onclick="removeCustomColorChip(${idx})" class="text-red-500 font-bold ml-1">✕</button>
+          </label>
+        `;
+      });
+    }
+
     function addToCart(title, price, img, orderType = 'retail', moq = 1, chosenSize = null, chosenColor = null) {
       if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq, chosenSize, chosenColor))) {
         return;
@@ -1394,7 +1466,7 @@
         customer_name: currentCustomer.name,
         customer_phone: currentCustomer.phone,
         delivery_address: currentCustomer.address,
-        city_pincode: `Lucknow - ${currentCustomer.pincode}`,
+        city_pincode: `Lucknow - ${currentCustomer.pincode || '226003'}`,
         distance_km: calculatedDistanceKm,
         items: [...shoppingCart],
         subtotal: subtotal,
@@ -1959,10 +2031,20 @@
         }
       });
 
-      // Check Colors
-      document.querySelectorAll(".colorCheckbox").forEach(cb => {
+      // Check Built-in Colors
+      document.querySelectorAll(".colorCheckbox:not(.customColorCheck)").forEach(cb => {
         cb.checked = Array.isArray(prod.colors) && prod.colors.includes(cb.value);
       });
+
+      // Restore Custom Colors if any
+      customColorsList = [];
+      if (Array.isArray(prod.colors)) {
+        prod.colors.forEach(col => {
+          const isBuiltIn = Array.from(document.querySelectorAll(".colorCheckbox:not(.customColorCheck)")).some(cb => cb.value === col);
+          if (!isBuiltIn) customColorsList.push(col);
+        });
+      }
+      renderCustomColorChips();
 
       // Check Sizes
       document.querySelectorAll(".sizeCheckbox").forEach(cb => {
@@ -1980,6 +2062,8 @@
     function resetProductForm() {
       document.getElementById("editingProductId").value = "";
       document.querySelector("form").reset();
+      customColorsList = [];
+      renderCustomColorChips();
       clearPreviewImage();
       document.getElementById("formHeaderTitle").innerText = "Add Item to Store";
       document.getElementById("formHeaderIcon").innerText = "🛍️";
