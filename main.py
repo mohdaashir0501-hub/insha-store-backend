@@ -18,8 +18,10 @@ app.add_middleware(
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 STORE_URL = os.environ.get("STORE_URL", "https://insha-store.onrender.com")
-WHATSAPP_API_TOKEN = os.environ.get("WHATSAPP_API_TOKEN", "")
-WHATSAPP_PHONE_ID = os.environ.get("WHATSAPP_PHONE_ID", "")
+
+# TELEGRAM INSTANT NOTIFICATION CONFIG
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
 # Orders Database
 orders_db = []
@@ -138,86 +140,36 @@ class OrderCreate(BaseModel):
     status: Optional[str] = "CONFIRMED"
     timestamp: Optional[str] = ""
 
-def generate_ai_receipt_text(order: dict) -> str:
-    cust_name = order.get("customer_name", "Valued Customer")
-    order_id = order.get("order_id", "IB-ORD")
-    address = order.get("delivery_address", "")
-    city_pin = order.get("city_pincode", "")
-    final_total = order.get("final_total", 0)
-    items = order.get("items", [])
+def send_instant_telegram_notification(order: dict):
+    token = TELEGRAM_BOT_TOKEN
+    chat_id = TELEGRAM_CHAT_ID
+    if not token or not chat_id:
+        return
 
     items_text = ""
-    for item in items:
+    for item in order.get("items", []):
         title = item.get("title", "Item")
         qty = item.get("qty", 1)
         price = item.get("price", 0)
-        items_text += f"  * {title} (x{qty}) - Rs. {price * qty}\n"
+        order_type = item.get("orderType", "retail").upper()
+        items_text += f"• {title} ({order_type}) x{qty} = Rs. {price * qty}\n"
 
-    receipt_msg = (
-        f"Dear {cust_name},\n\n"
-        f"Thank you so much for shopping with *Insha Bangles & Purses*! ✨🌸\n\n"
-        f"We are delighted to confirm your order (*{order_id}*). Our team is preparing your package with utmost care and love.\n\n"
-        f"* DELIVERY DETAILS:\n"
-        f"  Address: {address}, {city_pin}\n\n"
-        f"* ITEMS ORDERED:\n{items_text}\n"
-        f"* Total Amount: Rs. {final_total}\n\n"
-        f"May your festive celebrations and everyday moments sparkle with timeless beauty and elegance! 💫\n\n"
-        f"With warm regards,\n"
-        f"*Insha Bangles & Purses*\n"
-        f"In front of Chidiya Bazar, Nakkhas, Lucknow 💐"
+    msg = (
+        f"🚨 *NEW ORDER RECEIVED!* 🚨\n\n"
+        f"🆔 *Order ID:* `{order.get('order_id')}`\n"
+        f"👤 *Customer:* {order.get('customer_name')}\n"
+        f"📞 *Phone:* {order.get('customer_phone')}\n"
+        f"📍 *Address:* {order.get('delivery_address')}, {order.get('city_pincode')}\n\n"
+        f"🛍️ *Items Ordered:*\n{items_text}\n"
+        f"💰 *Total Amount:* Rs. {order.get('final_total')}\n"
+        f"⏰ *Time:* {order.get('timestamp')}"
     )
-    return receipt_msg
 
-def send_background_whatsapp_receipt(order_data: dict):
-    phone_clean = ''.join(filter(str.isdigit, str(order_data.get("customer_phone", ""))))
-    if len(phone_clean) == 10:
-        phone_clean = f"91{phone_clean}"
-
-    msg_body = generate_ai_receipt_text(order_data)
-    
-    if WHATSAPP_API_TOKEN and WHATSAPP_PHONE_ID:
-        url = f"https://graph.facebook.com/v19.0/{WHATSAPP_PHONE_ID}/messages"
-        headers = {
-            "Authorization": f"Bearer {WHATSAPP_API_TOKEN}",
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "messaging_product": "whatsapp",
-            "to": phone_clean,
-            "type": "text",
-            "text": {"body": msg_body}
-        }
-        try:
-            requests.post(url, json=payload, headers=headers, timeout=10)
-        except Exception as e:
-            print(f"Direct API push error: {e}")
-    else:
-        print(f"Receipt generated for {phone_clean}:\n{msg_body}")
-
-def generate_ai_reply(prompt_text: str) -> str:
-    text_lower = prompt_text.lower()
-    if any(k in text_lower for k in ["catalog", "catalogue", "all items", "rate list", "price list", "website"]):
-        return (
-            "Namaste! 🙏 Welcome to Insha Bangles & Purses, Nakkhas, Lucknow.\n\n"
-            f"✨ You can browse our complete collection and wholesale rates online:\n👉 {STORE_URL}\n\n"
-            "Feel free to reply with any designs or sizes (2.4, 2.6, 2.8) you would like to order!"
-        )
-
-    if not GEMINI_API_KEY:
-        return (
-            "Namaste! 🙏 Welcome to Insha Bangles & Purses, In front of Chidiya Bazar, Nakkhas, Lucknow.\n\n"
-            f"Explore our latest collection and prices directly at:\n👉 {STORE_URL}\n\n"
-            "Our team will assist you with stock and dispatch details shortly!"
-        )
-
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(f"You are the boutique assistant for 'Insha Bangles & Purses' in Nakkhas, Lucknow. Store URL: {STORE_URL}. Help politely with bangles, clutches, and innerwear.\n\nCustomer: {prompt_text}\nResponse:")
-        return response.text.strip()
-    except Exception:
-        return f"Namaste! 🙏 Welcome to Insha Bangles & Purses. Browse our catalog at {STORE_URL}!"
+        requests.post(url, json={"chat_id": chat_id, "text": msg, "parse_mode": "Markdown"}, timeout=8)
+    except Exception as e:
+        print(f"Telegram dispatch error: {e}")
 
 @app.get("/")
 def serve_home():
@@ -242,7 +194,6 @@ def delete_product(product_id: str):
     catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
     return {"success": True, "message": f"Product {product_id} deleted"}
 
-# Orders API & Deletion
 @app.get("/orders")
 def get_orders():
     return {"orders": orders_db}
@@ -254,7 +205,8 @@ def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
         order_data["order_id"] = f"IB-{len(orders_db) + 1001}"
     orders_db.insert(0, order_data)
     
-    background_tasks.add_task(send_background_whatsapp_receipt, order_data)
+    # Send instant push notification to Telegram
+    background_tasks.add_task(send_instant_telegram_notification, order_data)
     return {"success": True, "order": order_data}
 
 @app.delete("/orders/{order_id}")
@@ -287,9 +239,5 @@ async def chat_with_assistant(request: Request):
     if not msg_text:
         msg_text = request.query_params.get("message") or request.query_params.get("query") or ""
 
-    if not msg_text:
-        default_msg = "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you?"
-        return {"reply": default_msg, "replies": [{"message": default_msg}]}
-
-    ai_reply = generate_ai_reply(msg_text)
-    return {"reply": ai_reply, "replies": [{"message": ai_reply}]}
+    default_msg = "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you?"
+    return {"reply": default_msg, "replies": [{"message": default_msg}]}
