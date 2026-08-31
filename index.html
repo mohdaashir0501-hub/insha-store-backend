@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -242,7 +242,7 @@
         <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
+      <!-- SECTIONS -->
       <section id="bridal-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -256,7 +256,6 @@
         <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
       <section id="festive-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -270,7 +269,6 @@
         <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 3: DAILY WEAR BANGLES -->
       <section id="dailywear-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -284,7 +282,6 @@
         <div id="dailywearGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 4: STORE BEST SELLERS -->
       <section id="bestseller-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -298,7 +295,6 @@
         <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 5: PURSES & CLUTCHES -->
       <section id="purses-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -312,7 +308,6 @@
         <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 6: UNDERCLOTHES -->
       <section id="apparel-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -391,7 +386,7 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add Product Form with Multi-Category & Daily Wear -->
+        <!-- SECTION 2: Add Product Form with Multi-Category -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -407,7 +402,6 @@
               <input type="text" id="pTitle" required placeholder="e.g. Red Metal chudi / Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
             </div>
 
-            <!-- MULTI-CATEGORY SELECTION INCLUDING DAILY WEAR -->
             <div>
               <label class="block text-xs font-bold text-stone-700 mb-1.5">Assign to Categories & Sections (Select all that apply)</label>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100">
@@ -646,22 +640,18 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 pt-1">
-          <button onclick="checkoutWhatsAppOrder()" class="bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-emerald-600 transition">
-            <span>💬 Send WhatsApp Order</span>
-          </button>
-          <button onclick="generateUpiPayment()" class="bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#D4AF37]/50 shadow-md hover:bg-stone-900 transition">
-            <span>💳 Pay via UPI / QR</span>
-          </button>
-        </div>
+        <!-- UNIFIED PAYMENT / ORDER BUTTON -->
+        <button onclick="openPaymentQRModal()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
+          <span>💳 Proceed to Pay & Place Order</span>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- UPI Modal -->
+  <!-- UPI PAYMENT MODAL -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
-      <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Instant UPI Payment</h3>
+      <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Pay & Finalize Order</h3>
       <p class="text-xs text-stone-500">Scan using Google Pay, PhonePe, Paytm or BHIM UPI</p>
       
       <div class="p-3 bg-pink-50 rounded-2xl inline-block border border-pink-200">
@@ -674,11 +664,71 @@
       </div>
 
       <div class="space-y-2 pt-2">
-        <a id="upiIntentLink" href="#" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl block shadow-md hover:bg-stone-900 transition">
+        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
           🚀 Open in UPI App (Mobile)
         </a>
-        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold">Close Payment</button>
+        <button onclick="confirmOrderPayment()" class="w-full bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl block shadow-md hover:bg-emerald-700 transition">
+          ✅ I Have Paid / Confirm Order
+        </button>
+        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold block mx-auto">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ORDER CONFIRMATION & 10s CANCEL TIMER MODAL -->
+  <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200 relative overflow-hidden">
+      
+      <div id="confirmedStateBox" class="space-y-4">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner animate-bounce">
+          🎉
+        </div>
+
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#A64B74] block">PAYMENT & ORDER RECEIVED</span>
+          <h3 class="font-cormorant font-bold text-2xl text-[#1A1316] mt-0.5">Order Confirmed!</h3>
+          <p class="text-xs text-stone-600 mt-1" id="successOrderNumber">Order ID: IB-1001</p>
+        </div>
+
+        <!-- 10s Timer Banner -->
+        <div class="bg-pink-50/80 p-3.5 rounded-2xl border border-pink-200 text-xs space-y-2">
+          <div class="flex items-center justify-between font-bold">
+            <span class="text-stone-700">Dispatch Locking In:</span>
+            <span id="countdownSeconds" class="text-base text-red-600 font-black">10s</span>
+          </div>
+          <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
+            <div id="timerProgressBar" class="bg-red-500 h-full w-full transition-all duration-1000 ease-linear"></div>
+          </div>
+          <p class="text-[10px] text-stone-500 leading-tight">Need to change your mind? You can cancel and reverse within 10 seconds.</p>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <button onclick="cancelPendingOrder()" class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs py-2.5 rounded-xl border border-red-200 transition">
+            ❌ Cancel Order (Request Refund)
+          </button>
+          <button onclick="finishOrderAndNotify()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-2.5 rounded-xl hover:bg-stone-900 transition">
+            ✓ Continue & Notify Boutique
+          </button>
+        </div>
+      </div>
+
+      <!-- Cancelled State (shown if clicked cancel within 10s) -->
+      <div id="cancelledStateBox" class="hidden space-y-4">
+        <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+          ✕
+        </div>
+        <div>
+          <h3 class="font-cormorant font-bold text-xl text-red-600">Order Cancelled</h3>
+          <p class="text-xs text-stone-600 mt-1 leading-relaxed">
+            Your order has been cancelled. If money was deducted via UPI, please share your payment screenshot on WhatsApp for an immediate refund reversal.
+          </p>
+        </div>
+        <button onclick="openRefundWhatsApp()" class="w-full bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5">
+          <span>💬 WhatsApp Refund Support</span>
+        </button>
+        <button onclick="closeSuccessModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold">Close</button>
+      </div>
+
     </div>
   </div>
 
@@ -765,7 +815,7 @@
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
-    // Passkey Security
+    // Security Passkey
     const OWNER_PASSKEY = "InshaAdmin@2026"; 
     let failedAttempts = 0;
     let isLocked = false;
@@ -775,6 +825,10 @@
     let pendingCartAction = null;
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
+    let currentOrderId = null;
+    let cancelTimer = null;
+    let timerCountdownVal = 10;
+    let activeOrderPayload = null;
 
     function updateAuthHeaderUI() {
       const btn = document.getElementById("customerAuthBtn");
@@ -845,7 +899,7 @@
       return true;
     }
 
-    // Dynamic Calendar & Seasonal Festival Engine
+    // Dynamic Calendar Engine
     function applyCalendarFestivalTheme() {
       const now = new Date();
       const month = now.getMonth() + 1;
@@ -1146,86 +1200,12 @@
       toggleCartModal();
     }
 
-    async function recordOrderToOwnerPortal(orderRecord) {
-      liveOrders.unshift(orderRecord);
-      localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
-
-      try {
-        await fetch(`${API_BASE}/orders`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderRecord)
-        });
-      } catch (err) {
-        console.log("Order stored locally in cache.");
-      }
-    }
-
-    async function checkoutWhatsAppOrder() {
+    // PAYMENT MODAL & ORDER CONFIRMATION FLOW
+    function openPaymentQRModal() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      if (!requireCustomerLogin(() => checkoutWhatsAppOrder())) return;
+      if (!requireCustomerLogin(() => openPaymentQRModal())) return;
 
-      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
-      
-      const orderRecord = {
-        customer_name: currentCustomer.name,
-        customer_phone: currentCustomer.phone,
-        delivery_address: currentCustomer.address,
-        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
-        items: [...shoppingCart],
-        subtotal: subtotal,
-        discount: discountAmount,
-        final_total: finalTotal,
-        coupon_code: appliedCoupon ? appliedCoupon.code : "",
-        timestamp: new Date().toLocaleString()
-      };
-
-      await recordOrderToOwnerPortal(orderRecord);
-
-      let msg = "Hello Insha Bangles & Purses!\n\nI would like to place an order from your website:\n\n";
-      
-      msg += "* CUSTOMER & DELIVERY DETAILS:\n";
-      msg += `  Name: ${currentCustomer.name}\n`;
-      msg += `  Phone: ${currentCustomer.phone}\n`;
-      msg += `  Delivery Address: ${currentCustomer.address}, ${currentCustomer.city} - ${currentCustomer.pincode}\n\n`;
-
-      msg += "* ORDER ITEMS:\n";
-      shoppingCart.forEach(i => {
-        const lineTotal = i.price * i.qty;
-        msg += `* ${i.title} (${i.orderType.toUpperCase()})\n   Qty: ${i.qty} pcs @ Rs. ${i.price}/pc = Rs. ${lineTotal}\n`;
-      });
-      
-      msg += `\n* Subtotal: Rs. ${subtotal}\n`;
-      if (appliedCoupon && discountAmount > 0) {
-        msg += `* Coupon Applied: ${appliedCoupon.code} (-Rs. ${discountAmount})\n`;
-      }
-      msg += `* Final Payable Total: Rs. ${finalTotal}\n\n`;
-      msg += "Please confirm order acceptance and share delivery dispatch details!";
-      
-      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
-    }
-
-    async function generateUpiPayment() {
-      if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      if (!requireCustomerLogin(() => generateUpiPayment())) return;
-
-      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
-
-      const orderRecord = {
-        customer_name: currentCustomer.name,
-        customer_phone: currentCustomer.phone,
-        delivery_address: currentCustomer.address,
-        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
-        items: [...shoppingCart],
-        subtotal: subtotal,
-        discount: discountAmount,
-        final_total: finalTotal,
-        coupon_code: appliedCoupon ? appliedCoupon.code : "",
-        timestamp: new Date().toLocaleString()
-      };
-
-      await recordOrderToOwnerPortal(orderRecord);
-      
+      const { finalTotal } = calculateCartTotals();
       const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=OrderPayment`;
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
 
@@ -1239,6 +1219,125 @@
 
     function closeUpiModal() {
       document.getElementById("upiModal").classList.add("hidden");
+    }
+
+    async function confirmOrderPayment() {
+      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+      currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
+
+      activeOrderPayload = {
+        order_id: currentOrderId,
+        customer_name: currentCustomer.name,
+        customer_phone: currentCustomer.phone,
+        delivery_address: currentCustomer.address,
+        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
+        items: [...shoppingCart],
+        subtotal: subtotal,
+        discount: discountAmount,
+        final_total: finalTotal,
+        coupon_code: appliedCoupon ? appliedCoupon.code : "",
+        status: "CONFIRMED",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      };
+
+      // 1. Post to backend & local cache once
+      liveOrders.unshift(activeOrderPayload);
+      localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+
+      try {
+        await fetch(`${API_BASE}/orders`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(activeOrderPayload)
+        });
+      } catch (e) {
+        console.log("Offline local storage record.");
+      }
+
+      // 2. Clear Cart & Close QR Modal
+      shoppingCart = [];
+      updateCartBadge();
+      closeUpiModal();
+
+      // 3. Show 10-second confirmation timer modal
+      document.getElementById("successOrderNumber").innerText = `Order ID: ${currentOrderId}`;
+      document.getElementById("confirmedStateBox").classList.remove("hidden");
+      document.getElementById("cancelledStateBox").classList.add("hidden");
+      document.getElementById("orderSuccessModal").classList.remove("hidden");
+
+      start10sCountdown();
+    }
+
+    function start10sCountdown() {
+      clearInterval(cancelTimer);
+      timerCountdownVal = 10;
+      document.getElementById("countdownSeconds").innerText = `${timerCountdownVal}s`;
+      document.getElementById("timerProgressBar").style.width = "100%";
+
+      cancelTimer = setInterval(() => {
+        timerCountdownVal -= 1;
+        document.getElementById("countdownSeconds").innerText = `${timerCountdownVal}s`;
+        document.getElementById("timerProgressBar").style.width = `${timerCountdownVal * 10}%`;
+
+        if (timerCountdownVal <= 0) {
+          clearInterval(cancelTimer);
+          finishOrderAndNotify();
+        }
+      }, 1000);
+    }
+
+    async function cancelPendingOrder() {
+      clearInterval(cancelTimer);
+      
+      if (activeOrderPayload) {
+        activeOrderPayload.status = "CANCELLED";
+        localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+
+        try {
+          await fetch(`${API_BASE}/orders/${currentOrderId}/cancel`, { method: "PUT" });
+        } catch (e) {}
+      }
+
+      document.getElementById("confirmedStateBox").classList.add("hidden");
+      document.getElementById("cancelledStateBox").classList.remove("hidden");
+    }
+
+    function openRefundWhatsApp() {
+      let msg = `Hello Insha Bangles & Purses!\n\nI just cancelled my Order *${currentOrderId}*.\nPlease assist with the refund reversal for amount Rs. ${activeOrderPayload ? activeOrderPayload.final_total : ''}.\n\nCustomer: ${currentCustomer ? currentCustomer.name : ''} (${currentCustomer ? currentCustomer.phone : ''})`;
+      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+    }
+
+    function finishOrderAndNotify() {
+      clearInterval(cancelTimer);
+      closeSuccessModal();
+
+      if (!activeOrderPayload || activeOrderPayload.status === "CANCELLED") return;
+
+      // Send formatted WhatsApp notification
+      let msg = "Hello Insha Bangles & Purses!\n\nI have completed payment and placed a new order from your website:\n\n";
+      msg += `* ORDER ID: ${activeOrderPayload.order_id}\n`;
+      msg += `* CUSTOMER: ${activeOrderPayload.customer_name} (${activeOrderPayload.customer_phone})\n`;
+      msg += `* DELIVERY ADDRESS: ${activeOrderPayload.delivery_address}, ${activeOrderPayload.city_pincode}\n\n`;
+
+      msg += "* ORDER ITEMS:\n";
+      activeOrderPayload.items.forEach(i => {
+        const lineTotal = i.price * i.qty;
+        msg += `* ${i.title} (${i.orderType.toUpperCase()}) - ${i.qty} pcs @ Rs. ${i.price} = Rs. ${lineTotal}\n`;
+      });
+
+      msg += `\n* Subtotal: Rs. ${activeOrderPayload.subtotal}\n`;
+      if (activeOrderPayload.discount > 0) {
+        msg += `* Coupon Discount: -Rs. ${activeOrderPayload.discount}\n`;
+      }
+      msg += `* Total Paid (UPI): Rs. ${activeOrderPayload.final_total}\n\n`;
+      msg += "Please confirm order receipt and delivery dispatch!";
+
+      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+    }
+
+    function closeSuccessModal() {
+      clearInterval(cancelTimer);
+      document.getElementById("orderSuccessModal").classList.add("hidden");
     }
 
     // ORDERS FEED IN OWNER PORTAL
@@ -1264,12 +1363,17 @@
 
       list.innerHTML = liveOrders.map((ord, idx) => {
         const itemsSummary = (ord.items || []).map(i => `• ${i.title} (${i.qty} pcs @ ₹${i.price})`).join('<br>');
+        const isCancelled = ord.status === "CANCELLED";
+
         return `
-          <div class="bg-pink-50/70 p-3.5 rounded-2xl border border-pink-100 space-y-2 shadow-sm text-xs">
+          <div class="bg-pink-50/70 p-3.5 rounded-2xl border ${isCancelled ? 'border-red-300 opacity-75' : 'border-pink-100'} space-y-2 shadow-sm text-xs">
             <div class="flex items-center justify-between border-b border-pink-200/60 pb-1.5">
               <div>
                 <span class="font-black text-[#1A1316] text-sm">${ord.customer_name}</span>
                 <span class="text-stone-500 font-bold ml-1.5">(${ord.customer_phone})</span>
+                <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full ml-2 ${isCancelled ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800'}">
+                  ${ord.status || 'CONFIRMED'}
+                </span>
               </div>
               <span class="text-[10px] text-stone-400 font-semibold">${ord.timestamp || 'Recent'}</span>
             </div>
@@ -1286,7 +1390,7 @@
 
             <div class="flex items-center justify-between pt-1 border-t border-pink-200/60 font-bold">
               <span class="text-stone-500">Subtotal: ₹${ord.subtotal} ${ord.discount ? `(Disc: -₹${ord.discount})` : ''}</span>
-              <span class="text-sm font-black text-emerald-700">Total: ₹${ord.final_total}</span>
+              <span class="text-sm font-black ${isCancelled ? 'text-red-600 line-through' : 'text-emerald-700'}">Total: ₹${ord.final_total}</span>
             </div>
           </div>
         `;
