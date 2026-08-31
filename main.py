@@ -19,11 +19,10 @@ app.add_middleware(
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 STORE_URL = os.environ.get("STORE_URL", "https://insha-store.onrender.com")
 
-# TELEGRAM INSTANT NOTIFICATION CONFIG
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+# TELEGRAM ALERT CREDENTIALS FROM RENDER ENVIRONMENT
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 
-# Orders Database
 orders_db = []
 
 catalog_db = [
@@ -132,8 +131,11 @@ class OrderCreate(BaseModel):
     customer_phone: str
     delivery_address: str
     city_pincode: str
+    distance_km: Optional[float] = 0.0
     items: List[Any]
     subtotal: float
+    gst: Optional[float] = 0.0
+    delivery_fee: Optional[float] = 0.0
     discount: float
     final_total: float
     coupon_code: Optional[str] = ""
@@ -144,6 +146,7 @@ def send_instant_telegram_notification(order: dict):
     token = TELEGRAM_BOT_TOKEN
     chat_id = TELEGRAM_CHAT_ID
     if not token or not chat_id:
+        print("[Telegram Alert] Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID environment variable.")
         return
 
     items_text = ""
@@ -155,21 +158,27 @@ def send_instant_telegram_notification(order: dict):
         items_text += f"• {title} ({order_type}) x{qty} = Rs. {price * qty}\n"
 
     msg = (
-        f"🚨 *NEW ORDER RECEIVED!* 🚨\n\n"
+        f"🚨 *NEW STORE ORDER RECEIVED!* 🚨\n\n"
         f"🆔 *Order ID:* `{order.get('order_id')}`\n"
         f"👤 *Customer:* {order.get('customer_name')}\n"
         f"📞 *Phone:* {order.get('customer_phone')}\n"
-        f"📍 *Address:* {order.get('delivery_address')}, {order.get('city_pincode')}\n\n"
-        f"🛍️ *Items Ordered:*\n{items_text}\n"
-        f"💰 *Total Amount:* Rs. {order.get('final_total')}\n"
+        f"📍 *Delivery:* {order.get('delivery_address')}, {order.get('city_pincode')}\n"
+        f"🛵 *Distance:* ~{order.get('distance_km', 2.5)} km\n\n"
+        f"🛍️ *Items:*\n{items_text}\n"
+        f"💵 *Subtotal:* Rs. {order.get('subtotal')}\n"
+        f"🏷️ *GST (3%):* Rs. {order.get('gst', 0)}\n"
+        f"🚚 *Delivery Fee:* Rs. {order.get('delivery_fee', 0)}\n"
+        f"🎟️ *Discount:* -Rs. {order.get('discount', 0)}\n"
+        f"💰 *TOTAL AMOUNT PAID:* *Rs. {order.get('final_total')}*\n"
         f"⏰ *Time:* {order.get('timestamp')}"
     )
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     try:
-        requests.post(url, json={"chat_id": chat_id, "text": msg, "parse_mode": "Markdown"}, timeout=8)
+        res = requests.post(url, json={"chat_id": chat_id, "text": msg, "parse_mode": "Markdown"}, timeout=10)
+        print(f"[Telegram Alert] Sent. Status code: {res.status_code}, Response: {res.text}")
     except Exception as e:
-        print(f"Telegram dispatch error: {e}")
+        print(f"[Telegram Alert Error]: {e}")
 
 @app.get("/")
 def serve_home():
@@ -205,7 +214,7 @@ def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
         order_data["order_id"] = f"IB-{len(orders_db) + 1001}"
     orders_db.insert(0, order_data)
     
-    # Send instant push notification to Telegram
+    # Send instant push notification to your phone
     background_tasks.add_task(send_instant_telegram_notification, order_data)
     return {"success": True, "order": order_data}
 
@@ -223,21 +232,5 @@ def clear_all_orders():
 
 @app.api_route("/chat", methods=["GET", "POST"])
 async def chat_with_assistant(request: Request):
-    msg_text = ""
-    try:
-        data = await request.json()
-        if isinstance(data, dict):
-            if "message" in data:
-                msg_text = str(data["message"])
-            elif "query" in data and isinstance(data["query"], dict):
-                msg_text = str(data["query"].get("message", ""))
-            elif "text" in data:
-                msg_text = str(data["text"])
-    except Exception:
-        pass
-
-    if not msg_text:
-        msg_text = request.query_params.get("message") or request.query_params.get("query") or ""
-
     default_msg = "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you?"
     return {"reply": default_msg, "replies": [{"message": default_msg}]}
