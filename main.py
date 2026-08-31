@@ -2,13 +2,12 @@ from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Any
 import os
 import requests
 
 app = FastAPI(title="Insha Bangles & Purses API")
 
-# Enable CORS for frontend and external app requests
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,25 +17,10 @@ app.add_middleware(
 )
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-WHATSAPP_TOKEN = os.environ.get("WHATSAPP_TOKEN", "")
-WHATSAPP_PHONE_NUMBER_ID = os.environ.get("WHATSAPP_PHONE_NUMBER_ID", "")
-VERIFY_TOKEN = os.environ.get("WHATSAPP_VERIFY_TOKEN", "insha_secure_token_123")
 STORE_URL = os.environ.get("STORE_URL", "https://insha-store.onrender.com")
 
-SYSTEM_PROMPT = f"""
-You are the automated WhatsApp shopping assistant for 'Insha Bangles & Purses', a luxury bridal & festive boutique located in Dubagga, Hardoi Road, Lucknow.
-Shop & Product Details:
-1. Products: Handcrafted bridal velvet choodas, Kundan bangles, stone-embellished party clutches, bridal potlis, and everyday underclothes/innerwear.
-2. Standard Bangle Sizes: 2.4 (Small), 2.6 (Medium), 2.8 (Large), 2.10 (Extra Large).
-3. Pricing & Wholesale: Retail prices and wholesale rates with Minimum Order Quantity (MOQ: 6-12 pcs) are available.
-4. Offline Shop Timings: Open daily 10:00 AM – 10:00 PM in Dubagga, Lucknow.
-5. Online Store & Full Catalog Link: {STORE_URL}
-
-Guidelines:
-- Greet warmly in polite Hinglish or English matching the customer's language.
-- When customers ask for product availability, colors, or catalogs, provide concise, helpful details and invite them to explore the full live catalog at {STORE_URL}.
-- Keep replies clean, professional, and friendly.
-"""
+# In-memory orders database
+orders_db = []
 
 catalog_db = [
     {
@@ -44,9 +28,12 @@ catalog_db = [
         "title": "Royal Velvet Bridal Chooda Set",
         "description": "Handcrafted traditional bridal chooda with intricate stone work & velvet finish.",
         "category_name": "Bridal",
+        "categories": ["Bridal", "Festive"],
+        "original_price": 1600,
         "retail_price": 1250,
         "wholesale_price": 650,
         "min_wholesale_qty": 6,
+        "discount_pct": 22,
         "image_urls": ["https://images.unsplash.com/photo-1611591475152-4735eac870c2"],
         "stock_count": 50
     },
@@ -55,9 +42,12 @@ catalog_db = [
         "title": "Maharani Kundan Dulhan Bangles",
         "description": "Heavy Kundan and pearl studded bangle set for grand weddings.",
         "category_name": "Bridal",
+        "categories": ["Bridal", "Best Seller"],
+        "original_price": 1850,
         "retail_price": 1450,
         "wholesale_price": 780,
         "min_wholesale_qty": 6,
+        "discount_pct": 21,
         "image_urls": ["https://images.unsplash.com/photo-1535632066927-ab7c9ab60908"],
         "stock_count": 40
     },
@@ -66,20 +56,26 @@ catalog_db = [
         "title": "Velvet Festive Bangle Set (Pack of 24)",
         "description": "Rich multicolor festive velvet bangles with gold zari edging.",
         "category_name": "Festive",
+        "categories": ["Festive", "Best Seller"],
+        "original_price": 650,
         "retail_price": 450,
         "wholesale_price": 220,
         "min_wholesale_qty": 12,
+        "discount_pct": 30,
         "image_urls": ["https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6"],
         "stock_count": 100
     },
     {
         "id": "4",
-        "title": "Zari Embroidered Party Clutch",
+        "title": "Zari Embroidered Bridal Party Clutch",
         "description": "Premium golden zari stone clutch with detachable metal chain strap.",
         "category_name": "Purses & Clutches",
+        "categories": ["Purses & Clutches", "Bridal"],
+        "original_price": 1200,
         "retail_price": 890,
         "wholesale_price": 480,
         "min_wholesale_qty": 10,
+        "discount_pct": 25,
         "image_urls": ["https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d"],
         "stock_count": 30
     },
@@ -88,9 +84,12 @@ catalog_db = [
         "title": "Trending Matte Silk Everyday Bangles",
         "description": "Smooth textured durable daily wear bangles in 12 festive shades.",
         "category_name": "Best Seller",
+        "categories": ["Best Seller", "Festive"],
+        "original_price": 500,
         "retail_price": 350,
         "wholesale_price": 180,
         "min_wholesale_qty": 20,
+        "discount_pct": 30,
         "image_urls": ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"],
         "stock_count": 150
     },
@@ -99,9 +98,12 @@ catalog_db = [
         "title": "Premium Cotton Everyday Innerwear Set",
         "description": "Soft stretch breathable cotton innerwear essentials for all-day comfort.",
         "category_name": "Underclothes",
+        "categories": ["Underclothes"],
+        "original_price": 599,
         "retail_price": 399,
         "wholesale_price": 190,
         "min_wholesale_qty": 15,
+        "discount_pct": 33,
         "image_urls": ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a"],
         "stock_count": 80
     }
@@ -110,46 +112,53 @@ catalog_db = [
 class ProductCreate(BaseModel):
     title: str
     description: Optional[str] = ""
-    category_name: str
+    category_name: Optional[str] = ""
+    categories: Optional[List[str]] = []
     image_urls: List[str] = []
+    original_price: Optional[float] = None
     retail_price: float
     wholesale_price: Optional[float] = None
     min_wholesale_qty: Optional[int] = 10
+    discount_pct: Optional[int] = 0
     stock_count: Optional[int] = 100
+
+class OrderCreate(BaseModel):
+    customer_name: str
+    customer_phone: str
+    delivery_address: str
+    city_pincode: str
+    items: List[Any]
+    subtotal: float
+    discount: float
+    final_total: float
+    coupon_code: Optional[str] = ""
+    timestamp: Optional[str] = ""
 
 def generate_ai_reply(prompt_text: str) -> str:
     text_lower = prompt_text.lower()
-    
-    # Fast auto-recognition for catalog inquiries
     if any(k in text_lower for k in ["catalog", "catalogue", "all items", "rate list", "price list", "website"]):
         return (
-            "Namaste! 🙏 Welcome to Insha Bangles & Purses, Lucknow.\n\n"
-            f"✨ You can view our complete 2026 Bridal & Festive Collection with live retail & wholesale rates here:\n"
-            f"👉 {STORE_URL}\n\n"
-            "Feel free to reply with the items or sizes (2.4, 2.6, 2.8) you'd like to check for live stock!"
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses, Nakkhas, Lucknow.\n\n"
+            f"✨ You can browse our complete collection and wholesale rates online:\n👉 {STORE_URL}\n\n"
+            "Feel free to reply with any designs or sizes (2.4, 2.6, 2.8) you would like to order!"
         )
 
     if not GEMINI_API_KEY:
         return (
-            "Namaste! 🙏 Thank you for contacting Insha Bangles & Purses, Dubagga, Lucknow.\n\n"
-            f"Explore our latest collection and prices online:\n👉 {STORE_URL}\n\n"
-            "Our team will confirm item availability with you shortly!"
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses, In front of Chidiya Bazar, Nakkhas, Lucknow.\n\n"
+            f"Explore our latest collection and prices directly at:\n👉 {STORE_URL}\n\n"
+            "Our team will assist you with stock and dispatch details shortly!"
         )
 
     try:
         import google.generativeai as genai
         genai.configure(api_key=GEMINI_API_KEY)
         model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(f"{SYSTEM_PROMPT}\n\nCustomer Message: {prompt_text}\nAssistant Response:")
+        response = model.generate_content(f"You are the boutique shopping assistant for 'Insha Bangles & Purses' in Nakkhas, Lucknow. Store URL: {STORE_URL}. Help politely with bangles, clutches, and innerwear.\n\nCustomer: {prompt_text}\nResponse:")
         return response.text.strip()
     except Exception:
-        return (
-            "Namaste! 🙏 Welcome to Insha Bangles & Purses.\n\n"
-            f"You can view all bridal sets, purses, and innerwear directly at:\n👉 {STORE_URL}\n\n"
-            "Let us know which design or size you would like to book!"
-        )
+        return f"Namaste! 🙏 Welcome to Insha Bangles & Purses. Browse our catalog at {STORE_URL}!"
 
-# Routes
 @app.get("/")
 def serve_home():
     if os.path.exists("index.html"):
@@ -173,12 +182,21 @@ def delete_product(product_id: str):
     catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
     return {"success": True, "message": f"Product {product_id} deleted"}
 
-# Multi-format endpoint supporting both website frontend and AutoResponder for WA
+# Orders API
+@app.get("/orders")
+def get_orders():
+    return {"orders": orders_db}
+
+@app.post("/orders")
+def create_order(order: OrderCreate):
+    order_data = order.model_dump() if hasattr(order, "model_dump") else order.dict()
+    order_data["id"] = f"ORD-{len(orders_db) + 1001}"
+    orders_db.insert(0, order_data)
+    return {"success": True, "order": order_data}
+
 @app.api_route("/chat", methods=["GET", "POST"])
 async def chat_with_assistant(request: Request):
     msg_text = ""
-    
-    # 1. Parse JSON body (Website or AutoResponder POST)
     try:
         data = await request.json()
         if isinstance(data, dict):
@@ -191,7 +209,6 @@ async def chat_with_assistant(request: Request):
     except Exception:
         pass
 
-    # 2. Parse Query Params (GET requests / URL fallback)
     if not msg_text:
         msg_text = request.query_params.get("message") or request.query_params.get("query") or ""
 
@@ -200,55 +217,4 @@ async def chat_with_assistant(request: Request):
         return {"reply": default_msg, "replies": [{"message": default_msg}]}
 
     ai_reply = generate_ai_reply(msg_text)
-    
-    return {
-        "reply": ai_reply,
-        "replies": [
-            {"message": ai_reply}
-        ]
-    }
-
-# Webhook for Meta Cloud API (Optional fallback)
-@app.get("/webhook")
-def verify_webhook(request: Request):
-    params = dict(request.query_params)
-    mode = params.get("hub.mode")
-    token = params.get("hub.verify_token")
-    challenge = params.get("hub.challenge")
-
-    if mode == "subscribe" and token == VERIFY_TOKEN:
-        return Response(content=challenge, media_type="text/plain")
-    raise HTTPException(status_code=403, detail="Verification token mismatch")
-
-@app.post("/webhook")
-async def handle_whatsapp_incoming(request: Request):
-    data = await request.json()
-    try:
-        entry = data.get("entry", [])[0]
-        changes = entry.get("changes", [])[0]
-        value = changes.get("value", {})
-        messages = value.get("messages", [])
-
-        if messages:
-            msg = messages[0]
-            from_number = msg.get("from")
-            text_body = msg.get("text", {}).get("body", "")
-
-            if text_body and WHATSAPP_TOKEN and WHATSAPP_PHONE_NUMBER_ID:
-                ai_answer = generate_ai_reply(text_body)
-                url = f"https://graph.facebook.com/v19.0/{WHATSAPP_PHONE_NUMBER_ID}/messages"
-                headers = {
-                    "Authorization": f"Bearer {WHATSAPP_TOKEN}",
-                    "Content-Type": "application/json"
-                }
-                payload = {
-                    "messaging_product": "whatsapp",
-                    "to": from_number,
-                    "type": "text",
-                    "text": {"body": ai_answer}
-                }
-                requests.post(url, json=payload, headers=headers, timeout=10)
-    except Exception as e:
-        print(f"Webhook processing error: {e}")
-
-    return {"status": "success"}
+    return {"reply": ai_reply, "replies": [{"message": ai_reply}]}
