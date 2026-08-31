@@ -126,7 +126,7 @@
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
-      <!-- Category Navigation Pills -->
+      <!-- Category Pills -->
       <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
         <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
           👑 Royal Bridal Suite
@@ -222,7 +222,7 @@
           </h2>
           
           <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/90 leading-relaxed font-normal">
-            Handcrafted festive velvet bangle sets, daily wear metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Complete range of Baccha and adult sizes available.
+            Handcrafted festive velvet sets, daily metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Complete range of colors and sizes.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-3">
@@ -346,7 +346,7 @@
 
     </div>
 
-    <!-- 2. Secure Owner Dashboard View (with Add/Edit Product & Full Size Range) -->
+    <!-- 2. Secure Owner Dashboard View (with Color & Size Selectors) -->
     <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
@@ -383,7 +383,7 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add / Edit Product Form with Full Bangle & Underwear Sizing -->
+        <!-- SECTION 2: Add / Edit Product Form with Full Colors & Sizes -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -435,9 +435,55 @@
               </div>
             </div>
 
+            <!-- MULTI-COLOR PALETTE SELECTOR -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-stone-700">Available Color Variants (Select all shades in stock)</label>
+              <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100 text-xs">
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Red / Laal" class="colorCheckbox accent-red-600"> 🔴 Red (Laal)
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Maroon" class="colorCheckbox accent-rose-900"> 🍷 Maroon
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Gold / Golden" class="colorCheckbox accent-amber-500"> 🟡 Golden
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Green / Mehndi" class="colorCheckbox accent-emerald-600"> 🟢 Green
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Pink / Rani" class="colorCheckbox accent-pink-500"> 🌸 Rani Pink
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Navy Blue" class="colorCheckbox accent-blue-900"> 🔵 Navy Blue
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Sky Blue" class="colorCheckbox accent-sky-400"> 🩵 Sky Blue
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Yellow / Haldi" class="colorCheckbox accent-yellow-400"> 🌻 Yellow
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Orange" class="colorCheckbox accent-orange-500"> 🟠 Orange
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Purple / Velvet Plum" class="colorCheckbox accent-purple-600"> 🟣 Purple
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Black" class="colorCheckbox accent-stone-900"> ⚫ Black
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700">
+                  <input type="checkbox" value="Silver / White" class="colorCheckbox accent-stone-400"> ⚪ Silver
+                </label>
+                <label class="flex items-center gap-1.5 cursor-pointer font-semibold text-stone-700 col-span-3 sm:col-span-4">
+                  <input type="checkbox" value="Multicolor / Navratan" class="colorCheckbox accent-[#1A1316]"> 🌈 Multicolor / Navratan
+                </label>
+              </div>
+            </div>
+
             <!-- Bangle Sizes (Baccha & Chart Aligned) -->
             <div class="space-y-1.5">
-              <label class="block text-xs font-bold text-stone-700">Available Bangle Sizes (Select all available for this item)</label>
+              <label class="block text-xs font-bold text-stone-700">Available Bangle Sizes (Optional)</label>
               <div class="bg-pink-50/30 p-3 rounded-2xl border border-pink-100 space-y-2">
                 <div>
                   <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👶 Baccha / Kids Sizes</span>
@@ -455,7 +501,7 @@
                 </div>
 
                 <div>
-                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👑 Standard & Plus Sizes (From Chart)</span>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👑 Standard & Plus Sizes</span>
                   <div class="flex flex-wrap gap-2">
                     <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
                       <input type="checkbox" value="2-2 (2.125 in)" class="sizeCheckbox accent-[#1A1316]"> 2-2
@@ -488,7 +534,7 @@
 
             <!-- Ladies Underclothes Sizes -->
             <div class="space-y-1.5">
-              <label class="block text-xs font-bold text-stone-700">Available Ladies Underwear & Innerwear Sizes</label>
+              <label class="block text-xs font-bold text-stone-700">Available Ladies Underwear Sizes (Optional)</label>
               <div class="flex flex-wrap gap-2 bg-pink-50/30 p-2.5 rounded-2xl border border-pink-100">
                 <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
                   <input type="checkbox" value="S (28-30)" class="sizeCheckbox accent-[#1A1316]"> S (28-30)
@@ -627,7 +673,7 @@
           <span class="text-xl">📍</span>
           <div>
             <h3 class="font-cormorant font-bold text-lg text-[#F4D068]">Delivery Details</h3>
-            <p class="text-[10px] text-pink-200/80">Available exclusively across Lucknow</p>
+            <p class="text-[10px] text-pink-200/80">Delivering everywhere across Lucknow</p>
           </div>
         </div>
         <button onclick="closeCustomerAuthModal()" class="text-stone-400 hover:text-white text-lg font-bold">✕</button>
@@ -657,17 +703,12 @@
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block font-bold text-stone-700 mb-1">City *</label>
-            <input type="text" id="custCityInput" required readonly value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/20 border border-pink-200 rounded-xl text-stone-500 cursor-not-allowed">
+            <input type="text" id="custCityInput" required value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
           </div>
           <div>
-            <label class="block font-bold text-stone-700 mb-1">Lucknow Pincode (226xxx) *</label>
+            <label class="block font-bold text-stone-700 mb-1">Pincode *</label>
             <input type="text" id="custPincodeInput" oninput="estimateDistanceByPincode(this.value)" required placeholder="226003" maxlength="6" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
           </div>
-        </div>
-
-        <div id="serviceStatusBox" class="p-2.5 bg-pink-50/70 rounded-xl border border-pink-200/80 text-[11px] flex items-center justify-between">
-          <span class="text-stone-600 font-medium">Service Status:</span>
-          <span id="estimatedDistanceLabel" class="font-black text-[#1A1316]">~2.5 km (Local Nakkhas Hub)</span>
         </div>
 
         <button type="submit" id="saveDeliveryBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl hover:bg-stone-900 transition shadow-md border border-[#D4AF37]/50 mt-1">
@@ -783,7 +824,7 @@
     </div>
   </div>
 
-  <!-- Product Modal with Size Selector -->
+  <!-- Product Modal with Multi-Color & Multi-Size Selectors -->
   <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="relative">
@@ -797,9 +838,15 @@
           <p id="modalDesc" class="text-xs text-stone-600 mt-1 leading-relaxed">Product description</p>
         </div>
 
+        <!-- Dynamic Color Selector inside Modal -->
+        <div id="modalColorSection" class="space-y-1.5">
+          <label class="block text-xs font-bold text-stone-700">Choose Color Variant *</label>
+          <div id="modalColorPills" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
         <!-- Dynamic Size Selector inside Modal -->
         <div id="modalSizeSection" class="space-y-1.5">
-          <label class="block text-xs font-bold text-stone-700">Choose Size:</label>
+          <label class="block text-xs font-bold text-stone-700">Choose Size (Optional):</label>
           <div id="modalSizePills" class="flex flex-wrap gap-1.5"></div>
         </div>
         
@@ -850,7 +897,7 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
       <div class="bg-white border border-pink-100 text-[#1A1316] text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available across Lucknow with FREE shipping on orders above ₹999! How may I assist you with sizes or orders today?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available anywhere across Lucknow with FREE shipping on orders above ₹999! How may I assist you with colors, sizes, or orders today?
       </div>
     </div>
 
@@ -878,11 +925,11 @@
     let currentCustomer = JSON.parse(localStorage.getItem('insha_customer_user') || 'null');
     let pendingCartAction = null;
     let calculatedDistanceKm = 2.5;
-    let isServiceableArea = true;
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
     let preparedOrderPayload = null;
     let selectedModalSize = null;
+    let selectedModalColor = null;
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
       const R = 6371;
@@ -906,37 +953,13 @@
     }
 
     function estimateDistanceByPincode(pin) {
-      const box = document.getElementById("serviceStatusBox");
-      const label = document.getElementById("estimatedDistanceLabel");
-      const saveBtn = document.getElementById("saveDeliveryBtn");
-
       if (!pin || pin.length < 6) return;
       const p = String(pin).trim();
-
-      if (!p.startsWith("226")) {
-        isServiceableArea = false;
-        box.className = "p-2.5 bg-red-50 rounded-xl border border-red-200 text-[11px] flex items-center justify-between text-red-700 font-bold";
-        label.innerText = "❌ Service only available in Lucknow (226xxx)";
-        if (saveBtn) {
-          saveBtn.disabled = true;
-          saveBtn.classList.add("opacity-50", "cursor-not-allowed");
-        }
-        return;
-      }
-
-      isServiceableArea = true;
-      if (saveBtn) {
-        saveBtn.disabled = false;
-        saveBtn.classList.remove("opacity-50", "cursor-not-allowed");
-      }
 
       if (p === "226003" || p === "226004" || p === "226018") calculatedDistanceKm = 1.8;
       else if (p === "226017" || p === "226001" || p === "226019") calculatedDistanceKm = 4.2;
       else if (p === "226010" || p === "226016" || p === "226024") calculatedDistanceKm = 10.5;
       else calculatedDistanceKm = 6.5;
-
-      box.className = "p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-[11px] flex items-center justify-between text-emerald-800 font-bold";
-      label.innerText = `✓ Lucknow Serviceable (~${calculatedDistanceKm} km from Nakkhas)`;
     }
 
     function detectGPSLocation() {
@@ -945,18 +968,10 @@
       navigator.geolocation.getCurrentPosition((pos) => {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
-        const dist = calculateDistance(STORE_LAT, STORE_LNG, userLat, userLng);
-
-        if (dist > 35) {
-          alert("Your GPS indicates you are outside Lucknow. Delivery is currently limited to Lucknow only.");
-          return;
-        }
-
-        calculatedDistanceKm = dist;
+        calculatedDistanceKm = calculateDistance(STORE_LAT, STORE_LNG, userLat, userLng);
         document.getElementById("custAddressInput").value = `GPS Location (${userLat.toFixed(3)}, ${userLng.toFixed(3)})`;
-        document.getElementById("estimatedDistanceLabel").innerText = `~${calculatedDistanceKm} km from Store (Live GPS)`;
       }, () => {
-        alert("Unable to retrieve location. Please enter your Lucknow 226xxx pincode.");
+        alert("Unable to retrieve location. Please enter your Lucknow address.");
       });
     }
 
@@ -1001,12 +1016,6 @@
     function saveCustomerProfile(e) {
       e.preventDefault();
       const pin = document.getElementById("custPincodeInput").value.trim();
-
-      if (!pin.startsWith("226")) {
-        alert("Sorry! Delivery is currently restricted strictly to Lucknow (Pincode: 226xxx).");
-        return;
-      }
-
       estimateDistanceByPincode(pin);
 
       const profile = {
@@ -1023,7 +1032,7 @@
       updateAuthHeaderUI();
       closeCustomerAuthModal();
 
-      alert(`Delivery address saved! (Lucknow ~${calculatedDistanceKm} km)`);
+      alert(`Delivery address saved for ${profile.name}!`);
 
       if (typeof pendingCartAction === 'function') {
         const action = pendingCartAction;
@@ -1198,13 +1207,15 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    function addToCart(title, price, img, orderType = 'retail', moq = 1, chosenSize = null) {
-      if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq, chosenSize))) {
+    function addToCart(title, price, img, orderType = 'retail', moq = 1, chosenSize = null, chosenColor = null) {
+      if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq, chosenSize, chosenColor))) {
         return;
       }
 
+      const colorLabel = chosenColor ? ` [Color: ${chosenColor}]` : "";
       const sizeLabel = chosenSize ? ` (Size: ${chosenSize})` : "";
-      const displayTitle = `${title}${sizeLabel}`;
+      const displayTitle = `${title}${colorLabel}${sizeLabel}`;
+      
       const cartKey = `${displayTitle}_${orderType}`;
       const qtyToAdd = orderType === 'wholesale' ? (parseInt(moq) || 10) : 1;
       const existing = shoppingCart.find(i => i.cartKey === cartKey);
@@ -1220,6 +1231,7 @@
           orderType,
           moq: parseInt(moq) || 1,
           size: chosenSize || "Standard",
+          color: chosenColor || "Default",
           qty: qtyToAdd
         });
       }
@@ -1373,11 +1385,6 @@
     function openPaymentQRModal() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
       if (!requireCustomerLogin(() => openPaymentQRModal())) return;
-
-      if (!currentCustomer.pincode.startsWith("226")) {
-        alert("Sorry! Delivery is available only in Lucknow. Outstation orders cannot be placed.");
-        return;
-      }
 
       const { subtotal, gstAmount, deliveryFee, discountAmount, finalTotal } = calculateCartTotals();
       const currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
@@ -1597,9 +1604,11 @@
 
       let filtered = allProducts.filter(p => {
         const catStr = Array.isArray(p.categories) ? p.categories.join(' ') : (p.category_name || '');
+        const colorsStr = Array.isArray(p.colors) ? p.colors.join(' ') : '';
         const matchesQuery = query === "" || 
           (p.title || '').toLowerCase().includes(query) ||
           (p.description || '').toLowerCase().includes(query) ||
+          colorsStr.toLowerCase().includes(query) ||
           catStr.toLowerCase().includes(query);
 
         const matchesCategory = selectedCategory === "All" || 
@@ -1638,7 +1647,15 @@
       selectedModalSize = size;
     }
 
-    function openProductModal(title, retail, original, wholesale, moq, img, desc, category, discount, sizes = []) {
+    function selectColorOption(btn, color) {
+      document.querySelectorAll(".modalColorBtn").forEach(b => {
+        b.className = "modalColorBtn px-3 py-1.5 rounded-xl border border-pink-200 text-xs font-bold text-stone-700 hover:bg-pink-50 transition";
+      });
+      btn.className = "modalColorBtn px-3 py-1.5 rounded-xl border border-[#D4AF37] bg-[#1A1316] text-[#F4D068] text-xs font-black shadow-sm transition";
+      selectedModalColor = color;
+    }
+
+    function openProductModal(title, retail, original, wholesale, moq, img, desc, category, discount, sizes = [], colors = []) {
       document.getElementById("modalTitle").innerText = title;
       document.getElementById("modalRetail").innerText = "₹" + retail;
       
@@ -1654,7 +1671,28 @@
       document.getElementById("modalBadge").innerText = (discount ? `${discount}% OFF • ` : '') + (category || "Showcase");
       document.getElementById("modalImg").src = img;
 
-      // Render Size Selector inside modal
+      // Color Selector
+      const colorSection = document.getElementById("modalColorSection");
+      const colorPills = document.getElementById("modalColorPills");
+      colorPills.innerHTML = "";
+      selectedModalColor = null;
+
+      if (colors && colors.length > 0) {
+        colorSection.classList.remove("hidden");
+        colors.forEach((c, idx) => {
+          const isFirst = idx === 0;
+          if (isFirst) selectedModalColor = c;
+          colorPills.innerHTML += `
+            <button type="button" onclick="selectColorOption(this, '${c}')" class="modalColorBtn px-3 py-1.5 rounded-xl border text-xs font-bold transition ${isFirst ? 'border-[#D4AF37] bg-[#1A1316] text-[#F4D068] font-black' : 'border-pink-200 text-stone-700 hover:bg-pink-50'}">
+              ${c}
+            </button>
+          `;
+        });
+      } else {
+        colorSection.classList.add("hidden");
+      }
+
+      // Size Selector
       const sizeSection = document.getElementById("modalSizeSection");
       const sizePills = document.getElementById("modalSizePills");
       sizePills.innerHTML = "";
@@ -1683,7 +1721,7 @@
         document.getElementById("modalWholesale").innerText = `₹${wsPrice}/pc (Min: ${wsMoq})`;
         document.getElementById("modalAddWholesaleBtn").classList.remove("hidden");
         document.getElementById("modalAddWholesaleBtn").onclick = () => { 
-          addToCart(title, wsPrice, img, 'wholesale', wsMoq, selectedModalSize); 
+          addToCart(title, wsPrice, img, 'wholesale', wsMoq, selectedModalSize, selectedModalColor); 
           closeProductModal(); 
         };
       } else {
@@ -1692,7 +1730,7 @@
       }
 
       document.getElementById("modalAddRetailBtn").onclick = () => { 
-        addToCart(title, retail, img, 'retail', 1, selectedModalSize); 
+        addToCart(title, retail, img, 'retail', 1, selectedModalSize, selectedModalColor); 
         closeProductModal(); 
       };
       document.getElementById("productModal").classList.remove("hidden");
@@ -1753,10 +1791,11 @@
       const wsPrice = parseFloat(p.wholesale_price) || 0;
       const wsMoq = parseInt(p.min_wholesale_qty) || 10;
       const sizesJson = JSON.stringify(p.sizes || []).replace(/'/g, "\\'");
+      const colorsJson = JSON.stringify(p.colors || []).replace(/'/g, "\\'");
 
       return `
         <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
-          <div onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" class="cursor-pointer">
+          <div onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson}, ${colorsJson})" class="cursor-pointer">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
               
@@ -1774,7 +1813,14 @@
             <div class="p-3.5 space-y-1.5">
               <h3 class="font-cormorant font-bold text-sm sm:text-base text-[#1A1316] line-clamp-1">${p.title}</h3>
               <p class="text-[11px] text-stone-500 line-clamp-2 leading-relaxed">${p.description || 'Festive handcrafted boutique collection piece'}</p>
-              <div class="pt-2">
+              
+              ${p.colors && p.colors.length ? `
+                <div class="flex items-center gap-1 text-[10px] text-[#A64B74] font-semibold truncate pt-1">
+                  <span>🎨 ${p.colors.length} Colors Available</span>
+                </div>
+              ` : ''}
+
+              <div class="pt-1.5">
                 <div class="flex items-baseline gap-1.5">
                   <span class="text-sm sm:text-base font-black text-[#1A1316]">₹${retailPrice}</span>
                   ${origPrice > retailPrice ? `<span class="text-[11px] text-stone-400 line-through font-semibold">₹${origPrice}</span>` : ''}
@@ -1792,13 +1838,13 @@
           <div class="p-3 pt-0 flex flex-col gap-1.5">
             <div class="flex gap-1.5">
               <button 
-                onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" 
+                onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson}, ${colorsJson})" 
                 class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[10px] font-bold py-1.5 rounded-xl transition">
                 + Retail
               </button>
               ${wsPrice > 0 ? `
                 <button 
-                  onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" 
+                  onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson}, ${colorsJson})" 
                   class="flex-1 bg-[#1A1316] hover:bg-stone-900 text-[#F4D068] text-[10px] font-bold py-1.5 rounded-xl border border-[#D4AF37]/40 transition">
                   + Bulk (${wsMoq}pc)
                 </button>
@@ -1860,6 +1906,7 @@
       allProducts.forEach((p, idx) => {
         const prodId = p.id || `item-${idx}`;
         const catText = Array.isArray(p.categories) ? p.categories.join(', ') : (p.category_name || 'Boutique');
+        const colorCount = (p.colors && p.colors.length) ? `(${p.colors.length} colors)` : '';
         const sizeCount = (p.sizes && p.sizes.length) ? `(${p.sizes.length} sizes)` : '';
 
         list.innerHTML += `
@@ -1868,7 +1915,7 @@
               <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-11 h-11 rounded-xl object-cover flex-shrink-0 bg-white">
               <div class="truncate">
                 <p class="text-xs font-bold text-[#1A1316] truncate">${p.title}</p>
-                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} | ${catText} ${sizeCount}</p>
+                <p class="text-[10px] text-stone-500">₹${p.retail_price} | ${catText} ${colorCount} ${sizeCount}</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5 flex-shrink-0">
@@ -1912,6 +1959,11 @@
         }
       });
 
+      // Check Colors
+      document.querySelectorAll(".colorCheckbox").forEach(cb => {
+        cb.checked = Array.isArray(prod.colors) && prod.colors.includes(cb.value);
+      });
+
       // Check Sizes
       document.querySelectorAll(".sizeCheckbox").forEach(cb => {
         cb.checked = Array.isArray(prod.sizes) && prod.sizes.includes(cb.value);
@@ -1948,6 +2000,11 @@
       });
       if (selectedCategories.length === 0) selectedCategories.push("Daily Wear");
 
+      const selectedColors = [];
+      document.querySelectorAll(".colorCheckbox:checked").forEach(cb => {
+        selectedColors.push(cb.value);
+      });
+
       const selectedSizes = [];
       document.querySelectorAll(".sizeCheckbox:checked").forEach(cb => {
         selectedSizes.push(cb.value);
@@ -1962,6 +2019,7 @@
         description: document.getElementById("pDesc").value,
         category_name: selectedCategories.join(', '),
         categories: selectedCategories,
+        colors: selectedColors,
         sizes: selectedSizes,
         image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
         original_price: origPriceVal,
@@ -1973,11 +2031,9 @@
       };
 
       if (editingId) {
-        // Update existing
         const index = allProducts.findIndex(p => String(p.id) === String(editingId));
         if (index !== -1) allProducts[index] = productData;
       } else {
-        // Add new
         allProducts.unshift(productData);
       }
 
@@ -1993,7 +2049,7 @@
         console.log("Item saved locally.");
       }
 
-      alert(editingId ? "Product updated successfully!" : "Product published successfully with sizes!");
+      alert(editingId ? "Product updated successfully!" : "Product published successfully with colors and sizes!");
       resetProductForm();
       switchTab('store');
       renderAllSections();
