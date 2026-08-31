@@ -24,10 +24,6 @@
     .hero-gradient {
       background: radial-gradient(circle at 85% 15%, #4A1733 0%, #200E19 55%, #10060C 100%);
     }
-    .logo-ring {
-      background: radial-gradient(circle, #FCE8F0 0%, #F5C2D5 100%);
-      border: 2px solid #D4AF37;
-    }
     .section-card {
       background: #FFFFFF;
       border: 1px solid rgba(226, 178, 199, 0.45);
@@ -81,19 +77,14 @@
     <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — FREE DELIVERY ON ORDERS > ₹999 ACROSS LUCKNOW ✨</span>
   </div>
 
-  <!-- Header -->
+  <!-- Header with Official Insha Crest Logo -->
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
       <!-- Brand Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
-        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
-          <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
-            <path d="M35 32 L40 22 L50 28 L60 22 L65 32 Z" fill="#D4AF37" stroke="#1A1316" stroke-width="1.5" />
-            <circle cx="50" cy="52" r="22" fill="#1A1316" stroke="#D4AF37" stroke-width="2.5" />
-            <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-weight="900" font-size="17" fill="#F4D068" text-anchor="middle">IB</text>
-            <path d="M22 62 Q35 70 50 68 Q65 70 78 62" fill="none" stroke="#D4AF37" stroke-width="2" />
-          </svg>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#D4AF37] shadow-md bg-black flex items-center justify-center">
+          <img src="/logo.png" alt="Insha Bangles & Purses" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1C1418/D4AF37?text=IB'">
         </div>
         
         <div>
@@ -346,7 +337,7 @@
 
     </div>
 
-    <!-- 2. Secure Owner Dashboard View (with Full Color & Size Suites) -->
+    <!-- 2. Secure Owner Dashboard View -->
     <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
@@ -383,7 +374,7 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add / Edit Product Form -->
+        <!-- SECTION 2: Add / Edit Product Form with Full Colors & Sizes -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -435,7 +426,7 @@
               </div>
             </div>
 
-            <!-- 1. EXHAUSTIVE BANGLE COLOR PALETTE (28+ SHADES) -->
+            <!-- 1. EXHAUSTIVE BANGLE COLOR PALETTE -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-stone-700">🎨 Comprehensive Bangle & Accessory Colors</label>
               <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-3">
@@ -503,7 +494,7 @@
               </div>
             </div>
 
-            <!-- 2. DEDICATED LADIES UNDERGARMENTS COLOR SUITE (14+ SHADES) -->
+            <!-- 2. DEDICATED LADIES UNDERGARMENTS COLOR SUITE -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-stone-700">👙 Dedicated Ladies Undergarments & Innerwear Colors</label>
               <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-2">
@@ -704,7 +695,7 @@
 
   </main>
 
-  <!-- CUSTOMER LOGIN & DELIVERY MODAL -->
+  <!-- CUSTOMER LOGIN & DELIVERY MODAL (CITY PERMANENTLY LOCKED TO LUCKNOW) -->
   <div id="customerAuthModal" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -742,7 +733,8 @@
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block font-bold text-stone-700 mb-1">City *</label>
-            <input type="text" id="custCityInput" required value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+            <!-- PERMANENTLY LOCKED & UNCHANGEABLE -->
+            <input type="text" id="custCityInput" value="Lucknow" readonly tabindex="-1" class="w-full text-xs font-bold px-3.5 py-2.5 bg-pink-50/30 border border-pink-200 rounded-xl text-stone-700 cursor-not-allowed select-none focus:outline-none">
           </div>
           <div>
             <label class="block font-bold text-stone-700 mb-1">Pincode *</label>
@@ -921,11 +913,13 @@
     <span>✨ AI Shopping Buddy</span>
   </button>
 
-  <!-- AI Drawer -->
+  <!-- AI Drawer with Official Logo -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 rounded-full logo-ring flex items-center justify-center text-[#1A1316] text-xs font-cormorant font-black">IB</div>
+        <div class="w-9 h-9 rounded-full overflow-hidden flex-shrink-0 border border-[#D4AF37] bg-black flex items-center justify-center">
+          <img src="/logo.png" alt="IB" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1C1418/D4AF37?text=IB'">
+        </div>
         <div>
           <h3 class="text-base font-cormorant font-bold text-[#F4D068]">Insha AI Shopping Buddy</h3>
           <p class="text-[10px] text-pink-200/80">English & Hindi Shopping Guide</p>
@@ -1028,7 +1022,7 @@
         icon.innerText = "✓";
         text.innerText = currentCustomer.name.split(' ')[0];
         if (summaryName) summaryName.innerText = `Deliver to: ${currentCustomer.name} (${currentCustomer.phone})`;
-        if (summaryAddr) summaryAddr.innerText = `${currentCustomer.address}, ${currentCustomer.city} - ${currentCustomer.pincode}`;
+        if (summaryAddr) summaryAddr.innerText = `${currentCustomer.address}, Lucknow - ${currentCustomer.pincode}`;
       } else {
         icon.innerText = "👤";
         text.innerText = "Login";
@@ -1961,7 +1955,6 @@
       });
     }
 
-    // OWNER INVENTORY WITH EDIT & DELETE
     function renderOwnerInventory() {
       const list = document.getElementById("ownerInventoryList");
       const badge = document.getElementById("inventoryCountBadge");
@@ -2022,7 +2015,6 @@
         document.getElementById("imgPreviewBox").classList.remove("hidden");
       }
 
-      // Check Categories
       document.querySelectorAll(".categoryCheckbox").forEach(cb => {
         if (Array.isArray(prod.categories)) {
           cb.checked = prod.categories.includes(cb.value);
@@ -2031,12 +2023,10 @@
         }
       });
 
-      // Check Built-in Colors
       document.querySelectorAll(".colorCheckbox:not(.customColorCheck)").forEach(cb => {
         cb.checked = Array.isArray(prod.colors) && prod.colors.includes(cb.value);
       });
 
-      // Restore Custom Colors if any
       customColorsList = [];
       if (Array.isArray(prod.colors)) {
         prod.colors.forEach(col => {
@@ -2046,7 +2036,6 @@
       }
       renderCustomColorChips();
 
-      // Check Sizes
       document.querySelectorAll(".sizeCheckbox").forEach(cb => {
         cb.checked = Array.isArray(prod.sizes) && prod.sizes.includes(cb.value);
       });
