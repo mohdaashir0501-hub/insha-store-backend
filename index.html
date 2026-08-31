@@ -669,7 +669,7 @@
       </div>
 
       <div class="space-y-2 pt-2">
-        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-3 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
+        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
           🚀 Open in UPI App (Mobile)
         </a>
         <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold block mx-auto pt-1">Done / Close</button>
@@ -1161,7 +1161,7 @@
         final_total: finalTotal,
         coupon_code: appliedCoupon ? appliedCoupon.code : "",
         status: "CONFIRMED",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
       // 1. Post to Owner Portal & Cache once
