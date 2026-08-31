@@ -151,19 +151,18 @@ def generate_ai_receipt_text(order: dict) -> str:
         title = item.get("title", "Item")
         qty = item.get("qty", 1)
         price = item.get("price", 0)
-        items_text += f"  • {title} (x{qty}) - Rs. {price * qty}\n"
+        items_text += f"  * {title} (x{qty}) - Rs. {price * qty}\n"
 
-    # AI crafted sweet message
     receipt_msg = (
         f"Dear {cust_name},\n\n"
         f"Thank you so much for shopping with *Insha Bangles & Purses*! ✨🌸\n\n"
-        f"We are delighted to confirm your order (*{order_id}*). Our artisans are preparing your package with utmost love and care.\n\n"
+        f"We are delighted to confirm your order (*{order_id}*). Our team is preparing your package with utmost care and love.\n\n"
         f"* DELIVERY DETAILS:\n"
         f"  Address: {address}, {city_pin}\n\n"
         f"* ITEMS ORDERED:\n{items_text}\n"
-        f"💰 *Total Paid:* Rs. {final_total}\n\n"
-        f"May your festive occasions and everyday moments sparkle with elegance and happiness! 💫\n\n"
-        f"Warmest regards,\n"
+        f"* Total Amount: Rs. {final_total}\n\n"
+        f"May your festive celebrations and everyday moments sparkle with timeless beauty and elegance! 💫\n\n"
+        f"With warm regards,\n"
         f"*Insha Bangles & Purses*\n"
         f"In front of Chidiya Bazar, Nakkhas, Lucknow 💐"
     )
@@ -176,7 +175,6 @@ def send_background_whatsapp_receipt(order_data: dict):
 
     msg_body = generate_ai_receipt_text(order_data)
     
-    # Direct Cloud API dispatch if configured
     if WHATSAPP_API_TOKEN and WHATSAPP_PHONE_ID:
         url = f"https://graph.facebook.com/v19.0/{WHATSAPP_PHONE_ID}/messages"
         headers = {
@@ -195,6 +193,31 @@ def send_background_whatsapp_receipt(order_data: dict):
             print(f"Direct API push error: {e}")
     else:
         print(f"Receipt generated for {phone_clean}:\n{msg_body}")
+
+def generate_ai_reply(prompt_text: str) -> str:
+    text_lower = prompt_text.lower()
+    if any(k in text_lower for k in ["catalog", "catalogue", "all items", "rate list", "price list", "website"]):
+        return (
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses, Nakkhas, Lucknow.\n\n"
+            f"✨ You can browse our complete collection and wholesale rates online:\n👉 {STORE_URL}\n\n"
+            "Feel free to reply with any designs or sizes (2.4, 2.6, 2.8) you would like to order!"
+        )
+
+    if not GEMINI_API_KEY:
+        return (
+            "Namaste! 🙏 Welcome to Insha Bangles & Purses, In front of Chidiya Bazar, Nakkhas, Lucknow.\n\n"
+            f"Explore our latest collection and prices directly at:\n👉 {STORE_URL}\n\n"
+            "Our team will assist you with stock and dispatch details shortly!"
+        )
+
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        response = model.generate_content(f"You are the boutique assistant for 'Insha Bangles & Purses' in Nakkhas, Lucknow. Store URL: {STORE_URL}. Help politely with bangles, clutches, and innerwear.\n\nCustomer: {prompt_text}\nResponse:")
+        return response.text.strip()
+    except Exception:
+        return f"Namaste! 🙏 Welcome to Insha Bangles & Purses. Browse our catalog at {STORE_URL}!"
 
 @app.get("/")
 def serve_home():
@@ -219,7 +242,7 @@ def delete_product(product_id: str):
     catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
     return {"success": True, "message": f"Product {product_id} deleted"}
 
-# Orders API with Background Dispatch
+# Orders API & Deletion
 @app.get("/orders")
 def get_orders():
     return {"orders": orders_db}
@@ -229,12 +252,9 @@ def create_order(order: OrderCreate, background_tasks: BackgroundTasks):
     order_data = order.model_dump() if hasattr(order, "model_dump") else order.dict()
     if not order_data.get("order_id"):
         order_data["order_id"] = f"IB-{len(orders_db) + 1001}"
-    
     orders_db.insert(0, order_data)
     
-    # Auto-dispatch receipt to customer's WhatsApp in the background
     background_tasks.add_task(send_background_whatsapp_receipt, order_data)
-    
     return {"success": True, "order": order_data}
 
 @app.delete("/orders/{order_id}")
@@ -271,4 +291,5 @@ async def chat_with_assistant(request: Request):
         default_msg = "Namaste! Welcome to Insha Bangles & Purses Lucknow. How may we assist you?"
         return {"reply": default_msg, "replies": [{"message": default_msg}]}
 
-    return {"reply": default_msg, "replies": [{"message": default_msg}]}
+    ai_reply = generate_ai_reply(msg_text)
+    return {"reply": ai_reply, "replies": [{"message": ai_reply}]}
