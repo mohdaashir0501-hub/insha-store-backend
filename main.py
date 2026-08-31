@@ -156,7 +156,7 @@ def generate_ai_reply(prompt_text: str) -> str:
         import google.generativeai as genai
         genai.configure(api_key=GEMINI_API_KEY)
         model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(f"You are the boutique shopping assistant for 'Insha Bangles & Purses' in Nakkhas, Lucknow. Store URL: {STORE_URL}. Help politely with bangles, clutches, and innerwear.\n\nCustomer: {prompt_text}\nResponse:")
+        response = model.generate_content(f"You are the boutique assistant for 'Insha Bangles & Purses' in Nakkhas, Lucknow. Store URL: {STORE_URL}. Help politely with bangles, clutches, and innerwear.\n\nCustomer: {prompt_text}\nResponse:")
         return response.text.strip()
     except Exception:
         return f"Namaste! 🙏 Welcome to Insha Bangles & Purses. Browse our catalog at {STORE_URL}!"
@@ -184,7 +184,7 @@ def delete_product(product_id: str):
     catalog_db = [p for p in catalog_db if str(p.get("id")) != str(product_id)]
     return {"success": True, "message": f"Product {product_id} deleted"}
 
-# Orders API
+# Orders API & Deletion
 @app.get("/orders")
 def get_orders():
     return {"orders": orders_db}
@@ -196,6 +196,18 @@ def create_order(order: OrderCreate):
         order_data["order_id"] = f"IB-{len(orders_db) + 1001}"
     orders_db.insert(0, order_data)
     return {"success": True, "order": order_data}
+
+@app.delete("/orders/{order_id}")
+def delete_single_order(order_id: str):
+    global orders_db
+    orders_db = [o for o in orders_db if str(o.get("order_id")) != str(order_id)]
+    return {"success": True, "message": f"Order {order_id} deleted"}
+
+@app.delete("/orders")
+def clear_all_orders():
+    global orders_db
+    orders_db = []
+    return {"success": True, "message": "All orders cleared"}
 
 @app.put("/orders/{order_id}/cancel")
 def cancel_order(order_id: str):
