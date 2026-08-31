@@ -19,7 +19,7 @@ app.add_middleware(
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 STORE_URL = os.environ.get("STORE_URL", "https://insha-store.onrender.com")
 
-# In-memory orders database
+# Orders Database
 orders_db = []
 
 catalog_db = [
@@ -53,10 +53,10 @@ catalog_db = [
     },
     {
         "id": "3",
-        "title": "Velvet Festive Bangle Set (Pack of 24)",
-        "description": "Rich multicolor festive velvet bangles with gold zari edging.",
-        "category_name": "Festive",
-        "categories": ["Festive", "Best Seller"],
+        "title": "Red Metal Chudi & Velvet Set (Pack of 24)",
+        "description": "Rich red daily wear metal chudis with gold shimmer finish.",
+        "category_name": "Daily Wear",
+        "categories": ["Daily Wear", "Festive"],
         "original_price": 650,
         "retail_price": 450,
         "wholesale_price": 220,
@@ -83,8 +83,8 @@ catalog_db = [
         "id": "5",
         "title": "Trending Matte Silk Everyday Bangles",
         "description": "Smooth textured durable daily wear bangles in 12 festive shades.",
-        "category_name": "Best Seller",
-        "categories": ["Best Seller", "Festive"],
+        "category_name": "Daily Wear",
+        "categories": ["Daily Wear", "Best Seller"],
         "original_price": 500,
         "retail_price": 350,
         "wholesale_price": 180,
@@ -123,6 +123,7 @@ class ProductCreate(BaseModel):
     stock_count: Optional[int] = 100
 
 class OrderCreate(BaseModel):
+    order_id: Optional[str] = ""
     customer_name: str
     customer_phone: str
     delivery_address: str
@@ -132,6 +133,7 @@ class OrderCreate(BaseModel):
     discount: float
     final_total: float
     coupon_code: Optional[str] = ""
+    status: Optional[str] = "CONFIRMED"
     timestamp: Optional[str] = ""
 
 def generate_ai_reply(prompt_text: str) -> str:
@@ -190,9 +192,18 @@ def get_orders():
 @app.post("/orders")
 def create_order(order: OrderCreate):
     order_data = order.model_dump() if hasattr(order, "model_dump") else order.dict()
-    order_data["id"] = f"ORD-{len(orders_db) + 1001}"
+    if not order_data.get("order_id"):
+        order_data["order_id"] = f"IB-{len(orders_db) + 1001}"
     orders_db.insert(0, order_data)
     return {"success": True, "order": order_data}
+
+@app.put("/orders/{order_id}/cancel")
+def cancel_order(order_id: str):
+    for ord in orders_db:
+        if ord.get("order_id") == order_id:
+            ord["status"] = "CANCELLED"
+            return {"success": True, "message": f"Order {order_id} cancelled"}
+    return {"success": False, "message": "Order not found"}
 
 @app.api_route("/chat", methods=["GET", "POST"])
 async def chat_with_assistant(request: Request):
