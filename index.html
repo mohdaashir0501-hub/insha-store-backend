@@ -122,7 +122,7 @@
     </div>
   </header>
 
-  <!-- Sticky Section & Filter Bar -->
+  <!-- Sticky Section Navigation -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
@@ -208,7 +208,6 @@
       <!-- Hero Banner -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-2xl space-y-4">
-          
           <div class="flex flex-wrap items-center gap-2">
             <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[10px] font-extrabold uppercase tracking-[0.2em]">
               <span id="heroBadgeText">👑 Exclusive Bridal & Wholesale Hub</span>
@@ -223,7 +222,7 @@
           </h2>
           
           <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/90 leading-relaxed font-normal">
-            Handcrafted festive velvet bangle sets, daily wear metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Express delivery across Lucknow.
+            Handcrafted festive velvet bangle sets, daily wear metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Complete range of Baccha and adult sizes available.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-3">
@@ -269,7 +268,7 @@
               <span class="text-2xl">💫</span>
               <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Daily Wear & Everyday Bangles</h2>
             </div>
-            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Red metal chudis, smooth matte bangles, daily glass sets & lightweight essentials</p>
+            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Red metal chudis, smooth matte bangles, daily glass sets & Baccha kids sizes</p>
           </div>
         </div>
         <div id="dailywearGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
@@ -308,7 +307,7 @@
               <span class="text-2xl">👗</span>
               <h2 class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#1A1316] tracking-wide">Underclothes & Innerwear</h2>
             </div>
-            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Premium comfortable undergarments, soft daily essentials & innerwear sets</p>
+            <p class="text-xs text-[#A64B74] font-medium mt-0.5">Premium comfortable undergarments, soft daily essentials (S to 2XL sizes)</p>
           </div>
         </div>
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
@@ -347,7 +346,7 @@
 
     </div>
 
-    <!-- 2. Secure Owner Dashboard View -->
+    <!-- 2. Secure Owner Dashboard View (with Add/Edit Product & Full Size Range) -->
     <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
@@ -384,22 +383,28 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add Product Form -->
+        <!-- SECTION 2: Add / Edit Product Form with Full Bangle & Underwear Sizing -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-lg bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-sm">🛍️</div>
-              <h2 class="text-lg font-bold text-[#1A1316]">Add Item to Store</h2>
+              <div class="w-8 h-8 rounded-lg bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-sm" id="formHeaderIcon">🛍️</div>
+              <h2 class="text-lg font-bold text-[#1A1316]" id="formHeaderTitle">Add Item to Store</h2>
             </div>
-            <button onclick="lockOwnerDashboard()" class="text-xs text-stone-400 hover:text-red-500 font-bold">Lock 🔒</button>
+            <div class="flex items-center gap-2">
+              <button type="button" id="cancelEditBtn" onclick="resetProductForm()" class="hidden text-xs text-stone-400 hover:text-stone-700 font-bold">Cancel Edit</button>
+              <button onclick="lockOwnerDashboard()" class="text-xs text-stone-400 hover:text-red-500 font-bold">Lock 🔒</button>
+            </div>
           </div>
           
-          <form onsubmit="addProduct(event)" class="space-y-4">
+          <form onsubmit="saveProduct(event)" class="space-y-4">
+            <input type="hidden" id="editingProductId" value="">
+
             <div>
               <label class="block text-xs font-bold text-stone-700 mb-1">Product Title</label>
               <input type="text" id="pTitle" required placeholder="e.g. Red Metal chudi / Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
             </div>
 
+            <!-- Categories -->
             <div>
               <label class="block text-xs font-bold text-stone-700 mb-1.5">Assign to Categories & Sections (Select all that apply)</label>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100">
@@ -426,6 +431,82 @@
                 <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
                   <input type="checkbox" value="Underclothes" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
                   <span>👗 Underclothes</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Bangle Sizes (Baccha & Chart Aligned) -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-stone-700">Available Bangle Sizes (Select all available for this item)</label>
+              <div class="bg-pink-50/30 p-3 rounded-2xl border border-pink-100 space-y-2">
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👶 Baccha / Kids Sizes</span>
+                  <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="1-12 (Kids)" class="sizeCheckbox accent-[#1A1316]"> 1-12
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="1-14 (Kids)" class="sizeCheckbox accent-[#1A1316]"> 1-14
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-0 (Kids)" class="sizeCheckbox accent-[#1A1316]"> 2-0
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="text-[10px] font-bold text-[#A64B74] uppercase tracking-wider block mb-1">👑 Standard & Plus Sizes (From Chart)</span>
+                  <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-2 (2.125 in)" class="sizeCheckbox accent-[#1A1316]"> 2-2
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-4 (2.250 in)" class="sizeCheckbox accent-[#1A1316]"> 2-4
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-6 (2.375 in)" class="sizeCheckbox accent-[#1A1316]"> 2-6
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-8 (2.500 in)" class="sizeCheckbox accent-[#1A1316]"> 2-8
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-10 (2.625 in)" class="sizeCheckbox accent-[#1A1316]"> 2-10
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-12 (2.750 in)" class="sizeCheckbox accent-[#1A1316]"> 2-12
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="2-14 (2.875 in)" class="sizeCheckbox accent-[#1A1316]"> 2-14
+                    </label>
+                    <label class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                      <input type="checkbox" value="3-0 (3.000 in)" class="sizeCheckbox accent-[#1A1316]"> 3-0
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ladies Underclothes Sizes -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold text-stone-700">Available Ladies Underwear & Innerwear Sizes</label>
+              <div class="flex flex-wrap gap-2 bg-pink-50/30 p-2.5 rounded-2xl border border-pink-100">
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="S (28-30)" class="sizeCheckbox accent-[#1A1316]"> S (28-30)
+                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="M (32-34)" class="sizeCheckbox accent-[#1A1316]"> M (32-34)
+                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="L (36-38)" class="sizeCheckbox accent-[#1A1316]"> L (36-38)
+                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="XL (40-42)" class="sizeCheckbox accent-[#1A1316]"> XL (40-42)
+                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="2XL (44-46)" class="sizeCheckbox accent-[#1A1316]"> 2XL (44-46)
+                </label>
+                <label class="flex items-center gap-1.5 bg-white px-2.5 py-1 rounded-lg border border-pink-200 text-xs font-semibold cursor-pointer">
+                  <input type="checkbox" value="Free Size" class="sizeCheckbox accent-[#1A1316]"> Free Size
                 </label>
               </div>
             </div>
@@ -485,7 +566,7 @@
             </div>
 
             <button type="submit" id="addBtn" class="w-full bg-[#1A1316] text-[#F4D068] text-sm font-bold py-3.5 rounded-xl hover:bg-stone-900 transition flex items-center justify-center gap-2 border border-[#D4AF37]/50">
-              <span>✨ Publish to Store Catalog</span>
+              <span id="submitBtnText">✨ Publish to Store Catalog</span>
             </button>
           </form>
         </div>
@@ -524,13 +605,13 @@
           </div>
         </div>
 
-        <!-- SECTION 4: Listed Inventory Manager -->
+        <!-- SECTION 4: Listed Inventory Manager with EDIT & DELETE -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-3 border-b border-pink-100 pb-3">
             <h3 class="text-sm font-bold text-[#1A1316]">Manage Listed Items</h3>
             <span id="inventoryCountBadge" class="text-[11px] font-bold text-[#A64B74] bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">0 items</span>
           </div>
-          <div id="ownerInventoryList" class="space-y-2 max-h-72 overflow-y-auto"></div>
+          <div id="ownerInventoryList" class="space-y-2 max-h-80 overflow-y-auto"></div>
         </div>
 
       </div>
@@ -596,7 +677,7 @@
     </div>
   </div>
 
-  <!-- Shopping Cart Modal with Free Delivery Deal (> ₹999) & GST -->
+  <!-- Shopping Cart Modal -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200 flex flex-col max-h-[90vh]">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -611,7 +692,6 @@
 
       <div class="p-4 bg-white border-t border-pink-100 space-y-2.5">
         
-        <!-- Live Delivery Address Bar -->
         <div id="cartCustomerAddressBar" class="bg-stone-50 p-2.5 rounded-2xl border border-stone-200 text-xs flex items-center justify-between">
           <div class="truncate">
             <span class="font-bold text-[#1A1316] block truncate" id="cartCustSummaryName">Deliver to: Guest</span>
@@ -620,13 +700,11 @@
           <button onclick="openCustomerAuthModal()" class="text-[#A64B74] font-bold text-[11px] underline flex-shrink-0 ml-2">Edit</button>
         </div>
 
-        <!-- FREE DELIVERY PROMO DEAL BADGE (> ₹999) -->
         <div id="freeDeliveryDealBanner" class="p-2 bg-emerald-50 border border-emerald-300 rounded-xl text-[11px] font-bold text-emerald-800 flex items-center justify-between shadow-sm">
           <span id="freeDeliveryProgressText">🎉 Deal Active: Orders > ₹999 Get 100% Free Delivery!</span>
           <span id="freeDeliveryCheckMark" class="hidden text-emerald-600 text-xs">✓ FREE</span>
         </div>
 
-        <!-- Coupon Redemption -->
         <div class="bg-pink-50/70 p-2.5 rounded-2xl border border-pink-200/80 space-y-1.5">
           <div class="flex gap-2">
             <input type="text" id="cartCouponInput" placeholder="Promo code..." class="flex-1 text-xs font-mono uppercase font-bold px-3 py-1.5 bg-white border border-pink-200 rounded-xl focus:outline-none">
@@ -640,7 +718,6 @@
           </div>
         </div>
 
-        <!-- Calculated Bill Breakdown -->
         <div class="space-y-1 text-xs pt-1">
           <div class="flex items-center justify-between text-stone-500 font-medium">
             <span>Item Subtotal:</span>
@@ -668,7 +745,6 @@
           </div>
         </div>
 
-        <!-- Checkout Button -->
         <button onclick="openPaymentQRModal()" id="proceedToPayBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
           <span>💳 Proceed to Pay & Place Order</span>
         </button>
@@ -676,7 +752,7 @@
     </div>
   </div>
 
-  <!-- UPI PAYMENT & QR MODAL (DISPATCHES TELEGRAM AFTER PAYMENT CONFIRMATION) -->
+  <!-- UPI PAYMENT MODAL -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
       <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Scan & Pay via UPI</h3>
@@ -707,7 +783,7 @@
     </div>
   </div>
 
-  <!-- Product Modal -->
+  <!-- Product Modal with Size Selector -->
   <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="relative">
@@ -719,6 +795,12 @@
           <span id="modalBadge" class="text-[10px] uppercase font-bold text-[#A64B74] tracking-wider">Category</span>
           <h3 id="modalTitle" class="text-xl font-cormorant font-bold text-[#1A1316]">Product Title</h3>
           <p id="modalDesc" class="text-xs text-stone-600 mt-1 leading-relaxed">Product description</p>
+        </div>
+
+        <!-- Dynamic Size Selector inside Modal -->
+        <div id="modalSizeSection" class="space-y-1.5">
+          <label class="block text-xs font-bold text-stone-700">Choose Size:</label>
+          <div id="modalSizePills" class="flex flex-wrap gap-1.5"></div>
         </div>
         
         <div class="bg-pink-50/60 p-3.5 rounded-2xl flex items-center justify-between">
@@ -768,7 +850,7 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
       <div class="bg-white border border-pink-100 text-[#1A1316] text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available across Lucknow with FREE shipping on orders above ₹999! How may I assist you today?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available across Lucknow with FREE shipping on orders above ₹999! How may I assist you with sizes or orders today?
       </div>
     </div>
 
@@ -786,7 +868,6 @@
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
-    // Store Hub Coordinates (Nakkhas, Lucknow)
     const STORE_LAT = 26.8522;
     const STORE_LNG = 80.9080;
 
@@ -801,6 +882,7 @@
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
     let preparedOrderPayload = null;
+    let selectedModalSize = null;
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
       const R = 6371;
@@ -813,18 +895,16 @@
       return (R * c).toFixed(1);
     }
 
-    // Blinkit-style Delivery Fee with Free Threshold > ₹999
     function computeDeliveryFee(distanceKm, subtotal) {
-      if (subtotal >= 999) return 0; // FREE DELIVERY ON ORDERS ABOVE ₹999
+      if (subtotal >= 999) return 0;
 
       const dist = parseFloat(distanceKm) || 2.5;
-      if (dist <= 3) return 25;       // 0-3km: ₹25
-      if (dist <= 8) return 40;       // 3-8km: ₹40
-      if (dist <= 15) return 60;      // 8-15km: ₹60
-      return Math.round(75 + (dist - 15) * 4); // 15km+: ₹75
+      if (dist <= 3) return 25;
+      if (dist <= 8) return 40;
+      if (dist <= 15) return 60;
+      return Math.round(75 + (dist - 15) * 4);
     }
 
-    // STRICT LUCKNOW ONLY VALIDATION (226xxx)
     function estimateDistanceByPincode(pin) {
       const box = document.getElementById("serviceStatusBox");
       const label = document.getElementById("estimatedDistanceLabel");
@@ -1118,12 +1198,14 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    function addToCart(title, price, img, orderType = 'retail', moq = 1) {
-      if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq))) {
+    function addToCart(title, price, img, orderType = 'retail', moq = 1, chosenSize = null) {
+      if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq, chosenSize))) {
         return;
       }
 
-      const cartKey = `${title}_${orderType}`;
+      const sizeLabel = chosenSize ? ` (Size: ${chosenSize})` : "";
+      const displayTitle = `${title}${sizeLabel}`;
+      const cartKey = `${displayTitle}_${orderType}`;
       const qtyToAdd = orderType === 'wholesale' ? (parseInt(moq) || 10) : 1;
       const existing = shoppingCart.find(i => i.cartKey === cartKey);
 
@@ -1132,16 +1214,17 @@
       } else {
         shoppingCart.push({
           cartKey,
-          title,
+          title: displayTitle,
           price: parseFloat(price),
           img,
           orderType,
           moq: parseInt(moq) || 1,
+          size: chosenSize || "Standard",
           qty: qtyToAdd
         });
       }
       updateCartBadge();
-      alert(`Added ${qtyToAdd} pcs (${orderType.toUpperCase()}) of "${title}" to your shopping bag!`);
+      alert(`Added ${qtyToAdd} pcs (${orderType.toUpperCase()}) of "${displayTitle}" to your shopping bag!`);
     }
 
     function updateCartBadge() {
@@ -1286,7 +1369,7 @@
       toggleCartModal();
     }
 
-    // STAGE 1: OPEN PAYMENT MODAL ONLY (DO NOT SEND NOTIFICATION YET)
+    // OPEN PAYMENT MODAL
     function openPaymentQRModal() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
       if (!requireCustomerLogin(() => openPaymentQRModal())) return;
@@ -1328,7 +1411,7 @@
       document.getElementById("upiModal").classList.remove("hidden");
     }
 
-    // STAGE 2: AFTER PAYMENT IS COMPLETED -> TRIGGER TELEGRAM TO OWNER
+    // CONFIRM PAYMENT & DISPATCH TELEGRAM ALERT
     async function confirmPaymentAndDispatchTelegram() {
       if (!preparedOrderPayload) return;
 
@@ -1357,7 +1440,7 @@
       document.getElementById("upiModal").classList.add("hidden");
     }
 
-    // OWNER PORTAL ORDER MANAGEMENT
+    // OWNER PORTAL: ORDERS FEED WITH DELETE
     async function fetchOrders() {
       const list = document.getElementById("ownerOrdersList");
       if (!list) return;
@@ -1547,7 +1630,15 @@
       document.getElementById("storeSection").classList.remove("hidden");
     }
 
-    function openProductModal(title, retail, original, wholesale, moq, img, desc, category, discount) {
+    function selectSizeOption(btn, size) {
+      document.querySelectorAll(".modalSizeBtn").forEach(b => {
+        b.className = "modalSizeBtn px-3 py-1.5 rounded-xl border border-pink-200 text-xs font-bold text-stone-700 hover:bg-pink-50 transition";
+      });
+      btn.className = "modalSizeBtn px-3 py-1.5 rounded-xl border border-[#D4AF37] bg-[#1A1316] text-[#F4D068] text-xs font-black shadow-sm transition";
+      selectedModalSize = size;
+    }
+
+    function openProductModal(title, retail, original, wholesale, moq, img, desc, category, discount, sizes = []) {
       document.getElementById("modalTitle").innerText = title;
       document.getElementById("modalRetail").innerText = "₹" + retail;
       
@@ -1563,6 +1654,27 @@
       document.getElementById("modalBadge").innerText = (discount ? `${discount}% OFF • ` : '') + (category || "Showcase");
       document.getElementById("modalImg").src = img;
 
+      // Render Size Selector inside modal
+      const sizeSection = document.getElementById("modalSizeSection");
+      const sizePills = document.getElementById("modalSizePills");
+      sizePills.innerHTML = "";
+      selectedModalSize = null;
+
+      if (sizes && sizes.length > 0) {
+        sizeSection.classList.remove("hidden");
+        sizes.forEach((s, idx) => {
+          const isFirst = idx === 0;
+          if (isFirst) selectedModalSize = s;
+          sizePills.innerHTML += `
+            <button type="button" onclick="selectSizeOption(this, '${s}')" class="modalSizeBtn px-3 py-1.5 rounded-xl border text-xs font-bold transition ${isFirst ? 'border-[#D4AF37] bg-[#1A1316] text-[#F4D068] font-black' : 'border-pink-200 text-stone-700 hover:bg-pink-50'}">
+              ${s}
+            </button>
+          `;
+        });
+      } else {
+        sizeSection.classList.add("hidden");
+      }
+
       const wsPrice = parseFloat(wholesale) || 0;
       const wsMoq = parseInt(moq) || 10;
 
@@ -1571,7 +1683,7 @@
         document.getElementById("modalWholesale").innerText = `₹${wsPrice}/pc (Min: ${wsMoq})`;
         document.getElementById("modalAddWholesaleBtn").classList.remove("hidden");
         document.getElementById("modalAddWholesaleBtn").onclick = () => { 
-          addToCart(title, wsPrice, img, 'wholesale', wsMoq); 
+          addToCart(title, wsPrice, img, 'wholesale', wsMoq, selectedModalSize); 
           closeProductModal(); 
         };
       } else {
@@ -1580,7 +1692,7 @@
       }
 
       document.getElementById("modalAddRetailBtn").onclick = () => { 
-        addToCart(title, retail, img, 'retail', 1); 
+        addToCart(title, retail, img, 'retail', 1, selectedModalSize); 
         closeProductModal(); 
       };
       document.getElementById("productModal").classList.remove("hidden");
@@ -1640,10 +1752,11 @@
       
       const wsPrice = parseFloat(p.wholesale_price) || 0;
       const wsMoq = parseInt(p.min_wholesale_qty) || 10;
+      const sizesJson = JSON.stringify(p.sizes || []).replace(/'/g, "\\'");
 
       return `
         <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
-          <div onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount})" class="cursor-pointer">
+          <div onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" class="cursor-pointer">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
               
@@ -1679,13 +1792,13 @@
           <div class="p-3 pt-0 flex flex-col gap-1.5">
             <div class="flex gap-1.5">
               <button 
-                onclick="addToCart('${escapedTitle}', ${retailPrice}, '${img}', 'retail', 1)" 
+                onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" 
                 class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[10px] font-bold py-1.5 rounded-xl transition">
                 + Retail
               </button>
               ${wsPrice > 0 ? `
                 <button 
-                  onclick="addToCart('${escapedTitle}', ${wsPrice}, '${img}', 'wholesale', ${wsMoq})" 
+                  onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount}, ${sizesJson})" 
                   class="flex-1 bg-[#1A1316] hover:bg-stone-900 text-[#F4D068] text-[10px] font-bold py-1.5 rounded-xl border border-[#D4AF37]/40 transition">
                   + Bulk (${wsMoq}pc)
                 </button>
@@ -1730,6 +1843,7 @@
       });
     }
 
+    // OWNER INVENTORY WITH EDIT & DELETE
     function renderOwnerInventory() {
       const list = document.getElementById("ownerInventoryList");
       const badge = document.getElementById("inventoryCountBadge");
@@ -1746,21 +1860,146 @@
       allProducts.forEach((p, idx) => {
         const prodId = p.id || `item-${idx}`;
         const catText = Array.isArray(p.categories) ? p.categories.join(', ') : (p.category_name || 'Boutique');
+        const sizeCount = (p.sizes && p.sizes.length) ? `(${p.sizes.length} sizes)` : '';
+
         list.innerHTML += `
           <div class="bg-pink-50/60 p-2.5 rounded-xl border border-pink-100 flex items-center justify-between gap-2 shadow-sm">
             <div class="flex items-center gap-2.5 overflow-hidden">
               <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-11 h-11 rounded-xl object-cover flex-shrink-0 bg-white">
               <div class="truncate">
                 <p class="text-xs font-bold text-[#1A1316] truncate">${p.title}</p>
-                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} ${p.original_price ? `(MRP: ₹${p.original_price})` : ''} | ${catText}</p>
+                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} | ${catText} ${sizeCount}</p>
               </div>
             </div>
-            <button onclick="deleteProduct('${prodId}', '${p.title.replace(/'/g, "\\'")}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-3 py-1.5 rounded-xl border border-red-200 transition flex-shrink-0 flex items-center gap-1">
-              <span>🗑️ Delete</span>
-            </button>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <button onclick="editProduct('${prodId}')" class="bg-white hover:bg-stone-100 text-[#1A1316] font-bold text-xs px-2.5 py-1.5 rounded-xl border border-pink-200 transition">
+                ✏️ Edit
+              </button>
+              <button onclick="deleteProduct('${prodId}', '${p.title.replace(/'/g, "\\'")}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-2.5 py-1.5 rounded-xl border border-red-200 transition">
+                🗑️
+              </button>
+            </div>
           </div>
         `;
       });
+    }
+
+    function editProduct(productId) {
+      const prod = allProducts.find(p => String(p.id) === String(productId));
+      if (!prod) return;
+
+      document.getElementById("editingProductId").value = prod.id;
+      document.getElementById("pTitle").value = prod.title || "";
+      document.getElementById("pOriginal").value = prod.original_price || "";
+      document.getElementById("pRetail").value = prod.retail_price || "";
+      document.getElementById("pWholesale").value = prod.wholesale_price || "";
+      document.getElementById("pMoq").value = prod.min_wholesale_qty || 10;
+      document.getElementById("pDiscount").value = prod.discount_pct || "";
+      document.getElementById("pDesc").value = prod.description || "";
+      document.getElementById("pImg").value = (prod.image_urls && prod.image_urls[0]) ? prod.image_urls[0] : "";
+
+      if (prod.image_urls && prod.image_urls[0]) {
+        document.getElementById("imgPreviewTag").src = prod.image_urls[0];
+        document.getElementById("imgPreviewBox").classList.remove("hidden");
+      }
+
+      // Check Categories
+      document.querySelectorAll(".categoryCheckbox").forEach(cb => {
+        if (Array.isArray(prod.categories)) {
+          cb.checked = prod.categories.includes(cb.value);
+        } else {
+          cb.checked = (prod.category_name || '').includes(cb.value);
+        }
+      });
+
+      // Check Sizes
+      document.querySelectorAll(".sizeCheckbox").forEach(cb => {
+        cb.checked = Array.isArray(prod.sizes) && prod.sizes.includes(cb.value);
+      });
+
+      document.getElementById("formHeaderTitle").innerText = "Edit Listed Item";
+      document.getElementById("formHeaderIcon").innerText = "✏️";
+      document.getElementById("submitBtnText").innerText = "💾 Save & Update Item";
+      document.getElementById("cancelEditBtn").classList.remove("hidden");
+
+      window.scrollTo({ top: document.getElementById("productFormBox").offsetTop - 80, behavior: 'smooth' });
+    }
+
+    function resetProductForm() {
+      document.getElementById("editingProductId").value = "";
+      document.querySelector("form").reset();
+      clearPreviewImage();
+      document.getElementById("formHeaderTitle").innerText = "Add Item to Store";
+      document.getElementById("formHeaderIcon").innerText = "🛍️";
+      document.getElementById("submitBtnText").innerText = "✨ Publish to Store Catalog";
+      document.getElementById("cancelEditBtn").classList.add("hidden");
+    }
+
+    async function saveProduct(e) {
+      e.preventDefault();
+      const btn = document.getElementById("addBtn");
+      btn.disabled = true;
+
+      const editingId = document.getElementById("editingProductId").value;
+
+      const selectedCategories = [];
+      document.querySelectorAll(".categoryCheckbox:checked").forEach(cb => {
+        selectedCategories.push(cb.value);
+      });
+      if (selectedCategories.length === 0) selectedCategories.push("Daily Wear");
+
+      const selectedSizes = [];
+      document.querySelectorAll(".sizeCheckbox:checked").forEach(cb => {
+        selectedSizes.push(cb.value);
+      });
+
+      const origPriceVal = document.getElementById("pOriginal").value ? parseFloat(document.getElementById("pOriginal").value) : null;
+      const retailPriceVal = parseFloat(document.getElementById("pRetail").value);
+
+      const productData = {
+        id: editingId ? editingId : "prod-" + Date.now(),
+        title: document.getElementById("pTitle").value,
+        description: document.getElementById("pDesc").value,
+        category_name: selectedCategories.join(', '),
+        categories: selectedCategories,
+        sizes: selectedSizes,
+        image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
+        original_price: origPriceVal,
+        retail_price: retailPriceVal,
+        wholesale_price: document.getElementById("pWholesale").value ? parseFloat(document.getElementById("pWholesale").value) : null,
+        min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 10,
+        discount_pct: parseInt(document.getElementById("pDiscount").value) || 0,
+        stock_count: 100
+      };
+
+      if (editingId) {
+        // Update existing
+        const index = allProducts.findIndex(p => String(p.id) === String(editingId));
+        if (index !== -1) allProducts[index] = productData;
+      } else {
+        // Add new
+        allProducts.unshift(productData);
+      }
+
+      localStorage.setItem('insha_catalog_cache', JSON.stringify(allProducts));
+
+      try {
+        await fetch(`${API_BASE}/products`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(productData)
+        });
+      } catch (err) {
+        console.log("Item saved locally.");
+      }
+
+      alert(editingId ? "Product updated successfully!" : "Product published successfully with sizes!");
+      resetProductForm();
+      switchTab('store');
+      renderAllSections();
+      renderOwnerInventory();
+
+      btn.disabled = false;
     }
 
     async function deleteProduct(productId, title) {
@@ -1793,63 +2032,6 @@
       } finally {
         renderAllSections();
       }
-    }
-
-    async function addProduct(e) {
-      e.preventDefault();
-      const btn = document.getElementById("addBtn");
-      btn.disabled = true;
-      btn.innerText = "Publishing...";
-
-      const selectedCategories = [];
-      document.querySelectorAll(".categoryCheckbox:checked").forEach(cb => {
-        selectedCategories.push(cb.value);
-      });
-
-      if (selectedCategories.length === 0) {
-        selectedCategories.push("Daily Wear");
-      }
-
-      const origPriceVal = document.getElementById("pOriginal").value ? parseFloat(document.getElementById("pOriginal").value) : null;
-      const retailPriceVal = parseFloat(document.getElementById("pRetail").value);
-
-      const newProduct = {
-        id: "prod-" + Date.now(),
-        title: document.getElementById("pTitle").value,
-        description: document.getElementById("pDesc").value,
-        category_name: selectedCategories.join(', '),
-        categories: selectedCategories,
-        image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
-        original_price: origPriceVal,
-        retail_price: retailPriceVal,
-        wholesale_price: document.getElementById("pWholesale").value ? parseFloat(document.getElementById("pWholesale").value) : null,
-        min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 10,
-        discount_pct: parseInt(document.getElementById("pDiscount").value) || 0,
-        stock_count: 100
-      };
-
-      allProducts.unshift(newProduct);
-      localStorage.setItem('insha_catalog_cache', JSON.stringify(allProducts));
-
-      try {
-        await fetch(`${API_BASE}/products`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newProduct)
-        });
-      } catch (err) {
-        console.log("Item saved locally.");
-      }
-
-      alert("Product published successfully with Daily Wear & multi-category settings!");
-      document.querySelector("form").reset();
-      clearPreviewImage();
-      switchTab('store');
-      renderAllSections();
-      renderOwnerInventory();
-
-      btn.disabled = false;
-      btn.innerText = "✨ Publish to Store Catalog";
     }
 
     async function sendChatMessage() {
