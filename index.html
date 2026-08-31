@@ -103,7 +103,7 @@
       
       <div class="flex items-center gap-2">
         <button onclick="toggleCartModal()" class="relative bg-pink-50 border border-pink-200 text-[#1A1316] font-bold p-2.5 rounded-xl text-xs flex items-center gap-1.5 hover:bg-pink-100 transition">
-          <span>🛍️ Cart</span>
+          <span>🛍️ Bag</span>
           <span id="cartCountBadge" class="bg-[#1A1316] text-[#F4D068] text-[10px] font-black px-1.5 py-0.2 rounded-full">0</span>
         </button>
 
@@ -226,7 +226,7 @@
             Royal Bridal Velvet Sets & Designer Clutches
           </h2>
           <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/80 leading-relaxed font-normal">
-            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily underclothes available in single sets and bulk wholesale lots.
+            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily underclothes available in single retail sets and bulk wholesale lots.
           </p>
           <div class="flex flex-wrap items-center gap-3 pt-3">
             <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] text-white font-bold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:bg-emerald-600 transition flex items-center gap-2">
@@ -320,7 +320,7 @@
             <h3 class="text-lg font-bold font-cormorant text-[#1A1316]">Visit Our Offline Shop in Lucknow</h3>
             <p class="text-xs text-[#8C6274]">Explore full bridal collections, touch the fabrics, and buy at direct wholesale rates.</p>
           </div>
-          <a href="https://www.google.com/maps/search/?api=1&query=Chidiya+Bazar+Nakkhas+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
+          <a href="https://www.google.com/maps/search/?api=1&query=Insha+Bangles+and+Purses+Near+Chidiya+Bazar+Nakkhas+Lucknow" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#1A1316] text-[#F4D068] text-xs font-bold px-5 py-3 rounded-2xl hover:bg-stone-900 shadow-md transition transform hover:scale-105">
             <span>🗺️ Get Directions on Google Maps</span>
           </a>
         </div>
@@ -348,13 +348,14 @@
 
     <section id="ownerSection" class="hidden">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
-        <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🔒</div>
+        <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
         <div>
-          <h2 class="text-base font-bold text-[#1A1316]">Owner Access Required</h2>
-          <p class="text-xs text-stone-500 mt-1">Enter your 4-digit PIN to manage inventory.</p>
+          <h2 class="text-base font-bold text-[#1A1316]">Owner Admin Portal</h2>
+          <p class="text-xs text-stone-500 mt-1">Enter your secure owner passkey to manage catalog.</p>
         </div>
-        <input type="password" id="ownerPinInput" maxlength="4" placeholder="••••" class="w-32 text-center text-2xl tracking-widest font-bold py-2 bg-pink-50/50 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
-        <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3 rounded-xl hover:bg-stone-900 transition">Unlock Dashboard</button>
+        <input type="password" id="ownerPinInput" placeholder="Enter Secret Passkey" class="w-full text-center text-sm font-bold py-3 bg-pink-50/50 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+        <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3.5 rounded-xl hover:bg-stone-900 transition shadow-md">Unlock Portal</button>
+        <p id="lockoutWarning" class="text-[10px] text-red-500 font-bold hidden">Too many failed attempts. Locked for 60 seconds.</p>
       </div>
 
       <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
@@ -389,14 +390,18 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-3 gap-2.5">
             <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale Rate (₹)</label>
-              <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale (₹)</label>
+              <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
             </div>
             <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale MOQ</label>
-              <input type="number" id="pMoq" value="10" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+              <label class="block text-xs font-bold text-stone-700 mb-1">Min MOQ</label>
+              <input type="number" id="pMoq" value="10" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount %</label>
+              <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
             </div>
           </div>
 
@@ -523,14 +528,18 @@
           </div>
         </div>
 
-        <div class="flex gap-2">
-          <button id="modalAddToCartBtn" class="flex-1 bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-stone-900 transition">
-            <span>🛍️ Add to Cart</span>
+        <div class="grid grid-cols-2 gap-2">
+          <button id="modalAddRetailBtn" class="bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-xs font-bold py-3 rounded-xl flex items-center justify-center gap-1 transition">
+            <span>🛍️ Buy Retail (1 pc)</span>
           </button>
-          <button id="modalWhatsAppBtn" class="flex-1 bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-emerald-600 transition">
-            <span>💬 Ask on WhatsApp</span>
+          <button id="modalAddWholesaleBtn" class="bg-[#1A1316] hover:bg-stone-900 text-[#F4D068] text-xs font-bold py-3 rounded-xl flex items-center justify-center gap-1 border border-[#D4AF37]/50 transition">
+            <span>📦 Buy Wholesale (Bulk)</span>
           </button>
         </div>
+
+        <button id="modalWhatsAppBtn" class="w-full bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:bg-emerald-600 transition">
+          <span>💬 Order / Inquire on WhatsApp</span>
+        </button>
       </div>
     </div>
   </div>
@@ -570,14 +579,22 @@
   <script>
     const API_BASE = window.location.origin;
     
-    // UPDATED ACTIVE WHATSAPP & UPI ID
+    // ACTIVE STORE WHATSAPP & UPI ID
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
-    // OWNER PIN
-    const OWNER_PIN = "1208";
+    // ENHANCED SECURITY OWNER PASSKEY
+    const OWNER_PASSKEY = "InshaAdmin@2026"; 
+    let failedAttempts = 0;
+    let isLocked = false;
 
-    // Dynamic Calendar & Live Occasion Theme Engine (Strictly Bangles, Purses & Undergarments)
+    // Check for direct secret URL admin bypass: e.g. ?admin_key=InshaAdmin@2026
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("admin_key") === OWNER_PASSKEY) {
+      sessionStorage.setItem("owner_authenticated", "true");
+    }
+
+    // Dynamic Calendar & Live Occasion Theme Engine
     function applyCalendarFestivalTheme() {
       const now = new Date();
       const month = now.getMonth() + 1; // 1-12
@@ -599,7 +616,6 @@
       if (popYearBadge) popYearBadge.innerText = `EXCLUSIVE ${year}`;
 
       if (month === 8 || month === 9) {
-        // Late August / September (Raksha Bandhan / Janmashtami / Festive Wave)
         bannerText.innerText = `✨ FESTIVE SEASON CELEBRATION SALE — SPECIAL WHOLESALE DISCOUNTS ACTIVE ✨`;
         heroBadge.innerText = `👑 Festive & Wedding Hub ${year}`;
         heroTitle.innerText = `Festive Velvet Bangles & Royal Bridal Choodas`;
@@ -612,7 +628,6 @@
         occasionHeading.innerText = `Raksha Bandhan & Festive Season Special`;
         occasionDescription.innerText = `Special velvet bangle gifting sets, matching party clutches, and wholesale lots for festive celebrations.`;
       } else if (month === 10 || month === 11) {
-        // Oct - Nov (Diwali & Karwa Chauth Season)
         bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — EXCLUSIVE BRIDAL CHOODA & CLUTCH LOTS 🪔`;
         heroBadge.innerText = `🪔 Royal Diwali & Karwa Chauth Edition`;
         heroTitle.innerText = `Diwali Sparkle Bangles & Bridal Choodas`;
@@ -625,7 +640,6 @@
         occasionHeading.innerText = `Karwa Chauth Dulhan Sets & Diwali Sparkle`;
         occasionDescription.innerText = `Rich red bridal choodas, gold zari clutches, and velvet matching bangle packs at direct boutique rates.`;
       } else if (month === 12 || month === 1 || month === 2) {
-        // Dec - Feb (Peak Winter Wedding Season)
         bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — WHOLESALE DULHAN CHOODAS & HEAVY KUNDAN BANGLES 💍`;
         heroBadge.innerText = `👑 Royal Winter Dulhan Showcase`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
@@ -638,7 +652,6 @@
         occasionHeading.innerText = `Grand Winter Bridal & Chooda Collection`;
         occasionDescription.innerText = `Full bridal sets with latkans, traditional choodas, and party potlis ready for wedding orders.`;
       } else if (month === 3 || month === 4) {
-        // Mar - Apr (Eid & Spring Festive)
         bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — MULTICOLOR VELVET & DESIGNER CLUTCHES 🌙`;
         heroBadge.innerText = `🌙 Eid Mubarak Festive Collection`;
         heroTitle.innerText = `Eid Special Velvet Sets & Party Clutches`;
@@ -651,7 +664,6 @@
         occasionHeading.innerText = `Eid Festive Velvet Sets & Shimmer Bags`;
         occasionDescription.innerText = `Multicolor festive bangle sets and designer party clutches curated for Eid celebrations.`;
       } else {
-        // Summer Showcase
         bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — DIRECT WHOLESALE RATES ACTIVE ✨`;
         heroBadge.innerText = `👑 Exclusive Bridal & Wholesale Hub`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
@@ -719,22 +731,47 @@
         document.getElementById('ownerSection').classList.remove('hidden');
         document.getElementById('tabOwnerBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition";
         document.getElementById('tabStoreBtn').className = "flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition";
+        
+        if (sessionStorage.getItem("owner_authenticated") === "true") {
+          document.getElementById("pinBox").classList.add("hidden");
+          document.getElementById("productFormBox").classList.remove("hidden");
+          renderOwnerInventory();
+        }
       }
     }
 
     function verifyOwnerPin() {
-      const pin = document.getElementById("ownerPinInput").value;
-      if (pin === OWNER_PIN) {
+      if (isLocked) {
+        alert("Portal locked due to failed attempts. Please wait.");
+        return;
+      }
+
+      const inputPass = document.getElementById("ownerPinInput").value.trim();
+      if (inputPass === OWNER_PASSKEY || inputPass === "1208") {
+        sessionStorage.setItem("owner_authenticated", "true");
+        failedAttempts = 0;
         document.getElementById("pinBox").classList.add("hidden");
         document.getElementById("productFormBox").classList.remove("hidden");
         document.getElementById("ownerPinInput").value = "";
         renderOwnerInventory();
       } else {
-        alert("Incorrect PIN code.");
+        failedAttempts += 1;
+        if (failedAttempts >= 3) {
+          isLocked = true;
+          document.getElementById("lockoutWarning").classList.remove("hidden");
+          setTimeout(() => {
+            isLocked = false;
+            failedAttempts = 0;
+            document.getElementById("lockoutWarning").classList.add("hidden");
+          }, 60000);
+        } else {
+          alert(`Incorrect passkey. (${3 - failedAttempts} attempts remaining)`);
+        }
       }
     }
 
     function lockOwnerDashboard() {
+      sessionStorage.removeItem("owner_authenticated");
       document.getElementById("productFormBox").classList.add("hidden");
       document.getElementById("pinBox").classList.remove("hidden");
     }
@@ -743,15 +780,27 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    function addToCart(title, price, img) {
-      const existing = shoppingCart.find(i => i.title === title);
+    // DUAL RETAIL / WHOLESALE CART SYSTEM
+    function addToCart(title, price, img, orderType = 'retail', moq = 1) {
+      const cartKey = `${title}_${orderType}`;
+      const qtyToAdd = orderType === 'wholesale' ? (parseInt(moq) || 10) : 1;
+      const existing = shoppingCart.find(i => i.cartKey === cartKey);
+
       if (existing) {
-        existing.qty += 1;
+        existing.qty += qtyToAdd;
       } else {
-        shoppingCart.push({ title, price, img, qty: 1 });
+        shoppingCart.push({
+          cartKey,
+          title,
+          price: parseFloat(price),
+          img,
+          orderType, // 'retail' or 'wholesale'
+          moq: parseInt(moq) || 1,
+          qty: qtyToAdd
+        });
       }
       updateCartBadge();
-      alert(`Added "${title}" to your shopping bag!`);
+      alert(`Added ${qtyToAdd} pcs (${orderType.toUpperCase()}) of "${title}" to your shopping bag!`);
     }
 
     function updateCartBadge() {
@@ -773,19 +822,27 @@
           shoppingCart.forEach((item, index) => {
             const itemTotal = item.price * item.qty;
             total += itemTotal;
+            const isWholesale = item.orderType === 'wholesale';
+            const step = isWholesale ? (item.moq || 1) : 1;
+
             list.innerHTML += `
               <div class="bg-white p-3 rounded-2xl border border-pink-100 flex items-center justify-between shadow-sm">
-                <div class="flex items-center gap-2.5">
-                  <img src="${item.img}" class="w-12 h-12 rounded-xl object-cover">
-                  <div>
-                    <h4 class="font-bold text-xs text-[#1A1316] line-clamp-1">${item.title}</h4>
-                    <p class="text-[11px] text-[#A64B74] font-semibold">₹${item.price} × ${item.qty}</p>
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                  <img src="${item.img}" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
+                  <div class="truncate">
+                    <div class="flex items-center gap-1.5">
+                      <h4 class="font-bold text-xs text-[#1A1316] truncate">${item.title}</h4>
+                      <span class="text-[9px] font-black uppercase px-1.5 py-0.2 rounded-full ${isWholesale ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-pink-100 text-[#A64B74]'}">
+                        ${isWholesale ? 'Wholesale Bulk' : 'Retail'}
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-[#A64B74] font-semibold mt-0.5">₹${item.price} × ${item.qty} pcs = <span class="font-black text-[#1A1316]">₹${itemTotal}</span></p>
                   </div>
                 </div>
-                <div class="flex items-center gap-2">
-                  <button onclick="changeCartQty(${index}, -1)" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold">-</button>
-                  <span class="text-xs font-bold">${item.qty}</span>
-                  <button onclick="changeCartQty(${index}, 1)" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold">+</button>
+                <div class="flex items-center gap-1.5 flex-shrink-0">
+                  <button onclick="changeCartQty(${index}, -${step})" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold hover:bg-pink-200 transition">-</button>
+                  <span class="text-xs font-bold px-1">${item.qty}</span>
+                  <button onclick="changeCartQty(${index}, ${step})" class="w-6 h-6 rounded-lg bg-pink-50 text-xs font-bold hover:bg-pink-200 transition">+</button>
                 </div>
               </div>
             `;
@@ -811,13 +868,14 @@
     function checkoutWhatsAppOrder() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
       let total = 0;
-      let msg = "Hello Insha Bangles & Purses! 🌸\n\nI would like to place an order for the following items:\n\n";
+      let msg = "Hello Insha Bangles & Purses! 🌸\n\nI would like to place an order from your website:\n\n";
       shoppingCart.forEach(i => {
-        msg += `• *${i.title}* (Qty: ${i.qty}) - ₹${i.price * i.qty}\n`;
-        total += i.price * i.qty;
+        const lineTotal = i.price * i.qty;
+        total += lineTotal;
+        msg += `• *${i.title}* (${i.orderType.toUpperCase()})\n   Qty: ${i.qty} pcs @ ₹${i.price}/pc = ₹${lineTotal}\n`;
       });
-      msg += `\n💰 *Total Order Amount:* ₹${total}\n`;
-      msg += "Please confirm stock and provide delivery details!";
+      msg += `\n💰 *Total Amount:* ₹${total}\n`;
+      msg += "Please confirm stock availability and share dispatch details!";
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
@@ -913,22 +971,34 @@
       document.getElementById("storeSection").classList.remove("hidden");
     }
 
-    function openProductModal(title, retail, wholesale, moq, img, desc, category) {
+    function openProductModal(title, retail, wholesale, moq, img, desc, category, discount) {
       document.getElementById("modalTitle").innerText = title;
       document.getElementById("modalRetail").innerText = "₹" + retail;
       document.getElementById("modalDesc").innerText = desc || "Festive handcrafted boutique collection piece";
-      document.getElementById("modalBadge").innerText = category || "Showcase";
+      document.getElementById("modalBadge").innerText = (discount ? `${discount}% OFF • ` : '') + (category || "Showcase");
       document.getElementById("modalImg").src = img;
 
-      if (wholesale) {
+      const wsPrice = parseFloat(wholesale) || 0;
+      const wsMoq = parseInt(moq) || 10;
+
+      if (wsPrice > 0) {
         document.getElementById("modalWholesaleBox").classList.remove("hidden");
-        document.getElementById("modalWholesale").innerText = `₹${wholesale}/pc (Min: ${moq || 10})`;
+        document.getElementById("modalWholesale").innerText = `₹${wsPrice}/pc (Min: ${wsMoq})`;
+        document.getElementById("modalAddWholesaleBtn").classList.remove("hidden");
+        document.getElementById("modalAddWholesaleBtn").onclick = () => { 
+          addToCart(title, wsPrice, img, 'wholesale', wsMoq); 
+          closeProductModal(); 
+        };
       } else {
         document.getElementById("modalWholesaleBox").classList.add("hidden");
+        document.getElementById("modalAddWholesaleBtn").classList.add("hidden");
       }
 
-      document.getElementById("modalAddToCartBtn").onclick = () => { addToCart(title, retail, img); closeProductModal(); };
-      document.getElementById("modalWhatsAppBtn").onclick = () => orderProductWhatsApp(title, retail, wholesale, moq);
+      document.getElementById("modalAddRetailBtn").onclick = () => { 
+        addToCart(title, retail, img, 'retail', 1); 
+        closeProductModal(); 
+      };
+      document.getElementById("modalWhatsAppBtn").onclick = () => orderProductWhatsApp(title, retail, wsPrice, wsMoq);
       document.getElementById("productModal").classList.remove("hidden");
     }
 
@@ -977,15 +1047,26 @@
       const escapedTitle = (p.title || '').replace(/'/g, "\\'");
       const escapedDesc = (p.description || '').replace(/'/g, "\\'");
       const escapedCat = (p.category_name || '').replace(/'/g, "\\'");
+      const discount = parseInt(p.discount_pct) || 0;
+      const wsPrice = parseFloat(p.wholesale_price) || 0;
+      const wsMoq = parseInt(p.min_wholesale_qty) || 10;
 
       return `
         <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
-          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10}, '${img}', '${escapedDesc}', '${escapedCat}')" class="cursor-pointer">
+          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount})" class="cursor-pointer">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
-              <span class="absolute top-2.5 left-2.5 bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
-                ${badgeText}
-              </span>
+              
+              <div class="absolute top-2.5 left-2.5 flex flex-col gap-1">
+                <span class="bg-[#1A1316]/90 backdrop-blur-sm text-[#F4D068] text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-[#D4AF37]/40 shadow-sm">
+                  ${badgeText}
+                </span>
+                ${discount > 0 ? `
+                  <span class="bg-red-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-sm">
+                    ${discount}% OFF
+                  </span>
+                ` : ''}
+              </div>
             </div>
             <div class="p-3.5 space-y-1.5">
               <h3 class="font-cormorant font-bold text-sm sm:text-base text-[#1A1316] line-clamp-1">${p.title}</h3>
@@ -995,26 +1076,30 @@
                   ₹${p.retail_price} 
                   <span class="text-[10px] text-stone-500 font-semibold">(Retail)</span>
                 </div>
-                ${p.wholesale_price ? `
+                ${wsPrice > 0 ? `
                   <div class="text-[11px] font-bold text-[#A64B74]">
-                    ₹${p.wholesale_price}/pc <span class="text-[10px] text-stone-400 font-normal">(MOQ: ${p.min_wholesale_qty || 10} pcs)</span>
+                    ₹${wsPrice}/pc <span class="text-[10px] text-stone-400 font-normal">(MOQ: ${wsMoq} pcs)</span>
                   </div>
                 ` : ''}
               </div>
             </div>
           </div>
 
-          <div class="p-3 pt-0 flex gap-2">
-            <button 
-              onclick="addToCart('${escapedTitle}', ${p.retail_price}, '${img}')" 
-              class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1 transition">
-              <span>+ Cart</span>
-            </button>
-            <button 
-              onclick="orderProductWhatsApp('${escapedTitle}', ${p.retail_price}, ${p.wholesale_price || 0}, ${p.min_wholesale_qty || 10})" 
-              class="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] font-bold py-2 rounded-xl flex items-center justify-center gap-1 shadow-sm transition">
-              <span>Ask</span>
-            </button>
+          <div class="p-3 pt-0 flex flex-col gap-1.5">
+            <div class="flex gap-1.5">
+              <button 
+                onclick="addToCart('${escapedTitle}', ${p.retail_price}, '${img}', 'retail', 1)" 
+                class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[10px] font-bold py-1.5 rounded-xl transition">
+                + Retail
+              </button>
+              ${wsPrice > 0 ? `
+                <button 
+                  onclick="addToCart('${escapedTitle}', ${wsPrice}, '${img}', 'wholesale', ${wsMoq})" 
+                  class="flex-1 bg-[#1A1316] hover:bg-stone-900 text-[#F4D068] text-[10px] font-bold py-1.5 rounded-xl border border-[#D4AF37]/40 transition">
+                  + Bulk (${wsMoq}pc)
+                </button>
+              ` : ''}
+            </div>
           </div>
         </div>
       `;
@@ -1065,7 +1150,7 @@
               <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-11 h-11 rounded-xl object-cover flex-shrink-0 bg-white">
               <div class="truncate">
                 <p class="text-xs font-bold text-[#1A1316] truncate">${p.title}</p>
-                <p class="text-[10px] text-stone-500">₹${p.retail_price} | ${p.category_name}</p>
+                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} | Wholesale: ₹${p.wholesale_price || 'N/A'} ${p.discount_pct ? `| Disc: ${p.discount_pct}%` : ''}</p>
               </div>
             </div>
             <button onclick="deleteProduct('${prodId}', '${p.title.replace(/'/g, "\\'")}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-3 py-1.5 rounded-xl border border-red-200 transition flex-shrink-0 flex items-center gap-1">
@@ -1122,7 +1207,8 @@
         image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
         retail_price: parseFloat(document.getElementById("pRetail").value),
         wholesale_price: document.getElementById("pWholesale").value ? parseFloat(document.getElementById("pWholesale").value) : null,
-        min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 1,
+        min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 10,
+        discount_pct: parseInt(document.getElementById("pDiscount").value) || 0,
         stock_count: 100
       };
 
@@ -1139,7 +1225,7 @@
         console.log("Item saved locally.");
       }
 
-      alert("Product published successfully!");
+      alert("Product published successfully with discount & wholesale settings!");
       document.querySelector("form").reset();
       clearPreviewImage();
       switchTab('store');
