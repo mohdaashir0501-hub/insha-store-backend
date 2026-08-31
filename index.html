@@ -122,7 +122,7 @@
     </div>
   </header>
 
-  <!-- Sticky Section & Filter Bar -->
+  <!-- Sticky Section Navigation -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
@@ -538,7 +538,7 @@
 
   </main>
 
-  <!-- CUSTOMER LOGIN & DELIVERY MODAL WITH GPS AND LUCKNOW-ONLY VALIDATION -->
+  <!-- CUSTOMER LOGIN & DELIVERY MODAL -->
   <div id="customerAuthModal" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -584,7 +584,6 @@
           </div>
         </div>
 
-        <!-- Distance & Service Area Indicator -->
         <div id="serviceStatusBox" class="p-2.5 bg-pink-50/70 rounded-xl border border-pink-200/80 text-[11px] flex items-center justify-between">
           <span class="text-stone-600 font-medium">Service Status:</span>
           <span id="estimatedDistanceLabel" class="font-black text-[#1A1316]">~2.5 km (Local Nakkhas Hub)</span>
@@ -670,20 +669,19 @@
         </div>
 
         <!-- Checkout Button -->
-        <button onclick="processOrderAndOpenPayment()" id="proceedToPayBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
+        <button onclick="openPaymentQRModal()" id="proceedToPayBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
           <span>💳 Proceed to Pay & Place Order</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- UPI PAYMENT & QR MODAL WITH FREE DELIVERY DEAL CALLOUT -->
+  <!-- UPI PAYMENT & QR MODAL (DISPATCHES TELEGRAM AFTER PAYMENT CONFIRMATION) -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
       <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Scan & Pay via UPI</h3>
       <p class="text-xs text-stone-500">Scan using Google Pay, PhonePe, Paytm or BHIM UPI</p>
       
-      <!-- Highlight Deal Badge inside Payment Modal -->
       <div id="paymentDealBadge" class="p-2 bg-emerald-50 border border-emerald-300 rounded-xl text-[11px] font-bold text-emerald-800">
         ✨ Free Express Delivery Applied (Order > ₹300)
       </div>
@@ -698,12 +696,13 @@
       </div>
 
       <div class="space-y-2 pt-2">
-        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
+        <a id="upiIntentLink" onclick="confirmPaymentAndDispatchTelegram()" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
           🚀 Open in UPI App (Mobile)
         </a>
-        <button onclick="closeUpiModal()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-2.5 rounded-xl block hover:bg-stone-900 transition">
-          Done / Close
+        <button onclick="confirmPaymentAndDispatchTelegram()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-xl block shadow-md transition">
+          ✅ I Have Paid / Submit Order
         </button>
+        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold block mx-auto pt-1">Cancel</button>
       </div>
     </div>
   </div>
@@ -801,6 +800,7 @@
     let isServiceableArea = true;
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
+    let preparedOrderPayload = null;
 
     function calculateDistance(lat1, lon1, lat2, lon2) {
       const R = 6371;
@@ -1153,10 +1153,7 @@
       let subtotal = 0;
       shoppingCart.forEach(item => { subtotal += item.price * item.qty; });
 
-      // GST: 3% Boutique rate
       const gstAmount = Math.round(subtotal * 0.03);
-
-      // Blinkit-style Delivery Fee (> ₹300 Free)
       const deliveryFee = computeDeliveryFee(calculatedDistanceKm, subtotal);
 
       let discountAmount = 0;
@@ -1289,10 +1286,10 @@
       toggleCartModal();
     }
 
-    // DIRECT ORDER PLACEMENT WITH AUTO TELEGRAM NOTIFICATION
-    async function processOrderAndOpenPayment() {
+    // STAGE 1: OPEN PAYMENT MODAL ONLY (DO NOT SEND NOTIFICATION YET)
+    function openPaymentQRModal() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      if (!requireCustomerLogin(() => processOrderAndOpenPayment())) return;
+      if (!requireCustomerLogin(() => openPaymentQRModal())) return;
 
       if (!currentCustomer.pincode.startsWith("226")) {
         alert("Sorry! Delivery is available only in Lucknow. Outstation orders cannot be placed.");
@@ -1302,7 +1299,7 @@
       const { subtotal, gstAmount, deliveryFee, discountAmount, finalTotal } = calculateCartTotals();
       const currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
 
-      const orderPayload = {
+      preparedOrderPayload = {
         order_id: currentOrderId,
         customer_name: currentCustomer.name,
         customer_phone: currentCustomer.phone,
@@ -1320,14 +1317,29 @@
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
-      liveOrders.unshift(orderPayload);
+      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=Order_${currentOrderId}`;
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+
+      document.getElementById("upiQrCodeImg").src = qrCodeUrl;
+      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${finalTotal}`;
+      document.getElementById("upiIntentLink").href = upiUrl;
+
+      document.getElementById("cartModal").classList.add("hidden");
+      document.getElementById("upiModal").classList.remove("hidden");
+    }
+
+    // STAGE 2: AFTER PAYMENT IS COMPLETED -> TRIGGER TELEGRAM TO OWNER
+    async function confirmPaymentAndDispatchTelegram() {
+      if (!preparedOrderPayload) return;
+
+      liveOrders.unshift(preparedOrderPayload);
       localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
 
       try {
         await fetch(`${API_BASE}/orders`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(orderPayload)
+          body: JSON.stringify(preparedOrderPayload)
         });
       } catch (e) {
         console.log("Recorded to local order cache.");
@@ -1335,15 +1347,10 @@
 
       shoppingCart = [];
       updateCartBadge();
-      toggleCartModal();
+      closeUpiModal();
 
-      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=Order_${currentOrderId}`;
-      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
-
-      document.getElementById("upiQrCodeImg").src = qrCodeUrl;
-      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${finalTotal}`;
-      document.getElementById("upiIntentLink").href = upiUrl;
-      document.getElementById("upiModal").classList.remove("hidden");
+      alert(`🎉 Payment submitted! Your Order (${preparedOrderPayload.order_id}) is confirmed and sent for dispatch.`);
+      preparedOrderPayload = null;
     }
 
     function closeUpiModal() {
