@@ -8,7 +8,6 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Premium Boutique Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -50,7 +49,7 @@
 </head>
 <body class="bg-[#FAF4F6] text-[#241C20] pb-28 selection:bg-pink-100">
 
-  <!-- FULL SCREEN SECTION POP-UP BANNER -->
+  <!-- FULL SCREEN POPUP RIBBON -->
   <div id="fullScreenPopRibbon" class="fixed top-0 left-0 right-0 w-full z-50 pointer-events-none opacity-0 shadow-2xl">
     <div class="w-full bg-gradient-to-r from-[#170B11] via-[#2F1221] to-[#170B11] border-b-2 border-[#D4AF37] px-6 py-4 sm:py-5 flex items-center justify-between shadow-2xl backdrop-blur-md">
       <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
@@ -77,7 +76,7 @@
     </div>
   </div>
 
-  <!-- Dynamic Top Announcement Bar -->
+  <!-- Announcement Bar -->
   <div id="dynamicFestivalBanner" class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨</span>
   </div>
@@ -86,7 +85,7 @@
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
-      <!-- Brand Logo -->
+      <!-- Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
           <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
@@ -103,31 +102,37 @@
         </div>
       </div>
       
-      <!-- Top Actions -->
+      <!-- Header Actions & Customer Auth -->
       <div class="flex items-center gap-2">
+        <!-- Customer Account / Login Pill -->
+        <button onclick="openCustomerAuthModal()" id="customerAuthBtn" class="bg-pink-50 border border-pink-200 text-[#1A1316] text-[11px] font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 hover:bg-pink-100 transition">
+          <span id="authBtnIcon">👤</span>
+          <span id="authBtnText">Login</span>
+        </button>
+
+        <!-- Cart Trigger -->
         <button onclick="toggleCartModal()" class="relative bg-pink-50 border border-pink-200 text-[#1A1316] font-bold p-2.5 rounded-xl text-xs flex items-center gap-1.5 hover:bg-pink-100 transition">
           <span>🛍️ Bag</span>
           <span id="cartCountBadge" class="bg-[#1A1316] text-[#F4D068] text-[10px] font-black px-1.5 py-0.2 rounded-full">0</span>
         </button>
 
-        <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-[11px] sm:text-xs font-bold px-3.5 sm:px-4 py-2 rounded-xl shadow-md flex items-center gap-1.5 transition transform hover:scale-105">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.029.376-.087c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.553 4.095 1.523 5.823l-1.616 5.908 6.071-1.593c1.668.91 3.57 1.42 5.599 1.42 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
-          <span>Ask WhatsApp</span>
+        <button onclick="sendFullCatalogWhatsApp()" class="hidden sm:flex bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-md items-center gap-1.5 transition">
+          <span>💬 Ask WhatsApp</span>
         </button>
 
-        <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-pink-50/80 border border-pink-200 text-xs font-semibold text-[#1A1316] rounded-xl px-2.5 py-2 focus:outline-none cursor-pointer">
-          <option value="en">🇬🇧 English</option>
-          <option value="hi">🇮🇳 हिंदी</option>
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-pink-50/80 border border-pink-200 text-xs font-semibold text-[#1A1316] rounded-xl px-2 py-2 focus:outline-none cursor-pointer">
+          <option value="en">🇬🇧 En</option>
+          <option value="hi">🇮🇳 हिं</option>
         </select>
       </div>
     </div>
   </header>
 
-  <!-- Sticky Section Navigation & Advanced Filter/Search Bar -->
+  <!-- Sticky Section & Filter Bar -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
-      <!-- Category Pills -->
+      <!-- Category Navigation Pills -->
       <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
         <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
           👑 Royal Bridal Suite
@@ -146,7 +151,7 @@
         </a>
       </div>
 
-      <!-- Live Search & Filtering Bar -->
+      <!-- Search & Filters -->
       <div class="flex flex-col sm:flex-row gap-2">
         <div class="relative flex-1">
           <input 
@@ -181,7 +186,7 @@
     </div>
   </div>
 
-  <!-- Main Container -->
+  <!-- Main Content -->
   <main class="max-w-6xl mx-auto px-4 py-6">
 
     <!-- Store vs Owner Switcher -->
@@ -190,7 +195,7 @@
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
 
-    <!-- Live Search & Filter Results Grid -->
+    <!-- Filtered Results Grid -->
     <section id="searchResultsSection" class="hidden space-y-4 mb-12">
       <div class="flex items-center justify-between border-b border-pink-200 pb-2">
         <h2 class="text-lg font-bold text-[#1A1316] font-cormorant" id="searchHeader">Filtered Products</h2>
@@ -199,10 +204,10 @@
       <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
     </section>
 
-    <!-- 1. Customer Store View -->
+    <!-- 1. Customer Storefront -->
     <div id="storeSection" class="space-y-12">
 
-      <!-- CLEAN SINGLE HERO BANNER -->
+      <!-- Hero Banner -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-2xl space-y-4">
           
@@ -211,7 +216,7 @@
               <span id="heroBadgeText">👑 Exclusive Bridal & Wholesale Hub</span>
             </div>
             <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-bold">
-              <span>🎟️ Promo Coupons Active at Checkout</span>
+              <span>🎟️ Doorstep Delivery Available</span>
             </div>
           </div>
 
@@ -232,11 +237,10 @@
             </a>
           </div>
         </div>
-
         <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
-      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
+      <!-- SECTIONS -->
       <section id="bridal-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -246,14 +250,10 @@
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Heavy bridal choodas, dulhan velvet sets & ceremonial gold-tone bangles</p>
           </div>
-          <span class="text-[11px] font-bold bg-[#1A1316] text-[#F4D068] px-3.5 py-1.5 rounded-full border border-[#D4AF37]/40 shadow-sm hidden sm:inline-block">
-            Bridal Special
-          </span>
         </div>
         <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
       <section id="festive-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -263,14 +263,10 @@
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Vibrant velvet sets, party latkan accessories, and glitter highlights</p>
           </div>
-          <span class="text-[11px] font-bold bg-pink-100 text-[#8C2E58] px-3.5 py-1.5 rounded-full border border-pink-300 shadow-sm hidden sm:inline-block">
-            Festive 2026
-          </span>
         </div>
         <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 3: STORE BEST SELLERS -->
       <section id="bestseller-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -280,14 +276,10 @@
             </div>
             <p class="text-xs text-[#A64B74] font-medium mt-0.5">Most in-demand wholesale lots & daily fast-movers</p>
           </div>
-          <span class="text-[11px] font-bold bg-amber-100 text-amber-900 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-sm hidden sm:inline-block">
-            Top Trending
-          </span>
         </div>
         <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 4: PURSES & CLUTCHES -->
       <section id="purses-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -301,7 +293,6 @@
         <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- SECTION 5: UNDERCLOTHES -->
       <section id="apparel-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -315,7 +306,7 @@
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
-      <!-- Boutique Location & Trust Footer -->
+      <!-- Offline Location Footer -->
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-pink-200/80 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-100 pb-5">
           <div>
@@ -339,7 +330,7 @@
             <p class="text-stone-500">10:00 AM – 10:00 PM</p>
           </div>
           <div class="space-y-1">
-            <p class="font-bold text-[#1A1316]">💬 Wholesale & Direct Orders</p>
+            <p class="font-bold text-[#1A1316]">💬 Wholesale Helpline</p>
             <p class="font-medium text-stone-800">Direct Store Helpline</p>
             <a href="https://wa.me/919411729786" target="_blank" class="text-[#25D366] font-bold hover:underline block">+91 94117 29786</a>
           </div>
@@ -348,13 +339,13 @@
 
     </div>
 
-    <!-- 2. Secure Owner Dashboard View (Passkey Protected + Coupon Manager) -->
+    <!-- 2. Secure Owner Dashboard View (Catalog, Coupons & Order Feed) -->
     <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
         <div>
           <h2 class="text-base font-bold text-[#1A1316]">Owner Admin Portal</h2>
-          <p class="text-xs text-stone-500 mt-1">Enter your secure owner passkey to manage inventory & coupons.</p>
+          <p class="text-xs text-stone-500 mt-1">Enter your secure owner passkey to manage inventory, orders & coupons.</p>
         </div>
         <input type="password" id="ownerPinInput" placeholder="Enter Secret Passkey" class="w-full text-center text-sm font-bold py-3 bg-pink-50/50 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3.5 rounded-xl hover:bg-stone-900 transition shadow-md">Unlock Portal</button>
@@ -362,9 +353,27 @@
       </div>
 
       <!-- Owner Management Panel -->
-      <div id="productFormBox" class="hidden space-y-6 max-w-2xl mx-auto">
+      <div id="productFormBox" class="hidden space-y-6 max-w-3xl mx-auto">
         
-        <!-- SECTION A: Add Product Form with MRP Original Price & Multi-Category -->
+        <!-- SECTION 1: LIVE INCOMING ORDERS FEED -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-pink-100 pb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-800 text-[#F4D068] flex items-center justify-center font-bold text-sm">📦</div>
+              <div>
+                <h3 class="text-base font-bold text-[#1A1316]">Customer Orders & Delivery Details</h3>
+                <p class="text-[11px] text-stone-500">Live feed of orders placed with customer address & quantities.</p>
+              </div>
+            </div>
+            <button onclick="fetchOrders()" class="text-xs text-[#A64B74] font-bold hover:underline">🔄 Refresh Orders</button>
+          </div>
+
+          <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto">
+            <!-- Order Cards Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- SECTION 2: Add Product Form -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -380,9 +389,8 @@
               <input type="text" id="pTitle" required placeholder="e.g. Royal Bridal Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
             </div>
 
-            <!-- MULTI-CATEGORY SELECTION -->
             <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1.5">Assign to Categories & Sections (Select all that apply)</label>
+              <label class="block text-xs font-bold text-stone-700 mb-1.5">Assign to Categories & Sections</label>
               <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100">
                 <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
                   <input type="checkbox" value="Bridal" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
@@ -407,10 +415,9 @@
               </div>
             </div>
 
-            <!-- PRICING & MRP ORIGINAL PRICE -->
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div>
-                <label class="block text-xs font-bold text-stone-500 mb-1">Original Price / MRP (₹)</label>
+                <label class="block text-xs font-bold text-stone-500 mb-1">Original MRP (₹)</label>
                 <input type="number" id="pOriginal" placeholder="1100" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/20 border border-pink-200 rounded-xl focus:outline-none">
               </div>
               <div>
@@ -418,7 +425,7 @@
                 <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm font-bold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
               </div>
               <div class="col-span-2 sm:col-span-1">
-                <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount % Tag (Optional)</label>
+                <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount % Tag</label>
                 <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3.5 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
               </div>
             </div>
@@ -468,7 +475,7 @@
           </form>
         </div>
 
-        <!-- SECTION B: Active Promo Coupons Manager -->
+        <!-- SECTION 3: Promo Coupons Manager -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm space-y-4">
           <div class="flex items-center justify-between border-b border-pink-100 pb-3">
             <div class="flex items-center gap-2">
@@ -480,7 +487,6 @@
             </div>
           </div>
 
-          <!-- Coupon Creator Form -->
           <form onsubmit="createCoupon(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
             <div>
               <label class="block text-[11px] font-bold text-stone-700 mb-1">Coupon Code</label>
@@ -497,24 +503,19 @@
             </div>
           </form>
 
-          <!-- Active Coupons List -->
           <div class="pt-3 border-t border-pink-100">
             <h4 class="text-xs font-bold text-stone-700 mb-2">Active Store Coupons</h4>
-            <div id="activeCouponsList" class="space-y-2 max-h-48 overflow-y-auto">
-              <!-- Rendered via JS -->
-            </div>
+            <div id="activeCouponsList" class="space-y-2 max-h-48 overflow-y-auto"></div>
           </div>
         </div>
 
-        <!-- SECTION C: Listed Inventory Manager -->
+        <!-- SECTION 4: Listed Inventory Manager -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-3 border-b border-pink-100 pb-3">
             <h3 class="text-sm font-bold text-[#1A1316]">Manage Listed Items</h3>
             <span id="inventoryCountBadge" class="text-[11px] font-bold text-[#A64B74] bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">0 items</span>
           </div>
-          <div id="ownerInventoryList" class="space-y-2 max-h-72 overflow-y-auto">
-            <!-- Items rendered via JS -->
-          </div>
+          <div id="ownerInventoryList" class="space-y-2 max-h-72 overflow-y-auto"></div>
         </div>
 
       </div>
@@ -522,7 +523,55 @@
 
   </main>
 
-  <!-- Shopping Cart & Checkout Modal with Promo Coupon Engine -->
+  <!-- CUSTOMER LOGIN & DELIVERY DETAILS MODAL -->
+  <div id="customerAuthModal" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-pink-200">
+      <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📍</span>
+          <div>
+            <h3 class="font-cormorant font-bold text-lg text-[#F4D068]">Customer Delivery Details</h3>
+            <p class="text-[10px] text-pink-200/80">Save once for seamless doorstep delivery & orders</p>
+          </div>
+        </div>
+        <button onclick="closeCustomerAuthModal()" class="text-stone-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <form onsubmit="saveCustomerProfile(event)" class="p-5 space-y-3.5 bg-white text-xs">
+        <div>
+          <label class="block font-bold text-stone-700 mb-1">Full Name *</label>
+          <input type="text" id="custNameInput" required placeholder="e.g. Fatima Khan" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+        </div>
+
+        <div>
+          <label class="block font-bold text-stone-700 mb-1">WhatsApp / Contact Number *</label>
+          <input type="tel" id="custPhoneInput" required placeholder="e.g. 9876543210" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+        </div>
+
+        <div>
+          <label class="block font-bold text-stone-700 mb-1">Complete Street / Delivery Address *</label>
+          <textarea id="custAddressInput" required rows="2" placeholder="House/Flat No., Landmark, Colony/Area..." class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-stone-700 mb-1">City / Town *</label>
+            <input type="text" id="custCityInput" required placeholder="Lucknow" value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-stone-700 mb-1">Pincode *</label>
+            <input type="text" id="custPincodeInput" required placeholder="226003" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl hover:bg-stone-900 transition shadow-md border border-[#D4AF37]/50 mt-2">
+          ✓ Save & Continue Shopping
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shopping Cart & Checkout Modal -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200 flex flex-col max-h-[90vh]">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -535,9 +584,17 @@
 
       <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]"></div>
 
-      <!-- Cart Total & Coupon Section -->
       <div class="p-4 bg-white border-t border-pink-100 space-y-3">
         
+        <!-- Live Delivery Address Review Bar -->
+        <div id="cartCustomerAddressBar" class="bg-stone-50 p-2.5 rounded-2xl border border-stone-200 text-xs flex items-center justify-between">
+          <div class="truncate">
+            <span class="font-bold text-[#1A1316] block truncate" id="cartCustSummaryName">Deliver to: Guest</span>
+            <span class="text-[10px] text-stone-500 truncate block" id="cartCustSummaryAddress">Tap to enter delivery address</span>
+          </div>
+          <button onclick="openCustomerAuthModal()" class="text-[#A64B74] font-bold text-[11px] underline flex-shrink-0 ml-2">Edit</button>
+        </div>
+
         <!-- Live Coupon Redemption Box -->
         <div class="bg-pink-50/70 p-2.5 rounded-2xl border border-pink-200/80 space-y-1.5">
           <label class="block text-[11px] font-bold text-[#1A1316]">Have a Promo Coupon Code?</label>
@@ -581,7 +638,7 @@
     </div>
   </div>
 
-  <!-- UPI Payment Intent & QR Modal -->
+  <!-- UPI Modal -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
       <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Instant UPI Payment</h3>
@@ -649,7 +706,7 @@
     </div>
   </div>
 
-  <!-- Floating AI Assistant Button -->
+  <!-- Floating AI Assistant -->
   <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-40 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
@@ -674,7 +731,6 @@
       </div>
     </div>
 
-    <!-- Chat Input -->
     <div class="p-3 border-t border-pink-100 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-pink-50 text-stone-700 hover:text-[#A64B74] p-2.5 rounded-xl text-sm transition">
         🎙️
@@ -689,21 +745,91 @@
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
-    // Passkey Security
+    // Security Passkey
     const OWNER_PASSKEY = "InshaAdmin@2026"; 
     let failedAttempts = 0;
     let isLocked = false;
 
-    // URL Admin bypass: ?admin_key=InshaAdmin@2026
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("admin_key") === OWNER_PASSKEY) {
-      sessionStorage.setItem("owner_authenticated", "true");
+    // Customer Session Profile (Persisted in localStorage)
+    let currentCustomer = JSON.parse(localStorage.getItem('insha_customer_user') || 'null');
+    let pendingCartAction = null; // Callback holder for action after login
+
+    // Store Active Orders (Local + Backend)
+    let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
+
+    function updateAuthHeaderUI() {
+      const btn = document.getElementById("customerAuthBtn");
+      const icon = document.getElementById("authBtnIcon");
+      const text = document.getElementById("authBtnText");
+      
+      const summaryName = document.getElementById("cartCustSummaryName");
+      const summaryAddr = document.getElementById("cartCustSummaryAddress");
+
+      if (currentCustomer && currentCustomer.name) {
+        icon.innerText = "✓";
+        text.innerText = currentCustomer.name.split(' ')[0];
+        if (summaryName) summaryName.innerText = `Deliver to: ${currentCustomer.name} (${currentCustomer.phone})`;
+        if (summaryAddr) summaryAddr.innerText = `${currentCustomer.address}, ${currentCustomer.city} - ${currentCustomer.pincode}`;
+      } else {
+        icon.innerText = "👤";
+        text.innerText = "Login";
+        if (summaryName) summaryName.innerText = "Deliver to: Guest User";
+        if (summaryAddr) summaryAddr.innerText = "Tap Edit to enter delivery address";
+      }
+    }
+
+    function openCustomerAuthModal(callback = null) {
+      pendingCartAction = callback;
+      if (currentCustomer) {
+        document.getElementById("custNameInput").value = currentCustomer.name || "";
+        document.getElementById("custPhoneInput").value = currentCustomer.phone || "";
+        document.getElementById("custAddressInput").value = currentCustomer.address || "";
+        document.getElementById("custCityInput").value = currentCustomer.city || "Lucknow";
+        document.getElementById("custPincodeInput").value = currentCustomer.pincode || "";
+      }
+      document.getElementById("customerAuthModal").classList.remove("hidden");
+    }
+
+    function closeCustomerAuthModal() {
+      document.getElementById("customerAuthModal").classList.add("hidden");
+    }
+
+    function saveCustomerProfile(e) {
+      e.preventDefault();
+      const profile = {
+        name: document.getElementById("custNameInput").value.trim(),
+        phone: document.getElementById("custPhoneInput").value.trim(),
+        address: document.getElementById("custAddressInput").value.trim(),
+        city: document.getElementById("custCityInput").value.trim(),
+        pincode: document.getElementById("custPincodeInput").value.trim()
+      };
+
+      currentCustomer = profile;
+      localStorage.setItem('insha_customer_user', JSON.stringify(profile));
+      updateAuthHeaderUI();
+      closeCustomerAuthModal();
+
+      alert(`Welcome, ${profile.name}! Your delivery address is saved.`);
+
+      if (typeof pendingCartAction === 'function') {
+        const action = pendingCartAction;
+        pendingCartAction = null;
+        action();
+      }
+    }
+
+    function requireCustomerLogin(actionCallback) {
+      if (!currentCustomer || !currentCustomer.name || !currentCustomer.address) {
+        openCustomerAuthModal(actionCallback);
+        return false;
+      }
+      return true;
     }
 
     // Dynamic Calendar & Seasonal Festival Engine
     function applyCalendarFestivalTheme() {
       const now = new Date();
-      const month = now.getMonth() + 1; // 1-12
+      const month = now.getMonth() + 1;
       const year = now.getFullYear();
 
       const bannerText = document.getElementById("festivalBannerText");
@@ -755,8 +881,6 @@
 
     let allProducts = JSON.parse(localStorage.getItem('insha_catalog_cache') || '[]');
     let shoppingCart = [];
-    
-    // Active Coupons
     let activeCoupons = JSON.parse(localStorage.getItem('insha_coupons') || '[{"code":"WELCOME10","discount":10},{"code":"FESTIVE15","discount":15}]');
     let appliedCoupon = null;
 
@@ -767,13 +891,9 @@
       const ribbon = document.getElementById("fullScreenPopRibbon");
       document.getElementById("popIcon").innerText = icon;
       document.getElementById("popTitle").innerText = title;
-
       ribbon.classList.add("active");
-
       clearTimeout(ribbonTimeout);
-      ribbonTimeout = setTimeout(() => {
-        ribbon.classList.remove("active");
-      }, 1600);
+      ribbonTimeout = setTimeout(() => { ribbon.classList.remove("active"); }, 1600);
     }
 
     const observerOptions = { root: null, rootMargin: "-45% 0px -45% 0px", threshold: 0 };
@@ -817,6 +937,7 @@
           document.getElementById("productFormBox").classList.remove("hidden");
           renderOwnerInventory();
           renderActiveCoupons();
+          fetchOrders();
         }
       }
     }
@@ -836,6 +957,7 @@
         document.getElementById("ownerPinInput").value = "";
         renderOwnerInventory();
         renderActiveCoupons();
+        fetchOrders();
       } else {
         failedAttempts += 1;
         if (failedAttempts >= 3) {
@@ -862,8 +984,12 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    // CART & COUPON CALCULATOR
+    // CART WITH LOGIN GATE
     function addToCart(title, price, img, orderType = 'retail', moq = 1) {
+      if (!requireCustomerLogin(() => addToCart(title, price, img, orderType, moq))) {
+        return;
+      }
+
       const cartKey = `${title}_${orderType}`;
       const qtyToAdd = orderType === 'wholesale' ? (parseInt(moq) || 10) : 1;
       const existing = shoppingCart.find(i => i.cartKey === cartKey);
@@ -892,9 +1018,7 @@
 
     function calculateCartTotals() {
       let subtotal = 0;
-      shoppingCart.forEach(item => {
-        subtotal += item.price * item.qty;
-      });
+      shoppingCart.forEach(item => { subtotal += item.price * item.qty; });
 
       let discountAmount = 0;
       if (appliedCoupon && subtotal > 0) {
@@ -944,6 +1068,7 @@
           });
         }
 
+        updateAuthHeaderUI();
         renderCartPricingSummary();
         modal.classList.remove("hidden");
       } else {
@@ -953,7 +1078,6 @@
 
     function renderCartPricingSummary() {
       const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
-      
       document.getElementById("cartSubtotalVal").innerText = `₹${subtotal}`;
       
       const discountRow = document.getElementById("cartDiscountRow");
@@ -1003,29 +1127,85 @@
       toggleCartModal();
     }
 
-    function checkoutWhatsAppOrder() {
+    async function recordOrderToOwnerPortal(orderRecord) {
+      liveOrders.unshift(orderRecord);
+      localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+
+      try {
+        await fetch(`${API_BASE}/orders`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(orderRecord)
+        });
+      } catch (err) {
+        console.log("Order stored locally in cache.");
+      }
+    }
+
+    async function checkoutWhatsAppOrder() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
+      if (!requireCustomerLogin(() => checkoutWhatsAppOrder())) return;
+
       const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
       
-      let msg = "Hello Insha Bangles & Purses! 🌸\n\nI would like to place an order from your website:\n\n";
+      const orderRecord = {
+        customer_name: currentCustomer.name,
+        customer_phone: currentCustomer.phone,
+        delivery_address: currentCustomer.address,
+        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
+        items: [...shoppingCart],
+        subtotal: subtotal,
+        discount: discountAmount,
+        final_total: finalTotal,
+        coupon_code: appliedCoupon ? appliedCoupon.code : "",
+        timestamp: new Date().toLocaleString()
+      };
+
+      await recordOrderToOwnerPortal(orderRecord);
+
+      let msg = "Hello Insha Bangles & Purses!\n\nI would like to place an order from your website:\n\n";
+      
+      msg += "* CUSTOMER & DELIVERY DETAILS:\n";
+      msg += `  Name: ${currentCustomer.name}\n`;
+      msg += `  Phone: ${currentCustomer.phone}\n`;
+      msg += `  Delivery Address: ${currentCustomer.address}, ${currentCustomer.city} - ${currentCustomer.pincode}\n\n`;
+
+      msg += "* ORDER ITEMS:\n";
       shoppingCart.forEach(i => {
         const lineTotal = i.price * i.qty;
-        msg += `• *${i.title}* (${i.orderType.toUpperCase()})\n   Qty: ${i.qty} pcs @ ₹${i.price}/pc = ₹${lineTotal}\n`;
+        msg += `* ${i.title} (${i.orderType.toUpperCase()})\n   Qty: ${i.qty} pcs @ Rs. ${i.price}/pc = Rs. ${lineTotal}\n`;
       });
       
-      msg += `\n📦 Subtotal: ₹${subtotal}\n`;
+      msg += `\n* Subtotal: Rs. ${subtotal}\n`;
       if (appliedCoupon && discountAmount > 0) {
-        msg += `🎟️ Coupon Applied: *${appliedCoupon.code}* (-₹${discountAmount})\n`;
+        msg += `* Coupon Applied: ${appliedCoupon.code} (-Rs. ${discountAmount})\n`;
       }
-      msg += `💰 *Final Payable Total:* ₹${finalTotal}\n\n`;
-      msg += "Please confirm stock availability and share dispatch details!";
+      msg += `* Final Payable Total: Rs. ${finalTotal}\n\n`;
+      msg += "Please confirm order acceptance and share delivery dispatch details!";
       
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
-    function generateUpiPayment() {
+    async function generateUpiPayment() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      const { finalTotal } = calculateCartTotals();
+      if (!requireCustomerLogin(() => generateUpiPayment())) return;
+
+      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+
+      const orderRecord = {
+        customer_name: currentCustomer.name,
+        customer_phone: currentCustomer.phone,
+        delivery_address: currentCustomer.address,
+        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
+        items: [...shoppingCart],
+        subtotal: subtotal,
+        discount: discountAmount,
+        final_total: finalTotal,
+        coupon_code: appliedCoupon ? appliedCoupon.code : "",
+        timestamp: new Date().toLocaleString()
+      };
+
+      await recordOrderToOwnerPortal(orderRecord);
       
       const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=OrderPayment`;
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
@@ -1040,6 +1220,58 @@
 
     function closeUpiModal() {
       document.getElementById("upiModal").classList.add("hidden");
+    }
+
+    // ORDERS FEED IN OWNER PORTAL
+    async function fetchOrders() {
+      const list = document.getElementById("ownerOrdersList");
+      if (!list) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/orders`);
+        const data = await res.json();
+        if (data && data.orders && data.orders.length > 0) {
+          liveOrders = data.orders;
+          localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
+        }
+      } catch (e) {
+        console.log("Serving offline order feed.");
+      }
+
+      if (liveOrders.length === 0) {
+        list.innerHTML = `<div class="text-stone-400 text-xs text-center py-6">No customer orders placed yet.</div>`;
+        return;
+      }
+
+      list.innerHTML = liveOrders.map((ord, idx) => {
+        const itemsSummary = (ord.items || []).map(i => `• ${i.title} (${i.qty} pcs @ ₹${i.price})`).join('<br>');
+        return `
+          <div class="bg-pink-50/70 p-3.5 rounded-2xl border border-pink-100 space-y-2 shadow-sm text-xs">
+            <div class="flex items-center justify-between border-b border-pink-200/60 pb-1.5">
+              <div>
+                <span class="font-black text-[#1A1316] text-sm">${ord.customer_name}</span>
+                <span class="text-stone-500 font-bold ml-1.5">(${ord.customer_phone})</span>
+              </div>
+              <span class="text-[10px] text-stone-400 font-semibold">${ord.timestamp || 'Recent'}</span>
+            </div>
+
+            <div class="text-stone-700 bg-white p-2 rounded-xl border border-pink-100/80">
+              <span class="font-bold text-[#A64B74]">📍 Delivery Address:</span>
+              <p class="font-medium text-stone-800">${ord.delivery_address}, ${ord.city_pincode}</p>
+            </div>
+
+            <div class="text-stone-600 space-y-1">
+              <span class="font-bold text-[#1A1316]">🛍️ Items Ordered:</span>
+              <div class="text-[11px] font-medium leading-relaxed pl-1 text-stone-800">${itemsSummary}</div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1 border-t border-pink-200/60 font-bold">
+              <span class="text-stone-500">Subtotal: ₹${ord.subtotal} ${ord.discount ? `(Disc: -₹${ord.discount})` : ''}</span>
+              <span class="text-sm font-black text-emerald-700">Total: ₹${ord.final_total}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     // OWNER COUPON SUITE
@@ -1074,7 +1306,6 @@
       const discount = parseInt(document.getElementById("couponDiscountInput").value);
 
       if (!code || isNaN(discount) || discount <= 0) return alert("Please enter valid coupon details.");
-
       if (activeCoupons.some(c => c.code === code)) return alert("A coupon with this code already exists.");
 
       activeCoupons.push({ code, discount });
@@ -1082,7 +1313,6 @@
       
       document.getElementById("couponCodeInput").value = "";
       document.getElementById("couponDiscountInput").value = "";
-      
       renderActiveCoupons();
       alert(`Coupon "${code}" (${discount}% OFF) activated successfully!`);
     }
@@ -1420,14 +1650,13 @@
       btn.disabled = true;
       btn.innerText = "Publishing...";
 
-      // Gather multi-selected categories
       const selectedCategories = [];
       document.querySelectorAll(".categoryCheckbox:checked").forEach(cb => {
         selectedCategories.push(cb.value);
       });
 
       if (selectedCategories.length === 0) {
-        selectedCategories.push("Bridal"); // Default fallback
+        selectedCategories.push("Bridal");
       }
 
       const origPriceVal = document.getElementById("pOriginal").value ? parseFloat(document.getElementById("pOriginal").value) : null;
@@ -1503,6 +1732,7 @@
     }
 
     applyCalendarFestivalTheme();
+    updateAuthHeaderUI();
     fetchProducts();
   </script>
 </body>
