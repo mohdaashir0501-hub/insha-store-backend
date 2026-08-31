@@ -8,6 +8,7 @@
   <link rel="manifest" href="/manifest.json" />
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Premium Boutique Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,10 +23,7 @@
       color: #1A1316;
     }
     .hero-gradient {
-      background: radial-gradient(circle at 85% 15%, #441A30 0%, #1E0F17 55%, #10070C 100%);
-    }
-    .festive-spotlight-gradient {
-      background: linear-gradient(135deg, #2D0F1E 0%, #4A1A33 50%, #1A0A12 100%);
+      background: radial-gradient(circle at 85% 15%, #4A1733 0%, #200E19 55%, #10060C 100%);
     }
     .logo-ring {
       background: radial-gradient(circle, #FCE8F0 0%, #F5C2D5 100%);
@@ -52,6 +50,7 @@
 </head>
 <body class="bg-[#FAF4F6] text-[#241C20] pb-28 selection:bg-pink-100">
 
+  <!-- FULL SCREEN SECTION POP-UP BANNER -->
   <div id="fullScreenPopRibbon" class="fixed top-0 left-0 right-0 w-full z-50 pointer-events-none opacity-0 shadow-2xl">
     <div class="w-full bg-gradient-to-r from-[#170B11] via-[#2F1221] to-[#170B11] border-b-2 border-[#D4AF37] px-6 py-4 sm:py-5 flex items-center justify-between shadow-2xl backdrop-blur-md">
       <div class="max-w-6xl mx-auto w-full flex items-center justify-between">
@@ -78,13 +77,16 @@
     </div>
   </div>
 
+  <!-- Dynamic Top Announcement Bar -->
   <div id="dynamicFestivalBanner" class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
     <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨</span>
   </div>
 
+  <!-- Header -->
   <header class="glass-nav border-b border-pink-100 sticky top-0 z-40 px-4 py-2.5 shadow-sm">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
       
+      <!-- Brand Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full logo-ring flex items-center justify-center shadow-md flex-shrink-0 relative overflow-hidden">
           <svg viewBox="0 0 100 100" class="w-8 h-8 drop-shadow-sm">
@@ -101,6 +103,7 @@
         </div>
       </div>
       
+      <!-- Top Actions -->
       <div class="flex items-center gap-2">
         <button onclick="toggleCartModal()" class="relative bg-pink-50 border border-pink-200 text-[#1A1316] font-bold p-2.5 rounded-xl text-xs flex items-center gap-1.5 hover:bg-pink-100 transition">
           <span>🛍️ Bag</span>
@@ -120,9 +123,11 @@
     </div>
   </header>
 
+  <!-- Sticky Section Navigation & Advanced Filter/Search Bar -->
   <div class="sticky top-[59px] z-30 bg-[#FAF4F6]/95 backdrop-blur-md border-b border-pink-200/70 py-2.5 px-4 shadow-sm">
     <div class="max-w-6xl mx-auto space-y-2.5">
       
+      <!-- Category Pills -->
       <div class="flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
         <a href="#bridal-section" onclick="triggerFullRibbon('👑', 'Royal Bridal Suite')" class="flex-shrink-0 px-3.5 py-1.5 rounded-full font-bold bg-[#1A1316] text-[#F4D068] shadow-sm border border-[#D4AF37]/50 hover:opacity-90 transition">
           👑 Royal Bridal Suite
@@ -141,6 +146,7 @@
         </a>
       </div>
 
+      <!-- Live Search & Filtering Bar -->
       <div class="flex flex-col sm:flex-row gap-2">
         <div class="relative flex-1">
           <input 
@@ -175,13 +181,16 @@
     </div>
   </div>
 
+  <!-- Main Container -->
   <main class="max-w-6xl mx-auto px-4 py-6">
 
+    <!-- Store vs Owner Switcher -->
     <div class="flex bg-pink-100/70 p-1 rounded-2xl mb-6 max-w-xs mx-auto border border-pink-200/50">
       <button onclick="switchTab('store')" id="tabStoreBtn" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white shadow-sm text-[#1A1316] transition">🛍️ Shop Store</button>
       <button onclick="switchTab('owner')" id="tabOwnerBtn" class="flex-1 py-2 text-xs font-bold rounded-xl text-stone-600 hover:text-[#1A1316] transition">⚙️ Owner Portal</button>
     </div>
 
+    <!-- Live Search & Filter Results Grid -->
     <section id="searchResultsSection" class="hidden space-y-4 mb-12">
       <div class="flex items-center justify-between border-b border-pink-200 pb-2">
         <h2 class="text-lg font-bold text-[#1A1316] font-cormorant" id="searchHeader">Filtered Products</h2>
@@ -190,56 +199,44 @@
       <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
     </section>
 
+    <!-- 1. Customer Store View -->
     <div id="storeSection" class="space-y-12">
 
-      <div id="liveOccasionSpotlight" class="rounded-3xl festive-spotlight-gradient text-white p-5 sm:p-7 border border-[#D4AF37]/50 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2 text-center md:text-left z-10">
-          <div class="inline-flex items-center gap-2 bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-3 py-1 rounded-full text-[#F4D068] text-[10px] font-black uppercase tracking-widest">
-            <span id="occasionBadgeIcon">✨</span>
-            <span id="occasionBadgeText">FESTIVAL CELEBRATION ACTIVE</span>
-          </div>
-          <h3 id="occasionHeading" class="text-2xl sm:text-3xl font-cormorant font-bold italic text-[#FFEBF2]">
-            Raksha Bandhan & Festive Season Special
-          </h3>
-          <p id="occasionDescription" class="text-xs text-pink-100/80 max-w-xl leading-relaxed">
-            Special festive velvet bangles, elegant party clutches, and gift set packages with direct wholesale pricing for sisters & families.
-          </p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-3 z-10 w-full md:w-auto">
-          <button onclick="sendFullCatalogWhatsApp()" class="w-full sm:w-auto bg-[#25D366] hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-md flex items-center justify-center gap-2 transition">
-            <span>💬 Get Festival Catalog</span>
-          </button>
-          <a href="#festive-section" class="w-full sm:w-auto gold-gradient-btn font-extrabold text-xs px-5 py-3 rounded-xl shadow-md text-center hover:opacity-90 transition">
-            <span>Explore Sets ✦</span>
-          </a>
-        </div>
-        <div class="absolute -right-12 -top-12 w-48 h-48 bg-[#D4AF37]/15 rounded-full blur-2xl pointer-events-none"></div>
-      </div>
-
+      <!-- CLEAN SINGLE HERO BANNER WITH DYNAMIC OCCASION ACCENT -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
-        <div class="relative z-10 max-w-xl space-y-4">
-          <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[11px] font-bold uppercase tracking-[0.2em]">
-            <span id="heroBadgeText">👑 Exclusive Bridal & Wholesale Hub</span>
+        <div class="relative z-10 max-w-2xl space-y-4">
+          
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-500/20 border border-[#D4AF37]/50 text-[#F4D068] text-[10px] font-extrabold uppercase tracking-[0.2em]">
+              <span id="heroBadgeText">👑 Exclusive Bridal & Wholesale Hub</span>
+            </div>
+            <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-bold">
+              <span>🎟️ Promo Coupons Active at Checkout</span>
+            </div>
           </div>
+
           <h2 id="heroTitleText" class="text-3xl sm:text-5xl font-cormorant font-bold italic leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFEBF2] via-[#F6D787] to-[#E5A823]">
-            Royal Bridal Velvet Sets & Designer Clutches
+            Festive Velvet Bangles & Royal Bridal Choodas
           </h2>
-          <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/80 leading-relaxed font-normal">
-            Handcrafted traditional bridal choodas, rich velvet bangles, stone-embellished clutches, and daily underclothes available in single retail sets and bulk wholesale lots.
+          
+          <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/90 leading-relaxed font-normal">
+            Handcrafted festive velvet bangle sets, Kundan dulhan choodas, stone party clutches, and ladies undergarment lots available in single retail packs and bulk wholesale cartons.
           </p>
+
           <div class="flex flex-wrap items-center gap-3 pt-3">
             <button onclick="sendFullCatalogWhatsApp()" class="bg-[#25D366] text-white font-bold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:bg-emerald-600 transition flex items-center gap-2">
               <span>💬 Request WhatsApp Catalog</span>
             </button>
-            <button onclick="toggleChat()" class="gold-gradient-btn font-extrabold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:opacity-95 transition flex items-center gap-2">
-              <span>✨ Ask AI Assistant</span>
-            </button>
+            <a href="#festive-section" class="gold-gradient-btn font-extrabold text-xs px-5 py-3.5 rounded-xl shadow-lg hover:opacity-95 transition flex items-center gap-2">
+              <span>✨ Explore Festive Sets</span>
+            </a>
           </div>
         </div>
-        <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
       </div>
 
+      <!-- SECTION 1: ROYAL BRIDAL SUITE -->
       <section id="bridal-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -256,6 +253,7 @@
         <div id="bridalGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 2: FESTIVE SEASON SPECIALS -->
       <section id="festive-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -272,6 +270,7 @@
         <div id="festiveGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 3: STORE BEST SELLERS -->
       <section id="bestseller-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -288,6 +287,7 @@
         <div id="bestsellerGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 4: PURSES & CLUTCHES -->
       <section id="purses-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -301,6 +301,7 @@
         <div id="pursesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- SECTION 5: UNDERCLOTHES -->
       <section id="apparel-section" class="scroll-mt-36 space-y-5">
         <div class="flex items-end justify-between border-b border-pink-200/80 pb-3.5">
           <div>
@@ -314,6 +315,7 @@
         <div id="apparelGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
       </section>
 
+      <!-- Boutique Location & Trust Footer -->
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-pink-200/80 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-pink-100 pb-5">
           <div>
@@ -346,111 +348,159 @@
 
     </div>
 
-    <section id="ownerSection" class="hidden">
+    <!-- 2. Secure Owner Dashboard View (Passkey Protected + Coupon Manager) -->
+    <section id="ownerSection" class="hidden space-y-6">
       <div id="pinBox" class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-sm mx-auto text-center space-y-4">
         <div class="w-12 h-12 rounded-2xl bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-lg mx-auto border border-[#D4AF37]/40">🛡️</div>
         <div>
           <h2 class="text-base font-bold text-[#1A1316]">Owner Admin Portal</h2>
-          <p class="text-xs text-stone-500 mt-1">Enter your secure owner passkey to manage catalog.</p>
+          <p class="text-xs text-stone-500 mt-1">Enter your secure owner passkey to manage inventory & coupons.</p>
         </div>
         <input type="password" id="ownerPinInput" placeholder="Enter Secret Passkey" class="w-full text-center text-sm font-bold py-3 bg-pink-50/50 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
         <button onclick="verifyOwnerPin()" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-3.5 rounded-xl hover:bg-stone-900 transition shadow-md">Unlock Portal</button>
         <p id="lockoutWarning" class="text-[10px] text-red-500 font-bold hidden">Too many failed attempts. Locked for 60 seconds.</p>
       </div>
 
-      <div id="productFormBox" class="hidden bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm max-w-lg mx-auto">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-sm">⚙️</div>
-            <h2 class="text-lg font-bold text-[#1A1316]">Add Item to Store</h2>
-          </div>
-          <button onclick="lockOwnerDashboard()" class="text-xs text-stone-400 hover:text-red-500 font-bold">Lock 🔒</button>
-        </div>
+      <!-- Owner Management Panel -->
+      <div id="productFormBox" class="hidden space-y-6 max-w-2xl mx-auto">
         
-        <form onsubmit="addProduct(event)" class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Product Title</label>
-            <input type="text" id="pTitle" required placeholder="e.g. Royal Bridal Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+        <!-- SECTION A: Add Product Form with Discount Option -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-[#1A1316] text-[#F4D068] flex items-center justify-center font-bold text-sm">🛍️</div>
+              <h2 class="text-lg font-bold text-[#1A1316]">Add Item to Store</h2>
+            </div>
+            <button onclick="lockOwnerDashboard()" class="text-xs text-stone-400 hover:text-red-500 font-bold">Lock 🔒</button>
           </div>
+          
+          <form onsubmit="addProduct(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Product Title</label>
+              <input type="text" id="pTitle" required placeholder="e.g. Royal Bridal Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
+            </div>
 
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Category & Section</label>
-              <select id="pCategory" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
-                <option value="Bridal">👑 Royal Bridal Suite</option>
-                <option value="Festive">✨ Festive Specials</option>
-                <option value="Best Seller">🔥 Store Best Sellers</option>
-                <option value="Purses & Clutches">👜 Purses & Clutches</option>
-                <option value="Underclothes">👗 Underclothes & Innerwear</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Retail Price (₹)</label>
-              <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2.5">
-            <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale (₹)</label>
-              <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-stone-700 mb-1">Min MOQ</label>
-              <input type="number" id="pMoq" value="10" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount %</label>
-              <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Take Photo or Upload</label>
-            <div class="space-y-2">
-              <div class="flex gap-2">
-                <label class="flex-1 bg-pink-100 text-[#1A1316] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-200 transition">
-                  <span>📸 Open Camera</span>
-                  <input type="file" accept="image/*" capture="environment" onchange="handleImageFile(event)" class="hidden">
-                </label>
-                <label class="flex-1 bg-pink-50 text-stone-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-100 border border-pink-200 transition">
-                  <span>🖼️ Choose File</span>
-                  <input type="file" accept="image/*" onchange="handleImageFile(event)" class="hidden">
-                </label>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Category & Section</label>
+                <select id="pCategory" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+                  <option value="Bridal">👑 Royal Bridal Suite</option>
+                  <option value="Festive">✨ Festive Specials</option>
+                  <option value="Best Seller">🔥 Store Best Sellers</option>
+                  <option value="Purses & Clutches">👜 Purses & Clutches</option>
+                  <option value="Underclothes">👗 Underclothes & Innerwear</option>
+                </select>
               </div>
-
-              <div id="imgPreviewBox" class="hidden relative rounded-xl overflow-hidden border border-pink-200 h-32 bg-stone-100">
-                <img id="imgPreviewTag" src="" class="w-full h-full object-cover">
-                <button type="button" onclick="clearPreviewImage()" class="absolute top-2 right-2 bg-black/60 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center">✕</button>
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Retail Price (₹)</label>
+                <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
               </div>
-              
-              <input type="url" id="pImg" placeholder="Or paste image URL directly..." class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5">
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale (₹)</label>
+                <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Min MOQ</label>
+                <input type="number" id="pMoq" value="10" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount %</label>
+                <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Take Photo or Upload</label>
+              <div class="space-y-2">
+                <div class="flex gap-2">
+                  <label class="flex-1 bg-pink-100 text-[#1A1316] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-200 transition">
+                    <span>📸 Open Camera</span>
+                    <input type="file" accept="image/*" capture="environment" onchange="handleImageFile(event)" class="hidden">
+                  </label>
+                  <label class="flex-1 bg-pink-50 text-stone-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer hover:bg-pink-100 border border-pink-200 transition">
+                    <span>🖼️ Choose File</span>
+                    <input type="file" accept="image/*" onchange="handleImageFile(event)" class="hidden">
+                  </label>
+                </div>
+
+                <div id="imgPreviewBox" class="hidden relative rounded-xl overflow-hidden border border-pink-200 h-32 bg-stone-100">
+                  <img id="imgPreviewTag" src="" class="w-full h-full object-cover">
+                  <button type="button" onclick="clearPreviewImage()" class="absolute top-2 right-2 bg-black/60 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center">✕</button>
+                </div>
+                
+                <input type="url" id="pImg" placeholder="Or paste image URL directly..." class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1">Description</label>
+              <textarea id="pDesc" rows="2" placeholder="Handcrafted velvet finish, stone embroidery..." class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none"></textarea>
+            </div>
+
+            <button type="submit" id="addBtn" class="w-full bg-[#1A1316] text-[#F4D068] text-sm font-bold py-3.5 rounded-xl hover:bg-stone-900 transition flex items-center justify-center gap-2 border border-[#D4AF37]/50">
+              <span>✨ Publish to Store Catalog</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- SECTION B: Active Promo Coupons Manager -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-pink-100 pb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-emerald-700 text-[#F4D068] flex items-center justify-center font-bold text-sm">🎟️</div>
+              <div>
+                <h3 class="text-base font-bold text-[#1A1316]">Promo Coupon Manager</h3>
+                <p class="text-[11px] text-stone-500">Create discount coupons for customers to use at checkout.</p>
+              </div>
             </div>
           </div>
 
-          <div>
-            <label class="block text-xs font-bold text-stone-700 mb-1">Description</label>
-            <textarea id="pDesc" rows="2" placeholder="Handcrafted velvet finish, stone embroidery..." class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none"></textarea>
+          <!-- Coupon Creator Form -->
+          <form onsubmit="createCoupon(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+            <div>
+              <label class="block text-[11px] font-bold text-stone-700 mb-1">Coupon Code</label>
+              <input type="text" id="couponCodeInput" required placeholder="e.g. FESTIVE15" class="w-full text-xs font-mono uppercase font-bold px-3 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-stone-700 mb-1">Discount (%)</label>
+              <input type="number" id="couponDiscountInput" required min="1" max="90" placeholder="15" class="w-full text-xs font-bold px-3 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+            </div>
+            <div class="flex items-end">
+              <button type="submit" class="w-full bg-[#1A1316] text-[#F4D068] text-xs font-bold py-2.5 rounded-xl hover:bg-stone-900 transition border border-[#D4AF37]/40 shadow-sm">
+                + Create Coupon
+              </button>
+            </div>
+          </form>
+
+          <!-- Active Coupons List -->
+          <div class="pt-3 border-t border-pink-100">
+            <h4 class="text-xs font-bold text-stone-700 mb-2">Active Store Coupons</h4>
+            <div id="activeCouponsList" class="space-y-2 max-h-48 overflow-y-auto">
+              <!-- Rendered via JS -->
+            </div>
           </div>
+        </div>
 
-          <button type="submit" id="addBtn" class="w-full bg-[#1A1316] text-[#F4D068] text-sm font-bold py-3.5 rounded-xl hover:bg-stone-900 transition flex items-center justify-center gap-2 border border-[#D4AF37]/50">
-            <span>✨ Publish to Store Catalog</span>
-          </button>
-        </form>
-
-        <div class="mt-8 pt-6 border-t border-pink-100">
-          <div class="flex items-center justify-between mb-3">
+        <!-- SECTION C: Listed Inventory Manager -->
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
+          <div class="flex items-center justify-between mb-3 border-b border-pink-100 pb-3">
             <h3 class="text-sm font-bold text-[#1A1316]">Manage Listed Items</h3>
-            <span id="inventoryCountBadge" class="text-[11px] font-bold text-[#A64B74] bg-pink-50 px-2 py-0.5 rounded-full border border-pink-200">0 items</span>
+            <span id="inventoryCountBadge" class="text-[11px] font-bold text-[#A64B74] bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">0 items</span>
           </div>
           <div id="ownerInventoryList" class="space-y-2 max-h-72 overflow-y-auto">
-            </div>
+            <!-- Items rendered via JS -->
+          </div>
         </div>
+
       </div>
     </section>
 
   </main>
 
+  <!-- Shopping Cart & Checkout Modal with Promo Coupon Engine -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200 flex flex-col max-h-[90vh]">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -463,10 +513,38 @@
 
       <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]"></div>
 
+      <!-- Cart Total & Coupon Section -->
       <div class="p-4 bg-white border-t border-pink-100 space-y-3">
-        <div class="flex items-center justify-between text-sm">
-          <span class="text-stone-500 font-bold">Total Order Value:</span>
-          <span id="cartTotalVal" class="text-lg font-black text-[#1A1316]">₹0</span>
+        
+        <!-- Live Coupon Redemption Box -->
+        <div class="bg-pink-50/70 p-2.5 rounded-2xl border border-pink-200/80 space-y-1.5">
+          <label class="block text-[11px] font-bold text-[#1A1316]">Have a Promo Coupon Code?</label>
+          <div class="flex gap-2">
+            <input type="text" id="cartCouponInput" placeholder="Enter coupon code..." class="flex-1 text-xs font-mono uppercase font-bold px-3 py-2 bg-white border border-pink-200 rounded-xl focus:outline-none">
+            <button onclick="applyCartCoupon()" class="bg-[#1A1316] text-[#F4D068] text-xs font-bold px-4 py-2 rounded-xl hover:bg-stone-900 transition flex-shrink-0">
+              Apply
+            </button>
+          </div>
+          <div id="couponAppliedBadge" class="hidden flex items-center justify-between text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
+            <span id="couponSuccessText">✓ Coupon Applied!</span>
+            <button onclick="removeCartCoupon()" class="text-red-500 hover:underline">Remove</button>
+          </div>
+        </div>
+
+        <!-- Calculated Summary -->
+        <div class="space-y-1 text-xs">
+          <div class="flex items-center justify-between text-stone-500 font-medium">
+            <span>Subtotal:</span>
+            <span id="cartSubtotalVal" class="font-bold text-stone-800">₹0</span>
+          </div>
+          <div id="cartDiscountRow" class="hidden flex items-center justify-between text-emerald-600 font-bold">
+            <span>Coupon Discount:</span>
+            <span id="cartDiscountVal">-₹0</span>
+          </div>
+          <div class="flex items-center justify-between text-sm pt-1 border-t border-pink-100">
+            <span class="text-stone-700 font-black">Final Total Payable:</span>
+            <span id="cartTotalVal" class="text-lg font-black text-[#1A1316]">₹0</span>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2 pt-1">
@@ -481,6 +559,7 @@
     </div>
   </div>
 
+  <!-- UPI Payment Intent & QR Modal -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
       <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Instant UPI Payment</h3>
@@ -504,6 +583,7 @@
     </div>
   </div>
 
+  <!-- Product Quickview Modal -->
   <div id="productModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="relative">
@@ -544,11 +624,13 @@
     </div>
   </div>
 
+  <!-- Floating AI Assistant Button -->
   <button onclick="toggleChat()" class="fixed bottom-6 right-6 bg-[#1A1316] border border-[#D4AF37]/50 text-[#F4D068] font-bold px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 text-xs sm:text-sm z-40 hover:scale-105 transition">
     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>✨ AI Shopping Buddy</span>
   </button>
 
+  <!-- AI Chat Drawer -->
   <div id="chatDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
@@ -567,6 +649,7 @@
       </div>
     </div>
 
+    <!-- Chat Input -->
     <div class="p-3 border-t border-pink-100 bg-white flex items-center gap-2">
       <button onclick="startVoiceInput()" id="micBtn" title="Speak in Hindi/English" class="bg-pink-50 text-stone-700 hover:text-[#A64B74] p-2.5 rounded-xl text-sm transition">
         🎙️
@@ -578,23 +661,21 @@
 
   <script>
     const API_BASE = window.location.origin;
-    
-    // ACTIVE STORE WHATSAPP & UPI ID
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
-    // ENHANCED SECURITY OWNER PASSKEY
+    // Passkey Security
     const OWNER_PASSKEY = "InshaAdmin@2026"; 
     let failedAttempts = 0;
     let isLocked = false;
 
-    // Check for direct secret URL admin bypass: e.g. ?admin_key=InshaAdmin@2026
+    // URL Admin bypass: ?admin_key=InshaAdmin@2026
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("admin_key") === OWNER_PASSKEY) {
       sessionStorage.setItem("owner_authenticated", "true");
     }
 
-    // Dynamic Calendar & Live Occasion Theme Engine
+    // Dynamic Calendar & Seasonal Festival Engine
     function applyCalendarFestivalTheme() {
       const now = new Date();
       const month = now.getMonth() + 1; // 1-12
@@ -608,25 +689,15 @@
       const popSubBadge = document.getElementById("popSubBadge");
       const popYearBadge = document.getElementById("popYearBadge");
 
-      const occasionBadgeIcon = document.getElementById("occasionBadgeIcon");
-      const occasionBadgeText = document.getElementById("occasionBadgeText");
-      const occasionHeading = document.getElementById("occasionHeading");
-      const occasionDescription = document.getElementById("occasionDescription");
-
       if (popYearBadge) popYearBadge.innerText = `EXCLUSIVE ${year}`;
 
       if (month === 8 || month === 9) {
         bannerText.innerText = `✨ FESTIVE SEASON CELEBRATION SALE — SPECIAL WHOLESALE DISCOUNTS ACTIVE ✨`;
         heroBadge.innerText = `👑 Festive & Wedding Hub ${year}`;
         heroTitle.innerText = `Festive Velvet Bangles & Royal Bridal Choodas`;
-        heroDesc.innerText = `Handcrafted festive velvet bangle sets, Kundan dulhan choodas, stone party clutches, and ladies undergarment lots.`;
+        heroDesc.innerText = `Handcrafted festive velvet bangle sets, Kundan dulhan choodas, stone party clutches, and ladies undergarment lots available in single retail packs and bulk wholesale cartons.`;
         storeSubTag.innerText = `Festive Bangles, Purses & Innerwear Hub`;
         if (popSubBadge) popSubBadge.innerText = `FESTIVE ARCHIVE ${year}`;
-
-        occasionBadgeIcon.innerText = `🎁`;
-        occasionBadgeText.innerText = `FESTIVE GIFTING & CELEBRATION ACTIVE`;
-        occasionHeading.innerText = `Raksha Bandhan & Festive Season Special`;
-        occasionDescription.innerText = `Special velvet bangle gifting sets, matching party clutches, and wholesale lots for festive celebrations.`;
       } else if (month === 10 || month === 11) {
         bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — EXCLUSIVE BRIDAL CHOODA & CLUTCH LOTS 🪔`;
         heroBadge.innerText = `🪔 Royal Diwali & Karwa Chauth Edition`;
@@ -634,11 +705,6 @@
         heroDesc.innerText = `Special red & gold dulhan chooda sets, glitter festive bangles, designer clutches, and daily ladies innerwear.`;
         storeSubTag.innerText = `Festive Bangles & Designer Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `DIWALI ROYAL SHOWCASE`;
-
-        occasionBadgeIcon.innerText = `🪔`;
-        occasionBadgeText.innerText = `DIWALI & KARWA CHAUTH SPECIAL`;
-        occasionHeading.innerText = `Karwa Chauth Dulhan Sets & Diwali Sparkle`;
-        occasionDescription.innerText = `Rich red bridal choodas, gold zari clutches, and velvet matching bangle packs at direct boutique rates.`;
       } else if (month === 12 || month === 1 || month === 2) {
         bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — WHOLESALE DULHAN CHOODAS & HEAVY KUNDAN BANGLES 💍`;
         heroBadge.innerText = `👑 Royal Winter Dulhan Showcase`;
@@ -646,11 +712,6 @@
         heroDesc.innerText = `Heavy traditional wedding choodas, premium velvet sets, stone-studded clutches, and ladies cotton innerwear.`;
         storeSubTag.innerText = `Royal Wedding Bangles & Purses Hub`;
         if (popSubBadge) popSubBadge.innerText = `WINTER BRIDAL SUITE`;
-
-        occasionBadgeIcon.innerText = `💍`;
-        occasionBadgeText.innerText = `PEAK WEDDING SEASON`;
-        occasionHeading.innerText = `Grand Winter Bridal & Chooda Collection`;
-        occasionDescription.innerText = `Full bridal sets with latkans, traditional choodas, and party potlis ready for wedding orders.`;
       } else if (month === 3 || month === 4) {
         bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — MULTICOLOR VELVET & DESIGNER CLUTCHES 🌙`;
         heroBadge.innerText = `🌙 Eid Mubarak Festive Collection`;
@@ -658,27 +719,21 @@
         heroDesc.innerText = `Multicolor silk bangles, stone-embellished clutches, and comfortable ladies underclothes available in retail & wholesale.`;
         storeSubTag.innerText = `Eid Festive Bangles & Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `EID FESTIVE SUITE`;
-
-        occasionBadgeIcon.innerText = `🌙`;
-        occasionBadgeText.innerText = `EID FESTIVE SPECIAL`;
-        occasionHeading.innerText = `Eid Festive Velvet Sets & Shimmer Bags`;
-        occasionDescription.innerText = `Multicolor festive bangle sets and designer party clutches curated for Eid celebrations.`;
       } else {
         bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — DIRECT WHOLESALE RATES ACTIVE ✨`;
         heroBadge.innerText = `👑 Exclusive Bridal & Wholesale Hub`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
         heroDesc.innerText = `Handcrafted traditional bridal choodas, rich velvet bangles, stone clutches, and ladies underclothes.`;
         storeSubTag.innerText = `Festive Bridal & Wholesale Hub`;
-
-        occasionBadgeIcon.innerText = `✨`;
-        occasionBadgeText.innerText = `BOUTIQUE SPECIALS`;
-        occasionHeading.innerText = `Curated Bridal Choodas & Everyday Essentials`;
-        occasionDescription.innerText = `Direct factory prices for bulk and single orders in Lucknow.`;
       }
     }
 
     let allProducts = JSON.parse(localStorage.getItem('insha_catalog_cache') || '[]');
     let shoppingCart = [];
+    
+    // Store Active Coupons (Persisted in localStorage)
+    let activeCoupons = JSON.parse(localStorage.getItem('insha_coupons') || '[{"code":"WELCOME10","discount":10},{"code":"FESTIVE15","discount":15}]');
+    let appliedCoupon = null;
 
     let ribbonTimeout;
     let lastActiveSection = null;
@@ -736,6 +791,7 @@
           document.getElementById("pinBox").classList.add("hidden");
           document.getElementById("productFormBox").classList.remove("hidden");
           renderOwnerInventory();
+          renderActiveCoupons();
         }
       }
     }
@@ -754,6 +810,7 @@
         document.getElementById("productFormBox").classList.remove("hidden");
         document.getElementById("ownerPinInput").value = "";
         renderOwnerInventory();
+        renderActiveCoupons();
       } else {
         failedAttempts += 1;
         if (failedAttempts >= 3) {
@@ -780,7 +837,7 @@
       document.getElementById("chatDrawer").classList.toggle("translate-x-full");
     }
 
-    // DUAL RETAIL / WHOLESALE CART SYSTEM
+    // CART & COUPON CALCULATOR
     function addToCart(title, price, img, orderType = 'retail', moq = 1) {
       const cartKey = `${title}_${orderType}`;
       const qtyToAdd = orderType === 'wholesale' ? (parseInt(moq) || 10) : 1;
@@ -794,7 +851,7 @@
           title,
           price: parseFloat(price),
           img,
-          orderType, // 'retail' or 'wholesale'
+          orderType,
           moq: parseInt(moq) || 1,
           qty: qtyToAdd
         });
@@ -808,20 +865,33 @@
       document.getElementById("cartCountBadge").innerText = totalQty;
     }
 
+    function calculateCartTotals() {
+      let subtotal = 0;
+      shoppingCart.forEach(item => {
+        subtotal += item.price * item.qty;
+      });
+
+      let discountAmount = 0;
+      if (appliedCoupon && subtotal > 0) {
+        discountAmount = Math.round((subtotal * appliedCoupon.discount) / 100);
+      }
+
+      const finalTotal = Math.max(0, subtotal - discountAmount);
+      return { subtotal, discountAmount, finalTotal };
+    }
+
     function toggleCartModal() {
       const modal = document.getElementById("cartModal");
       const list = document.getElementById("cartItemsList");
       
       if (modal.classList.contains("hidden")) {
         list.innerHTML = "";
-        let total = 0;
 
         if (shoppingCart.length === 0) {
           list.innerHTML = `<div class="py-12 text-center text-stone-400 text-xs">Your shopping bag is empty.</div>`;
         } else {
           shoppingCart.forEach((item, index) => {
             const itemTotal = item.price * item.qty;
-            total += itemTotal;
             const isWholesale = item.orderType === 'wholesale';
             const step = isWholesale ? (item.moq || 1) : 1;
 
@@ -848,11 +918,54 @@
             `;
           });
         }
-        document.getElementById("cartTotalVal").innerText = `₹${total}`;
+
+        renderCartPricingSummary();
         modal.classList.remove("hidden");
       } else {
         modal.classList.add("hidden");
       }
+    }
+
+    function renderCartPricingSummary() {
+      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+      
+      document.getElementById("cartSubtotalVal").innerText = `₹${subtotal}`;
+      
+      const discountRow = document.getElementById("cartDiscountRow");
+      const couponBadge = document.getElementById("couponAppliedBadge");
+
+      if (appliedCoupon && discountAmount > 0) {
+        discountRow.classList.remove("hidden");
+        document.getElementById("cartDiscountVal").innerText = `-₹${discountAmount} (${appliedCoupon.discount}% OFF)`;
+        couponBadge.classList.remove("hidden");
+        document.getElementById("couponSuccessText").innerText = `✓ Code '${appliedCoupon.code}' applied (${appliedCoupon.discount}% OFF)`;
+      } else {
+        discountRow.classList.add("hidden");
+        couponBadge.classList.add("hidden");
+      }
+
+      document.getElementById("cartTotalVal").innerText = `₹${finalTotal}`;
+    }
+
+    function applyCartCoupon() {
+      const input = document.getElementById("cartCouponInput");
+      const code = input.value.trim().toUpperCase();
+      if (!code) return alert("Please enter a coupon code.");
+
+      const match = activeCoupons.find(c => c.code.toUpperCase() === code);
+      if (match) {
+        appliedCoupon = match;
+        input.value = "";
+        renderCartPricingSummary();
+        alert(`Success! Coupon "${match.code}" applied for ${match.discount}% OFF.`);
+      } else {
+        alert("Invalid or expired coupon code.");
+      }
+    }
+
+    function removeCartCoupon() {
+      appliedCoupon = null;
+      renderCartPricingSummary();
     }
 
     function changeCartQty(index, delta) {
@@ -867,26 +980,33 @@
 
     function checkoutWhatsAppOrder() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      let total = 0;
+      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+      
       let msg = "Hello Insha Bangles & Purses! 🌸\n\nI would like to place an order from your website:\n\n";
       shoppingCart.forEach(i => {
         const lineTotal = i.price * i.qty;
-        total += lineTotal;
         msg += `• *${i.title}* (${i.orderType.toUpperCase()})\n   Qty: ${i.qty} pcs @ ₹${i.price}/pc = ₹${lineTotal}\n`;
       });
-      msg += `\n💰 *Total Amount:* ₹${total}\n`;
+      
+      msg += `\n📦 Subtotal: ₹${subtotal}\n`;
+      if (appliedCoupon && discountAmount > 0) {
+        msg += `🎟️ Coupon Applied: *${appliedCoupon.code}* (-₹${discountAmount})\n`;
+      }
+      msg += `💰 *Final Payable Total:* ₹${finalTotal}\n\n`;
       msg += "Please confirm stock availability and share dispatch details!";
+      
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
 
     function generateUpiPayment() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      const total = shoppingCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
-      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${total}&cu=INR&tn=OrderPayment`;
+      const { finalTotal } = calculateCartTotals();
+      
+      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=OrderPayment`;
       const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
 
       document.getElementById("upiQrCodeImg").src = qrCodeUrl;
-      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${total}`;
+      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${finalTotal}`;
       document.getElementById("upiIntentLink").href = upiUrl;
 
       document.getElementById("cartModal").classList.add("hidden");
@@ -897,6 +1017,58 @@
       document.getElementById("upiModal").classList.add("hidden");
     }
 
+    // OWNER COUPON SUITE
+    function renderActiveCoupons() {
+      const list = document.getElementById("activeCouponsList");
+      if (!list) return;
+      list.innerHTML = "";
+
+      if (activeCoupons.length === 0) {
+        list.innerHTML = `<div class="text-stone-400 text-xs py-2">No active coupons created yet.</div>`;
+        return;
+      }
+
+      activeCoupons.forEach((c, idx) => {
+        list.innerHTML += `
+          <div class="bg-pink-50/60 p-2 rounded-xl border border-pink-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-black text-xs text-[#1A1316] bg-white px-2 py-0.5 rounded-lg border border-pink-200">${c.code}</span>
+              <span class="text-xs font-bold text-emerald-700">${c.discount}% Discount</span>
+            </div>
+            <button onclick="deleteCoupon(${idx})" class="text-xs text-red-500 font-bold hover:bg-red-50 px-2 py-1 rounded-lg transition">
+              🗑️ Delete
+            </button>
+          </div>
+        `;
+      });
+    }
+
+    function createCoupon(e) {
+      e.preventDefault();
+      const code = document.getElementById("couponCodeInput").value.trim().toUpperCase();
+      const discount = parseInt(document.getElementById("couponDiscountInput").value);
+
+      if (!code || isNaN(discount) || discount <= 0) return alert("Please enter valid coupon details.");
+
+      if (activeCoupons.some(c => c.code === code)) return alert("A coupon with this code already exists.");
+
+      activeCoupons.push({ code, discount });
+      localStorage.setItem("insha_coupons", JSON.stringify(activeCoupons));
+      
+      document.getElementById("couponCodeInput").value = "";
+      document.getElementById("couponDiscountInput").value = "";
+      
+      renderActiveCoupons();
+      alert(`Coupon "${code}" (${discount}% OFF) activated successfully!`);
+    }
+
+    function deleteCoupon(index) {
+      if (!confirm(`Delete coupon "${activeCoupons[index].code}"?`)) return;
+      activeCoupons.splice(index, 1);
+      localStorage.setItem("insha_coupons", JSON.stringify(activeCoupons));
+      renderActiveCoupons();
+    }
+
     function orderProductWhatsApp(title, retailPrice, wholesalePrice, moq) {
       let msg = "Hello Insha Bangles & Purses!\n\n";
       msg += "I am interested in this item from your website:\n";
@@ -905,8 +1077,7 @@
       if (wholesalePrice && wholesalePrice > 0) {
         msg += "• *Wholesale Rate:* Rs. " + wholesalePrice + "/pc (MOQ: " + moq + " pcs)\n";
       }
-      msg += "\nCould you please confirm if this is currently available?\n";
-      msg += "Also, please share available sizes, color variants, and details.";
+      msg += "\nCould you please confirm availability, colors & sizes?";
 
       window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
     }
