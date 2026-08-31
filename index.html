@@ -24,6 +24,10 @@
     .hero-gradient {
       background: radial-gradient(circle at 85% 15%, #4A1733 0%, #200E19 55%, #10060C 100%);
     }
+    .logo-ring {
+      background: #10060C;
+      border: 2px solid #D4AF37;
+    }
     .section-card {
       background: #FFFFFF;
       border: 1px solid rgba(226, 178, 199, 0.45);
@@ -83,8 +87,17 @@
       
       <!-- Brand Logo -->
       <div class="flex items-center gap-2.5 sm:gap-3">
-        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#D4AF37] shadow-md bg-black flex items-center justify-center">
-          <img src="/logo.png" alt="Insha Bangles & Purses" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1C1418/D4AF37?text=IB'">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden flex-shrink-0 logo-ring shadow-md bg-black flex items-center justify-center">
+          <svg viewBox="0 0 200 200" class="w-full h-full">
+            <rect width="200" height="200" fill="#120A0F"/>
+            <path d="M100 22 L112 48 L138 38 L130 65 L155 70 L135 92 L148 118 L122 112 L112 138 L100 120 L88 138 L78 112 L52 118 L65 92 L45 70 L70 65 L62 38 L88 48 Z" fill="none" stroke="#D4AF37" stroke-width="4"/>
+            <circle cx="100" cy="88" r="42" fill="#1A1016" stroke="#D4AF37" stroke-width="4"/>
+            <circle cx="100" cy="88" r="36" fill="none" stroke="#F4D068" stroke-width="1.5"/>
+            <text x="100" y="100" font-family="'Cormorant Garamond', serif" font-weight="bold" font-size="34" fill="#F4D068" text-anchor="middle">IB</text>
+            <path d="M72 38 Q100 24 128 38" fill="none" stroke="#D4AF37" stroke-width="3"/>
+            <text x="100" y="152" font-family="'Playfair Display', serif" font-weight="900" font-size="18" fill="#F4D068" letter-spacing="3" text-anchor="middle">INSHA</text>
+            <text x="100" y="168" font-family="'Plus Jakarta Sans', sans-serif" font-weight="bold" font-size="7.5" fill="#E2B2C7" letter-spacing="1.5" text-anchor="middle">BANGLES & PURSES</text>
+          </svg>
         </div>
         
         <div>
@@ -374,7 +387,7 @@
           <div id="ownerOrdersList" class="space-y-3 max-h-96 overflow-y-auto"></div>
         </div>
 
-        <!-- SECTION 2: Add / Edit Product Form with Full Colors & Sizes -->
+        <!-- SECTION 2: Add / Edit Product Form -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -426,7 +439,7 @@
               </div>
             </div>
 
-            <!-- 1. EXHAUSTIVE BANGLE COLOR PALETTE -->
+            <!-- Comprehensive Bangle Color Palette -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-stone-700">🎨 Comprehensive Bangle & Accessory Colors</label>
               <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-3">
@@ -494,7 +507,7 @@
               </div>
             </div>
 
-            <!-- 2. DEDICATED LADIES UNDERGARMENTS COLOR SUITE -->
+            <!-- Dedicated Ladies Undergarments Color Suite -->
             <div class="space-y-2">
               <label class="block text-xs font-bold text-stone-700">👙 Dedicated Ladies Undergarments & Innerwear Colors</label>
               <div class="bg-pink-50/40 p-3 rounded-2xl border border-pink-100 space-y-2">
@@ -918,7 +931,11 @@
     <div class="p-4 border-b border-[#D4AF37]/30 flex items-center justify-between bg-[#1A1316] text-white">
       <div class="flex items-center gap-2.5">
         <div class="w-9 h-9 rounded-full overflow-hidden flex-shrink-0 border border-[#D4AF37] bg-black flex items-center justify-center">
-          <img src="/logo.png" alt="IB" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1C1418/D4AF37?text=IB'">
+          <svg viewBox="0 0 200 200" class="w-full h-full">
+            <rect width="200" height="200" fill="#120A0F"/>
+            <circle cx="100" cy="90" r="42" fill="#1A1016" stroke="#D4AF37" stroke-width="4"/>
+            <text x="100" y="102" font-family="'Cormorant Garamond', serif" font-weight="bold" font-size="34" fill="#F4D068" text-anchor="middle">IB</text>
+          </svg>
         </div>
         <div>
           <h3 class="text-base font-cormorant font-bold text-[#F4D068]">Insha AI Shopping Buddy</h3>
@@ -1955,6 +1972,7 @@
       });
     }
 
+    // OWNER INVENTORY WITH EDIT & DELETE
     function renderOwnerInventory() {
       const list = document.getElementById("ownerInventoryList");
       const badge = document.getElementById("inventoryCountBadge");
