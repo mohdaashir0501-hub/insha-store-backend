@@ -78,7 +78,7 @@
 
   <!-- Announcement Bar -->
   <div id="dynamicFestivalBanner" class="bg-gradient-to-r from-[#2B1420] via-[#52253E] to-[#2B1420] text-[#F9E2AF] text-[11px] font-bold py-1.5 px-4 text-center tracking-wide flex items-center justify-center gap-2 border-b border-[#D4AF37]/30 shadow-inner">
-    <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — SPECIAL WHOLESALE RATES ACTIVE ✨</span>
+    <span id="festivalBannerText">✨ GRAND FESTIVE & WEDDING SEASON SALE — FREE DELIVERY ON ORDERS > ₹300 ACROSS LUCKNOW ✨</span>
   </div>
 
   <!-- Header -->
@@ -214,7 +214,7 @@
               <span id="heroBadgeText">👑 Exclusive Bridal & Wholesale Hub</span>
             </div>
             <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-bold">
-              <span>🎟️ Doorstep Delivery Available</span>
+              <span>🛵 Free Delivery on Orders > ₹300 in Lucknow</span>
             </div>
           </div>
 
@@ -223,7 +223,7 @@
           </h2>
           
           <p id="heroDescText" class="text-xs sm:text-sm text-pink-100/90 leading-relaxed font-normal">
-            Handcrafted festive velvet bangle sets, daily wear metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments available in retail and wholesale.
+            Handcrafted festive velvet bangle sets, daily wear metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments. Express delivery across Lucknow.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-3">
@@ -538,55 +538,66 @@
 
   </main>
 
-  <!-- CUSTOMER LOGIN & DELIVERY MODAL -->
+  <!-- CUSTOMER LOGIN & DELIVERY MODAL WITH GPS AND LUCKNOW-ONLY VALIDATION -->
   <div id="customerAuthModal" class="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-pink-200">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
         <div class="flex items-center gap-2">
           <span class="text-xl">📍</span>
           <div>
-            <h3 class="font-cormorant font-bold text-lg text-[#F4D068]">Customer Delivery Details</h3>
-            <p class="text-[10px] text-pink-200/80">Save once for seamless doorstep delivery & orders</p>
+            <h3 class="font-cormorant font-bold text-lg text-[#F4D068]">Delivery Details</h3>
+            <p class="text-[10px] text-pink-200/80">Available exclusively across Lucknow</p>
           </div>
         </div>
         <button onclick="closeCustomerAuthModal()" class="text-stone-400 hover:text-white text-lg font-bold">✕</button>
       </div>
 
-      <form onsubmit="saveCustomerProfile(event)" class="p-5 space-y-3.5 bg-white text-xs">
+      <form onsubmit="saveCustomerProfile(event)" class="p-5 space-y-3 bg-white text-xs">
         <div>
           <label class="block font-bold text-stone-700 mb-1">Full Name *</label>
           <input type="text" id="custNameInput" required placeholder="e.g. Fatima Khan" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
         </div>
 
         <div>
-          <label class="block font-bold text-stone-700 mb-1">Contact Number *</label>
+          <label class="block font-bold text-stone-700 mb-1">Contact / Phone Number *</label>
           <input type="tel" id="custPhoneInput" required placeholder="e.g. 9876543210" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]">
         </div>
 
         <div>
-          <label class="block font-bold text-stone-700 mb-1">Complete Street / Delivery Address *</label>
-          <textarea id="custAddressInput" required rows="2" placeholder="House/Flat No., Landmark, Area..." class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]"></textarea>
+          <div class="flex items-center justify-between mb-1">
+            <label class="font-bold text-stone-700">Street / Area Address in Lucknow *</label>
+            <button type="button" onclick="detectGPSLocation()" class="text-[10px] text-[#A64B74] font-bold hover:underline flex items-center gap-1">
+              <span>📍 Auto-Detect GPS</span>
+            </button>
+          </div>
+          <textarea id="custAddressInput" required rows="2" placeholder="House/Flat No., Landmark, Colony/Area..." class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none focus:border-[#D4AF37]"></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="block font-bold text-stone-700 mb-1">City / Town *</label>
-            <input type="text" id="custCityInput" required placeholder="Lucknow" value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+            <label class="block font-bold text-stone-700 mb-1">City *</label>
+            <input type="text" id="custCityInput" required readonly value="Lucknow" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/20 border border-pink-200 rounded-xl text-stone-500 cursor-not-allowed">
           </div>
           <div>
-            <label class="block font-bold text-stone-700 mb-1">Pincode *</label>
-            <input type="text" id="custPincodeInput" required placeholder="226003" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+            <label class="block font-bold text-stone-700 mb-1">Lucknow Pincode (226xxx) *</label>
+            <input type="text" id="custPincodeInput" oninput="estimateDistanceByPincode(this.value)" required placeholder="226003" maxlength="6" class="w-full text-xs font-semibold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
           </div>
         </div>
 
-        <button type="submit" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl hover:bg-stone-900 transition shadow-md border border-[#D4AF37]/50 mt-2">
-          ✓ Save & Continue Shopping
+        <!-- Distance & Service Area Indicator -->
+        <div id="serviceStatusBox" class="p-2.5 bg-pink-50/70 rounded-xl border border-pink-200/80 text-[11px] flex items-center justify-between">
+          <span class="text-stone-600 font-medium">Service Status:</span>
+          <span id="estimatedDistanceLabel" class="font-black text-[#1A1316]">~2.5 km (Local Nakkhas Hub)</span>
+        </div>
+
+        <button type="submit" id="saveDeliveryBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3 rounded-xl hover:bg-stone-900 transition shadow-md border border-[#D4AF37]/50 mt-1">
+          ✓ Save Delivery Details
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Shopping Cart Modal -->
+  <!-- Shopping Cart Modal with Free Delivery Deal (> ₹300) & GST -->
   <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-pink-200 flex flex-col max-h-[90vh]">
       <div class="p-4 bg-[#1A1316] text-white flex items-center justify-between border-b border-[#D4AF37]/30">
@@ -599,8 +610,9 @@
 
       <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]"></div>
 
-      <div class="p-4 bg-white border-t border-pink-100 space-y-3">
+      <div class="p-4 bg-white border-t border-pink-100 space-y-2.5">
         
+        <!-- Live Delivery Address Bar -->
         <div id="cartCustomerAddressBar" class="bg-stone-50 p-2.5 rounded-2xl border border-stone-200 text-xs flex items-center justify-between">
           <div class="truncate">
             <span class="font-bold text-[#1A1316] block truncate" id="cartCustSummaryName">Deliver to: Guest</span>
@@ -609,60 +621,84 @@
           <button onclick="openCustomerAuthModal()" class="text-[#A64B74] font-bold text-[11px] underline flex-shrink-0 ml-2">Edit</button>
         </div>
 
+        <!-- FREE DELIVERY PROMO DEAL BADGE (> ₹300) -->
+        <div id="freeDeliveryDealBanner" class="p-2 bg-emerald-50 border border-emerald-300 rounded-xl text-[11px] font-bold text-emerald-800 flex items-center justify-between shadow-sm">
+          <span id="freeDeliveryProgressText">🎉 Deal Active: Orders > ₹300 Get 100% Free Delivery!</span>
+          <span id="freeDeliveryCheckMark" class="hidden text-emerald-600 text-xs">✓ FREE</span>
+        </div>
+
+        <!-- Coupon Redemption -->
         <div class="bg-pink-50/70 p-2.5 rounded-2xl border border-pink-200/80 space-y-1.5">
-          <label class="block text-[11px] font-bold text-[#1A1316]">Have a Promo Coupon Code?</label>
           <div class="flex gap-2">
-            <input type="text" id="cartCouponInput" placeholder="Enter coupon code..." class="flex-1 text-xs font-mono uppercase font-bold px-3 py-2 bg-white border border-pink-200 rounded-xl focus:outline-none">
-            <button onclick="applyCartCoupon()" class="bg-[#1A1316] text-[#F4D068] text-xs font-bold px-4 py-2 rounded-xl hover:bg-stone-900 transition flex-shrink-0">
+            <input type="text" id="cartCouponInput" placeholder="Promo code..." class="flex-1 text-xs font-mono uppercase font-bold px-3 py-1.5 bg-white border border-pink-200 rounded-xl focus:outline-none">
+            <button onclick="applyCartCoupon()" class="bg-[#1A1316] text-[#F4D068] text-xs font-bold px-4 py-1.5 rounded-xl hover:bg-stone-900 transition flex-shrink-0">
               Apply
             </button>
           </div>
-          <div id="couponAppliedBadge" class="hidden flex items-center justify-between text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
+          <div id="couponAppliedBadge" class="hidden flex items-center justify-between text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">
             <span id="couponSuccessText">✓ Coupon Applied!</span>
             <button onclick="removeCartCoupon()" class="text-red-500 hover:underline">Remove</button>
           </div>
         </div>
 
-        <div class="space-y-1 text-xs">
+        <!-- Calculated Bill Breakdown -->
+        <div class="space-y-1 text-xs pt-1">
           <div class="flex items-center justify-between text-stone-500 font-medium">
-            <span>Subtotal:</span>
+            <span>Item Subtotal:</span>
             <span id="cartSubtotalVal" class="font-bold text-stone-800">₹0</span>
           </div>
+
+          <div class="flex items-center justify-between text-stone-500 font-medium">
+            <span>GST / Taxes (3%):</span>
+            <span id="cartGstVal" class="font-bold text-stone-800">₹0</span>
+          </div>
+
+          <div class="flex items-center justify-between text-stone-500 font-medium">
+            <span id="deliveryLabelText">Delivery Fee (~2.5 km):</span>
+            <span id="cartDeliveryVal" class="font-bold text-stone-800">₹25</span>
+          </div>
+
           <div id="cartDiscountRow" class="hidden flex items-center justify-between text-emerald-600 font-bold">
             <span>Coupon Discount:</span>
             <span id="cartDiscountVal">-₹0</span>
           </div>
-          <div class="flex items-center justify-between text-sm pt-1 border-t border-pink-100">
-            <span class="text-stone-700 font-black">Final Total Payable:</span>
+
+          <div class="flex items-center justify-between text-sm pt-2 border-t border-pink-100">
+            <span class="text-stone-800 font-black">Final Payable Total:</span>
             <span id="cartTotalVal" class="text-lg font-black text-[#1A1316]">₹0</span>
           </div>
         </div>
 
-        <!-- DIRECT CHECKOUT BUTTON -->
-        <button onclick="processOrderAndOpenPayment()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
+        <!-- Checkout Button -->
+        <button onclick="processOrderAndOpenPayment()" id="proceedToPayBtn" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
           <span>💳 Proceed to Pay & Place Order</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- UPI PAYMENT & QR MODAL -->
+  <!-- UPI PAYMENT & QR MODAL WITH FREE DELIVERY DEAL CALLOUT -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
       <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Scan & Pay via UPI</h3>
       <p class="text-xs text-stone-500">Scan using Google Pay, PhonePe, Paytm or BHIM UPI</p>
       
+      <!-- Highlight Deal Badge inside Payment Modal -->
+      <div id="paymentDealBadge" class="p-2 bg-emerald-50 border border-emerald-300 rounded-xl text-[11px] font-bold text-emerald-800">
+        ✨ Free Express Delivery Applied (Order > ₹300)
+      </div>
+
       <div class="p-3 bg-pink-50 rounded-2xl inline-block border border-pink-200">
         <img id="upiQrCodeImg" src="" class="w-48 h-48 mx-auto rounded-lg">
       </div>
 
       <div class="space-y-1 text-xs">
-        <p class="font-bold text-stone-800">Insha Bangles & Purses</p>
+        <p class="font-bold text-stone-800">Insha Bangles & Purses (Lucknow Hub)</p>
         <p id="upiAmountLabel" class="text-base font-black text-emerald-600">₹0</p>
       </div>
 
       <div class="space-y-2 pt-2">
-        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-3 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
+        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
           🚀 Open in UPI App (Mobile)
         </a>
         <button onclick="closeUpiModal()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-2.5 rounded-xl block hover:bg-stone-900 transition">
@@ -733,7 +769,7 @@
 
     <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#FAF4F6]">
       <div class="bg-white border border-pink-100 text-[#1A1316] text-xs p-3.5 rounded-2xl rounded-tl-none max-w-[88%] leading-relaxed shadow-sm">
-        Namaste! 🙏 Welcome to Insha Bangles & Purses. How may I assist you with bridal choodas, metal chudis, daily wear bangles, clutches, or wholesale orders today?
+        Namaste! 🙏 Welcome to Insha Bangles & Purses. Delivery is available across Lucknow with FREE shipping on orders above ₹300! How may I assist you today?
       </div>
     </div>
 
@@ -751,14 +787,98 @@
     const SHOP_WHATSAPP = "919411729786";
     const SHOP_UPI_ID = "9411729786@hdfc";
     
+    // Store Hub Coordinates (Nakkhas, Lucknow)
+    const STORE_LAT = 26.8522;
+    const STORE_LNG = 80.9080;
+
     const OWNER_PASSKEY = "InshaAdmin@2026"; 
     let failedAttempts = 0;
     let isLocked = false;
 
     let currentCustomer = JSON.parse(localStorage.getItem('insha_customer_user') || 'null');
     let pendingCartAction = null;
+    let calculatedDistanceKm = 2.5;
+    let isServiceableArea = true;
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return (R * c).toFixed(1);
+    }
+
+    // Blinkit-style Delivery Fee with Free Threshold > ₹300
+    function computeDeliveryFee(distanceKm, subtotal) {
+      if (subtotal >= 300) return 0; // FREE DELIVERY ON ORDERS ABOVE ₹300
+
+      const dist = parseFloat(distanceKm) || 2.5;
+      if (dist <= 3) return 25;       // 0-3km: ₹25
+      if (dist <= 8) return 40;       // 3-8km: ₹40
+      if (dist <= 15) return 60;      // 8-15km: ₹60
+      return Math.round(75 + (dist - 15) * 4); // 15km+: ₹75
+    }
+
+    // STRICT LUCKNOW ONLY VALIDATION (226xxx)
+    function estimateDistanceByPincode(pin) {
+      const box = document.getElementById("serviceStatusBox");
+      const label = document.getElementById("estimatedDistanceLabel");
+      const saveBtn = document.getElementById("saveDeliveryBtn");
+
+      if (!pin || pin.length < 6) return;
+      const p = String(pin).trim();
+
+      if (!p.startsWith("226")) {
+        isServiceableArea = false;
+        box.className = "p-2.5 bg-red-50 rounded-xl border border-red-200 text-[11px] flex items-center justify-between text-red-700 font-bold";
+        label.innerText = "❌ Service only available in Lucknow (226xxx)";
+        if (saveBtn) {
+          saveBtn.disabled = true;
+          saveBtn.classList.add("opacity-50", "cursor-not-allowed");
+        }
+        return;
+      }
+
+      isServiceableArea = true;
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      }
+
+      if (p === "226003" || p === "226004" || p === "226018") calculatedDistanceKm = 1.8;
+      else if (p === "226017" || p === "226001" || p === "226019") calculatedDistanceKm = 4.2;
+      else if (p === "226010" || p === "226016" || p === "226024") calculatedDistanceKm = 10.5;
+      else calculatedDistanceKm = 6.5;
+
+      box.className = "p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-[11px] flex items-center justify-between text-emerald-800 font-bold";
+      label.innerText = `✓ Lucknow Serviceable (~${calculatedDistanceKm} km from Nakkhas)`;
+    }
+
+    function detectGPSLocation() {
+      if (!navigator.geolocation) return alert("Geolocation not supported by browser.");
+      
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const userLat = pos.coords.latitude;
+        const userLng = pos.coords.longitude;
+        const dist = calculateDistance(STORE_LAT, STORE_LNG, userLat, userLng);
+
+        if (dist > 35) {
+          alert("Your GPS indicates you are outside Lucknow. Delivery is currently limited to Lucknow only.");
+          return;
+        }
+
+        calculatedDistanceKm = dist;
+        document.getElementById("custAddressInput").value = `GPS Location (${userLat.toFixed(3)}, ${userLng.toFixed(3)})`;
+        document.getElementById("estimatedDistanceLabel").innerText = `~${calculatedDistanceKm} km from Store (Live GPS)`;
+      }, () => {
+        alert("Unable to retrieve location. Please enter your Lucknow 226xxx pincode.");
+      });
+    }
 
     function updateAuthHeaderUI() {
       const btn = document.getElementById("customerAuthBtn");
@@ -787,8 +907,9 @@
         document.getElementById("custNameInput").value = currentCustomer.name || "";
         document.getElementById("custPhoneInput").value = currentCustomer.phone || "";
         document.getElementById("custAddressInput").value = currentCustomer.address || "";
-        document.getElementById("custCityInput").value = currentCustomer.city || "Lucknow";
+        document.getElementById("custCityInput").value = "Lucknow";
         document.getElementById("custPincodeInput").value = currentCustomer.pincode || "";
+        if (currentCustomer.distanceKm) calculatedDistanceKm = currentCustomer.distanceKm;
       }
       document.getElementById("customerAuthModal").classList.remove("hidden");
     }
@@ -799,12 +920,22 @@
 
     function saveCustomerProfile(e) {
       e.preventDefault();
+      const pin = document.getElementById("custPincodeInput").value.trim();
+
+      if (!pin.startsWith("226")) {
+        alert("Sorry! Delivery is currently restricted strictly to Lucknow (Pincode: 226xxx).");
+        return;
+      }
+
+      estimateDistanceByPincode(pin);
+
       const profile = {
         name: document.getElementById("custNameInput").value.trim(),
         phone: document.getElementById("custPhoneInput").value.trim(),
         address: document.getElementById("custAddressInput").value.trim(),
-        city: document.getElementById("custCityInput").value.trim(),
-        pincode: document.getElementById("custPincodeInput").value.trim()
+        city: "Lucknow",
+        pincode: pin,
+        distanceKm: calculatedDistanceKm
       };
 
       currentCustomer = profile;
@@ -812,7 +943,7 @@
       updateAuthHeaderUI();
       closeCustomerAuthModal();
 
-      alert(`Welcome, ${profile.name}! Your delivery address is saved.`);
+      alert(`Delivery address saved! (Lucknow ~${calculatedDistanceKm} km)`);
 
       if (typeof pendingCartAction === 'function') {
         const action = pendingCartAction;
@@ -845,35 +976,35 @@
       if (popYearBadge) popYearBadge.innerText = `EXCLUSIVE ${year}`;
 
       if (month === 8 || month === 9) {
-        bannerText.innerText = `✨ FESTIVE SEASON CELEBRATION SALE — SPECIAL WHOLESALE DISCOUNTS ACTIVE ✨`;
+        bannerText.innerText = `✨ FESTIVE SEASON SALE — FREE DELIVERY ON ORDERS > ₹300 IN LUCKNOW ✨`;
         heroBadge.innerText = `👑 Festive & Wedding Hub ${year}`;
         heroTitle.innerText = `Festive Velvet Bangles & Royal Bridal Choodas`;
         heroDesc.innerText = `Handcrafted festive velvet sets, daily metal chudis, Kundan dulhan choodas, stone party clutches, and ladies undergarments.`;
         storeSubTag.innerText = `Festive Bangles, Purses & Innerwear Hub`;
         if (popSubBadge) popSubBadge.innerText = `FESTIVE ARCHIVE ${year}`;
       } else if (month === 10 || month === 11) {
-        bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — EXCLUSIVE BRIDAL CHOODA & CLUTCH LOTS 🪔`;
+        bannerText.innerText = `🪔 DIWALI & KARWA CHAUTH SPECIAL — FREE DELIVERY ON ORDERS > ₹300 🪔`;
         heroBadge.innerText = `🪔 Royal Diwali & Karwa Chauth Edition`;
         heroTitle.innerText = `Diwali Sparkle Bangles & Bridal Choodas`;
         heroDesc.innerText = `Special red & gold dulhan chooda sets, daily wear metal chudis, designer clutches, and ladies innerwear.`;
         storeSubTag.innerText = `Festive Bangles & Designer Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `DIWALI ROYAL SHOWCASE`;
       } else if (month === 12 || month === 1 || month === 2) {
-        bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — WHOLESALE DULHAN CHOODAS & HEAVY KUNDAN BANGLES 💍`;
+        bannerText.innerText = `💍 GRAND WINTER WEDDING SEASON — FREE DELIVERY ON ORDERS > ₹300 💍`;
         heroBadge.innerText = `👑 Royal Winter Dulhan Showcase`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
         heroDesc.innerText = `Heavy traditional wedding choodas, daily wear bangles, stone clutches, and ladies cotton innerwear.`;
         storeSubTag.innerText = `Royal Wedding Bangles & Purses Hub`;
         if (popSubBadge) popSubBadge.innerText = `WINTER BRIDAL SUITE`;
       } else if (month === 3 || month === 4) {
-        bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — MULTICOLOR VELVET & DESIGNER CLUTCHES 🌙`;
+        bannerText.innerText = `🌙 EID SPECIAL & SPRING FESTIVE SALE — FREE SHIPPING > ₹300 🌙`;
         heroBadge.innerText = `🌙 Eid Mubarak Festive Collection`;
         heroTitle.innerText = `Eid Special Velvet Sets & Party Clutches`;
         heroDesc.innerText = `Multicolor silk bangles, daily wear metal chudis, clutches, and comfortable ladies underclothes.`;
         storeSubTag.innerText = `Eid Festive Bangles & Purses Boutique`;
         if (popSubBadge) popSubBadge.innerText = `EID FESTIVE SUITE`;
       } else {
-        bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — DIRECT WHOLESALE RATES ACTIVE ✨`;
+        bannerText.innerText = `✨ SUMMER BRIDAL & FESTIVE HUB — FREE LOCAL DELIVERY > ₹300 ✨`;
         heroBadge.innerText = `👑 Exclusive Bridal & Wholesale Hub`;
         heroTitle.innerText = `Royal Bridal Velvet Sets & Designer Clutches`;
         heroDesc.innerText = `Handcrafted traditional bridal choodas, daily wear bangles, stone clutches, and ladies underclothes.`;
@@ -1022,13 +1153,19 @@
       let subtotal = 0;
       shoppingCart.forEach(item => { subtotal += item.price * item.qty; });
 
+      // GST: 3% Boutique rate
+      const gstAmount = Math.round(subtotal * 0.03);
+
+      // Blinkit-style Delivery Fee (> ₹300 Free)
+      const deliveryFee = computeDeliveryFee(calculatedDistanceKm, subtotal);
+
       let discountAmount = 0;
       if (appliedCoupon && subtotal > 0) {
         discountAmount = Math.round((subtotal * appliedCoupon.discount) / 100);
       }
 
-      const finalTotal = Math.max(0, subtotal - discountAmount);
-      return { subtotal, discountAmount, finalTotal };
+      const finalTotal = Math.max(0, subtotal + gstAmount + deliveryFee - discountAmount);
+      return { subtotal, gstAmount, deliveryFee, discountAmount, finalTotal };
     }
 
     function toggleCartModal() {
@@ -1079,8 +1216,31 @@
     }
 
     function renderCartPricingSummary() {
-      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+      const { subtotal, gstAmount, deliveryFee, discountAmount, finalTotal } = calculateCartTotals();
+      
       document.getElementById("cartSubtotalVal").innerText = `₹${subtotal}`;
+      document.getElementById("cartGstVal").innerText = `₹${gstAmount}`;
+      
+      const delLabel = document.getElementById("deliveryLabelText");
+      const delVal = document.getElementById("cartDeliveryVal");
+      const progressText = document.getElementById("freeDeliveryProgressText");
+      const checkMark = document.getElementById("freeDeliveryCheckMark");
+      const dealBadgePayment = document.getElementById("paymentDealBadge");
+
+      delLabel.innerText = `Delivery Fee (~${calculatedDistanceKm} km):`;
+      
+      if (subtotal >= 300) {
+        delVal.innerHTML = `<span class="text-emerald-600 font-black">FREE (Order > ₹300)</span>`;
+        progressText.innerText = "🎉 Free Delivery Unlocked for your Lucknow address!";
+        checkMark.classList.remove("hidden");
+        if (dealBadgePayment) dealBadgePayment.classList.remove("hidden");
+      } else {
+        delVal.innerText = `₹${deliveryFee}`;
+        const remaining = 300 - subtotal;
+        progressText.innerText = `Add ₹${remaining} more items for 100% FREE Delivery!`;
+        checkMark.classList.add("hidden");
+        if (dealBadgePayment) dealBadgePayment.classList.add("hidden");
+      }
       
       const discountRow = document.getElementById("cartDiscountRow");
       const couponBadge = document.getElementById("couponAppliedBadge");
@@ -1129,12 +1289,17 @@
       toggleCartModal();
     }
 
-    // DIRECT ORDER PLACEMENT WITH AUTO SERVER DISPATCH
+    // DIRECT ORDER PLACEMENT WITH AUTO TELEGRAM NOTIFICATION
     async function processOrderAndOpenPayment() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
       if (!requireCustomerLogin(() => processOrderAndOpenPayment())) return;
 
-      const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
+      if (!currentCustomer.pincode.startsWith("226")) {
+        alert("Sorry! Delivery is available only in Lucknow. Outstation orders cannot be placed.");
+        return;
+      }
+
+      const { subtotal, gstAmount, deliveryFee, discountAmount, finalTotal } = calculateCartTotals();
       const currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
 
       const orderPayload = {
@@ -1142,9 +1307,12 @@
         customer_name: currentCustomer.name,
         customer_phone: currentCustomer.phone,
         delivery_address: currentCustomer.address,
-        city_pincode: `${currentCustomer.city} - ${currentCustomer.pincode}`,
+        city_pincode: `Lucknow - ${currentCustomer.pincode}`,
+        distance_km: calculatedDistanceKm,
         items: [...shoppingCart],
         subtotal: subtotal,
+        gst: gstAmount,
+        delivery_fee: deliveryFee,
         discount: discountAmount,
         final_total: finalTotal,
         coupon_code: appliedCoupon ? appliedCoupon.code : "",
@@ -1227,7 +1395,7 @@
             </div>
 
             <div class="text-stone-700 bg-white p-2 rounded-xl border border-pink-100/80">
-              <span class="font-bold text-[#A64B74]">📍 Delivery Address:</span>
+              <span class="font-bold text-[#A64B74]">📍 Delivery Location (Lucknow ~${ord.distance_km || 2.5} km):</span>
               <p class="font-medium text-stone-800">${ord.delivery_address}, ${ord.city_pincode}</p>
             </div>
 
@@ -1236,8 +1404,8 @@
               <div class="text-[11px] font-medium leading-relaxed pl-1 text-stone-800">${itemsSummary}</div>
             </div>
 
-            <div class="flex items-center justify-between pt-1 border-t border-pink-200/60 font-bold">
-              <span class="text-stone-500">Subtotal: ₹${ord.subtotal} ${ord.discount ? `(Disc: -₹${ord.discount})` : ''}</span>
+            <div class="flex flex-wrap items-center justify-between pt-1 border-t border-pink-200/60 font-bold text-stone-500 text-[11px]">
+              <span>Subtotal: ₹${ord.subtotal} | GST: ₹${ord.gst || 0} | Delivery: ₹${ord.delivery_fee || 0}</span>
               <span class="text-sm font-black ${isCancelled ? 'text-red-600 line-through' : 'text-emerald-700'}">Total: ₹${ord.final_total}</span>
             </div>
           </div>
