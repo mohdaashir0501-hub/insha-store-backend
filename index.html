@@ -645,17 +645,18 @@
           </div>
         </div>
 
-        <button onclick="openPaymentQRModal()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
+        <!-- DIRECT CHECKOUT BUTTON -->
+        <button onclick="processOrderAndOpenPayment()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 border border-[#D4AF37]/50 shadow-lg hover:bg-stone-900 transition">
           <span>💳 Proceed to Pay & Place Order</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- UPI PAYMENT MODAL -->
+  <!-- UPI PAYMENT & QR MODAL -->
   <div id="upiModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200">
-      <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Pay & Finalize Order</h3>
+      <h3 class="font-cormorant font-bold text-xl text-[#1A1316]">Pay via UPI QR</h3>
       <p class="text-xs text-stone-500">Scan using Google Pay, PhonePe, Paytm or BHIM UPI</p>
       
       <div class="p-3 bg-pink-50 rounded-2xl inline-block border border-pink-200">
@@ -668,71 +669,11 @@
       </div>
 
       <div class="space-y-2 pt-2">
-        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-2.5 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
+        <a id="upiIntentLink" href="#" class="w-full bg-stone-100 text-stone-800 font-bold text-xs py-3 rounded-xl block border border-stone-300 hover:bg-stone-200 transition">
           🚀 Open in UPI App (Mobile)
         </a>
-        <button onclick="confirmOrderPayment()" class="w-full bg-emerald-600 text-white font-bold text-xs py-3 rounded-xl block shadow-md hover:bg-emerald-700 transition">
-          ✅ I Have Paid / Confirm Order
-        </button>
-        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold block mx-auto">Cancel</button>
+        <button onclick="closeUpiModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold block mx-auto pt-1">Done / Close</button>
       </div>
-    </div>
-  </div>
-
-  <!-- ORDER CONFIRMATION & 10s CANCEL TIMER MODAL -->
-  <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl border border-pink-200 relative overflow-hidden">
-      
-      <div id="confirmedStateBox" class="space-y-4">
-        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner animate-bounce">
-          🎉
-        </div>
-
-        <div>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-[#A64B74] block">PAYMENT & ORDER RECEIVED</span>
-          <h3 class="font-cormorant font-bold text-2xl text-[#1A1316] mt-0.5">Order Confirmed!</h3>
-          <p class="text-xs text-stone-600 mt-1" id="successOrderNumber">Order ID: IB-1001</p>
-        </div>
-
-        <!-- 10s Timer Banner -->
-        <div class="bg-pink-50/80 p-3.5 rounded-2xl border border-pink-200 text-xs space-y-2">
-          <div class="flex items-center justify-between font-bold">
-            <span class="text-stone-700">Dispatch Locking In:</span>
-            <span id="countdownSeconds" class="text-base text-red-600 font-black">10s</span>
-          </div>
-          <div class="w-full bg-stone-200 h-1.5 rounded-full overflow-hidden">
-            <div id="timerProgressBar" class="bg-red-500 h-full w-full transition-all duration-1000 ease-linear"></div>
-          </div>
-          <p class="text-[10px] text-stone-500 leading-tight">Need to change your mind? You can cancel and reverse within 10 seconds.</p>
-        </div>
-
-        <div class="space-y-2 pt-1">
-          <button onclick="cancelPendingOrder()" class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs py-2.5 rounded-xl border border-red-200 transition">
-            ❌ Cancel Order (Request Refund)
-          </button>
-          <button onclick="finishOrderAndNotify()" class="w-full bg-[#1A1316] text-[#F4D068] font-bold text-xs py-2.5 rounded-xl hover:bg-stone-900 transition">
-            ✓ Continue & Get WhatsApp Receipt
-          </button>
-        </div>
-      </div>
-
-      <!-- Cancelled State -->
-      <div id="cancelledStateBox" class="hidden space-y-4">
-        <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
-          ✕
-        </div>
-        <div>
-          <h3 class="font-cormorant font-bold text-xl text-red-600">Order Cancelled</h3>
-          <p class="text-xs text-stone-600 mt-1 leading-relaxed">
-            Your order has been cancelled. If money was deducted via UPI, please share your payment screenshot on WhatsApp for an immediate refund reversal.
-          </p>
-        </div>
-        <button onclick="openRefundWhatsApp()" class="w-full bg-[#25D366] text-white font-bold text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5">
-          <span>💬 WhatsApp Refund Support</span>
-        </button>
-        <button onclick="closeSuccessModal()" class="text-xs text-stone-400 hover:text-stone-700 font-bold">Close</button>
-      </div>
-
     </div>
   </div>
 
@@ -829,10 +770,6 @@
     let pendingCartAction = null;
 
     let liveOrders = JSON.parse(localStorage.getItem('insha_orders_cache') || '[]');
-    let currentOrderId = null;
-    let cancelTimer = null;
-    let timerCountdownVal = 10;
-    let activeOrderPayload = null;
 
     function updateAuthHeaderUI() {
       const btn = document.getElementById("customerAuthBtn");
@@ -1204,32 +1141,15 @@
       toggleCartModal();
     }
 
-    // PAYMENT MODAL & ORDER CONFIRMATION FLOW
-    function openPaymentQRModal() {
+    // AUTOMATED ORDER PLACEMENT & SWEET WHATSAPP RECEIPT
+    async function processOrderAndOpenPayment() {
       if (shoppingCart.length === 0) return alert("Your cart is empty!");
-      if (!requireCustomerLogin(() => openPaymentQRModal())) return;
+      if (!requireCustomerLogin(() => processOrderAndOpenPayment())) return;
 
-      const { finalTotal } = calculateCartTotals();
-      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=OrderPayment`;
-      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
-
-      document.getElementById("upiQrCodeImg").src = qrCodeUrl;
-      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${finalTotal}`;
-      document.getElementById("upiIntentLink").href = upiUrl;
-
-      document.getElementById("cartModal").classList.add("hidden");
-      document.getElementById("upiModal").classList.remove("hidden");
-    }
-
-    function closeUpiModal() {
-      document.getElementById("upiModal").classList.add("hidden");
-    }
-
-    async function confirmOrderPayment() {
       const { subtotal, discountAmount, finalTotal } = calculateCartTotals();
-      currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
+      const currentOrderId = `IB-${Date.now().toString().slice(-4)}`;
 
-      activeOrderPayload = {
+      const orderPayload = {
         order_id: currentOrderId,
         customer_name: currentCustomer.name,
         customer_phone: currentCustomer.phone,
@@ -1244,108 +1164,60 @@
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       };
 
-      // Record once in local cache & server
-      liveOrders.unshift(activeOrderPayload);
+      // 1. Post to Owner Portal & Cache once
+      liveOrders.unshift(orderPayload);
       localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
 
       try {
         await fetch(`${API_BASE}/orders`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(activeOrderPayload)
+          body: JSON.stringify(orderPayload)
         });
       } catch (e) {
         console.log("Offline local storage record.");
       }
 
-      // Clear cart
+      // 2. Clear customer cart
       shoppingCart = [];
       updateCartBadge();
-      closeUpiModal();
+      toggleCartModal();
 
-      // Launch 10s confirmation modal
-      document.getElementById("successOrderNumber").innerText = `Order ID: ${currentOrderId}`;
-      document.getElementById("confirmedStateBox").classList.remove("hidden");
-      document.getElementById("cancelledStateBox").classList.add("hidden");
-      document.getElementById("orderSuccessModal").classList.remove("hidden");
+      // 3. Open QR Code for Payment
+      const upiUrl = `upi://pay?pa=${SHOP_UPI_ID}&pn=InshaBangles&am=${finalTotal}&cu=INR&tn=Order_${currentOrderId}`;
+      const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
 
-      start10sCountdown();
-    }
+      document.getElementById("upiQrCodeImg").src = qrCodeUrl;
+      document.getElementById("upiAmountLabel").innerText = `Total Payable: ₹${finalTotal}`;
+      document.getElementById("upiIntentLink").href = upiUrl;
+      document.getElementById("upiModal").classList.remove("hidden");
 
-    function start10sCountdown() {
-      clearInterval(cancelTimer);
-      timerCountdownVal = 10;
-      document.getElementById("countdownSeconds").innerText = `${timerCountdownVal}s`;
-      document.getElementById("timerProgressBar").style.width = "100%";
-
-      cancelTimer = setInterval(() => {
-        timerCountdownVal -= 1;
-        document.getElementById("countdownSeconds").innerText = `${timerCountdownVal}s`;
-        document.getElementById("timerProgressBar").style.width = `${timerCountdownVal * 10}%`;
-
-        if (timerCountdownVal <= 0) {
-          clearInterval(cancelTimer);
-          finishOrderAndNotify();
-        }
-      }, 1000);
-    }
-
-    async function cancelPendingOrder() {
-      clearInterval(cancelTimer);
-      
-      if (activeOrderPayload) {
-        activeOrderPayload.status = "CANCELLED";
-        localStorage.setItem('insha_orders_cache', JSON.stringify(liveOrders));
-
-        try {
-          await fetch(`${API_BASE}/orders/${currentOrderId}/cancel`, { method: "PUT" });
-        } catch (e) {}
-      }
-
-      document.getElementById("confirmedStateBox").classList.add("hidden");
-      document.getElementById("cancelledStateBox").classList.remove("hidden");
-    }
-
-    function openRefundWhatsApp() {
-      let msg = `Hello Insha Bangles & Purses!\n\nI just cancelled my Order *${currentOrderId}*.\nPlease assist with the refund reversal for amount Rs. ${activeOrderPayload ? activeOrderPayload.final_total : ''}.\n\nCustomer: ${currentCustomer ? currentCustomer.name : ''} (${currentCustomer ? currentCustomer.phone : ''})`;
-      window.open("https://wa.me/" + SHOP_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
-    }
-
-    // AUTOMATIC SWEET WHATSAPP RECEIPT TO CUSTOMER'S NUMBER
-    function finishOrderAndNotify() {
-      clearInterval(cancelTimer);
-      closeSuccessModal();
-
-      if (!activeOrderPayload || activeOrderPayload.status === "CANCELLED") return;
-
-      const phoneClean = (activeOrderPayload.customer_phone || "").replace(/[^0-9]/g, '');
+      // 4. Send sweet thank-you receipt to customer's WhatsApp
+      const phoneClean = (orderPayload.customer_phone || "").replace(/[^0-9]/g, '');
       const custWaNumber = phoneClean.length === 10 ? `91${phoneClean}` : phoneClean;
 
-      // Personalized sweet message
-      let msg = `Dear ${activeOrderPayload.customer_name},\n\n`;
+      let msg = `Dear ${orderPayload.customer_name},\n\n`;
       msg += `Thank you so much for shopping with *Insha Bangles & Purses*! ✨🌸\n\n`;
       msg += `We are delighted to confirm that your order has been received and is being prepared with utmost care and love.\n\n`;
       
       msg += `* YOUR ORDER SUMMARY:\n`;
-      msg += `  Order ID: *${activeOrderPayload.order_id}*\n`;
-      msg += `  Delivery Address: ${activeOrderPayload.delivery_address}, ${activeOrderPayload.city_pincode}\n\n`;
+      msg += `  Order ID: *${orderPayload.order_id}*\n`;
+      msg += `  Delivery Address: ${orderPayload.delivery_address}, ${orderPayload.city_pincode}\n\n`;
 
       msg += `* ITEMS:\n`;
-      activeOrderPayload.items.forEach(i => {
+      orderPayload.items.forEach(i => {
         msg += `* ${i.title} (${i.orderType.toUpperCase()}) - ${i.qty} pcs\n`;
       });
 
-      msg += `\n* Total Amount Paid: Rs. ${activeOrderPayload.final_total}\n\n`;
+      msg += `\n* Total Amount Paid: Rs. ${orderPayload.final_total}\n\n`;
       msg += `May your celebrations and special days shine with timeless beauty and elegance! If you ever need styling advice, size assistance, or delivery tracking, feel free to reach out to us right here anytime.\n\n`;
       msg += `With warm regards,\n*Insha Bangles & Purses*\nNakkhas, Lucknow 💐`;
 
-      // Opens WhatsApp directly with customer receipt
       window.open(`https://wa.me/${custWaNumber}?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
-    function closeSuccessModal() {
-      clearInterval(cancelTimer);
-      document.getElementById("orderSuccessModal").classList.add("hidden");
+    function closeUpiModal() {
+      document.getElementById("upiModal").classList.add("hidden");
     }
 
     // OWNER PORTAL ORDER MANAGEMENT WITH DELETION
