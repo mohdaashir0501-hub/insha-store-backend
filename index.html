@@ -202,7 +202,7 @@
     <!-- 1. Customer Store View -->
     <div id="storeSection" class="space-y-12">
 
-      <!-- CLEAN SINGLE HERO BANNER WITH DYNAMIC OCCASION ACCENT -->
+      <!-- CLEAN SINGLE HERO BANNER -->
       <div class="relative overflow-hidden rounded-3xl hero-gradient text-white p-7 sm:p-12 border border-[#D4AF37]/40 shadow-2xl">
         <div class="relative z-10 max-w-2xl space-y-4">
           
@@ -364,7 +364,7 @@
       <!-- Owner Management Panel -->
       <div id="productFormBox" class="hidden space-y-6 max-w-2xl mx-auto">
         
-        <!-- SECTION A: Add Product Form with Discount Option -->
+        <!-- SECTION A: Add Product Form with MRP Original Price & Multi-Category -->
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-pink-100 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
@@ -380,35 +380,57 @@
               <input type="text" id="pTitle" required placeholder="e.g. Royal Bridal Velvet Bangle Set" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none focus:border-[#D4AF37]">
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">Category & Section</label>
-                <select id="pCategory" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
-                  <option value="Bridal">👑 Royal Bridal Suite</option>
-                  <option value="Festive">✨ Festive Specials</option>
-                  <option value="Best Seller">🔥 Store Best Sellers</option>
-                  <option value="Purses & Clutches">👜 Purses & Clutches</option>
-                  <option value="Underclothes">👗 Underclothes & Innerwear</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">Retail Price (₹)</label>
-                <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+            <!-- MULTI-CATEGORY SELECTION -->
+            <div>
+              <label class="block text-xs font-bold text-stone-700 mb-1.5">Assign to Categories & Sections (Select all that apply)</label>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-pink-50/40 p-3 rounded-2xl border border-pink-100">
+                <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
+                  <input type="checkbox" value="Bridal" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
+                  <span>👑 Royal Bridal</span>
+                </label>
+                <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
+                  <input type="checkbox" value="Festive" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
+                  <span>✨ Festive Specials</span>
+                </label>
+                <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
+                  <input type="checkbox" value="Best Seller" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
+                  <span>🔥 Best Sellers</span>
+                </label>
+                <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
+                  <input type="checkbox" value="Purses & Clutches" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
+                  <span>👜 Purses & Clutches</span>
+                </label>
+                <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer">
+                  <input type="checkbox" value="Underclothes" class="categoryCheckbox accent-[#1A1316] rounded w-4 h-4">
+                  <span>👗 Underclothes</span>
+                </label>
               </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2.5">
+            <!-- PRICING & MRP ORIGINAL PRICE -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale (₹)</label>
-                <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+                <label class="block text-xs font-bold text-stone-500 mb-1">Original Price / MRP (₹)</label>
+                <input type="number" id="pOriginal" placeholder="1100" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/20 border border-pink-200 rounded-xl focus:outline-none">
               </div>
               <div>
-                <label class="block text-xs font-bold text-stone-700 mb-1">Min MOQ</label>
-                <input type="number" id="pMoq" value="10" class="w-full text-sm px-3 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
+                <label class="block text-xs font-bold text-[#1A1316] mb-1">Retail Selling Price (₹)</label>
+                <input type="number" id="pRetail" required placeholder="850" class="w-full text-sm font-bold px-3.5 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl focus:outline-none">
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount % Tag (Optional)</label>
+                <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3.5 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale Rate (₹)</label>
+                <input type="number" id="pWholesale" placeholder="450" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
               </div>
               <div>
-                <label class="block text-xs font-bold text-[#A64B74] mb-1">Discount %</label>
-                <input type="number" id="pDiscount" placeholder="15" min="0" max="90" class="w-full text-sm px-3 py-2.5 bg-pink-100/40 border border-pink-200 rounded-xl focus:outline-none font-bold text-[#A64B74]">
+                <label class="block text-xs font-bold text-stone-700 mb-1">Wholesale Min MOQ</label>
+                <input type="number" id="pMoq" value="10" class="w-full text-sm px-3.5 py-2.5 bg-pink-50/30 border border-pink-100 rounded-xl focus:outline-none">
               </div>
             </div>
 
@@ -599,8 +621,11 @@
         
         <div class="bg-pink-50/60 p-3.5 rounded-2xl flex items-center justify-between">
           <div>
-            <span class="text-[10px] text-stone-500 font-bold uppercase block">Retail Price</span>
-            <span id="modalRetail" class="text-lg font-black text-[#1A1316]">₹0</span>
+            <span class="text-[10px] text-stone-500 font-bold uppercase block">Retail Selling Price</span>
+            <div class="flex items-baseline gap-2">
+              <span id="modalRetail" class="text-lg font-black text-[#1A1316]">₹0</span>
+              <span id="modalOriginal" class="text-xs text-stone-400 line-through font-semibold hidden">₹0</span>
+            </div>
           </div>
           <div id="modalWholesaleBox" class="text-right">
             <span class="text-[10px] text-stone-500 font-bold uppercase block">Wholesale Rate</span>
@@ -731,7 +756,7 @@
     let allProducts = JSON.parse(localStorage.getItem('insha_catalog_cache') || '[]');
     let shoppingCart = [];
     
-    // Store Active Coupons (Persisted in localStorage)
+    // Active Coupons
     let activeCoupons = JSON.parse(localStorage.getItem('insha_coupons') || '[{"code":"WELCOME10","discount":10},{"code":"FESTIVE15","discount":15}]');
     let appliedCoupon = null;
 
@@ -1109,13 +1134,14 @@
       storeSection.classList.add("hidden");
 
       let filtered = allProducts.filter(p => {
+        const catStr = Array.isArray(p.categories) ? p.categories.join(' ') : (p.category_name || '');
         const matchesQuery = query === "" || 
           (p.title || '').toLowerCase().includes(query) ||
           (p.description || '').toLowerCase().includes(query) ||
-          (p.category_name || '').toLowerCase().includes(query);
+          catStr.toLowerCase().includes(query);
 
         const matchesCategory = selectedCategory === "All" || 
-          (p.category_name || '').toLowerCase().includes(selectedCategory.toLowerCase());
+          catStr.toLowerCase().includes(selectedCategory.toLowerCase());
 
         return matchesQuery && matchesCategory;
       });
@@ -1142,9 +1168,18 @@
       document.getElementById("storeSection").classList.remove("hidden");
     }
 
-    function openProductModal(title, retail, wholesale, moq, img, desc, category, discount) {
+    function openProductModal(title, retail, original, wholesale, moq, img, desc, category, discount) {
       document.getElementById("modalTitle").innerText = title;
       document.getElementById("modalRetail").innerText = "₹" + retail;
+      
+      const origEl = document.getElementById("modalOriginal");
+      if (original && original > retail) {
+        origEl.innerText = "₹" + original;
+        origEl.classList.remove("hidden");
+      } else {
+        origEl.classList.add("hidden");
+      }
+
       document.getElementById("modalDesc").innerText = desc || "Festive handcrafted boutique collection piece";
       document.getElementById("modalBadge").innerText = (discount ? `${discount}% OFF • ` : '') + (category || "Showcase");
       document.getElementById("modalImg").src = img;
@@ -1217,14 +1252,20 @@
       const img = (p.image_urls && p.image_urls[0]) ? p.image_urls[0] : "https://images.unsplash.com/photo-1611591475152-4735eac870c2";
       const escapedTitle = (p.title || '').replace(/'/g, "\\'");
       const escapedDesc = (p.description || '').replace(/'/g, "\\'");
-      const escapedCat = (p.category_name || '').replace(/'/g, "\\'");
-      const discount = parseInt(p.discount_pct) || 0;
+      const catDisplay = Array.isArray(p.categories) ? p.categories.join(', ') : (p.category_name || '');
+      const escapedCat = catDisplay.replace(/'/g, "\\'");
+      
+      const origPrice = parseFloat(p.original_price) || 0;
+      const retailPrice = parseFloat(p.retail_price) || 0;
+      const calculatedDisc = origPrice > retailPrice ? Math.round(((origPrice - retailPrice) / origPrice) * 100) : 0;
+      const discount = parseInt(p.discount_pct) || calculatedDisc;
+      
       const wsPrice = parseFloat(p.wholesale_price) || 0;
       const wsMoq = parseInt(p.min_wholesale_qty) || 10;
 
       return `
         <div class="section-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group border border-pink-100/80 bg-white">
-          <div onclick="openProductModal('${escapedTitle}', ${p.retail_price}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount})" class="cursor-pointer">
+          <div onclick="openProductModal('${escapedTitle}', ${retailPrice}, ${origPrice}, ${wsPrice}, ${wsMoq}, '${img}', '${escapedDesc}', '${escapedCat}', ${discount})" class="cursor-pointer">
             <div class="relative overflow-hidden">
               <img src="${img}" class="w-full h-44 sm:h-48 object-cover bg-pink-50 transition duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/400x300'">
               
@@ -1243,8 +1284,9 @@
               <h3 class="font-cormorant font-bold text-sm sm:text-base text-[#1A1316] line-clamp-1">${p.title}</h3>
               <p class="text-[11px] text-stone-500 line-clamp-2 leading-relaxed">${p.description || 'Festive handcrafted boutique collection piece'}</p>
               <div class="pt-2">
-                <div class="text-sm sm:text-base font-black text-[#1A1316]">
-                  ₹${p.retail_price} 
+                <div class="flex items-baseline gap-1.5">
+                  <span class="text-sm sm:text-base font-black text-[#1A1316]">₹${retailPrice}</span>
+                  ${origPrice > retailPrice ? `<span class="text-[11px] text-stone-400 line-through font-semibold">₹${origPrice}</span>` : ''}
                   <span class="text-[10px] text-stone-500 font-semibold">(Retail)</span>
                 </div>
                 ${wsPrice > 0 ? `
@@ -1259,7 +1301,7 @@
           <div class="p-3 pt-0 flex flex-col gap-1.5">
             <div class="flex gap-1.5">
               <button 
-                onclick="addToCart('${escapedTitle}', ${p.retail_price}, '${img}', 'retail', 1)" 
+                onclick="addToCart('${escapedTitle}', ${retailPrice}, '${img}', 'retail', 1)" 
                 class="flex-1 bg-pink-50 hover:bg-pink-100 text-[#1A1316] border border-pink-200 text-[10px] font-bold py-1.5 rounded-xl transition">
                 + Retail
               </button>
@@ -1283,11 +1325,18 @@
       const pursesGrid = document.getElementById("pursesGrid");
       const apparelGrid = document.getElementById("apparelGrid");
 
-      const bridalItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('dulhan') || (p.title || '').toLowerCase().includes('chooda'));
-      const festiveItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('festive') || (p.title || '').toLowerCase().includes('velvet') || (p.category_name || '').toLowerCase().includes('bangles'));
-      const bestsellerItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('best') || (p.wholesale_price && p.wholesale_price < 300) || allProducts.indexOf(p) % 2 === 0);
-      const pursesItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('purse') || (p.category_name || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('bag'));
-      const apparelItems = allProducts.filter(p => (p.category_name || '').toLowerCase().includes('under') || (p.category_name || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
+      const itemMatchesCat = (p, catKeyword) => {
+        if (Array.isArray(p.categories)) {
+          return p.categories.some(c => c.toLowerCase().includes(catKeyword));
+        }
+        return (p.category_name || '').toLowerCase().includes(catKeyword);
+      };
+
+      const bridalItems = allProducts.filter(p => itemMatchesCat(p, 'bridal') || (p.title || '').toLowerCase().includes('bridal') || (p.title || '').toLowerCase().includes('dulhan') || (p.title || '').toLowerCase().includes('chooda'));
+      const festiveItems = allProducts.filter(p => itemMatchesCat(p, 'festive') || (p.title || '').toLowerCase().includes('velvet') || (p.title || '').toLowerCase().includes('bangles'));
+      const bestsellerItems = allProducts.filter(p => itemMatchesCat(p, 'best') || (p.wholesale_price && p.wholesale_price < 300) || allProducts.indexOf(p) % 2 === 0);
+      const pursesItems = allProducts.filter(p => itemMatchesCat(p, 'purse') || itemMatchesCat(p, 'clutch') || (p.title || '').toLowerCase().includes('clutch') || (p.title || '').toLowerCase().includes('bag'));
+      const apparelItems = allProducts.filter(p => itemMatchesCat(p, 'under') || itemMatchesCat(p, 'inner') || (p.title || '').toLowerCase().includes('inner') || (p.title || '').toLowerCase().includes('cotton'));
 
       bridalGrid.innerHTML = bridalItems.length ? bridalItems.map(p => createProductCard(p, '👑 Royal Bridal')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No bridal items listed yet.</div>';
       festiveGrid.innerHTML = festiveItems.length ? festiveItems.map(p => createProductCard(p, '✨ Festive Pick')).join('') : '<div class="col-span-full py-8 text-center text-xs text-stone-400">No festive items listed yet.</div>';
@@ -1315,13 +1364,14 @@
 
       allProducts.forEach((p, idx) => {
         const prodId = p.id || `item-${idx}`;
+        const catText = Array.isArray(p.categories) ? p.categories.join(', ') : (p.category_name || 'Boutique');
         list.innerHTML += `
           <div class="bg-pink-50/60 p-2.5 rounded-xl border border-pink-100 flex items-center justify-between gap-2 shadow-sm">
             <div class="flex items-center gap-2.5 overflow-hidden">
               <img src="${p.image_urls?.[0] || 'https://placehold.co/100x100'}" class="w-11 h-11 rounded-xl object-cover flex-shrink-0 bg-white">
               <div class="truncate">
                 <p class="text-xs font-bold text-[#1A1316] truncate">${p.title}</p>
-                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} | Wholesale: ₹${p.wholesale_price || 'N/A'} ${p.discount_pct ? `| Disc: ${p.discount_pct}%` : ''}</p>
+                <p class="text-[10px] text-stone-500">Retail: ₹${p.retail_price} ${p.original_price ? `(MRP: ₹${p.original_price})` : ''} | ${catText}</p>
               </div>
             </div>
             <button onclick="deleteProduct('${prodId}', '${p.title.replace(/'/g, "\\'")}')" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-3 py-1.5 rounded-xl border border-red-200 transition flex-shrink-0 flex items-center gap-1">
@@ -1370,13 +1420,28 @@
       btn.disabled = true;
       btn.innerText = "Publishing...";
 
+      // Gather multi-selected categories
+      const selectedCategories = [];
+      document.querySelectorAll(".categoryCheckbox:checked").forEach(cb => {
+        selectedCategories.push(cb.value);
+      });
+
+      if (selectedCategories.length === 0) {
+        selectedCategories.push("Bridal"); // Default fallback
+      }
+
+      const origPriceVal = document.getElementById("pOriginal").value ? parseFloat(document.getElementById("pOriginal").value) : null;
+      const retailPriceVal = parseFloat(document.getElementById("pRetail").value);
+
       const newProduct = {
         id: "prod-" + Date.now(),
         title: document.getElementById("pTitle").value,
         description: document.getElementById("pDesc").value,
-        category_name: document.getElementById("pCategory").value,
+        category_name: selectedCategories.join(', '),
+        categories: selectedCategories,
         image_urls: document.getElementById("pImg").value ? [document.getElementById("pImg").value] : [],
-        retail_price: parseFloat(document.getElementById("pRetail").value),
+        original_price: origPriceVal,
+        retail_price: retailPriceVal,
         wholesale_price: document.getElementById("pWholesale").value ? parseFloat(document.getElementById("pWholesale").value) : null,
         min_wholesale_qty: parseInt(document.getElementById("pMoq").value) || 10,
         discount_pct: parseInt(document.getElementById("pDiscount").value) || 0,
@@ -1396,7 +1461,7 @@
         console.log("Item saved locally.");
       }
 
-      alert("Product published successfully with discount & wholesale settings!");
+      alert("Product published successfully with multi-category & MRP pricing!");
       document.querySelector("form").reset();
       clearPreviewImage();
       switchTab('store');
